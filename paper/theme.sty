@@ -1,0 +1,70 @@
+%%% Font.
+%\RequirePackage{libertine}
+\RequirePackage[regular]{newcomputermodern}  % newest version of Computer Modern (regular: display weight)
+
+% Links.
+\hypersetup{
+	colorlinks,
+	pdfpagelabels,
+	bookmarksopen,
+	bookmarksnumbered,
+	linkcolor=black,
+	plainpages=false,
+	hypertexnames=false,
+	citecolor=blue!80!black,
+	urlcolor=red,
+	pdfdisplaydoctitle=true,
+}
+
+%% Set style of operators.
+%% taken from: https://tex.stackexchange.com/questions/219417/how-to-change-the-default-font-of-math-operators/219427#219427
+%\DeclareSymbolFont{sansops}{T1}{\sfdefault}{m}{n}
+%\SetSymbolFont{sansops}{bold}{T1}{\sfdefault}{b}{n}
+%
+%\makeatletter
+%\renewcommand\operator@font{\mathgroup\symsansops}
+%\makeatother
+
+
+%%% Page style.
+\RequirePackage[margin=3cm]{geometry}
+
+
+% Title page.
+\setkomafont{publishers}{}  % \publishers in normal font
+
+
+%%% Environments in roman style with bold title.
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+%\AfterEndEnvironment{definition}{\noindent\ignorespaces}
+\newtheorem{example}{Example}
+\newtheorem{condition}{Condition}
+\newtheorem{problem}{Problem}
+
+
+%%% Environments in italic style with bold title.
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{observation}{Observation}
+\newtheorem{conjecture}{Conjecture}
+
+
+%%% Environments in roman style with italic title.
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{annotation}{Annotation}
+\newtheorem{claim}{Claim}
+\newtheorem*{note}{Note}  % No numbering
+\newtheorem{case}{Case}
+\newtheorem{acknowledgment}{Acknowledgment}
+\newtheorem{conclusion}{Conclusion}
+
+
+%%% PDF options.
+\hypersetup{
+	pdfdisplaydoctitle=true,
+}

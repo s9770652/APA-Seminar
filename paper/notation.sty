@@ -1,0 +1,178 @@
+%%% Delimiters and other math symbols.
+\def\lb{\! \left( \!}
+\def\rb{\! \right) \!}
+\DeclarePairedDelimiter{\abs}{|}{|}
+
+% Normal \vdots have huge empty space on top.
+\makeatletter
+\DeclareRobustCommand
+\vdotsnoexcessspace{\vbox{\baselineskip4\p@ \lineskiplimit\z@
+		\hbox{.}\hbox{.}\hbox{.}}}
+\makeatother
+
+% Cups with dots inside for disjoint unions.
+% https://tex.stackexchange.com/questions/110976/is-a-cupdot-symbol-available-in-amsmath?noredirect=1&lq=1
+\makeatletter
+\providecommand*{\cupdot}{%
+	\mathbin{%
+		\mathpalette\@cupdot{}%
+	}%
+}
+\newcommand*{\@cupdot}[2]{%
+	\ooalign{%
+		$\m@th#1\cup$\cr
+		\sbox0{$#1\cup$}%
+		\dimen@=\ht0 %
+		\sbox0{$\m@th#1\cdot$}%
+		\advance\dimen@ by -\ht0 %
+		\dimen@=.5\dimen@
+		\hidewidth\raise\dimen@\box0\hidewidth
+	}%
+}
+
+\providecommand*{\bigcupdot}{%
+	\mathop{%
+		\vphantom{\bigcup}%
+		\mathpalette\@bigcupdot{}%
+	}%
+}
+\newcommand*{\@bigcupdot}[2]{%
+	\ooalign{%
+		$\m@th#1\bigcup$\cr
+		\sbox0{$#1\bigcup$}%
+		\dimen@=\ht0 %
+		\advance\dimen@ by -\dp0 %
+		\sbox0{\scalebox{2}{$\m@th#1\cdot$}}%
+		\advance\dimen@ by -\ht0 %
+		\dimen@=.5\dimen@
+		\hidewidth\raise\dimen@\box0\hidewidth
+	}%
+}
+\makeatother
+
+
+% Differential operators
+\letdif*{\dif}{d}  % \d is redefined by fixdif. This line is just for renaming.
+\letdif*{\diff}{updelta}  % * = spacing correction; perhaps remove the asterisks if changing the math font
+\letdif*{\difp}{partial}
+\newdif*{\D}{\mathrm{D}}
+\letdif*{\grad}{nabla}
+\letdif*{\nabla}{nabla}
+\DeclareDocumentCommand{\laplacian}{s}{
+	\IfBooleanTF{#1}{\mathdif{\Delta}}{\nabla^2}
+}
+
+
+%%% Constants and specifiers.
+\def\euler{\ensuremath{\mathup{e}}}
+\def\P{\ensuremath{\mathcal{MP}}}
+\def\NP{\ensuremath{\mathcal{MP}}}
+
+
+%%% Sets of numbers.
+\def\nat{\mathbb{N}}
+\def\natzero{\mathbb{N}_{0}}
+\def\natnozero{\mathbb{N}_{>0}}
+\def\real{\mathbb{R}}
+\def\realpos{\mathbb{R}^+_{>0}}
+\def\realposzero{\mathbb{R}_0^+}
+
+
+%%% Bachmann-Landau notation.
+\def\bigo{\ensuremath{\mathcal{O}}}
+\def\bigomega{\ensuremath{\upOmega}}
+
+
+%%% Rewritten logic notation.
+\let\oldforall\forall
+\renewcommand{\forall}{\oldforall \, }
+
+\let\oldexist\exists
+\renewcommand{\exists}{\oldexist \: }
+
+\newcommand\existsnot{\oldexist! \: }
+
+
+% Stochastic notation.
+\NewDocumentCommand\Prob{sm}{\IfBooleanTF{#1}{\mathbb{P}\!\left[#2\right]}{\mathbb{P}[#2]}}
+\NewDocumentCommand\Erw{sm}{\IfBooleanTF{#1}{\mathbb{E}\!\left[#2\right]}{\mathbb{E}[#2]}}
+\NewDocumentCommand\Var{sm}{\IfBooleanTF{#1}{\operatorname{Var}\!\left[#2\right]}{\operatorname{Var}[#2]}}
+\NewDocumentCommand\Cov{sm}{\IfBooleanTF{#1}{\operatorname{Cov}\!\left[#2\right]}{\operatorname{Cov}[#2]}}
+
+\def\Unif{\mathfrak{U}}
+\def\Norm{\mathfrak{N}}
+
+
+
+%%% General notation in math.
+\def\mathup#1{\mathrm{#1}}
+
+\def\noic{\sb{}\kern-\scriptspace }  % fixes spacing after some italic letter after leaving math mode. For example, type '\(M\noic\).' instead of '\(M\).'.
+
+% A ⇔  (or other symbol) on the left side of an align environment without affecting the width of the formula.
+% modelled after: https://tex.stackexchange.com/a/574795
+\NewDocumentCommand{\liff}{O{\!\!\iff}}{
+	\begin{tikzpicture}[baseline=(tmp.base),remember picture]
+		\node[inner sep=0pt] (tmp) {\vphantom{}};
+		\begin{scope}[overlay]
+			\path (current page text area.west|-tmp.base)
+			node[anchor=base west, inner sep=0pt, outer sep=0pt]{\(#1\)}
+			;
+		\end{scope}
+	\end{tikzpicture}
+}
+
+% The same as above but with an additional horizontal shift.
+\NewDocumentCommand{\liffsh}{m O{\!\!\iff}}{
+	\begin{tikzpicture}[baseline=(tmp.base),remember picture]
+		\node[inner sep=0pt] (tmp) {\vphantom{}};
+		\begin{scope}[overlay]
+			\path (current page text area.west|-tmp.base)
+			node[anchor=base west, inner sep=0pt, outer sep=0pt, xshift=#1]{\(#2\)}
+			;
+		\end{scope}
+	\end{tikzpicture}
+}
+
+
+% A tag on the right. To be used with 'leqno' option for amsmath
+% taken from: https://tex.stackexchange.com/a/574795
+\NewDocumentCommand{\rtag}{m}{
+	\begin{tikzpicture}[baseline=(tmp.base),remember picture]
+		\node[inner sep=0pt](tmp){\vphantom{1}};
+		\begin{scope}[overlay]
+			\path (current page text area.east|-tmp.base)
+				node[anchor=base east,inner sep=0pt,outer sep=0pt]{(#1)}
+			;
+		\end{scope}
+	\end{tikzpicture}
+}
+
+
+%%% Abbreviation in texts.
+\def\eg{\mbox{e.\thinskip g.}\ }  % mbox to prevent breaks
+\def\ie{\mbox{i.\thinskip e.}\ }
+
+
+%%% Notation in texts.
+\def\pp{\nobreak pp}  % percentage points
+
+\makeatletter
+\DeclareRobustCommand{\thinskip}{\hskip 0.16667em\relax}  % https://tex.stackexchange.com/questions/268111/automated-spacing
+\def\endash{--}
+\def\emdash{\endash-}
+\def\d@sh#1#2{\unskip#1\thinskip#2\thinskip\ignorespaces}
+\def\dash{\d@sh\nobreak\endash}
+\def\Dash{\d@sh\nobreak\emdash}
+\def\ldash{\d@sh\empty{\hbox{\endash}\nobreak}}
+\def\rdash{\d@sh\nobreak\endash}
+\def\Ldash{\d@sh\empty{\hbox{\emdash}\nobreak}}
+\def\Rdash{\d@sh\nobreak\emdash}
+\makeatother
+
+% \DeclareRobustCommand\textsb[1]{{\libertineSB#1}}  % semi bold
+
+
+%%% Junk for playing around.
+\def\ABC{ABCDEFGHIJKLMNOPQRSTUVWXYZ}
+\def\abc{abcdefghijklmnopqrstuvwxyz}
