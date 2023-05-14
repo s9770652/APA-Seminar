@@ -6,11 +6,12 @@
 \let\mathbbold\mathbb  % speichere herkömmliche Buchstaben mit Doppelstrich und Serifen
 \RequirePackage[math-style=ISO, bold-style=ISO, partial=upright]{unicode-math}  % für kursive gr. Großbuchstaben und aufrechtes ∂ benützt
 \let\mathbb\mathbbold  % kehre zu herkömmlichen Buchstaben mit Doppelstrich und Serifen zurück; neue Zeichen wie 1 mittels \symbb{1} verfügbar
-\RequirePackage[intlimits]{mathtools}  % stellt u. a. \DeclarePairedDelimiter zur Verfügung
+\RequirePackage[intlimits]{mathtools}  % stellt u. a. \DeclarePairedDelimiter zur Verfügung + weitere Verbesserungen für amsmath
 \RequirePackage{xfrac}  % schräge Brüche; vor fontspec zu laden!
 
 \RequirePackage[inline]{enumitem}  % bessere Aufzählung (mit *-Variante für Aufzählungen innerhalb eines Textes)
 \RequirePackage[protrusion=true]{microtype}  % für hängende Interpunktion
+\RequirePackage{tabularx}  % bessere Trenner und Zeilentypen
 
 \RequirePackage{tikz} % Grafikpaket
 \RequirePackage{tikzpagenodes}  % benötig für current page
