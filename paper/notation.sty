@@ -1,17 +1,61 @@
-%%% Delimiters and other math symbols.
-\def\lb{\! \left( \!}
-\def\rb{\! \right) \!}
-\DeclarePairedDelimiter{\abs}{|}{|}
+%%% General notation in math.
+\mathtoolsset{mathic=true}  % italic correction (use \(..\) instead of $..$)
 
-% Normal \vdots have huge empty space on top.
-\makeatletter
-\DeclareRobustCommand
-\vdotsnoexcessspace{\vbox{\baselineskip4\p@ \lineskiplimit\z@
-		\hbox{.}\hbox{.}\hbox{.}}}
-\makeatother
+% A ⇔  (or other symbol) on the left side of an align environment without affecting the width of the formula.
+% modelled after: https://tex.stackexchange.com/a/574795
+\NewDocumentCommand{\liff}{O{\!\!\iff}}{
+	\begin{tikzpicture}[baseline=(tmp.base),remember picture]
+		\node[inner sep=0pt] (tmp) {\vphantom{}};
+		\begin{scope}[overlay]
+			\path (current page text area.west|-tmp.base)
+			node[anchor=base west, inner sep=0pt, outer sep=0pt]{\(#1\)}
+			;
+		\end{scope}
+	\end{tikzpicture}
+}
 
+% The same as above but with an additional horizontal shift.
+\NewDocumentCommand{\liffsh}{m O{\!\!\iff}}{
+	\begin{tikzpicture}[baseline=(tmp.base),remember picture]
+		\node[inner sep=0pt] (tmp) {\vphantom{}};
+		\begin{scope}[overlay]
+			\path (current page text area.west|-tmp.base)
+			node[anchor=base west, inner sep=0pt, outer sep=0pt, xshift=#1]{\(#2\)}
+			;
+		\end{scope}
+	\end{tikzpicture}
+}
+
+
+% A tag on the right. To be used with 'leqno' option for amsmath
+% taken from: https://tex.stackexchange.com/a/574795
+\NewDocumentCommand{\rtag}{m}{
+	\begin{tikzpicture}[baseline=(tmp.base),remember picture]
+		\node[inner sep=0pt](tmp){\vphantom{1}};
+		\begin{scope}[overlay]
+			\path (current page text area.east|-tmp.base)
+			node[anchor=base east,inner sep=0pt,outer sep=0pt]{(#1)}
+			;
+		\end{scope}
+	\end{tikzpicture}
+}
+
+
+%%% Delimiters.
+\DeclarePairedDelimiter{\abs}{\left\lvert}{\right\rvert}
+\DeclarePairedDelimiter{\norm}{\left\lVert}{\right\rVert}
+
+% Removes excess space when using \left(..\right).
+% taken from: https://www.reddit.com/r/LaTeX/comments/64derj/comment/dg2fpcz/?utm_source=share&utm_medium=web2x&context=3
+\let\originalleft\left
+\let\originalright\right
+\renewcommand{\left}{\mathopen{}\mathclose\bgroup\originalleft}
+\renewcommand{\right}{\aftergroup\egroup\originalright}
+
+
+%%% Operators.
 % Cups with dots inside for disjoint unions.
-% https://tex.stackexchange.com/questions/110976/is-a-cupdot-symbol-available-in-amsmath?noredirect=1&lq=1
+% taken from: https://tex.stackexchange.com/questions/110976/is-a-cupdot-symbol-available-in-amsmath?noredirect=1&lq=1
 \makeatletter
 \providecommand*{\cupdot}{%
 	\mathbin{%
@@ -50,7 +94,6 @@
 }
 \makeatother
 
-
 % Differential operators
 \letdif*{\dif}{d}  % \d is redefined by fixdif. This line is just for renaming.
 \letdif*{\diff}{updelta}  % * = spacing correction; perhaps remove the asterisks if changing the math font
@@ -62,28 +105,7 @@
 	\IfBooleanTF{#1}{\mathdif*{\Delta}}{\nabla^2}
 }
 
-
-%%% Constants and specifiers.
-\def\euler{\ensuremath{\mathup{e}}}
-\def\P{\ensuremath{\mathcal{MP}}}
-\def\NP{\ensuremath{\mathcal{MP}}}
-
-
-%%% Sets of numbers.
-\def\nat{\mathbb{N}}
-\def\natzero{\mathbb{N}_{0}}
-\def\natnozero{\mathbb{N}_{>0}}
-\def\real{\mathbb{R}}
-\def\realpos{\mathbb{R}^+_{>0}}
-\def\realposzero{\mathbb{R}_0^+}
-
-
-%%% Bachmann-Landau notation.
-\def\bigo{\ensuremath{\mathcal{O}}}
-\def\bigomega{\ensuremath{\upOmega}}
-
-
-%%% Rewritten logic notation.
+% Logic notation.
 \let\oldforall\forall
 \renewcommand{\forall}{\oldforall \, }
 
@@ -93,7 +115,27 @@
 \newcommand\existsnot{\oldexist! \: }
 
 
-% Stochastic notation.
+%%% Constants and specifiers.
+\def\euler{\ensuremath{\mathup{e}}}
+\def\P{\ensuremath{\mathcal{P}}}
+\def\NP{\ensuremath{\mathcal{NP}}}
+
+
+% Sets of numbers.
+\def\nat{\mathbb{N}}
+\def\natzero{\mathbb{N}_{0}}
+\def\natnozero{\mathbb{N}_{>0}}
+\def\real{\mathbb{R}}
+\def\realpos{\mathbb{R}^+_{>0}}
+\def\realposzero{\mathbb{R}_0^+}
+
+
+%%% Bachmann-Landau notation.
+\def\bigo{\ensuremath{\mathcal{O}}} % TODO: Schreibweisen angleichen
+\def\bigomega{\ensuremath{\upOmega}}
+
+
+%%% Stochastic notation.
 \NewDocumentCommand\Prob{sm}{\IfBooleanTF{#1}{\mathbb{P}\!\left[#2\right]}{\mathbb{P}[#2]}}
 \NewDocumentCommand\Erw{sm}{\IfBooleanTF{#1}{\mathbb{E}\!\left[#2\right]}{\mathbb{E}[#2]}}
 \NewDocumentCommand\Var{sm}{\IfBooleanTF{#1}{\operatorname{Var}\!\left[#2\right]}{\operatorname{Var}[#2]}}
@@ -103,60 +145,18 @@
 \def\Norm{\mathfrak{N}}
 
 
-
-%%% General notation in math.
-\def\noic{\sb{}\kern-\scriptspace }  % fixes spacing after some italic letter after leaving math mode. For example, type '\(M\noic\).' instead of '\(M\).'.
-
-% A ⇔  (or other symbol) on the left side of an align environment without affecting the width of the formula.
-% modelled after: https://tex.stackexchange.com/a/574795
-\NewDocumentCommand{\liff}{O{\!\!\iff}}{
-	\begin{tikzpicture}[baseline=(tmp.base),remember picture]
-		\node[inner sep=0pt] (tmp) {\vphantom{}};
-		\begin{scope}[overlay]
-			\path (current page text area.west|-tmp.base)
-			node[anchor=base west, inner sep=0pt, outer sep=0pt]{\(#1\)}
-			;
-		\end{scope}
-	\end{tikzpicture}
-}
-
-% The same as above but with an additional horizontal shift.
-\NewDocumentCommand{\liffsh}{m O{\!\!\iff}}{
-	\begin{tikzpicture}[baseline=(tmp.base),remember picture]
-		\node[inner sep=0pt] (tmp) {\vphantom{}};
-		\begin{scope}[overlay]
-			\path (current page text area.west|-tmp.base)
-			node[anchor=base west, inner sep=0pt, outer sep=0pt, xshift=#1]{\(#2\)}
-			;
-		\end{scope}
-	\end{tikzpicture}
-}
-
-
-% A tag on the right. To be used with 'leqno' option for amsmath
-% taken from: https://tex.stackexchange.com/a/574795
-\NewDocumentCommand{\rtag}{m}{
-	\begin{tikzpicture}[baseline=(tmp.base),remember picture]
-		\node[inner sep=0pt](tmp){\vphantom{1}};
-		\begin{scope}[overlay]
-			\path (current page text area.east|-tmp.base)
-				node[anchor=base east,inner sep=0pt,outer sep=0pt]{(#1)}
-			;
-		\end{scope}
-	\end{tikzpicture}
-}
-
-
 %%% Abbreviation in texts.
-\def\eg{\mbox{e.\thinskip g.}\ }  % mbox to prevent breaks
-\def\ie{\mbox{i.\thinskip e.}\ }
+\def\eg{\mbox{e.\thinskip g.}\@}  % mbox to prevent breaks
+\def\ie{\mbox{i.\thinskip e.}\@}
 
 
 %%% Notation in texts.
 \def\pp{\nobreak pp}  % percentage points
 
+% Thin spaces around en dash (\dash) and em dash(\Dash). Use only for English texts!
+% taken from: https://tex.stackexchange.com/questions/268111/automated-spacing
 \makeatletter
-\DeclareRobustCommand{\thinskip}{\hskip 0.16667em\relax}  % https://tex.stackexchange.com/questions/268111/automated-spacing
+\DeclareRobustCommand{\thinskip}{\hskip 0.16667em\relax}
 \def\endash{--}
 \def\emdash{\endash-}
 \def\d@sh#1#2{\unskip#1\thinskip#2\thinskip\ignorespaces}
@@ -169,6 +169,13 @@
 \makeatother
 
 % \DeclareRobustCommand\textsb[1]{{\libertineSB#1}}  % semi bold
+
+
+%%% Tables.
+% Column types for tabularx (X = justified)
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}  % left-aligned
+\newcolumntype{C}{>{\centering\arraybackslash}X}  % centered
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}  % right-aligned
 
 
 %%% Junk for playing around.
