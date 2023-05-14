@@ -26,6 +26,6 @@
 \RequirePackage{fixdif}  % bessere Ableitungsoperatoren; benötigt 'unicode-math'; nach 'hyperref' zu laden
 
 \RequirePackage[backend=biber, style=numeric-comp, sortcites]{biblatex}  % Quellenverzeichnis
-\addbibresource{bibliography.bib}
+\addbibresource{../sources.bib}
 
 \RequirePackage[toc, math, pangram]{blindtext}  % lorem ipsum dolor sit amet
