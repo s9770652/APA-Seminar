@@ -1,0 +1,27 @@
+\begin{algorithm}
+	\KwIn{
+		set \(\agents = \{ 1, \dots, n \}\) of agents with weights \(\weight[i] \forall i \in \agents\),
+		set \(\goods = \{ 1, \dots, m \}\) indivisible items,
+		additive valuations \(\valuations[i] \colon \powerset[\goods] \to \realpos\) where \(\valuations[i][\genericset]\) is the valuation of agent \(i \in \agents\) for each item set \(\genericset \subset \goods\)
+	}
+	\KwOut{
+		\(\sfrac{1}{2n}\)-approximation \(\alloc = (\alloc[1], \dots, \alloc[n])\) of optimal allocation
+	}
+
+	\(\alloc[i] \gets \emptyset \quad\forall i \in \agents\)\;
+	\(\remvalue{i} \gets \valuations[i][\goodsint{i}{2n+1:m}] \quad\forall i \in \agents\)\;
+	\(\weights \gets \{\,  \weight[i] \cdot \log\bigl( \valuations[i][j] + \frac{\remvalue{i}}{n} \bigr) \given[\bigm] \forall i \in \agents \forall j \in \goods \,\}\)\tcp*{graph weights}
+	\(\bipartitegraph \gets (\agents, \goods, \weights)\)\tcp*{bipartite graph}
+	\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
+	\(\alloc[i] \gets \{\, j \given (i, j) \in \matching \,\} \quad\forall i \in \agents\)\;
+	\(\goodsrem \gets \goods \setminus \{\, j \given (i, j) \in \matching \,\}\)\;
+	\While{\(\goodsrem \neq \emptyset\)}{
+		\(\weights \gets \{\,  \weight[i] \cdot \log\bigl( \valuations[i][j] + \valuations[i][\alloc[i]] \bigr) \given[\bigm] \forall i \in \agents \forall j \in \goodsrem \,\}\)\;
+		\(\bipartitegraph \gets (\agents, \goodsrem, \weights)\)\;
+		\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
+		\(\alloc[i] \gets \alloc[i] \cup \{\, j \given (i, j) \in \matching \,\} \quad\forall i \in \agents\)\;
+		\(\goodsrem \gets \goodsrem \setminus \{\, j \given (i, j) \in \matching \,\}\)\;
+	}
+	\Return{\(\alloc\)}
+	\caption{\smatch{} for the Asymmetric Additive \nsw{} problem}
+\end{algorithm}

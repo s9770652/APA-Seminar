@@ -4,7 +4,7 @@
 % A ⇔  (or other symbol) on the left side of an align environment without affecting the width of the formula.
 % modelled after: https://tex.stackexchange.com/a/574795
 \NewDocumentCommand{\liff}{O{\!\!\iff}}{
-	\begin{tikzpicture}[baseline=(tmp.base),remember picture]
+	\begin{tikzpicture}[baseline=(tmp.base), remember picture]
 		\node[inner sep=0pt] (tmp) {\vphantom{}};
 		\begin{scope}[overlay]
 			\path (current page text area.west|-tmp.base)
@@ -16,7 +16,7 @@
 
 % The same as above but with an additional horizontal shift.
 \NewDocumentCommand{\liffsh}{m O{\!\!\iff}}{
-	\begin{tikzpicture}[baseline=(tmp.base),remember picture]
+	\begin{tikzpicture}[baseline=(tmp.base), remember picture]
 		\node[inner sep=0pt] (tmp) {\vphantom{}};
 		\begin{scope}[overlay]
 			\path (current page text area.west|-tmp.base)
@@ -30,7 +30,7 @@
 % A tag on the right. To be used with 'leqno' option for amsmath
 % taken from: https://tex.stackexchange.com/a/574795
 \NewDocumentCommand{\rtag}{m}{
-	\begin{tikzpicture}[baseline=(tmp.base),remember picture]
+	\begin{tikzpicture}[baseline=(tmp.base), remember picture]
 		\node[inner sep=0pt](tmp){\vphantom{1}};
 		\begin{scope}[overlay]
 			\path (current page text area.east|-tmp.base)
@@ -44,6 +44,7 @@
 %%% Delimiters.
 \DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
 \DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\NewDocumentCommand{\given}{O{}}{\mathrel{#1|}}
 
 % Removes excess space when using \left(..\right).
 % taken from: https://www.reddit.com/r/LaTeX/comments/64derj/comment/dg2fpcz/?utm_source=share&utm_medium=web2x&context=3
@@ -120,7 +121,6 @@
 \def\P{\ensuremath{\mathcal{P}}}
 \def\NP{\ensuremath{\mathcal{NP}}}
 
-
 % Sets of numbers.
 \def\nat{\mathbb{N}}
 \def\natzero{\mathbb{N}_{0}}
@@ -128,6 +128,21 @@
 \def\real{\mathbb{R}}
 \def\realpos{\mathbb{R}^+_{>0}}
 \def\realposzero{\mathbb{R}_0^+}
+
+
+%%% Power set.
+\NewDocumentCommand{\powerset}{so}{
+	\IfNoValueTF{#2}{
+		\mathcal{P}
+	}{
+		\IfBooleanTF{#1}{
+			\mathcal{P}\left(#2\right)
+		}{
+			\mathcal{P}(#2)
+		}
+	}
+}
+
 
 
 %%% Bachmann-Landau notation.
@@ -181,3 +196,47 @@
 %%% Junk for playing around.
 \def\ABC{ABCDEFGHIJKLMNOPQRSTUVWXYZ}
 \def\abc{abcdefghijklmnopqrstuvwxyz}
+
+
+%%% APA seminar.
+% Maths & algo.
+\NewDocumentCommand{\agents}{}{\mathcal{A}}
+\NewDocumentCommand{\alloc}{o}{
+	\IfNoValueTF{#1}{
+		\mathbfit{x}
+	}{
+		\mathbfit{x}_{#1}
+	}
+}
+\NewDocumentCommand{\bipartitegraph}{}{G}
+\NewDocumentCommand{\genericset}{}{\mathcal{S}}
+\NewDocumentCommand{\goods}{}{\mathcal{G}}
+\NewDocumentCommand{\goodsint}{mm}{\goods_{#1, [#2]}}
+\NewDocumentCommand{\goodsrem}{}{\mathcal{G}^{\textnormal{rem}}}
+\NewDocumentCommand{\matching}{}{\mathcal{M}}
+\NewDocumentCommand{\remvalue}{m}{
+	u_{#1}
+}
+\NewDocumentCommand{\valuations}{soo}{
+	\IfNoValueTF{#2}{
+		v
+	}{
+		\IfNoValueTF{#3}{
+			v_{#2}
+		}{
+			\IfBooleanTF{#1}{
+				v_{#2}\left({#3}\right)
+			}{
+				v_{#2}({#3})
+			}
+		}
+	}
+}
+\NewDocumentCommand{\weight}{o}{\IfNoValueTF{#1}{\eta}{\eta_{#1}}}
+\NewDocumentCommand{\weights}{}{\mathcal{W}}
+
+\SetKwFunction{maxweightmatching}{max\_weight\_matching}
+
+% Texts.
+\NewDocumentCommand{\nsw}{}{NSW}
+\NewDocumentCommand{\smatch}{}{SMatch}
