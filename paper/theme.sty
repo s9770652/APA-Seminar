@@ -1,6 +1,16 @@
 %%% Font.
 %\RequirePackage{libertine}
 \RequirePackage[regular]{newcomputermodern}  % newest version of Computer Modern (regular: display weight)
+\NewDocumentCommand{\abb}{m}{#1}  % abbreviations
+
+% Logic notation.
+\let\oldforall\forall
+\renewcommand{\forall}{\oldforall \, }
+
+\let\oldexist\exists
+\renewcommand{\exists}{\oldexist \: }
+
+\newcommand\existsnot{\oldexist! \: }
 
 % Links.
 \hypersetup{
@@ -60,6 +70,11 @@
 \newtheorem{case}{Case}
 \newtheorem{acknowledgment}{Acknowledgment}
 \newtheorem{conclusion}{Conclusion}
+
+
+%%% Algorithms.
+\DontPrintSemicolon
+\SetKwComment{tct}{\(\vartriangleright\)}{}
 
 
 %%% PDF options.

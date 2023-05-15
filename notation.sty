@@ -43,8 +43,10 @@
 
 %%% Delimiters.
 \DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
-\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
 \NewDocumentCommand{\given}{O{}}{\mathrel{#1|}}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
 
 % Removes excess space when using \left(..\right).
 % taken from: https://www.reddit.com/r/LaTeX/comments/64derj/comment/dg2fpcz/?utm_source=share&utm_medium=web2x&context=3
@@ -105,15 +107,6 @@
 \DeclareDocumentCommand{\laplacian}{s}{
 	\IfBooleanTF{#1}{\mathdif*{\Delta}}{\nabla^2}
 }
-
-% Logic notation.
-\let\oldforall\forall
-\renewcommand{\forall}{\oldforall \, }
-
-\let\oldexist\exists
-\renewcommand{\exists}{\oldexist \: }
-
-\newcommand\existsnot{\oldexist! \: }
 
 
 %%% Constants and specifiers.
@@ -193,6 +186,19 @@
 \newcolumntype{R}{>{\raggedleft\arraybackslash}X}  % right-aligned
 
 
+%%% Algorithms.
+% Removes line number for one line. Best use with \nosemic
+% taken from: https://tex.stackexchange.com/a/153906
+\makeatletter
+\newcommand{\nosemic}{\renewcommand{\@endalgocfline}{\relax}}  % Drop semi-colon ;
+\newcommand{\dosemic}{\renewcommand{\@endalgocfline}{\algocf@endline}}  % Reinstate semi-colon ;
+\newcommand{\pushline}{\Indp}  % indent
+\newcommand{\popline}{\Indm\dosemic}  % undent
+\let\oldnl\nl
+\newcommand{\nonl}{\renewcommand{\nl}{\let\nl\oldnl}}
+\makeatother
+
+
 %%% Junk for playing around.
 \def\ABC{ABCDEFGHIJKLMNOPQRSTUVWXYZ}
 \def\abc{abcdefghijklmnopqrstuvwxyz}
@@ -201,12 +207,8 @@
 %%% APA seminar.
 % Maths & algo.
 \NewDocumentCommand{\agents}{}{\mathcal{A}}
-\NewDocumentCommand{\alloc}{o}{
-	\IfNoValueTF{#1}{
-		\mathbfit{x}
-	}{
-		\mathbfit{x}_{#1}
-	}
+\NewDocumentCommand{\alloc}{oo}{
+	\mathbfit{x}\IfValueT{#1}{_{#1}}\IfValueT{#2}{^{#2}}
 }
 \NewDocumentCommand{\bipartitegraph}{}{G}
 \NewDocumentCommand{\genericset}{}{\mathcal{S}}
@@ -214,29 +216,28 @@
 \NewDocumentCommand{\goodsint}{mm}{\goods_{#1, [#2]}}
 \NewDocumentCommand{\goodsrem}{}{\mathcal{G}^{\textnormal{rem}}}
 \NewDocumentCommand{\matching}{}{\mathcal{M}}
-\NewDocumentCommand{\remvalue}{m}{
-	u_{#1}
-}
+\NewDocumentCommand{\phasei}{}{\mathup{I}}
+\NewDocumentCommand{\phaseii}{}{\mathup{II}}
+\NewDocumentCommand{\phaseiii}{}{\mathup{III}}
+\NewDocumentCommand{\remvalue}{m}{u_{#1}}
 \NewDocumentCommand{\valuations}{soo}{
-	\IfNoValueTF{#2}{
-		v
+	\IfBooleanTF{#1}{
+		v\IfValueT{#2}{_{#2}}\IfValueT{#3}{(#3)}
 	}{
-		\IfNoValueTF{#3}{
-			v_{#2}
-		}{
-			\IfBooleanTF{#1}{
-				v_{#2}\left({#3}\right)
-			}{
-				v_{#2}({#3})
-			}
-		}
+		v\IfValueT{#2}{_{#2}}\IfValueT{#3}{\left(#3\right)}
 	}
 }
 \NewDocumentCommand{\weight}{o}{\IfNoValueTF{#1}{\eta}{\eta_{#1}}}
 \NewDocumentCommand{\weights}{}{\mathcal{W}}
 
 \SetKwFunction{maxweightmatching}{max\_weight\_matching}
+\SetKwFunction{arballoc}{arbitrary\_allocation}
+
+\NewDocumentCommand{\phaseisep}{}{\nonl\CommentSty{Phase I:}\;}
+\NewDocumentCommand{\phaseiisep}{}{\vspace{0.25em}\nonl\CommentSty{Phase II:}\;}
+\NewDocumentCommand{\phaseiiisep}{}{\vspace{0.25em}\nonl\CommentSty{Phase III:}\;}
 
 % Texts.
-\NewDocumentCommand{\nsw}{}{NSW}
-\NewDocumentCommand{\smatch}{}{SMatch}
+\NewDocumentCommand{\nsw}{}{\abb{NSW}}
+\NewDocumentCommand{\reprematch}{}{\abb{RepReMatch}}
+\NewDocumentCommand{\smatch}{}{\abb{SMatch}}
