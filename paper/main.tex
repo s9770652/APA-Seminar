@@ -1,20 +1,21 @@
-% !TeX spellcheck = en_GB
 % !TeX program = lualatex
 \documentclass[
 	abstract,
-	titlepage
+	titlepage,
+	draft
 ]{scrartcl}
 
 \input{../packages.def}
 \input{../notation.sty}
 \input{theme.sty}
 
-\titlehead{Algorithms and Complexity Group\hfill Summer Semester 2023 \\ Institute for Computer Science \\ Goethe University Frankfurt}
+\titlehead{Algorithms and Complexity Group\hfill Summer Semester \oldstylenums{2023} \\ Institute for Computer Science \\ Goethe University Frankfurt}
 \subject{Seminar Approximation Algorithms}
 \title{ANSWuSVþ(U)M}
-%\subtitle{Seminar Approximationsalgorithmen}
+%\subtitle{Seminar Approximation Algorithms}
 \author{Zeno Adrian Weil}
 \publishers{Supervisor: Dr Giovanna Varricchio}
+\date{\oldstylenums{\today}}
 
 \makeatletter
 \hypersetup{
@@ -31,13 +32,7 @@
 		\blindtext[2]
 	\end{abstract}
 
-	\section{Introduction}
-
-	\blindtext[1]
-
-	\blindtext[2]
-
-	\blindtext[2]
+	\include{intro}
 
 	\include{smatch}
 

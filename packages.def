@@ -1,4 +1,5 @@
 \RequirePackage[british]{babel}  % Sprache
+\RequirePackage{csquotes}  % Anführungszeichen
 
 \RequirePackage{geometry}  % Seitenlayout (insbesondere Ränder)
 
@@ -15,6 +16,7 @@
 \@ifclassloaded{beamer}{}{\RequirePackage[inline]{enumitem}}  % bessere Aufzählung (mit *-Variante für Aufzählungen innerhalb eines Textes); für 'beamer' ausgeschaltet
 \makeatother
 
+\PassOptionsToPackage{dvipsnames}{xcolor}
 \RequirePackage{tikz} % Grafikpaket
 \RequirePackage{tikzpagenodes}  % benötig für current page
 \RequirePackage{pgfplots}  % tikz-Erweiterung
@@ -31,3 +33,4 @@
 \addbibresource{../sources.bib}
 
 \RequirePackage[toc, math, pangram]{blindtext}  % lorem ipsum dolor sit amet
+\RequirePackage{todonotes}

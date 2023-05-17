@@ -97,6 +97,11 @@
 }
 \makeatother
 
+% Cup with higher lower limit (to be used for textmode).
+\providecommand*{\highbigcup}{%
+	\mathop{\bigcup{}}
+}
+
 % Differential operators
 \letdif*{\dif}{d}  % \d is redefined by fixdif. This line is just for renaming.
 \letdif*{\diff}{updelta}  % * = spacing correction; perhaps remove the asterisks if changing the math font
@@ -107,6 +112,10 @@
 \DeclareDocumentCommand{\laplacian}{s}{
 	\IfBooleanTF{#1}{\mathdif*{\Delta}}{\nabla^2}
 }
+
+% Minima and maxima.
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
 
 
 %%% Constants and specifiers.
@@ -207,14 +216,15 @@
 %%% APA seminar.
 % Maths & algo.
 \NewDocumentCommand{\agents}{}{\mathcal{A}}
+\NewDocumentCommand{\allallocs}{mm}{\Pi_{#1}(#2)}
 \NewDocumentCommand{\alloc}{oo}{
 	\mathbfit{x}\IfValueT{#1}{_{#1}}\IfValueT{#2}{^{#2}}
 }
 \NewDocumentCommand{\bipartitegraph}{}{G}
 \NewDocumentCommand{\genericset}{}{\mathcal{S}}
 \NewDocumentCommand{\goods}{}{\mathcal{G}}
-\NewDocumentCommand{\goodsint}{mm}{\goods_{#1, [#2]}}
-\NewDocumentCommand{\goodsrem}{}{\mathcal{G}^{\textnormal{rem}}}
+\NewDocumentCommand{\goodsint}{mmm}{\goods_{#1, [#2:#3]}}
+\NewDocumentCommand{\goodsrem}{}{\mathcal{G}^{\mathup{rem}}}
 \NewDocumentCommand{\matching}{}{\mathcal{M}}
 \NewDocumentCommand{\phasei}{}{\mathup{I}}
 \NewDocumentCommand{\phaseii}{}{\mathup{II}}
@@ -222,12 +232,12 @@
 \NewDocumentCommand{\remvalue}{m}{u_{#1}}
 \NewDocumentCommand{\valuations}{soo}{
 	\IfBooleanTF{#1}{
-		v\IfValueT{#2}{_{#2}}\IfValueT{#3}{(#3)}
-	}{
 		v\IfValueT{#2}{_{#2}}\IfValueT{#3}{\left(#3\right)}
+	}{
+		v\IfValueT{#2}{_{#2}}\IfValueT{#3}{(#3)}
 	}
 }
-\NewDocumentCommand{\weight}{o}{\IfNoValueTF{#1}{\eta}{\eta_{#1}}}
+\NewDocumentCommand{\weight}{m}{\eta_{#1}}
 \NewDocumentCommand{\weights}{}{\mathcal{W}}
 
 \SetKwFunction{maxweightmatching}{max\_weight\_matching}

@@ -1,7 +1,21 @@
 %%% Font.
-%\RequirePackage{libertine}
+%\RequirePackage{libertinus}
 \RequirePackage[regular]{newcomputermodern}  % newest version of Computer Modern (regular: display weight)
+
 \NewDocumentCommand{\abb}{m}{#1}  % abbreviations
+\setkomafont{captionlabel}{\usekomafont{descriptionlabel}}
+
+% Colours in titles.
+%\NewDocumentCommand{\accentcolor}{}{\color[RGB]{118, 13, 28}}  % Mordred's colour
+\NewDocumentCommand{\accentcolor}{}{\color{black}}
+\addtokomafont{captionlabel}{\accentcolor}
+\addtokomafont{disposition}{\accentcolor}
+\addtokomafont{labelinglabel}{\accentcolor}
+\addtokomafont{itemizelabel}{\accentcolor}
+\addtokomafont{descriptionlabel}{\accentcolor}
+
+% Title page.
+\setkomafont{publishers}{}  % \publishers in normal font
 
 % Logic notation.
 \let\oldforall\forall
@@ -26,7 +40,7 @@
 }
 
 %% Set style of operators.
-%% taken from: https://tex.stackexchange.com/questions/219417/how-to-change-the-default-font-of-math-operators/219427#219427
+%% taken from: https://tex.stackexchange.com/a/604317
 %\DeclareSymbolFont{sansops}{T1}{\sfdefault}{m}{n}
 %\SetSymbolFont{sansops}{bold}{T1}{\sfdefault}{b}{n}
 %
@@ -38,11 +52,18 @@
 %%% Page style.
 \geometry{margin=3cm}
 
-% Title page.
-\setkomafont{publishers}{}  % \publishers in normal font
-
 
 %%% Environments in roman style with bold title.
+\newtheoremstyle{definition}
+	{\topsep}   % ABOVESPACE
+	{\topsep}   % BELOWSPACE
+	{\normalfont}  % BODYFONT
+	{0pt}       % INDENT (empty value is the same as 0pt)
+	{\accentcolor\maybesffamily\bfseries} % HEADFONT
+	{.}         % HEADPUNCT
+	{5pt plus 1pt minus 1pt} % HEADSPACE
+	{}          % CUSTOM-HEAD-SPEC
+
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}
 %\AfterEndEnvironment{definition}{\noindent\ignorespaces}
@@ -52,6 +73,16 @@
 
 
 %%% Environments in italic style with bold title.
+\newtheoremstyle{plain}
+	{\topsep}   % ABOVESPACE
+	{\topsep}   % BELOWSPACE
+	{\itshape}  % BODYFONT
+	{0pt}       % INDENT (empty value is the same as 0pt)
+	{\accentcolor\maybesffamily\bfseries} % HEADFONT
+	{.}         % HEADPUNCT
+	{5pt plus 1pt minus 1pt} % HEADSPACE
+	{}          % CUSTOM-HEAD-SPEC
+
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}
 \newtheorem{proposition}{Proposition}
@@ -62,6 +93,16 @@
 
 
 %%% Environments in roman style with italic title.
+\newtheoremstyle{plain}
+	{0.5\topsep}   % ABOVESPACE
+	{0.5\topsep}   % BELOWSPACE
+	{\normalfont}  % BODYFONT
+	{0pt}       % INDENT (empty value is the same as 0pt)
+	{\accentcolor\maybesffamily\itshape} % HEADFONT
+	{.}         % HEADPUNCT
+	{5pt plus 1pt minus 1pt} % HEADSPACE
+	{}          % CUSTOM-HEAD-SPEC
+
 \theoremstyle{remark}
 \newtheorem{remark}{Remark}
 \newtheorem{annotation}{Annotation}
@@ -74,7 +115,12 @@
 
 %%% Algorithms.
 \DontPrintSemicolon
-\SetKwComment{tct}{{\footnotesize\(\rhd\)}\,}{}
+\SetKwComment{tct}{\raisebox{0.15em}{\scriptsize\(\rhd\)}\,}{}
+\SetAlCapFnt{\accentcolor\maybesffamily}
+\SetFuncSty{setoperatorname}
+\SetCommentSty{emph}
+%\SetKwInOut{KwIn}{\maybesffamily Input}
+%\SetKwInOut{KwOut}{\maybesffamily Output\!}
 
 
 %%% PDF options.
