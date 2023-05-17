@@ -2,11 +2,12 @@
 %\RequirePackage{libertinus}
 \RequirePackage[regular]{newcomputermodern}  % newest version of Computer Modern (regular: display weight)
 
-\NewDocumentCommand{\abb}{m}{#1}  % abbreviations
+\NewDocumentCommand{\abb}{m}{\text{#1}}  % abbreviations
 \setkomafont{captionlabel}{\usekomafont{descriptionlabel}}
 
 % Colours in titles.
-%\NewDocumentCommand{\accentcolor}{}{\color[RGB]{118, 13, 28}}  % Mordred's colour
+%\NewDocumentCommand{\accentcolor}{}{\color[RGB]{118, 13, 28}}  % Mordred's red
+%\NewDocumentCommand{\accentcolor}{}{\color[RGB]{51, 0, 102}}  % algo's violet
 \NewDocumentCommand{\accentcolor}{}{\color{black}}
 \addtokomafont{captionlabel}{\accentcolor}
 \addtokomafont{disposition}{\accentcolor}
@@ -52,6 +53,7 @@
 %%% Page style.
 \geometry{margin=3cm}
 
+\captionsetup{format=plain}
 
 %%% Environments in roman style with bold title.
 \newtheoremstyle{definition}

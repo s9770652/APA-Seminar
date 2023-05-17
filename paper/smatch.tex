@@ -1,3 +1,9 @@
+\section{SMatch}
+
+\begin{itemize}
+	\item
+\end{itemize}
+
 \begin{algorithm*}
 	\KwIn{%
 		set \(\agents = \{ 1, \dots, n \}\) of agents with weights \(\weight{i} \forall i \in \agents\),
@@ -22,6 +28,86 @@
 		\(\goodsrem \gets \goodsrem \setminus \{\, j \given (i, j) \in \matching \,\}\)\;
 	}
 	\Return{\(\alloc\)}
-	\caption{\smatch{} for the Asymmetric Additive \nsw{} problem}
+	\caption{%
+		\SMatch{} for the Asymmetric Additive \NSW{} problem
+	}
 	\label{alg:smatch}
 \end{algorithm*}
+
+\begin{figure*}
+	\tikzset{
+		lbl/.style = {},
+		agent/.style = {draw, circle},
+		item/.style = {draw, rectangle},
+		dots/.style = {},
+		weight/.style = {font=\small},
+		edgeopt/.style = {black},
+		edgealg/.style = {black},
+		edgegry/.style = {black},
+		node distance=10mm and 27mm,
+	}
+	\def\allocationexample{
+		\begin{tikzpicture}
+			% items
+			\node[item, label={[lbl]above:\(\goods\)}] (i1)                       {1};
+			\node[item]                                (i2)  [below=of i1]        {2};
+			\node[item]                                (i3)  [below=of i2]        {3};
+			\node[item]                                (im)  [below=of i3]        {\(m\)};
+			\node[item]                                (im1) [below=of im]        {\(m+1\)};
+			\node[dots]                                (id)  at ($(i3)!0.5!(im)$) {\(\vdots\)};
+			% agents
+			\node[agent, label={[lbl]above:\(\agents\)}] (a1) [left=of i1]  {1};
+			\node[agent]                                 (a2) [left=of im1] {2};
+			% valuations
+			\draw[edgealg] (a1) to node[weight, pos=.43, below]      {\(m + \epsilon\)} (i1);
+			\draw          (a1) to node[weight, pos=.42, below]      {\(1\)} (i2);
+			\draw          (a1) to node[weight, pos=.37, below]      {\(1\)} (i3);
+			\draw          (a1) to node[weight, pos=.30, below]      {\(1\)} (im);
+			\draw[edgeopt] (a1) to node[weight, pos=.26, below left] {\(1\)} (im1);
+
+			\draw[edgeopt] (a2) to node[weight, pos=.26, above left] {\(m\)} (i1);
+			\draw[edgegry] (a2) to node[weight, pos=.30, above]      {\(0\)} (i2);
+			\draw[edgegry] (a2) to node[weight, pos=.37, above]      {\(0\)} (i3);
+			\draw[edgegry] (a2) to node[weight, pos=.42, above]      {\(0\)} (im);
+			\draw[edgealg] (a2) to node[weight, pos=.48, above]      {\(1\)} (im1);
+		\end{tikzpicture}
+	}
+	\centering
+	\begin{subfigure}{0.31\textwidth}
+		\allocationexample
+		\caption{%
+			base case
+			[might merge]
+		}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{0.31\textwidth}
+		\tikzset{
+			edgealg/.style = {white},
+			edgegry/.style = {white},
+		}
+		\allocationexample
+		\caption{%
+			\(\OPT = \sqrt{m \cdot m}\)
+		}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{0.31\textwidth}
+		\tikzset{
+			edgeopt/.style = {white},
+			edgegry/.style = {white},
+		}
+		\allocationexample
+		\caption{%
+			\(\ALG \leq \sqrt{(2m + \epsilon - 1) \cdot 1}\)
+		}
+	\end{subfigure}
+	\caption{%
+		Agent \(1\) values item \(1\) at \(m + \epsilon\), and all other items at \(1\).
+		Agent \(2\) values item \(1\) at \(m\), item \(m+1\) at \(1\), and all other items at \(0\).
+		In an optimal allocation, item \(1\) would be assigned to agent \(2\) and all other items to agent \(1\), resulting in a \NSW{} of \(\sqrt{m \cdot m} = m\).
+		A repeated maximum matching algorithm would greedily assign item \(1\) to agent \(1\) and item \(m+1\) to agent \(2\) in the first round.
+		Even if all remaining items were going to be assigned to agent \(1\), the \NSW{} will never surpass \(\sqrt{(2m + \epsilon - 1) \cdot 1} < \sqrt{2m}\).
+		The approximation factor \(\alpha \approx \sqrt{m/2}\) is therefore dependant on the number \(m\) of items.
+	}
+\end{figure*}

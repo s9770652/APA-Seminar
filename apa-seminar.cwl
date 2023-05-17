@@ -1,3 +1,4 @@
+# Mathematical notation.
 \agents#\math
 
 \alloc#\math
@@ -31,3 +32,12 @@
 \weight{agent}#\math
 
 \weights#\math
+
+
+# Algorithms.
+\maxweightmatching
+
+\arballoc
+
+\tct{Text%text}
+\tct*{Text%text}
