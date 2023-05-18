@@ -35,7 +35,8 @@
 	\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
 	\(\alloc[i][\phaseiii] \gets \alloc[i][\phaseii] \cup \{j\} \quad\forall(i, j) \in \matching\)\;
 	\(\goodsrem \gets \goodsrem \setminus \{\, j \given (i, j) \in \matching \,\}\)\;
-	\(\alloc[][\phaseiii] \gets \arballoc( \agents, \goodsrem, \alloc[][\phaseiii], (\valuations[i])_{i \in \agents} )\)\;
+	\(\alloc[][\phaseiii] \gets \arballoc( \agents, \goodsrem, \alloc[][\phaseiii], (\valuations[i])_{i \in \agents} )\)
+	\todo{decide on \(\alloc\) or \(\alloc[][\phaseiii]\); discrepancies in orig paper in def of \(\alloc[][\phaseiii]\)!}\;
 	\Return{\(\alloc[][\phaseiii]\)}
 	\caption{%
 		\RepReMatch{} for the Asymmetric Submodular \NSW{} problem
