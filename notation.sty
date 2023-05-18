@@ -220,8 +220,8 @@
 % Maths & algo.
 \NewDocumentCommand{\agents}{}{\mathcal{A}}
 \NewDocumentCommand{\allallocs}{mm}{\Pi_{#1}(#2)}
-\NewDocumentCommand{\alloc}{oo}{
-	\mathbfit{x}\IfValueT{#1}{_{#1}}\IfValueT{#2}{^{#2}}
+\NewDocumentCommand{\alloc}{O{} O{}}{
+	\mathbfit{x}\IfEmptyF{#1}{_{#1}}\IfEmptyF{#2}{^{#2}}
 }
 \NewDocumentCommand{\bipartitegraph}{}{G}
 \NewDocumentCommand{\genericset}{}{\mathcal{S}}
@@ -233,11 +233,11 @@
 \NewDocumentCommand{\phaseii}{}{\mathup{II}}
 \NewDocumentCommand{\phaseiii}{}{\mathup{III}}
 \NewDocumentCommand{\remvalue}{m}{u_{#1}}
-\NewDocumentCommand{\valuations}{soo}{
+\NewDocumentCommand{\valuations}{s O{} O{}}{
 	\IfBooleanTF{#1}{
-		v\IfValueT{#2}{_{#2}}\IfValueT{#3}{\left(#3\right)}
+		v\IfEmptyF{#2}{_{#2}}\IfEmptyF{#3}{\left(#3\right)}
 	}{
-		v\IfValueT{#2}{_{#2}}\IfValueT{#3}{(#3)}
+		v\IfEmptyF{#2}{_{#2}}\IfEmptyF{#3}{(#3)}
 	}
 }
 \NewDocumentCommand{\weight}{m}{\eta_{#1}}
