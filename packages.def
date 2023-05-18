@@ -4,8 +4,8 @@
 \RequirePackage{geometry}  % Seitenlayout (insbesondere Ränder)
 
 \RequirePackage{amsmath, amssymb, amsthm}  % mathematische Grundlagen
-\let\mathbbold\mathbb  % speichere herkömmliche Buchstaben mit Doppelstrich und Serifen
 \RequirePackage[intlimits]{mathtools}  % stellt u. a. \DeclarePairedDelimiter zur Verfügung + weitere Verbesserungen für amsmath
+\let\mathbbold\mathbb  % speichere herkömmliche Buchstaben mit Doppelstrich und Serifen
 \RequirePackage[math-style=ISO, bold-style=ISO, partial=upright]{unicode-math}  % für kursive gr. Großbuchstaben und aufrechtes ∂ benützt
 \let\mathbb\mathbbold  % kehre zu herkömmlichen Buchstaben mit Doppelstrich und Serifen zurück; neue Zeichen wie 1 mittels \symbb{1} verfügbar
 \RequirePackage{xfrac}  % schräge Brüche; vor fontspec zu laden!
@@ -25,7 +25,7 @@
 \RequirePackage{pgfplots}  % tikz-Erweiterung
 \pgfplotsset{compat=1.18}
 
-\RequirePackage[ruled, lined, longend, nofillcomment, linesnumbered]{algorithm2e}
+\RequirePackage[ruled, lined, longend, nofillcomment, linesnumbered]{algorithm2e}  % Algorithmen setzen
 
 \RequirePackage{hyperref}  % klickbare Verweise
 \RequirePackage[nameinlink, noabbrev]{cleveref}  % Namen in Verweisen
@@ -36,4 +36,7 @@
 \addbibresource{../sources.bib}
 
 \RequirePackage[toc, math, pangram]{blindtext}  % lorem ipsum dolor sit amet
-\RequirePackage{todonotes}
+\RequirePackage[obeyDraft, colorinlistoftodos, tickmarkheight=.25em, textwidth=2.1cm]{todonotes}  % Notizen
+\todostyle{info}{color=CornflowerBlue, textcolor=white}
+\RequirePackage{marginnote}  % benötigt, um \todo in Gleitobjekten benutzen zu können
+\renewcommand{\marginpar}{\marginnote}
