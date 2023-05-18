@@ -42,11 +42,13 @@
 
 
 %%% Delimiters.
-\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\abs}{\vert}{\vert}
+\DeclarePairedDelimiter{\braces}{\{}{\}}
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
 \NewDocumentCommand{\given}{O{}}{\mathrel{#1|}}
 \DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\paren}{(}{)}
 
 % Removes excess space when using \left(..\right).
 % taken from: https://www.reddit.com/r/LaTeX/comments/64derj/comment/dg2fpcz/?utm_source=share&utm_medium=web2x&context=3
@@ -219,20 +221,31 @@
 %%% APA seminar.
 % Maths & algo.
 \NewDocumentCommand{\agents}{}{\mathcal{A}}
-\NewDocumentCommand{\allallocs}{mm}{\Pi_{#1}(#2)}
+\NewDocumentCommand{\allallocs}{m m}{\Pi_{#1}(#2)}
 \NewDocumentCommand{\alloc}{O{} O{}}{
 	\mathbfit{x}\IfEmptyF{#1}{_{#1}}\IfEmptyF{#2}{^{#2}}
+}
+\NewDocumentCommand{\alloclen}{O{i} O{}}{
+	\tau\IfEmptyF{#1}{_{#1}}\IfEmptyF{#2}{^{#2}}
+}
+\NewDocumentCommand{\asgd}{O{i} m}{
+	h\IfEmptyF{#1}{_{#1}}^{#2}
 }
 \NewDocumentCommand{\bipartitegraph}{}{G}
 \NewDocumentCommand{\genericset}{}{\mathcal{S}}
 \NewDocumentCommand{\goods}{}{\mathcal{G}}
-\NewDocumentCommand{\goodsint}{mmm}{\goods_{#1, [#2:#3]}}
+\NewDocumentCommand{\goodsint}{m m m}{\goods_{#1, [#2:#3]}}
 \NewDocumentCommand{\goodsrem}{}{\mathcal{G}^{\mathup{rem}}}
+\NewDocumentCommand{\goodsordered}{O{i} m}{
+	\goods\IfEmptyF{#1}{_{#1}}^{\,\smash{(}#2\smash{)}}
+}
 \NewDocumentCommand{\matching}{}{\mathcal{M}}
 \NewDocumentCommand{\phasei}{}{\mathup{I}}
 \NewDocumentCommand{\phaseii}{}{\mathup{II}}
 \NewDocumentCommand{\phaseiii}{}{\mathup{III}}
-\NewDocumentCommand{\remvalue}{m}{u_{#1}}
+\NewDocumentCommand{\remvalue}{O{i}}{
+	u\IfEmptyF{#1}{_{#1}}
+}
 \NewDocumentCommand{\valuations}{s O{} O{}}{
 	\IfBooleanTF{#1}{
 		v\IfEmptyF{#2}{_{#2}}\IfEmptyF{#3}{\left(#3\right)}

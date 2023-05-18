@@ -3,8 +3,16 @@
 
 \alloc#\math
 \alloc[agent]#\math
-\alloc[\NoValue][phase]#\math
+\alloc[][phase]#\math
 \alloc[agent][phase]#\math
+
+\alloclen#\math
+\alloclen[agent]#\math
+\alloclen[][phase]#\math
+\alloclen[agent][phase]#\math
+
+\asgd{rank}#\math
+\asgd[agent]{rank}#\math
 
 \bipartitegraph#\math
 
@@ -16,12 +24,16 @@
 
 \goodsrem#\math
 
+\goodsordered{rank}#\math
+\goodsordered[agent]{rank}#\math
+
 \matching#\math
 
 \phasei#\math
 \phaseii#\math
 \phaseiii#\math
 
+\remvalue#\math
 \remvalue[agent]#\math
 
 \valuations#\math
