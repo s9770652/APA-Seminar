@@ -15,17 +15,17 @@
 
 For a fixed agent \(i\), order the items in descending order of the valuations by agent \(i\) and denote the \(j\)-th most liked item by \(\goodsordered{j}\).\todo{probably to be mentionend earlier because of \(\remvalue\)}
 \begin{lemma}
-	\(\valuations[i][\asgd{t}] \geq \valuations[i][\goodsordered{tn}]\).
+	\(\valuations[\asgd{t}] \geq \valuations[\goodsordered{tn}]\).
 \end{lemma}
 
 \begin{proof}
 	At the start of the \(t\)-th iteration, at most \((t-1) n\) items out of the \(tn\) most highly valued items \(\goodsordered{1}, \dots, \goodsordered{tn}\) have been assigned in previous iterations since at most \(n\) items are assigned in each iteration.
 	During the \(t\)-th iteration, at most \(n-1\) more of those highly valued items could be assigned to all other agents \(i' \neq i\), leaving at least one item in \(\goodsordered{1}, \dots, \goodsordered{tn}\) unassigned.
-	Since \(\valuations[i][\goodsordered{k}] \geq \valuations[i][\goodsordered{tn}]\) for all \(k \leq i\) by definition, the lemma follows.
+	Since \(\valuations[\goodsordered{k}] \geq \valuations[\goodsordered{tn}]\) for all \(k \leq i\) by definition, the lemma follows.
 \end{proof}
 
 \begin{lemma}
-	\(\valuations[i][ \asgd{2}, \dots, \asgd{\alloclen} ] \geq \frac{\remvalue}{n}\).
+	\(\valuations[ \asgd{2}, \dots, \asgd{\alloclen} ] \geq \frac{\remvalue}{n}\).
 \end{lemma}
 
 \begin{proof}[Proof Sketch]
@@ -35,26 +35,26 @@ For a fixed agent \(i\), order the items in descending order of the valuations b
 	\KwIn{%
 		set \(\agents = \{ 1, \dots, n \}\) of agents with weights \(\weight{i} \forall i \in \agents\),
 		set \(\goods = \{ 1, \dots, m \}\) indivisible items,
-		additive valuations \(\valuations[i] \colon \powerset[\goods] \to \realpos\) where \(\valuations[i][\genericset]\) is the valuation of agent \(i \in \agents\) for each item set \(\genericset \subset \goods\)}
+		additive valuations \(\valuations \colon \powerset[\goods] \to \realpos\) where \(\valuations[\genericset]\) is the valuation of agent \(i \in \agents\) for each item set \(\genericset \subset \goods\)}
 	\KwOut{%
-		\(\frac{1}{2n}\)-approximation \(\alloc = (\alloc[1], \dots, \alloc[n])\) of an optimal allocation
+		\(\frac{1}{2n}\)-approximation \(\alloc[][] = (\alloc[][1], \dots, \alloc[][n])\) of an optimal allocation
 	}
 
-	\(\alloc[i] \gets \emptyset \quad\forall i \in \agents\)\;
-	\(\remvalue \gets \valuations[i][\goodsint{i}{2n+1}{m}] \quad\forall i \in \agents\)\;
-	\(\weights \gets \{\,  \weight{i} \cdot \log\bigl( \valuations[i][j] + \frac{\remvalue}{n} \bigr) \given[\bigm] i \in \agents, j \in \goods \,\}\)\tct*{edge weights}
+	\(\alloc \gets \emptyset \quad\forall i \in \agents\)\;
+	\(\remvalue \gets \valuations[\goodsint{2n+1}{m}] \quad\forall i \in \agents\)\;
+	\(\weights \gets \{\,  \weight{i} \cdot \log\bigl( \valuations[j] + \frac{\remvalue}{n} \bigr) \given[\bigm] i \in \agents, j \in \goods \,\}\)\tct*{edge weights}
 	\(\bipartitegraph \gets (\agents, \goods, \weights)\)\tct*{bipartite graph}
 	\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
-	\(\alloc[i] \gets \{\, j \given (i, j) \in \matching \,\} \quad\forall i \in \agents\)\tct*{allocate according to matching}
+	\(\alloc \gets \{\, j \given (i, j) \in \matching \,\} \quad\forall i \in \agents\)\tct*{allocate according to matching}
 	\(\goodsrem \gets \goods \setminus \{\, j \given (i, j) \in \matching \,\}\)\tct*{remove allocated goods}
 	\While{\(\goodsrem \neq \emptyset\)}{
-		\(\weights \gets \{\,  \weight{i} \cdot \log\bigl( \valuations[i][j] + \valuations[i][\alloc[i]] \bigr) \given[\bigm] i \in \agents, j \in \goodsrem \,\}\)\;
+		\(\weights \gets \{\,  \weight{i} \cdot \log\bigl( \valuations[j] + \valuations[\alloc] \bigr) \given[\bigm] i \in \agents, j \in \goodsrem \,\}\)\;
 		\(\bipartitegraph \gets (\agents, \goodsrem, \weights)\)\;
 		\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
-		\(\alloc[i] \gets \alloc[i] \cup \{\, j \given (i, j) \in \matching \,\} \quad\forall i \in \agents\)\;
+		\(\alloc \gets \alloc \cup \{\, j \given (i, j) \in \matching \,\} \quad\forall i \in \agents\)\;
 		\(\goodsrem \gets \goodsrem \setminus \{\, j \given (i, j) \in \matching \,\}\)\;
 	}
-	\Return{\(\alloc\)}
+	\Return{\(\alloc[][]\)}
 	\caption{%
 		\SMatch{} for the Asymmetric Additive \NSW{} problem
 	}

@@ -2,17 +2,17 @@
 \agents#\math
 
 \alloc#\math
-\alloc[agent]#\math
-\alloc[][phase]#\math
-\alloc[agent][phase]#\math
+\alloc[phase]#\math
+\alloc[][agent]#\math
+\alloc[phase][agent]#\math
 
 \alloclen#\math
-\alloclen[agent]#\math
-\alloclen[][phase]#\math
-\alloclen[agent][phase]#\math
+\alloclen[phase]#\math
+\alloclen[][agent]#\math
+\alloclen[phase][agent]#\math
 
 \asgd{rank}#\math
-\asgd[agent]{rank}#\math
+\asgd{rank}[agent]#\math
 
 \bipartitegraph#\math
 
@@ -20,12 +20,13 @@
 
 \goods#\math
 
-\goodsint{agent}{start}{end}#\math
+\goodsint{start}{end}#\math
+\goodsint{start}{end}[agent]#\math
 
 \goodsrem#\math
 
 \goodsordered{rank}#\math
-\goodsordered[agent]{rank}#\math
+\goodsordered{rank}[agent]#\math
 
 \matching#\math
 
@@ -37,9 +38,8 @@
 \remvalue[agent]#\math
 
 \valuations#\math
-\valuations[agent]#\math
-\valuations[agent][item]#\math
-\valuations*[agent][item]#\math
+\valuations[item]#\math
+\valuations[item][agent]#\math
 
 \weight{agent}#\math
 
