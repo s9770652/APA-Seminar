@@ -33,7 +33,7 @@ For a fixed agent \(i\), order the items in descending order of the valuations b
 
 \begin{algorithm*}[p]
 	\KwIn{%
-		set \(\agents = \{ 1, \dots, n \}\) of agents with weights \(\weight{i} \forall i \in \agents\),
+		set \(\agents = \{ 1, \dots, n \}\) of agents with weights \(\weight \forall i \in \agents\),
 		set \(\goods = \{ 1, \dots, m \}\) indivisible items,
 		additive valuations \(\valuations \colon \powerset[\goods] \to \realpos\) where \(\valuations[\genericset]\) is the valuation of agent \(i \in \agents\) for each item set \(\genericset \subset \goods\)}
 	\KwOut{%
@@ -42,13 +42,13 @@ For a fixed agent \(i\), order the items in descending order of the valuations b
 
 	\(\alloc \gets \emptyset \quad\forall i \in \agents\)\;
 	\(\remvalue \gets \valuations[\goodsint{2n+1}{m}] \quad\forall i \in \agents\)\;
-	\(\weights \gets \{\,  \weight{i} \cdot \log\bigl( \valuations[j] + \frac{\remvalue}{n} \bigr) \given[\bigm] i \in \agents, j \in \goods \,\}\)\tct*{edge weights}
+	\(\weights \gets \{\,  \weight \cdot \log\bigl( \valuations[j] + \frac{\remvalue}{n} \bigr) \given[\bigm] i \in \agents, j \in \goods \,\}\)\tct*{edge weights}
 	\(\bipartitegraph \gets (\agents, \goods, \weights)\)\tct*{bipartite graph}
 	\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
 	\(\alloc \gets \{\, j \given (i, j) \in \matching \,\} \quad\forall i \in \agents\)\tct*{allocate according to matching}
 	\(\goodsrem \gets \goods \setminus \{\, j \given (i, j) \in \matching \,\}\)\tct*{remove allocated goods}
 	\While{\(\goodsrem \neq \emptyset\)}{
-		\(\weights \gets \{\,  \weight{i} \cdot \log\bigl( \valuations[j] + \valuations[\alloc] \bigr) \given[\bigm] i \in \agents, j \in \goodsrem \,\}\)\;
+		\(\weights \gets \{\,  \weight \cdot \log\bigl( \valuations[j] + \valuations[\alloc] \bigr) \given[\bigm] i \in \agents, j \in \goodsrem \,\}\)\;
 		\(\bipartitegraph \gets (\agents, \goodsrem, \weights)\)\;
 		\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
 		\(\alloc \gets \alloc \cup \{\, j \given (i, j) \in \matching \,\} \quad\forall i \in \agents\)\;

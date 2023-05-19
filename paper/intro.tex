@@ -26,10 +26,10 @@
 \begin{definition}
 	Given a set \(\goods\) of items and a set \(\agents\) of agents with \emph{valuations} \(\valuations \colon \powerset[\goods] \to \real\)\todo[info]{\(\mathbfit{i}\): less strict def of valuations; restriction for our case later on} and \emph{agent weights} \(\eta_i\) for all agents \(i \in \agents\), the \emph{Nash Social Welfare problem} (\NSW) is to find an allocation maximising the weighted geometric mean of valuations, that is
 	\begin{equation*}
-		\argmax_{\alloc[][] \in \allallocs{n}{\goods}} \braces[\bigg]{ \paren[\Big]{ \prod_{i \in \agents} \valuations[\alloc]^{\weight{i}} }^{1 / \sum_{i \in \agents} \weight{i}} }
+		\argmax_{\alloc[][] \in \allallocs{n}{\goods}} \braces[\bigg]{ \paren[\Big]{ \prod_{i \in \agents} \valuations[\alloc]^{\weight} }^{1 / \sum_{i \in \agents} \weight} }
 	\end{equation*}
 	where \(\allallocs{n}{\goods}\) is the set of all possible allocations of the items in \(\goods\) amongst \(n\) agents.
-	The problem is called \emph{symmetric} if all agent weights \(\weight{i}\) are equal, and \emph{asymmetric} otherwise.
+	The problem is called \emph{symmetric} if all agent weights \(\weight\) are equal, and \emph{asymmetric} otherwise.
 \end{definition}
 
 \(\vdots\)
