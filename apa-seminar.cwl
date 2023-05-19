@@ -41,7 +41,8 @@
 \valuations[item]#\math
 \valuations[item][agent]#\math
 
-\weight{agent}#\math
+\weight#\math
+\weight[agent]#\math
 
 \weights#\math
 

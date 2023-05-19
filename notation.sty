@@ -249,7 +249,9 @@
 \NewDocumentCommand{\valuations}{O{} O{i}}{
 	v\IfEmptyF{#2}{_{#2}}\IfEmptyF{#1}{(#1)}
 }
-\NewDocumentCommand{\weight}{m}{\eta_{#1}}
+\NewDocumentCommand{\weight}{O{i}}{
+	\eta\IfEmptyF{#1}{_{#1}}
+}
 \NewDocumentCommand{\weights}{}{\mathcal{W}}
 
 \SetKwFunction{maxweightmatching}{max\_weight\_matching}
