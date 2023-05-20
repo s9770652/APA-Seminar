@@ -234,10 +234,10 @@
 \NewDocumentCommand{\bipartitegraph}{}{G}
 \NewDocumentCommand{\genericset}{}{\mathcal{S}}
 \NewDocumentCommand{\goods}{}{\mathcal{G}}
-\NewDocumentCommand{\goodsint}{m m O{i}}{\goods_{#3, [#1:#2]}}
+\NewDocumentCommand{\goodsint}{m m O{i}}{\goods_{\!#3, [#1:#2]}}
 \NewDocumentCommand{\goodsrem}{}{\mathcal{G}^{\mathup{rem}}}
 \NewDocumentCommand{\goodsordered}{m O{i}}{
-	\goods\IfEmptyF{#2}{_{#2}}^{\,\smash{(}#1\smash{)}}
+	\goods\IfEmptyF{#2}{_{\!#2}}^{\smash{(}#1\smash{)}}
 }
 \NewDocumentCommand{\matching}{}{\mathcal{M}}
 \NewDocumentCommand{\phasei}{}{\mathup{I}}
