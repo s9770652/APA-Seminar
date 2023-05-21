@@ -222,22 +222,23 @@
 % Maths & algo.
 \NewDocumentCommand{\agents}{}{\mathcal{A}}
 \NewDocumentCommand{\allallocs}{m m}{\Pi_{#1}(#2)}
-\NewDocumentCommand{\alloc}{O{} O{i}}{
-	\mathbfit{x}\IfEmptyF{#2}{_{#2}}\IfEmptyF{#1}{^{#1}}
+\NewDocumentCommand{\alloc}{s O{} O{i}}{
+	\mathbfit{x}\IfEmptyF{#3}{_{#3}}\IfEmptyTF{#2}{\IfBooleanT{#1}{^*}}{^{\IfBooleanT{#1}{*}#2}}
 }
-\NewDocumentCommand{\alloclen}{O{} O{i}}{
-	\tau\IfEmptyF{#2}{_{#2}}\IfEmptyF{#1}{^{#1}}
+\NewDocumentCommand{\alloclen}{s O{} O{i}}{
+	\smash{\tau\IfEmptyF{#3}{_{#3}}\IfEmptyTF{#2}{\IfBooleanT{#1}{^*}}{^{\IfBooleanT{#1}{*}#2}}}
 }
-\NewDocumentCommand{\asgd}{m O{i}}{
-	h\IfEmptyF{#2}{_{#2}}^{#1}
+\NewDocumentCommand{\asgd}{s m O{i}}{
+	\IfBooleanTF{#1}{g}{h}\IfEmptyF{#3}{_{#3}}^{#2}
 }
 \NewDocumentCommand{\bipartitegraph}{}{G}
-\NewDocumentCommand{\genericset}{}{\mathcal{S}}
+\NewDocumentCommand{\genericset}{s O{}}{
+	\mathcal{S}\IfEmptyF{#2}{}\IfBooleanT{#1}{^*}
+}
 \NewDocumentCommand{\goods}{}{\mathcal{G}}
-\NewDocumentCommand{\goodsint}{m m O{i}}{\goods_{\!#3, [#1:#2]}}
 \NewDocumentCommand{\goodsrem}{}{\mathcal{G}^{\mathup{rem}}}
 \NewDocumentCommand{\goodsordered}{m O{i}}{
-	\goods\IfEmptyF{#2}{_{\!#2}}^{\smash{(}#1\smash{)}}
+	\goods\IfEmptyF{#2}{_{\!#2}}^{\thinspace\smash{#1}}
 }
 \NewDocumentCommand{\matching}{}{\mathcal{M}}
 \NewDocumentCommand{\phasei}{}{\mathup{I}}
