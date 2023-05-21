@@ -27,8 +27,8 @@
 
 \RequirePackage[ruled, lined, longend, nofillcomment, linesnumbered]{algorithm2e}  % Algorithmen setzen
 
-\RequirePackage{hyperref}  % klickbare Verweise
-\RequirePackage[nameinlink, noabbrev]{cleveref}  % Namen in Verweisen
+\RequirePackage[final]{hyperref}  % klickbare Verweise
+\RequirePackage[nameinlink]{cleveref}  % Namen in Verweisen
 
 \RequirePackage{fixdif}  % bessere Ableitungsoperatoren; benötigt 'unicode-math'; nach 'hyperref' zu laden
 
