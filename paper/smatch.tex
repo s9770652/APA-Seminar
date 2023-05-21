@@ -1,4 +1,5 @@
 \section{SMatch}
+\label{sec:smatch}
 
 In the case of an equal number of agents and items, \ie{} \(\abs{\agents} = n = m = \abs{\goods}\), the \emph{additive} \NSW{} can be solved exactly by finding a maximum matching on a bipartite graph with the sets of agents and of items as its parts;
 as weight of the edge between agent \(i\) and item \(j\), use \(\weight \log \valuations[j]\), that is the weighted valuation of item \(j\) by agent \(i\) in the \emph{logarithmic} Nash social welfare.
@@ -86,7 +87,7 @@ The geometric mean of the \NSW{} favours allocations with similar valuations\tod
 	\label{fig:allocation}
 \end{figure*}
 
-The algorithm \SMatch{}, described in \cref{alg:smatch}, eliminates the flaw by first gaining foresight of the valuations of items assigned after the first matching, achieving an approximation factor of \(\frac{1}{2n}\) (cf. \cref{th:smatch} later on).
+The algorithm \SMatch{}, described in \cref{alg:smatch}, eliminates the flaw by first gaining foresight of the valuations of items assigned after the first matching, achieving an approximation factor of \(2 n\) (cf. \cref{th:smatch} later on).
 For a fixed agent \(i\), order the items in descending order of the valuations by agent \(i\) and denote the \(j\)-th most liked item by \(\goodsordered{j}\).
 To obtain a well-defined order, items of equal rank are further ordered numerically.
 \SMatch, too, does repeatedly match items.
@@ -167,7 +168,7 @@ We can now establish \(\remvalue/n = \valuations[ \goodsordered{2n+1}, \dots, \g
 This allows us to calculate a lower bound on the approximation factor of \SMatch.
 \begin{theorem}
 	\label{th:smatch}
-	\SMatch{} has an approximation factor of \(\frac{1}{2 n}\).
+	\SMatch{} has an approximation factor of \(2 n\).
 \end{theorem}
 \begin{proof}
 	\Cref{lem:lower_bound_later_items} can be plugged into the logarithmic \NSW:
