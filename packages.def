@@ -40,7 +40,7 @@
 \RequirePackage[backend=biber, style=numeric-comp, sortcites]{biblatex}  % Quellenverzeichnis
 \addbibresource{../sources.bib}
 
-\RequirePackage[toc, math, pangram]{blindtext}  % lorem ipsum dolor sit amet
+\RequirePackage{lipsum}  % lorem ipsum dolor sit amet
 \RequirePackage[obeyDraft, colorinlistoftodos, tickmarkheight=.25em, textwidth=2.1cm]{todonotes}  % Notizen
 \todostyle{info}{color=CornflowerBlue, textcolor=white}
 \RequirePackage{marginnote}  % benötigt, um \todo in Gleitobjekten benutzen zu können
