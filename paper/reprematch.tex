@@ -2,7 +2,7 @@
 	\KwIn{%
 		set \(\agents = \{ 1, \dots, n \}\) of agents with weights \(\weight \forall i \in \agents\),
 		set \(\goods = \{ 1, \dots, m \}\) indivisible items,
-		additive valuations \(\valuations \colon \powerset[\goods] \to \realpos\) where \(\valuations[\genericset]\) is the valuation of agent \(i \in \agents\) for each item set \(\genericset \subset \goods\)
+		additive valuations \(\valuations \colon \powerset[\goods] \to \realposzero\) where \(\valuations[\genericset]\) is the valuation of agent \(i \in \agents\) for each item set \(\genericset \subset \goods\)
 	}
 	\KwOut{%
 		\(\frac{1}{2n\log n}\)-approximation \(\alloc[\phaseiii][] = (\alloc[\phaseiii][1], \dots, \alloc[\phaseiii][n])\) of an optimal allocation
@@ -12,7 +12,7 @@
 	\(\goodsrem \gets \goods\)\;
 	\For{\(t = 0, \dots, \ceil{\log n}-1\)}{
 		\If{\(\goodsrem \neq \emptyset\)}{
-			\(\weights \gets \{\,  \weight \cdot \log\bigl( \valuations[j] \bigr) \given[\bigm] i \in \agents, j \in \goods \,\}\)\;
+			\(\weights \gets \{\,  \weight \cdot \log\paren[\big]{ \valuations[j] } \given[\bigm] i \in \agents, j \in \goods \,\}\)\;
 			\(\bipartitegraph \gets (\agents, \goods, \weights)\)\;
 			\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
 			\(\alloc[\phasei] \gets \alloc[\phasei] \cup \{j\} \quad \forall(i, j) \in \matching\)\;
@@ -22,21 +22,21 @@
 	\phaseiisep
 	\(\alloc[\phaseii] \gets \emptyset \quad\forall i \in \agents\)\;
 	\While{\(\goodsrem \neq \emptyset\)}{
-		\(\weights \gets \{\,  \weight \cdot \log\bigl( \valuations[ \alloc[\phaseii] \cup \{j\} ] \bigr) \given[\bigm] i \in \agents, j \in \goods \,\}\)\;
+		\(\weights \gets \{\,  \weight \cdot \log\paren[\big]{ \valuations[ \alloc[\phaseii] \cup \{j\} ] } \given[\bigm] i \in \agents, j \in \goods \,\}\)\;
 		\(\bipartitegraph \gets (\agents, \goods, \weights)\)\;
 		\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
 		\(\alloc[\phaseii] \gets \alloc[\phaseii] \cup \{j\} \quad \forall(i, j) \in \matching\)\;
 		\(\goodsrem \gets \goodsrem \setminus \{\, j \given (i, j) \in \matching \,\}\)\;
 	}
 	\phaseiiisep
-	\(\goodsrem \gets \bigcup_{i \in \agents} \alloc[\phasei]\)\tct*{release items allocated in first phase}
-	\(\weights \gets \{\,  \weight \cdot \log\bigl( \valuations[ \alloc[\phaseii] \cup \{j\} ] \bigr) \given[\bigm] i \in \agents, j \in \goods \,\}\)\;
+	\(\goodsrem \gets \mathop{\bigcup\hspace{-1pt}_{i \in \agents}} \alloc[\phasei]\)\tct*{release items allocated in first phase}
+	\(\weights \gets \{\,  \weight \cdot \log\paren[\big]{ \valuations[ \alloc[\phaseii] \cup \{j\} ] } \given[\bigm] i \in \agents, j \in \goods \,\}\)\;
 	\(\bipartitegraph \gets (\agents, \goods, \weights)\)\;
 	\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
 	\(\alloc[\phaseiii] \gets \alloc[\phaseii] \cup \{j\} \quad\forall(i, j) \in \matching\)\;
 	\(\goodsrem \gets \goodsrem \setminus \{\, j \given (i, j) \in \matching \,\}\)\;
 	\(\alloc[\phaseiii] \gets \arballoc( \agents, \goodsrem, \alloc[\phaseiii], (\valuations)_{i \in \agents} )\)
-	\todo{decide on \(\alloc[][]\) or \(\alloc[\phaseiii][]\); discrepancies in orig paper in def of \(\alloc[][\phaseiii]\)!}\;
+	\todo{decide on \(\alloc[][]\) or \(\alloc[\phaseiii][]\); discrepancies in orig paper in def of \(\alloc[\phaseiii][]\)!}\;
 	\Return{\(\alloc[\phaseiii][]\)}
 	\caption{%
 		\RepReMatch{} for the Asymmetric Submodular \NSW{} problem

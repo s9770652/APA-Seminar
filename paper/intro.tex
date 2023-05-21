@@ -24,13 +24,14 @@
 \(\vdots\)
 
 \begin{definition}
-	Given a set \(\goods\) of items and a set \(\agents\) of agents with \emph{valuations} \(\valuations \colon \powerset[\goods] \to \real\)\todo[info]{\(\mathbfit{i}\): less strict def of valuations; restriction for our case later on} and \emph{agent weights} \(\eta_i\) for all agents \(i \in \agents\), the \emph{Nash Social Welfare problem} (\NSW) is to find an allocation maximising the weighted geometric mean of valuations, that is
+	Given a set \(\goods\) of items and a set \(\agents\) of agents with \emph{valuations} \(\valuations \colon \powerset[\goods] \to \real\)\todo[info]{less strict def of valuations; restriction for our case later on} and \emph{agent weights} \(\eta_i\) for all agents \(i \in \agents\), the \emph{Nash Social Welfare problem} (\NSW) is to find an allocation maximising the weighted geometric mean of valuations, that is
 	\begin{equation*}
 		\argmax_{\alloc[][] \in \allallocs{n}{\goods}} \braces[\bigg]{ \paren[\Big]{ \prod_{i \in \agents} \valuations[\alloc]^{\weight} }^{1 / \sum_{i \in \agents} \weight} }
 	\end{equation*}
 	where \(\allallocs{n}{\goods}\) is the set of all possible allocations of the items in \(\goods\) amongst \(n\) agents.
 	The problem is called \emph{symmetric} if all agent weights \(\weight\) are equal, and \emph{asymmetric} otherwise.
 \end{definition}
+\todo[inline]{agents without items assigned have valuation zero → prevent}
 
 \(\vdots\)
 
@@ -42,14 +43,15 @@ In a slight abuse of notation, we omit the brackets in a valuation function if t
 
 \(\vdots\)
 
-Garg, Kulkarni and Kulkarni consider five different types of non-negative monotonically non-decreasing valuation functions of which we are going to consider only the following two due to space constraints:
+Garg, Kulkarni and Kulkarni~\cite{APNSWuSVþUM} consider five different types of non-negative monotonically non-decreasing valuation functions of which we are going to consider only the following two due to space constraints:
 \begin{description}
 	\item[Additive]
 	The valuation \(\valuations[\genericset]\) of an agent \(i\) for a set \(\genericset \subset \goods\) of items \(j\) is the sum of individual valuations \(\valuations[j]\), that is \(\valuations[\genericset] = \sum_{j \in \genericset} \valuations[j]\).
 
 	\item[Submodular]
-	Let \(\valuations[\genericset_1 \given \genericset_2] \coloneq \valuations[\genericset_1 \cup \genericset_2] - \valuations[\genericset_2]\) denote the marginal utility of agent~\(i\) for a set \(\genericset_1 \subset \goods\) of items over the disjoint set \(\genericset_2 \subset \goods\).
-	This valuation functions satisfies the submodularity constraint \(\valuations[j \given \genericset_1 \cup \genericset_2] \leq \valuations[j \given \genericset_1]\) for all agents \(i \in \agents\), items \(j \in \goods\) and sets \(\genericset_1, \genericset_2 \subset \goods\) of items.
+	Let \(\valuations[\genericset[1] \given \genericset[2]] \coloneq \valuations[\genericset[1] \cup \genericset[2]] - \valuations[\genericset[2]]\) denote the marginal utility of agent~\(i\) for a set \(\genericset[1] \subset \goods\) of items over the disjoint set \(\genericset[2] \subset \goods\).
+	This valuation functions satisfies the submodularity constraint \(\valuations[j \given \genericset[1] \cup \genericset[2]] \leq \valuations[j \given \genericset[1]]\) for all agents \(i \in \agents\), items \(j \in \goods\) and sets \(\genericset[1], \genericset[2] \subset \goods\) of items.
 \end{description}
+We use \emph{additive \NSW} and \emph{submodular \NSW} as shorthands for the Nash social welfare problems with additive and submodular valuation functions, respectively.
 
 \blindtext[4]
