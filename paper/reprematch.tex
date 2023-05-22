@@ -65,7 +65,7 @@
 		}
 	}
 	\phaseiisep
-	\(\alloc[\phaseii] \gets \emptyset \quad\forall i \in \agents\)   \tct*{set allocation \(\alloc[\phasei]\) aside and start a new one}
+	\(\alloc[\phaseii] \gets \emptyset \quad\forall i \in \agents\)   \tct*{put allocation \(\alloc[\phasei]\) aside and start a new one}
 	\While{\(\goodsrem \neq \emptyset\)}{
 		\(\weights \gets \{\,  \weight \cdot \log\paren[\big]{ \valuations[ \alloc[\phaseii] \cup \{j\} ] } \given[\bigm] i \in \agents, j \in \goods \,\}\)\;
 		\(\bipartitegraph \gets (\agents, \goods, \weights)\)\;
