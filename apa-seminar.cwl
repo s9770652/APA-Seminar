@@ -1,4 +1,14 @@
 # Mathematical notation.
+# general
+\abs{formula}#m
+\braces[size]{formula}#m
+\ceil{formula}#m
+\floor{formula}#m
+\given[size]{formula}#m
+\norm{formula}#m
+\paren[size]{formula}#m
+
+# specific
 \agents#m
 
 \alloc#m
