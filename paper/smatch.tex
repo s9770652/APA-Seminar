@@ -6,7 +6,7 @@ as weight of the edge between agent \(i\) and item \(j\), use \(\weight \log \va
 Should there be more items than agents, then it would be obvious to just repeatedly find a maximum matching and assign the items accordingly until all items are assigned.
 The flaw of this idea is that such a greedy algorithm only considers the valuations of items in the current matching and perhaps the valuations of items already assigned.
 As the example in \cref{fig:allocation} demonstrates, this leads to an algorithm with an approximation factor dependent on the number \(m\) of items.\todo{What is the factor?}
-The geometric mean of the \NSW{} favours allocations with similarly valued bundles\todo{stimmt das?}, wherefore it may be beneficial for an agent to leave items to other agents if those agents cannot expect many more valuable items in the future.
+The geometric mean of the \NSW{} favours allocations with similarly valued bundles, wherefore it may be beneficial for an agent to leave items to other agents if those agents cannot expect many more valuable items in the future.
 
 \begin{figure*}
 	\tikzset{
@@ -153,7 +153,7 @@ We can now establish \(\remvalue/n = \valuations[ \goodsordered{2n+1}, \dots, \g
 \end{lemma}
 \begin{proof}
 	By \cref{lem:lower_bound_single_item} and definition of \(\goodsordered{\cdot}\), every item \(\asgd{t}\) is worth at least as much as each item \(\goodsordered{tn+k}\) with \(k \in \{0, \dots, n-1\}\) and, consequently, its valuation \(\valuations[\asgd{t}]\) is at least as high as the mean valuation \(\frac{1}{n} \valuations[ \goodsordered{tn}, \dots, \goodsordered{tn + n-1} ]\).
-	Further, it holds \(\alloclen n + n \geq m \) since each agent receives items for at least \(\floor{\frac{m}{n}} \geq \frac{m}{n} - 1\) rounds.\todo{unless there are zero valuations}
+	Further, it holds \(\alloclen n + n \geq m \) since each agent receives items for at least \(\floor{\frac{m}{n}} \geq \frac{m}{n} - 1\) rounds.
 	Together, this yields
 	\begin{align}
 		 \valuations[\asgd{2}, \dots, \asgd{\alloclen}]
@@ -161,12 +161,18 @@ We can now establish \(\remvalue/n = \valuations[ \goodsordered{2n+1}, \dots, \g
 		 \geq \sum_{t=2}^{\alloclen} \frac{1}{n} \valuations[ \goodsordered{tn}, \dots, \goodsordered{tn + n-1} ] \\
 		&\geq \frac{1}{n} \valuations[ \goodsordered{2n}, \dots, \goodsordered{m-1} ]
 		 \geq \frac{1}{n} \valuations[ \goodsordered{2n+1}, \dots, \goodsordered{m} ]
-		 = \frac{\remvalue}{n}
+		 = \frac{\remvalue}{n} \label{eq:lower_bound_later_items}
 	\end{align}
 	with the last inequality stemming from \(\valuations[\goodsordered{2n}] \geq \valuations[\goodsordered{m}]\).
 \end{proof}
 
-This allows us to calculate an approximation factor for \SMatch.
+\begin{remark}
+	In \cref{lem:lower_bound_later_items}, we assumed non-zero valuations for all items, hence the bundle lengths of \(\alloclen \geq \floor{\frac{m}{n}}\).
+	Of course in an actual program, one would not assign items to agents who value these with zero.
+	Nevertheless, \cref{lem:lower_bound_later_items} still holds as additional zeros in the sum of \cref{eq:lower_bound_later_items} do not change it.
+\end{remark}
+
+This allows us to calculate an approximation factor for \SMatch{} by comparing its output with an optimal allocation \(\alloc*[][]\).
 \begin{theorem}
 	\label{th:smatch}
 	\SMatch{} has an approximation factor of \(2 n\).
@@ -209,4 +215,5 @@ This allows us to calculate an approximation factor for \SMatch.
 		&\geq \frac{1}{\sum_{i=1}^{n} \weight} \cdot \sum_{i=1}^{n} \weight \log \paren[\bigg]{ \frac{\valuations[\alloc*]}{2n} }
 		 = \log \paren[\bigg]{\frac{\OPT}{2 n}}
 	\end{align}
+	\vspace*{-5mm}\qedhere
 \end{proof}
