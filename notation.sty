@@ -231,15 +231,15 @@
 \NewDocumentCommand{\asgd}{s m O{i}}{
 	\IfBooleanTF{#1}{g}{h}\IfEmptyF{#3}{_{#3}}^{#2}
 }
-\NewDocumentCommand{\attopt}{O{t} O{i}}{
+\NewDocumentCommand{\attopt}{m O{i}}{
 	\bar{\mathbfit{x}}^*_{\smash{#2, #1}}
 }
-\NewDocumentCommand{\attoptlen}{O{t} O{i}}{
+\NewDocumentCommand{\attoptlen}{m O{i}}{
 	\smash{\bar{\tau}^*_{#2, #1}}
 }
 \NewDocumentCommand{\bipartitegraph}{}{G}
 \NewDocumentCommand{\genericset}{s O{}}{
-	\mathcal{S}\IfBooleanT{#1}{^*}\IfEmptyF{#2}{}
+	\mathcal{S}\IfBooleanT{#1}{^*}\IfEmptyF{#2}{_{#2}}
 }
 \NewDocumentCommand{\goods}{}{\mathcal{G}}
 \NewDocumentCommand{\goodsrem}{}{\mathcal{G}^{\mathup{rem}}}

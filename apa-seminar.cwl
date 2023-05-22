@@ -1,3 +1,8 @@
+# Textual notation.
+\caseintext{number}{text}#n
+
+\caseintextfont{arg}#S
+
 # Mathematical notation.
 # general
 \abs{formula}#m
@@ -26,13 +31,11 @@
 \asgd{rank}[agent]#m
 \asgd*{rank}[agent]#m
 
-\attopt#m
-\attopt[time]#m
-\attopt[time][agent]#m
+\attopt{time}#m
+\attopt{time}[agent]#m
 
-\attoptlen#m
-\attoptlen[time]#m
-\attoptlen[time][agent]#m
+\attoptlen{time}#m
+\attoptlen{time}[agent]#m
 
 \bipartitegraph#m
 
