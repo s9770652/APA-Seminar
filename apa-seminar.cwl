@@ -1,74 +1,81 @@
 # Mathematical notation.
-\agents#\math
+\agents#m
 
-\alloc#\math
-\alloc*#\math
-\alloc[phase]#\math
-\alloc[phase][agent]#\math
+\alloc#m
+\alloc*#m
+\alloc[phase]#m
+\alloc[phase][agent]#m
 
-\alloclen#\math
-\alloclen*#\math
-\alloclen[phase]#\math
-\alloclen[phase][agent]#\math
+\alloclen#m
+\alloclen*#m
+\alloclen[phase]#m
+\alloclen[phase][agent]#m
 
-\asgd{rank}#\math
-\asgd*{rank}#\math
-\asgd{rank}[agent]#\math
-\asgd*{rank}[agent]#\math
+\asgd{rank}#m
+\asgd*{rank}#m
+\asgd{rank}[agent]#m
+\asgd*{rank}[agent]#m
 
-\attopt#\math
-\attopt[time]#\math
-\attopt[time][agent]#\math
+\attopt#m
+\attopt[time]#m
+\attopt[time][agent]#m
 
-\bipartitegraph#\math
+\attoptlen#m
+\attoptlen[time]#m
+\attoptlen[time][agent]#m
 
-\genericset#\math
-\genericset[subscript]#\math
-\genericset*#\math
-\genericset*[subscript]#\math
+\bipartitegraph#m
 
-\goods#\math
+\genericset#m
+\genericset[subscript]#m
+\genericset*#m
+\genericset*[subscript]#m
 
-\goodsrem#\math
+\goods#m
 
-\goodsordered{rank}#\math
-\goodsordered{rank}[agent]#\math
+\goodsrem#m
 
-\lostset#\math
-\lostset[time]#\math
-\lostset[time][agent]#\math
+\goodsordered{rank}#m
+\goodsordered{rank}[agent]#m
 
-\lostsetlen#\math
-\lostsetlen[time]#\math
-\lostsetlen[time][agent]#\math
+\lostset#m
+\lostset[time]#m
+\lostset[time][agent]#m
 
-\matching#\math
+\lostsetlen#m
+\lostsetlen[time]#m
+\lostsetlen[time][agent]#m
 
-\phasei#\math
-\phaseii#\math
-\phaseiii#\math
+matching#m
 
-\remvalue#\math
-\remvalue*#\math
-\remvalue[agent]#\math
+\phasei#m
+\phasei*#n
+\phaseii#m
+\phaseii*#n
+\phaseiii#m
+\phaseiii*#n
 
-\valuations#\math
-\valuations[item]#\math
-\valuations[item][agent]#\math
+\remvalue#m
+\remvalue*#m
+\remvalue[agent]#m
 
-\weight#\math
-\weight[agent]#\math
+\valuations#m
+\valuations[item]#m
+\valuations[item][agent]#m
 
-\weights#\math
+\weight#m
+\weight[agent]#m
+
+\weights#m
 
 
 # Algorithms.
-\maxweightmatching
+maxweightmatching#m
 
-\arballoc
+\arballoc#m
 
-\tct{Text%text}
-\tct*{Text%text}
+\tct{Text%text}#n
+\tct*{Text%text}#n
 
 
 # Macros
