@@ -1,5 +1,5 @@
 # Textual notation.
-\caseintext{number}{text}#n
+\begin{caseintext}{%|number%text}{condition%text}{text}%\\end{caseintext}#n
 
 \caseintextfont{arg}#S
 
@@ -31,11 +31,11 @@
 \asgd{rank}[agent]#m
 \asgd*{rank}[agent]#m
 
-\attopt{time}#m
-\attopt{time}[agent]#m
+\attopt{round}#m
+\attopt{round}[agent]#m
 
-\attoptlen{time}#m
-\attoptlen{time}[agent]#m
+\attoptlen{round}#m
+\attoptlen{round}[agent]#m
 
 \bipartitegraph#m
 
@@ -51,13 +51,11 @@
 \goodsordered{rank}#m
 \goodsordered{rank}[agent]#m
 
-\lostset#m
-\lostset[time]#m
-\lostset[time][agent]#m
+\lostset{round}#m
+\lostset{round}[agent]#m
 
-\lostsetlen#m
-\lostsetlen[time]#m
-\lostsetlen[time][agent]#m
+\lostsetlen{round}#m
+\lostsetlen{round}[agent]#m
 
 matching#m
 

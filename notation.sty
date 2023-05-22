@@ -246,11 +246,11 @@
 \NewDocumentCommand{\goodsordered}{m O{i}}{
 	\goods\IfEmptyF{#2}{_{\!#2}}^{\thinspace\smash{#1}}
 }
-\NewDocumentCommand{\lostset}{O{t} O{i}}{
-	\mathcal{L}\IfEmptyTF{#1}{\IfEmptyF{emptyCode}{#2}{_{\smash{#2}}}}{_{\smash{\IfEmptyF{#2}{#2, } #1}}}
+\NewDocumentCommand{\lostset}{m O{i}}{
+	\mathcal{L}_{\smash{\IfEmptyF{#2}{#2, } #1}}
 }
-\NewDocumentCommand{\lostsetlen}{O{t} O{i}}{
-	\ell\IfEmptyTF{#1}{\IfEmptyF{emptyCode}{#2}{_{\smash{#2}}}}{_{\smash{\IfEmptyF{#2}{#2, } #1}}}
+\NewDocumentCommand{\lostsetlen}{m O{i}}{
+	\ell_{\smash{\IfEmptyF{#2}{#2, } #1}}
 }
 \NewDocumentCommand{\matching}{}{\mathcal{M}}
 \NewDocumentCommand{\phasei}{s}{%
