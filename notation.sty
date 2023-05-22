@@ -232,7 +232,7 @@
 	\IfBooleanTF{#1}{g}{h}\IfEmptyF{#3}{_{#3}}^{#2}
 }
 \NewDocumentCommand{\attopt}{O{t} O{i}}{
-	\bar{\mathbfit{x}}^*_{#2, #1}
+	\bar{\mathbfit{x}}^*_{\smash{#2, #1}}
 }
 \NewDocumentCommand{\bipartitegraph}{}{G}
 \NewDocumentCommand{\genericset}{s O{}}{
@@ -244,10 +244,10 @@
 	\goods\IfEmptyF{#2}{_{\!#2}}^{\thinspace\smash{#1}}
 }
 \NewDocumentCommand{\lostset}{O{t} O{i}}{
-	\mathcal{L}\IfEmptyTF{#1}{\IfEmptyF{emptyCode}{#2}{_{#2}}}{_{\IfEmptyF{#2}{#2, } #1}}
+	\mathcal{L}\IfEmptyTF{#1}{\IfEmptyF{emptyCode}{#2}{_{\smash{#2}}}}{_{\smash{\IfEmptyF{#2}{#2, } #1}}}
 }
 \NewDocumentCommand{\lostsetlen}{O{t} O{i}}{
-	\ell\IfEmptyTF{#1}{\IfEmptyF{emptyCode}{#2}{_{#2}}}{_{\IfEmptyF{#2}{#2, } #1}}
+	\ell\IfEmptyTF{#1}{\IfEmptyF{emptyCode}{#2}{_{\smash{#2}}}}{_{\smash{\IfEmptyF{#2}{#2, } #1}}}
 }
 \NewDocumentCommand{\matching}{}{\mathcal{M}}
 \NewDocumentCommand{\phasei}{s}{%
