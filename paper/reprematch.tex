@@ -3,22 +3,59 @@
 
 \begin{itemize}
 	\item
-
+	\SMatch{} does not work for general submodular valuations since we need to detect the set of lowest valuation.
+	This is not possible independent of \(m\) [SF11].\todo{what exactly did SF11 show?}
 \end{itemize}
+
+\begin{lemma}
+	\label{lem:induction}
+	During phase \phaseii*{}, each agent \(i \in \agents\) gets assigned a set \(\alloc[\phaseii] = \{ \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} \}\) of items.
+	For all iterations \(t = 1, \dots, \alloclen[\phaseii] - 1\), the following inequality about her set \(\attopt\) of optimal and attainable items holds true:
+	\begin{equation*}
+		\valuations[ \attopt[t+1] \given \asgd{1}, \dots, \asgd{t} ] \geq \remvalue* - \lostsetlen[2] \valuations[\asgd{1}] - \sum_{t'=2}^{t} \lostsetlen[t'+1] \valuations[ \asgd{t'} \given \asgd{1}, \dots, \asgd{t'-1} ] - \valuations[\asgd{1}, \dots, \asgd{t}],
+	\end{equation*}
+	where \(\lostsetlen\) is the size of the set \(\lostset \subset \attopt[t-1]\) of optimal items that were attainable in iteration \(t-1\) and assigned to other agents in iteration \(t\)\todo{something about this identifier ought to be done (also in algo)}.\todo{\(\remvalue*\)}
+\end{lemma}
+
+\begin{corollary}
+	From \cref{lem:induction} follows
+	\begin{equation*}
+		\valuations[ \asgd{t+1} \given \asgd{1}, \dots, \asgd{t} ] \geq \begin{multlined}[t]
+			\frac{1}{\alloclen* - \sum_{t' = 1}^{t+1} \lostsetlen[t']} \paren[\Big]{ \remvalue* - \lostsetlen[2] \valuations[\asgd{1}] - \sum_{t'=2}^{t} \lostsetlen[t'+1] \valuations[ \asgd{t'} \given \asgd{1}, \dots, \asgd{t'-1} ] \\ - \valuations[\asgd{1}, \dots, \asgd{t}] }
+		\end{multlined}
+	\end{equation*}
+\end{corollary}
+
+\begin{lemma}
+	\begin{equation*}
+		\valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii]}] \geq \remvalue* / n
+	\end{equation*}
+\end{lemma}
+
+\begin{lemma}
+	about phase \phasei*
+\end{lemma}
+
+\begin{theorem}
+	\label{th:reprematch}
+	\RepReMatch{} has an approximation factor of \(2n (\log n + 2)\).
+\end{theorem}
+
+\lipsum[1-29]
 
 \begin{algorithm*}[p]
 	\KwIn{%
 		set \(\agents = \{ 1, \dots, n \}\) of agents with weights \(\weight \forall i \in \agents\),
-		set \(\goods = \{ 1, \dots, m \}\) indivisible items,
-		additive valuations \(\valuations \colon \powerset[\goods] \to \realposzero\) where \(\valuations[\genericset]\) is the valuation of agent \(i \in \agents\) for each item set \(\genericset \subset \goods\)
+		set \(\goods = \{ 1, \dots, m \}\) of indivisible items,
+		additive valuations \(\valuations \colon \powerset[\goods] \to \realposzero\) where \(\valuations[\genericset]\) is the valuation of agent \(i \in \agents\) for each set \(\genericset \subset \goods\) of items
 	}
 	\KwOut{%
-		\(\frac{1}{2n\log n}\)-approximation \(\alloc[\phaseiii][] = (\alloc[\phaseiii][1], \dots, \alloc[\phaseiii][n])\) of an optimal allocation
+		\(\frac{1}{2n(\log n + 2)}\)-approximation \(\alloc[\phaseiii][] = (\alloc[\phaseiii][1], \dots, \alloc[\phaseiii][n])\) of an optimal allocation
 	}
 	\phaseisep
 	\(\alloc[\phasei] \gets \emptyset \quad\forall i \in \agents\)\;
 	\(\goodsrem \gets \goods\)\;
-	\For{\(t = 0, \dots, \ceil{\log n}-1\)}{
+	\For{\(t \gets 0, \dots, \ceil{\log n}-1\)}{
 		\If{\(\goodsrem \neq \emptyset\)}{
 			\(\weights \gets \{\,  \weight \cdot \log\paren[\big]{ \valuations[j] } \given[\bigm] i \in \agents, j \in \goods \,\}\)\;
 			\(\bipartitegraph \gets (\agents, \goods, \weights)\)\;
@@ -28,7 +65,7 @@
 		}
 	}
 	\phaseiisep
-	\(\alloc[\phaseii] \gets \emptyset \quad\forall i \in \agents\)\;
+	\(\alloc[\phaseii] \gets \emptyset \quad\forall i \in \agents\)   \tct*{set allocation \(\alloc[\phasei]\) aside and start a new one}
 	\While{\(\goodsrem \neq \emptyset\)}{
 		\(\weights \gets \{\,  \weight \cdot \log\paren[\big]{ \valuations[ \alloc[\phaseii] \cup \{j\} ] } \given[\bigm] i \in \agents, j \in \goods \,\}\)\;
 		\(\bipartitegraph \gets (\agents, \goods, \weights)\)\;
@@ -37,7 +74,7 @@
 		\(\goodsrem \gets \goodsrem \setminus \{\, j \given (i, j) \in \matching \,\}\)\;
 	}
 	\phaseiiisep
-	\(\goodsrem \gets \mathop{\bigcup\hspace{-1pt}_{i \in \agents}} \alloc[\phasei]\)\tct*{release items allocated in first phase}
+	\(\goodsrem \gets \mathop{\bigcup\hspace{-1pt}_{i \in \agents}} \alloc[\phasei]\)  \tct*{release items assigned in phase \phasei*}
 	\(\weights \gets \{\,  \weight \cdot \log\paren[\big]{ \valuations[ \alloc[\phaseii] \cup \{j\} ] } \given[\bigm] i \in \agents, j \in \goods \,\}\)\;
 	\(\bipartitegraph \gets (\agents, \goods, \weights)\)\;
 	\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;

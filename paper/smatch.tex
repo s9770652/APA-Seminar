@@ -77,8 +77,8 @@ The geometric mean of the \NSW{} favours allocations with similar valuations\tod
 		}
 	\end{subfigure}
 	\caption{%
-		Agent \(1\) values item \(1\) at \(m + \epsilon\), and all other items at \(1\).
-		Agent \(2\) values item \(1\) at \(m\), item \(m+1\) at \(1\), and all other items at \(0\).
+		Agent \(1\) values item \(1\) at \(m + \epsilon\) and all other items at \(1\).
+		Agent \(2\) values item \(1\) at \(m\), item \(m+1\) at \(1\) and all other items at \(0\).
 		In an optimal allocation, item \(1\) would be assigned to agent \(2\) and all other items to agent \(1\), resulting in a NSW of \(\sqrt{m \cdot m} = m\).
 		A repeated maximum matching algorithm would greedily assign item \(1\) to agent \(1\) and item \(m+1\) to agent \(2\) in the first round.
 		Even if all remaining items were going to be assigned to agent \(1\), the NSW will never surpass \(\sqrt{(2m + \epsilon - 1) \cdot 1} < \sqrt{2m}\).
@@ -106,19 +106,20 @@ The addend \(\valuations[\alloc]\) could lead to better allocations in applicati
 \begin{algorithm*}[t]
 	\KwIn{%
 		set \(\agents = \{ 1, \dots, n \}\) of agents with weights \(\weight \forall i \in \agents\),
-		set \(\goods = \{ 1, \dots, m \}\) indivisible items,
-		additive valuations \(\valuations \colon \powerset[\goods] \to \realposzero\) where \(\valuations[\genericset]\) is the valuation of agent \(i \in \agents\) for each item set \(\genericset \subset \goods\)}
+		set \(\goods = \{ 1, \dots, m \}\) of indivisible items,
+		additive valuations \(\valuations \colon \powerset[\goods] \to \realposzero\) where \(\valuations[\genericset]\) is the valuation of agent \(i \in \agents\) for each set \(\genericset \subset \goods\) of items
+	}
 	\KwOut{%
 		\(\frac{1}{2n}\)-approximation \(\alloc[][] = (\alloc[][1], \dots, \alloc[][n])\) of an optimal allocation
 	}
 
 	\(\alloc \gets \emptyset \quad\forall i \in \agents\)\;
-	\(\remvalue \gets \valuations[ \goodsordered{2n+1}, \dots, \goodsordered{m} ] \quad\forall i \in \agents\)\;
-	\(\weights \gets \{\,  \weight \cdot \log\paren[\big]{ \valuations[j] + \remvalue/n } \given[\bigm] i \in \agents, j \in \goods \,\}\)\tct*{edge weights}
-	\(\bipartitegraph \gets (\agents, \goods, \weights)\)\tct*{bipartite graph}
+	\(\remvalue \gets \valuations[ \goodsordered{2n+1}, \dots, \goodsordered{m} ] \quad\forall i \in \agents\)  \tct*{est. valuations after the 1st matching}
+	\(\weights \gets \{\,  \weight \cdot \log\paren[\big]{ \valuations[j] + \remvalue/n } \given[\bigm] i \in \agents, j \in \goods \,\}\)  \tct*{edge weights}
+	\(\bipartitegraph \gets (\agents, \goods, \weights)\)  \tct*{bipartite graph}
 	\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
-	\(\alloc \gets \{\, j \given (i, j) \in \matching \,\} \quad\forall i \in \agents\)\tct*{allocate according to matching}
-	\(\goodsrem \gets \goods \setminus \{\, j \given (i, j) \in \matching \,\}\)\tct*{remove allocated goods}
+	\(\alloc \gets \{\, j \given (i, j) \in \matching \,\} \quad\forall i \in \agents\)  \tct*{assign according to matching}
+	\(\goodsrem \gets \goods \setminus \{\, j \given (i, j) \in \matching \,\}\)  \tct*{remove assigned items}
 	\While{\(\goodsrem \neq \emptyset\)}{
 		\(\weights \gets \{\,  \weight \cdot \log\paren[\big]{ \valuations[j] + \valuations[\alloc] } \given[\bigm] i \in \agents, j \in \goodsrem \,\}\)\;
 		\(\bipartitegraph \gets (\agents, \goodsrem, \weights)\)\;
@@ -133,11 +134,11 @@ The addend \(\valuations[\alloc]\) could lead to better allocations in applicati
 	\label{alg:smatch}
 \end{algorithm*}
 
-For convenience, we order the items in the final allocation \(\alloc = \{\asgd{1}, \dots, \asgd{\alloclen}\}\) of agent \(i\) by the order in which they were assigned, so that item \(\asgd{t}\) is assigned after the \(t\)-th matching.
+For convenience, we order the items in the final allocation \(\alloc = \{\asgd{1}, \dots, \asgd{\alloclen}\}\) of agent \(i\) by the order in which they were assigned, so that item \(\asgd{t}\) is assigned according to the \(t\)-th matching.
 To calculate the approximation factor of \SMatch, we first need to establish a lower bound on the valuation of single items.
 \begin{lemma}
 	\label{lem:lower_bound_single_item}
-	For each agent \(i\) and their final allocation \(\alloc = \{\asgd{1}, \dots, \asgd{\alloclen}\}\), the item \(\asgd{t}\) is worth at least as much as the overall \(tn\)-th most highly valued item \(\goodsordered{tn}\), \ie{} \(\valuations[\asgd{t}] \geq \valuations[\goodsordered{tn}]\), for all \(t = 1, \dots, \alloclen\).
+	For each agent \(i \in \agents\) and her final allocation \(\alloc = \{\asgd{1}, \dots, \asgd{\alloclen}\}\), the item \(\asgd{t}\) is worth at least as much as the overall \(tn\)-th most highly valued item \(\goodsordered{tn}\), \ie{} \(\valuations[\asgd{t}] \geq \valuations[\goodsordered{tn}]\), for all \(t = 1, \dots, \alloclen\).
 \end{lemma}
 \begin{proof}
 	At the start of the \(t\)-th iteration, no more than \((t-1) n\) items out of the \(tn\) most highly valued items \(\goodsordered{1}, \dots, \goodsordered{tn}\) have been assigned in previous iterations since at most~\(n\) items are assigned in each iteration.
@@ -148,11 +149,11 @@ To calculate the approximation factor of \SMatch, we first need to establish a l
 We can now establish \(\remvalue/n = \valuations[ \goodsordered{2n+1}, \dots, \goodsordered{m} ]/n\) as lower bound on  the valuations of items assigned after the first matching.
 \begin{lemma}
 	\label{lem:lower_bound_later_items}
-	\(\valuations[ \asgd{2}, \dots, \asgd{\alloclen} ] \geq \remvalue/n\).
+	For each agent \(i \in \agents\) and her final allocation \(\alloc = \{\asgd{1}, \dots, \asgd{\alloclen}\}\), it holds \(\valuations[ \asgd{2}, \dots, \asgd{\alloclen} ] \geq \remvalue/n\), where \(n\) is the number of items and \(\remvalue = \valuations[ \goodsordered{2n+1}, \dots, \goodsordered{m} ]\).
 \end{lemma}
 \begin{proof}
 	By \cref{lem:lower_bound_single_item} and definition of \(\goodsordered{\cdot}\), every item \(\asgd{t}\) is worth at least as much as each item \(\goodsordered{tn+k}\) with \(k \in \{0, \dots, n-1\}\) and, consequently, its valuation \(\valuations[\asgd{t}]\) is at least as high as the mean valuation \(\frac{1}{n} \valuations[ \goodsordered{tn}, \dots, \goodsordered{tn + n-1} ]\).
-	Further, it holds \(\alloclen n + n \geq m \) since each agent receives items for at least \(\floor{\frac{m}{n}} \geq \frac{m}{n} - 1\) rounds.
+	Further, it holds \(\alloclen n + n \geq m \) since each agent receives items for at least \(\floor{\frac{m}{n}} \geq \frac{m}{n} - 1\) rounds.\todo{unless there are zero valuations}
 	Together, this yields
 	\begin{align}
 		 \valuations[\asgd{2}, \dots, \asgd{\alloclen}]
@@ -165,7 +166,7 @@ We can now establish \(\remvalue/n = \valuations[ \goodsordered{2n+1}, \dots, \g
 	with the last inequality stemming from \(\valuations[\goodsordered{2n}] \geq \valuations[\goodsordered{m}]\).
 \end{proof}
 
-This allows us to calculate a lower bound on the approximation factor of \SMatch.
+This allows us to calculate an approximation factor for \SMatch.
 \begin{theorem}
 	\label{th:smatch}
 	\SMatch{} has an approximation factor of \(2 n\).
@@ -201,7 +202,7 @@ This allows us to calculate a lower bound on the approximation factor of \SMatch
 	\end{equation}
 	We get the lower bound \(\valuations[\asgd*{1}] \geq \frac{1}{2 n} \valuations[\genericset*]\) from a similar argument as in the proof of \cref{lem:lower_bound_later_items}.
 	Further, it holds \(\remvalue = \valuations[\goods \setminus \genericset[i]] \geq \valuations[\alloc* \setminus \genericset[i]] \geq \valuations[\alloc* \setminus \genericset*[i]]\).
-	We can substitute these into \cref{eq:smatch_approx_factor_lower_bound} and prove the theorem thereby:
+	We can substitute these two inequalities into \cref{eq:smatch_approx_factor_lower_bound} and prove the theorem thereby:
 	\begin{align}
 		\log \NSW(\alloc[][])
 		&\geq \frac{1}{\sum_{i=1}^{n} \weight} \cdot \sum_{i=1}^{n} \weight \log \paren[\bigg]{ \frac{\valuations[\genericset*[i]]}{2 n} + \frac{\valuations[\alloc* \setminus \genericset*[i]]}{n} } \\

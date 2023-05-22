@@ -231,21 +231,36 @@
 \NewDocumentCommand{\asgd}{s m O{i}}{
 	\IfBooleanTF{#1}{g}{h}\IfEmptyF{#3}{_{#3}}^{#2}
 }
+\NewDocumentCommand{\attopt}{O{t} O{i}}{
+	\bar{\mathbfit{x}}^*_{#2, #1}
+}
 \NewDocumentCommand{\bipartitegraph}{}{G}
 \NewDocumentCommand{\genericset}{s O{}}{
-	\mathcal{S}\IfEmptyF{#2}{}\IfBooleanT{#1}{^*}
+	\mathcal{S}\IfBooleanT{#1}{^*}\IfEmptyF{#2}{}
 }
 \NewDocumentCommand{\goods}{}{\mathcal{G}}
 \NewDocumentCommand{\goodsrem}{}{\mathcal{G}^{\mathup{rem}}}
 \NewDocumentCommand{\goodsordered}{m O{i}}{
 	\goods\IfEmptyF{#2}{_{\!#2}}^{\thinspace\smash{#1}}
 }
+\NewDocumentCommand{\lostset}{O{t} O{i}}{
+	\mathcal{L}\IfEmptyTF{#1}{\IfEmptyF{emptyCode}{#2}{_{#2}}}{_{\IfEmptyF{#2}{#2, } #1}}
+}
+\NewDocumentCommand{\lostsetlen}{O{t} O{i}}{
+	\ell\IfEmptyTF{#1}{\IfEmptyF{emptyCode}{#2}{_{#2}}}{_{\IfEmptyF{#2}{#2, } #1}}
+}
 \NewDocumentCommand{\matching}{}{\mathcal{M}}
-\NewDocumentCommand{\phasei}{}{\mathup{I}}
-\NewDocumentCommand{\phaseii}{}{\mathup{II}}
-\NewDocumentCommand{\phaseiii}{}{\mathup{III}}
-\NewDocumentCommand{\remvalue}{O{i}}{
-	u\IfEmptyF{#1}{_{#1}}
+\NewDocumentCommand{\phasei}{s}{%
+	\IfBooleanTF{#1}{I}{\mathup{I}}%
+}
+\NewDocumentCommand{\phaseii}{s}{%
+	\IfBooleanTF{#1}{II}{\mathup{II}}%
+}
+\NewDocumentCommand{\phaseiii}{s}{%
+	\IfBooleanTF{#1}{III}{\mathup{III}}%
+}
+\NewDocumentCommand{\remvalue}{s O{i}}{
+	u\IfBooleanT{#1}{^*}\IfEmptyF{#2}{_{#2}}
 }
 \NewDocumentCommand{\valuations}{O{} O{i}}{
 	v\IfEmptyF{#2}{_{#2}}\IfEmptyF{#1}{(#1)}
@@ -258,9 +273,9 @@
 \SetKwFunction{maxweightmatching}{max\_weight\_matching}
 \SetKwFunction{arballoc}{arbitrary\_allocation}
 
-\NewDocumentCommand{\phaseisep}{}{\nonl\CommentSty{Phase I:}\;}
-\NewDocumentCommand{\phaseiisep}{}{\vspace{0.25em}\nonl\CommentSty{Phase II:}\;}
-\NewDocumentCommand{\phaseiiisep}{}{\vspace{0.25em}\nonl\CommentSty{Phase III:}\;}
+\NewDocumentCommand{\phaseisep}{}{\nonl\CommentSty{Phase \phasei*:}\;}
+\NewDocumentCommand{\phaseiisep}{}{\vspace{0.25em}\nonl\CommentSty{Phase \phaseii*:}\;}
+\NewDocumentCommand{\phaseiiisep}{}{\vspace{0.25em}\nonl\CommentSty{Phase \phaseiii*:}\;}
 
 % Texts.
 \NewDocumentCommand{\NSW}{}{\abb{NSW}}

@@ -7,20 +7,25 @@
 \alloc[phase][agent]#\math
 
 \alloclen#\math
+\alloclen*#\math
 \alloclen[phase]#\math
 \alloclen[phase][agent]#\math
 
 \asgd{rank}#\math
-\asgd{rank}*#\math
+\asgd*{rank}#\math
 \asgd{rank}[agent]#\math
-\asgd{rank}[agent]*#\math
+\asgd*{rank}[agent]#\math
+
+\attopt#\math
+\attopt[time]#\math
+\attopt[time][agent]#\math
 
 \bipartitegraph#\math
 
 \genericset#\math
 \genericset[subscript]#\math
 \genericset*#\math
-\genericset[subscript]*#\math
+\genericset*[subscript]#\math
 
 \goods#\math
 
@@ -29,6 +34,14 @@
 \goodsordered{rank}#\math
 \goodsordered{rank}[agent]#\math
 
+\lostset#\math
+\lostset[time]#\math
+\lostset[time][agent]#\math
+
+\lostsetlen#\math
+\lostsetlen[time]#\math
+\lostsetlen[time][agent]#\math
+
 \matching#\math
 
 \phasei#\math
@@ -36,6 +49,7 @@
 \phaseiii#\math
 
 \remvalue#\math
+\remvalue*#\math
 \remvalue[agent]#\math
 
 \valuations#\math
