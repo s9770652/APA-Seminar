@@ -9,22 +9,98 @@
 
 \begin{lemma}
 	\label{lem:induction}
-	During phase \phaseii*{}, each agent \(i \in \agents\) gets assigned a set \(\alloc[\phaseii] = \{ \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} \}\) of items.
-	For all iterations \(t = 1, \dots, \alloclen[\phaseii] - 1\), the following inequality about her set \(\attopt\) of optimal and attainable items holds true:
+	During phase \phaseii*{}, each agent \(i \in \agents\) gets assigned a bundle \(\alloc[\phaseii] = \{ \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} \}\).
+	For all rounds \(r = 2, \dots, \alloclen[\phaseii]\), the following inequality about her set \(\attopt{r}\) of optimal and attainable items holds true:
 	\begin{equation*}
-		\valuations[ \attopt[t+1] \given \asgd{1}, \dots, \asgd{t} ] \geq \remvalue* - \lostsetlen[2] \valuations[\asgd{1}] - \sum_{t'=2}^{t} \lostsetlen[t'+1] \valuations[ \asgd{t'} \given \asgd{1}, \dots, \asgd{t'-1} ] - \valuations[\asgd{1}, \dots, \asgd{t}],
+		\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] \geq \remvalue* - \lostsetlen{2} \valuations[\asgd{1}] - \sum_{r'=2}^{r-1} \lostsetlen{r'} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] - \valuations[\asgd{1}, \dots, \asgd{r-1}],
 	\end{equation*}
-	where \(\lostsetlen\) is the size of the set \(\lostset \subset \attopt[t-1]\) of optimal items that were attainable in iteration \(t-1\) and assigned to other agents in iteration \(t\)\todo{something about this identifier ought to be done (also in algo)}.\todo{\(\remvalue*\)}
+	where \(\lostsetlen{l}\) is the size of her set \(\lostset{l} \subset \attopt{l-1}\) of optimal items which were attainable in round \(l-1\) and were assigned to other agents in round \(l\), and \(\remvalue* = \valuations[\attopt{1}]\) is her valuation of attainable and optimal items during the first round.
 \end{lemma}
+\begin{proof}
+	We prove the lemma by induction on the number \(r\) of rounds.
+	In the beginning of the base case \(r=2\), agent \(i\) has already been assigned item \(\asgd{1}\) but not the items in set~\(\lostset{1}\).
+	For each of the remaining optimal and attainable items~\(j\) in round \(1\), the marginal valuation \(\valuations[j \given \emptyset]\) over the empty set is at most \(\valuations[\asgd{1} \given \emptyset]\), as otherwise item~\(\asgd{1}\) would not have been assigned first.
+	Furthermore, the marginal valuation \(\valuations[j \given \asgd{1}]\) over \(\{\asgd{1}\}\) is upper-bounded by \(\valuations[\asgd{1} \given \emptyset]\) due to the submodularity of valuations.
+	During the round, a further \(\lostsetlen{2}\) out of these items are assigned to other agents, and item \(\asgd{2}\) is assigned to agent \(i\).
+	We can bound the marginal valuation of the remaining optimal and attainable items in round \(2\) in the following way:
+	\begin{caseintext}{1}{\(\asgd{1} \in \attopt{1}\)}
+		It holds \(\valuations[ \attopt{2} \given \asgd{1} ] = \valuations[ \attopt{2} \cup \{\asgd{1}\} ] - \valuations[\asgd{1}] = \valuations[\attopt{1} \setminus \lostset{2}] -  \valuations[\asgd{1}]\).
+	\end{caseintext}
+	\begin{caseintext}{2}{\(\asgd{1} \notin \attopt{1}\)}
+		Due to the monotonicity of valuations, it holds \(\valuations[ \attopt{2} \cup \{\asgd{1}\} ] \geq \valuations[ \attopt{2} ]\) and, therefore, \(\valuations[ \attopt{2} \given \asgd{1} ] \geq \valuations[ \attopt{2} ] - \valuations[\asgd{1}] = \valuations[\attopt{1} \setminus \lostset{2}] -  \valuations[\asgd{1}]\).
+	\end{caseintext}
+	\noindent
+	In both cases, the base case is proved because
+	\begin{align}
+		\valuations[ \attopt{2} \given \asgd{1} ]
+		&\geq \valuations[\attopt{1} \setminus \lostset{2}] -  \valuations[\asgd{1}] \\
+		&\geq \valuations[ \attopt{2} ] - \valuations[\lostset{2}] - \valuations[\asgd{1}] \\
+		&\geq \remvalue* - \lostsetlen{2} \valuations[\asgd{1}] - \valuations[\asgd{1}],
+	\end{align}
+	where the second inequality can be shown inductively with the definition of submodularity\todo{Do that or, alternatively, find a paper showing the other def.}, and the third inequality is due all \(\lostsetlen{2}\) items \(j\) in \(\lostset{2}\) being attainable but not assigned in round \(1\), implying \(\valuations[j] \leq \valuations[\asgd{1}]\).
 
+	As induction hypothesis, we assume that the lemma is true for all rounds up to some \(r\).
+	For the induction step \(r \to r+1\), we differentiate the same two cases again:
+	\begin{caseintext}{1}{\(\asgd{r} \in \attopt{r}\)}
+		Again we use the submodularity of valuations \todo{ditto} to obtain a lower bound on the marginal valuation of \(\attopt{r+1}\).
+		\begin{align}
+			\valuations[ \attopt{r+1} \given \asgd{1}, \dots, \asgd{r} ]
+			&= \valuations[ \attopt{r+1} \cup \{\asgd{r}\} \given \asgd{1}, \dots, \asgd{r-1} ] - \valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ] \\
+			&= \valuations[ \attopt{r} \setminus \lostset{r+1} \given \asgd{1}, \dots, \asgd{r-1} ] - \valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ] \\
+			&\geq \begin{multlined}[t]
+				\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] - \valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ] \\
+				- \valuations[ \lostset{r+1} \given \asgd{1}, \dots, \asgd{r-1} ]
+			\end{multlined}
+		\end{align}
+	\end{caseintext}
+	\begin{caseintext}{2}{\(\asgd{r} \notin \attopt{r}\)}
+		To obtain to the same lower bound for \(\asgd{r} \notin \attopt{r}\), we first use twice the submodularity of valuations and then the inequality
+		\begin{align}
+			\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r} ]
+			&= \valuations[ \attopt{r} \cup \{ \asgd{1}, \dots, \asgd{r} \} ] - \valuations[\asgd{1}, \dots, \asgd{r}] \\
+			&\geq \valuations[ \attopt{r} \cup \{ \asgd{1}, \dots, \asgd{r-1} \} ] - \valuations[\asgd{1}, \dots, \asgd{r}] \\
+			&= \begin{multlined}[t]
+				\paren[\big]{ \valuations[ \attopt{r} \cup \{ \asgd{1}, \dots, \asgd{r-1} \} ] - \valuations[\asgd{1}, \dots, \asgd{r-1}] } \\
+				- \paren[\big]{ \valuations[\asgd{1}, \dots, \asgd{r}] - \valuations[\asgd{1}, \dots, \asgd{r-1}] }
+			\end{multlined} \\
+			&= \valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] - \valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ]
+		\end{align}
+		using the monotonicity of valuations:
+		\begin{align}
+			\valuations[ \attopt{r+1} \given \asgd{1}, \dots, \asgd{r} ]
+			&= \valuations[ \attopt{r} \setminus \lostset{r+1} \given \asgd{1}, \dots, \asgd{r} ] \\
+			&\geq \valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r} ] - \valuations[ \lostset{r+1} \given \asgd{1}, \dots, \asgd{r} ] \\
+			&\geq \valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r} ] - \valuations[ \lostset{r+1} \given \asgd{1}, \dots, \asgd{r-1} ] \\
+			&\geq \begin{multlined}[t]
+				\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] - \valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ] \\
+				- \valuations[ \lostset{r+1} \given \asgd{1}, \dots, \asgd{r-1} ]
+			\end{multlined}
+		\end{align}
+	\end{caseintext}
+	In both cases, we can replace \(\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ]\) by the induction hypothesis and \(\valuations[ \lostset{r+1} \given \asgd{1}, \dots, \asgd{r-1} ]\) by \(\lostsetlen{r+1} \cdot \valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ]\) to prove the lemma.
+	For a more detailed formula simplification, we refer to Garg, Kulkarni and Kulkarni~\cite[14]{APNSWuSVþUM}.\todo[info]{\(\mathbfit{i}\): I hope the shortcut is allowed.}
+\end{proof}
+
+The lemma can be used to bound the marginal valuation of items in the round of their assignment for phase \phaseii*.
 \begin{corollary}
 	From \cref{lem:induction} follows
 	\begin{equation*}
-		\valuations[ \asgd{t+1} \given \asgd{1}, \dots, \asgd{t} ] \geq \begin{multlined}[t]
-			\frac{1}{\alloclen* - \sum_{t' = 1}^{t+1} \lostsetlen[t']} \paren[\Big]{ \remvalue* - \lostsetlen[2] \valuations[\asgd{1}] - \sum_{t'=2}^{t} \lostsetlen[t'+1] \valuations[ \asgd{t'} \given \asgd{1}, \dots, \asgd{t'-1} ] \\ - \valuations[\asgd{1}, \dots, \asgd{t}] }
+		\valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ] \geq \begin{multlined}[t]
+			\paren[\Big]{ \remvalue* - \lostsetlen{2} \valuations[\asgd{1}] - \sum_{r'=2}^{r-1} \lostsetlen{r'+1} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] \\
+				- \valuations[\asgd{1}, \dots, \asgd{r-1}] } \Bigm/ \paren[\Big]{ \attoptlen{0} - \sum_{l = 1}^{r} \lostsetlen{l} }
 		\end{multlined}
 	\end{equation*}
+	where \(\attoptlen{0} \coloneq \abs{\attopt{0}}\) denotes the number of optimal and attainable items after phase \phasei*.
 \end{corollary}
+\begin{proof}
+	There are \(\attoptlen{0}\) optimal and attainable items in \(\attopt{0}\) at the start of phase \phaseii*.
+	Of those, \(\lostsetlen{l}\) many are assigned to other agents in each round \(l \leq r\), and also some items \(\asgd{l}\) assigned to agent \(i\) may be optimal, whence an upper bound of \(\attoptlen{0} - \sum_{l=1}^{r} \lostsetlen{l}\) on the number \(\attoptlen{r}\) of items in the set \(\attopt{r}\).
+
+	The valuations are monotone, \ie, \(\valuations[\genericset[1]] \leq \valuations[\genericset[2]]\) for all sets \(\genericset[1] \subset \genericset[2] \subset \goods\) of items.
+	This implies that there must be an item \(j \in \attopt{r}\) with a marginal valuation of at least \(\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] / \attoptlen{r}\).
+	As item \(\asgd{r}\) was the one to be assigned, the marginal valuation of it cannot be smaller.
+	Using \cref{lem:induction} for the value of \(\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ]\) proves the corollary.
+\end{proof}
 
 \begin{lemma}
 	\begin{equation*}
@@ -41,13 +117,13 @@
 	\RepReMatch{} has an approximation factor of \(2n (\log n + 2)\).
 \end{theorem}
 
-\lipsum[1-29]
+%\lipsum[1-29]
 
 \begin{algorithm*}[p]
 	\KwIn{%
 		set \(\agents = \{ 1, \dots, n \}\) of agents with weights \(\weight \forall i \in \agents\),
 		set \(\goods = \{ 1, \dots, m \}\) of indivisible items,
-		additive valuations \(\valuations \colon \powerset[\goods] \to \realposzero\) where \(\valuations[\genericset]\) is the valuation of agent \(i \in \agents\) for each set \(\genericset \subset \goods\) of items
+		submodular valuations \(\valuations \colon \powerset[\goods] \to \realposzero\) where \(\valuations[\genericset]\) is the valuation of agent \(i \in \agents\) for each set \(\genericset \subset \goods\) of items
 	}
 	\KwOut{%
 		\(\frac{1}{2n(\log n + 2)}\)-approximation \(\alloc[\phaseiii][] = (\alloc[\phaseiii][1], \dots, \alloc[\phaseiii][n])\) of an optimal allocation
@@ -65,7 +141,7 @@
 		}
 	}
 	\phaseiisep
-	\(\alloc[\phaseii] \gets \emptyset \quad\forall i \in \agents\)   \tct*{put allocation \(\alloc[\phasei]\) aside and start a new one}
+	\(\alloc[\phaseii] \gets \emptyset \quad\forall i \in \agents\)   \tct*{put allocation \(\alloc[\phasei][]\) aside and start a new one}
 	\While{\(\goodsrem \neq \emptyset\)}{
 		\(\weights \gets \{\,  \weight \cdot \log\paren[\big]{ \valuations[ \alloc[\phaseii] \cup \{j\} ] } \given[\bigm] i \in \agents, j \in \goods \,\}\)\;
 		\(\bipartitegraph \gets (\agents, \goods, \weights)\)\;

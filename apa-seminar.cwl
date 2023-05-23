@@ -1,5 +1,5 @@
 # Textual notation.
-\begin{caseintext}{%|number%text}{condition%text}{text}%\\end{caseintext}#n
+\begin{caseintext}{%|number%text}{condition%text}%\\end{caseintext}#n
 
 \caseintextfont{arg}#S
 
@@ -9,7 +9,8 @@
 \braces[size]{formula}#m
 \ceil{formula}#m
 \floor{formula}#m
-\given[size]{formula}#m
+\given#m
+\given[size]#m
 \norm{formula}#m
 \paren[size]{formula}#m
 

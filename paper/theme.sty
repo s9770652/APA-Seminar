@@ -2,8 +2,10 @@
 %\RequirePackage{libertinus}
 \RequirePackage[regular]{newcomputermodern}  % newest version of Computer Modern (regular: display weight)
 
-\NewDocumentCommand{\abb}{m}{\text{#1}}  % abbreviations
+\RenewDocumentCommand{\abb}{m}{\text{#1}}  % abbreviations
 \setkomafont{captionlabel}{\usekomafont{descriptionlabel}}
+
+\RenewDocumentCommand{\caseintextfont}{}{\maybesffamily}
 
 % Colours in titles.
 %\NewDocumentCommand{\accentcolor}{}{\color[RGB]{118, 13, 28}}  % Mordred's red
@@ -122,6 +124,8 @@
 \SetCommentSty{emph}
 %\SetKwInOut{KwIn}{\maybesffamily Input}
 %\SetKwInOut{KwOut}{\maybesffamily Output\!}
+\SetKwInOut{KwIn}{Input}
+\SetKwInOut{KwOut}{Output\!}
 
 
 %%% PDF options.

@@ -175,6 +175,9 @@
 \NewDocumentCommand{\OPT}{}{\abb{OPT}}
 \NewDocumentCommand{\ALG}{}{\abb{ALG}}
 
+\NewDocumentCommand{\caseintextfont}{}{}  % actually defined in theme.sty
+\NewDocumentEnvironment{caseintext}{m m}{\par\smallskip\noindent{\caseintextfont Case #1 \Dash #2:}}{\par\smallskip}
+
 % Thin spaces around en dash (\dash) and em dash(\Dash). Use only for English texts!
 % taken from: https://tex.stackexchange.com/questions/268111/automated-spacing
 \makeatletter
@@ -281,6 +284,8 @@
 \NewDocumentCommand{\phaseiiisep}{}{\vspace{0.25em}\nonl\CommentSty{Phase \phaseiii*:}\;}
 
 % Texts.
+\NewDocumentCommand{\abb}{m}{#1}  % actually defined in theme.sty
+
 \NewDocumentCommand{\NSW}{}{\abb{NSW}}
 \NewDocumentCommand{\RepReMatch}{}{\abb{RepReMatch}}
 \NewDocumentCommand{\SMatch}{}{\abb{SMatch}}

@@ -1,7 +1,7 @@
 \section{SMatch}
 \label{sec:smatch}
 
-In the case of an equal number of agents and items, \ie{} \(\abs{\agents} = n = m = \abs{\goods}\), the \emph{additive} \NSW{} can be solved exactly by finding a maximum matching on a bipartite graph with the sets of agents and of items as its parts;
+In the case of an equal number of agents and items, \ie, \(\abs{\agents} = n = m = \abs{\goods}\), the \emph{additive} \NSW{} can be solved exactly by finding a maximum matching on a bipartite graph with the sets of agents and of items as its parts;
 as weight of the edge between agent \(i\) and item \(j\), use \(\weight \log \valuations[j]\), that is the weighted valuation of item \(j\) by agent \(i\) in the \emph{logarithmic} Nash social welfare.
 Should there be more items than agents, then it would be obvious to just repeatedly find a maximum matching and assign the items accordingly until all items are assigned.
 The flaw of this idea is that such a greedy algorithm only considers the valuations of items in the current matching and perhaps the valuations of items already assigned.
@@ -51,7 +51,7 @@ The geometric mean of the \NSW{} favours allocations with similarly valued bundl
 		\allocationexample
 		\caption{%
 			problem instance
-			\todo[info]{might delete if document in two columns → unused edges in grey}
+			\todo[info]{\(\mathbfit{i}\): might delete if document in two columns → unused edges in grey}
 		}
 	\end{subfigure}
 	\hfil
@@ -100,7 +100,7 @@ The addend \(\remvalue\) serves as estimation of the valuation of items assigned
 	= \valuations[ \goodsordered{2n+1}, \dots, \goodsordered{m} ].
 \end{equation}
 The set \(\genericset\) has less than \(2n\) elements only if there are less than \(2n\) items in total.
-From the second matching onwards, the edge weights are defined as \(\weight \log\paren[\big]{ \valuations[j] + \valuations[\alloc] }\), where \(\alloc\) is the continuously updated set of items assigned to agent \(i\) in previous matchings.
+From the second matching onwards, the edge weights are defined as \(\weight \log\paren[\big]{ \valuations[j] + \valuations[\alloc] }\), where \(\alloc\) is the continuously updated bundle of agent \(i\).
 The addend \(\valuations[\alloc]\) could lead to better allocations in applications, but does not improve the approximation factor asymptotically.
 
 \begin{algorithm*}[t]
@@ -141,8 +141,8 @@ To calculate the approximation factor of \SMatch, we first need to establish a l
 	For each agent \(i \in \agents\) and her final bundle \(\alloc = \{\asgd{1}, \dots, \asgd{\alloclen}\}\), the item \(\asgd{t}\) is worth at least as much as the overall \(tn\)-th most highly valued item \(\goodsordered{tn}\), \ie{} \(\valuations[\asgd{t}] \geq \valuations[\goodsordered{tn}]\), for all \(t = 1, \dots, \alloclen\).
 \end{lemma}
 \begin{proof}
-	At the start of the \(t\)-th iteration, no more than \((t-1) n\) items out of the \(tn\) most highly valued items \(\goodsordered{1}, \dots, \goodsordered{tn}\) have been assigned in previous iterations since at most~\(n\) items are assigned in each iteration.
-	During the \(t\)-th iteration, at most \(n-1\) more of those highly valued items could be assigned to all other agents \(i' \neq i\), leaving at least one item in \(\goodsordered{1}, \dots, \goodsordered{tn}\) unassigned.
+	At the start of the \(t\)-th round, no more than \((t-1) n\) items out of the \(tn\) most highly valued items \(\goodsordered{1}, \dots, \goodsordered{tn}\) have been assigned in previous rounds since at most~\(n\) items are assigned in each iteration.
+	During the \(t\)-th round, at most \(n-1\) more of those highly valued items could be assigned to all other agents \(i' \neq i\), leaving at least one item in \(\goodsordered{1}, \dots, \goodsordered{tn}\) unassigned.
 	Since \(\valuations[\goodsordered{k}] \geq \valuations[\goodsordered{tn}]\) for all \(k \leq tn\) by definition of \(\goodsordered{\cdot}\), the lemma follows.
 \end{proof}
 
@@ -168,8 +168,8 @@ We can now establish \(\remvalue/n = \valuations[ \goodsordered{2n+1}, \dots, \g
 
 \begin{remark}
 	In \cref{lem:lower_bound_later_items}, we assumed non-zero valuations for all items, hence the bundle lengths of \(\alloclen \geq \floor{\frac{m}{n}}\).
-	Of course in an actual program, one would not assign items to agents who value these with zero.
-	Nevertheless, \cref{lem:lower_bound_later_items} still holds as additional zeros in the sum of \cref{eq:lower_bound_later_items} do not change it.
+	Of course in an actual program, one would not assign items to agents who value them at zero.
+	Inasmuch as additional zeros in \cref{eq:lower_bound_later_items} do not change the sum, \cref{lem:lower_bound_later_items} still holds nevertheless.
 \end{remark}
 
 This allows us to calculate an approximation factor for \SMatch{} by comparing its output with an optimal allocation \(\alloc*[][]\).
