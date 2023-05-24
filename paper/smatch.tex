@@ -213,7 +213,7 @@ This allows us to calculate an approximation factor for \SMatch{} by comparing i
 		\log \NSW(\alloc[][])
 		&\geq \frac{1}{\sum_{i=1}^{n} \weight} \cdot \sum_{i=1}^{n} \weight \log \paren[\bigg]{ \frac{\valuations[\genericset*[i]]}{2 n} + \frac{\valuations[\alloc* \setminus \genericset*[i]]}{n} } \\
 		&\geq \frac{1}{\sum_{i=1}^{n} \weight} \cdot \sum_{i=1}^{n} \weight \log \paren[\bigg]{ \frac{\valuations[\alloc*]}{2n} }
-		 = \log \paren[\bigg]{\frac{\OPT}{2 n}}
+		 = \log \paren[\bigg]{\frac{\NSW(\alloc*[][])}{2 n}}
 	\end{align}
 	\vspace*{-5mm}\qedhere
 \end{proof}
