@@ -248,7 +248,12 @@
 \NewDocumentCommand{\lostsetlen}{m O{i}}{
 	\ell_{\smash{\IfEmptyF{#2}{#2, } #1}}
 }
-\NewDocumentCommand{\matching}{}{\mathcal{M}}
+\NewDocumentCommand{\matching}{O{}}{
+	\mathcal{M}\IfEmptyF{#1}{_{\hspace{-.1em}#1}}
+}
+\NewDocumentCommand{\overlygoodset}{O{i}}{
+	\goods^{+}\IfEmptyF{#1}{_{\!#1}}
+}
 \NewDocumentCommand{\phasei}{s}{%
 	\IfBooleanTF{#1}{I}{\mathup{I}}%
 }
@@ -260,6 +265,12 @@
 }
 \NewDocumentCommand{\remvalue}{s O{i}}{
 	u\IfBooleanT{#1}{^*}\IfEmptyF{#2}{_{#2}}
+}
+\NewDocumentCommand{\unluckyagents}{O{t}}{
+	\agents^-\IfEmptyF{#1}{_{#1}}
+}
+\NewDocumentCommand{\unluckyagentslen}{O{t}}{
+	a^-\IfEmptyF{#1}{_{#1}}
 }
 \NewDocumentCommand{\valuations}{O{} O{i}}{
 	v\IfEmptyF{#2}{_{#2}}\IfEmptyF{#1}{(#1)}

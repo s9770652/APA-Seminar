@@ -26,7 +26,7 @@
 \begin{definition}
 	Given a set \(\goods\) of items and a set \(\agents\) of agents with \emph{valuations} \(\valuations \colon \powerset[\goods] \to \real\)\todo[info]{\(\mathbfit{i}\): less strict def of valuations; restriction for our case later on} and \emph{agent weights} \(\eta_i\) for all agents \(i \in \agents\), the \emph{Nash Social Welfare problem} (\NSW) is to find an allocation maximising the weighted geometric mean of valuations, that is
 	\begin{equation*}
-		\argmax_{\alloc[][] \in \allallocs{n}{\goods}} \braces[\bigg]{ \paren[\Big]{ \prod_{i \in \agents} \valuations[\alloc]^{\weight} }^{1 / \sum_{i \in \agents} \weight} }
+		\argmax_{\alloc[][] \in \allallocs{n}{\goods}} \braces[\bigg]{ \paren[\Big]{ \smashoperator{\prod_{i \in \agents}} \valuations[\alloc]^{\weight} }^{1 / \sum_{i \in \agents} \weight} }
 	\end{equation*}
 	where \(\allallocs{n}{\goods}\) is the set of all possible allocations of the items in \(\goods\) amongst \(n\) agents.
 	The problem is called \emph{symmetric} if all agent weights \(\weight\) are equal, and \emph{asymmetric} otherwise.
@@ -35,7 +35,7 @@
 
 \(\vdots\)
 
-In a slight abuse of notation, we omit curly braces delimiting a set in the arguments of a valuation function, so for example we write \(\valuations[j_1, j_2, \dots][]\) to denote \(\valuations[\{j_1, j_2, \dots\}][]\).
+In a slight abuse of notation, we omit curly braces delimiting a set in the arguments of a valuation function, so, for example, we write \(\valuations[j_1, j_2, \dots][]\) but mean \(\valuations[\{j_1, j_2, \dots\}][]\).
 
 \(\vdots\)
 

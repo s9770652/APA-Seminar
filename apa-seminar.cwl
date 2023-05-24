@@ -58,7 +58,10 @@
 \lostsetlen{round}#m
 \lostsetlen{round}[agent]#m
 
-matching#m
+\matching#m
+
+\overlygoodset#m
+\overlygoodset[agent]#m
 
 \phasei#m
 \phasei*#n
@@ -82,7 +85,7 @@ matching#m
 
 
 # Algorithms.
-maxweightmatching#m
+\maxweightmatching#m
 
 \arballoc#m
 

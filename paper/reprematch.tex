@@ -13,7 +13,7 @@ First, we bound\todo[info]{\(\mathbfit{i}\): Would \enquote{to bound} (strongly)
 	During phase \phaseii*{}, each agent \(i \in \agents\) gets assigned a bundle \(\alloc[\phaseii] = \{ \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} \}\).
 	For all rounds \(r = 2, \dots, \alloclen[\phaseii]\), the following inequality about her set \(\attopt{r}\) of optimal and attainable items holds true:
 	\begin{equation*}
-		\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] \geq \remvalue* - \lostsetlen{2} \valuations[\asgd{1}] - \sum_{r'=2}^{r-1} \lostsetlen{r'} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] - \valuations[\asgd{1}, \dots, \asgd{r-1}],
+		\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] \geq \remvalue* - \lostsetlen{2} \cdot \valuations[\asgd{1}] - \smashoperator{\sum_{r'=2}^{r-1}} \lostsetlen{r'} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] - \valuations[\asgd{1}, \dots, \asgd{r-1}],
 	\end{equation*}
 	where \(\lostsetlen{l}\) is the size of her set \(\lostset{l} \subset \attopt{l-1}\) of optimal items which were attainable in round \(l-1\) and were assigned to other agents in round \(l\), and \(\remvalue* = \valuations[\attopt{1}]\) is her valuation of attainable and optimal items during the first round.
 \end{lemma}
@@ -79,7 +79,7 @@ First, we bound\todo[info]{\(\mathbfit{i}\): Would \enquote{to bound} (strongly)
 		\end{align}
 	\end{caseintext}
 	In both cases, we can replace \(\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ]\) by the induction hypothesis and \(\valuations[ \lostset{r+1} \given \asgd{1}, \dots, \asgd{r-1} ]\) by \(\lostsetlen{r+1} \cdot \valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ]\) to prove the lemma.
-	For a more detailed formula simplification, we refer to Garg, Kulkarni and Kulkarni~\cite[14]{APNSWuSVþUM}.\todo[info]{\(\mathbfit{i}\): I hope the shortcut is allowed. Might remove it if rest of document not too long.}
+	For a more detailed formula simplification, we refer to Garg, Kulkarni and Kulkarni~\cite[14]{APNSWuSVþUM}.\todo[info]{\(\mathbfit{i}\): I hope the shortcut is allowed. Might write out it if rest of document not too long.}
 \end{proof}
 
 The lemma can be used to bound the marginal valuation of the items assigned in each round \(r\).
@@ -88,7 +88,7 @@ The lemma can be used to bound the marginal valuation of the items assigned in e
 	From \cref{lem:induction} follows
 	\begin{equation*}
 		\valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ] \geq \begin{multlined}[t]
-			\paren[\Big]{ \remvalue* - \lostsetlen{2} \valuations[\asgd{1}] - \sum_{r'=2}^{r-1} \lostsetlen{r'+1} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] \\
+			\paren[\Big]{ \remvalue* - \lostsetlen{2} \cdot \valuations[\asgd{1}] - \smashoperator{\sum_{r'=2}^{r-1}} \lostsetlen{r'+1} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] \\
 				- \valuations[\asgd{1}, \dots, \asgd{r-1}] } \Bigm/ \paren[\Big]{ \attoptlen{0} - \sum_{l = 1}^{r} \lostsetlen{l} }
 		\end{multlined}
 	\end{equation*}
@@ -120,7 +120,7 @@ This, finally, enables us to give a lower bound on the valuation of the whole bu
 		\valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii]}]
 		&= \valuations[ \asgd{\alloclen[\phaseii]} \given \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} ] + \valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii] - 1}] \\
 		&\geq \begin{multlined}[t]
-			\paren[\Big]{ \remvalue* - \lostsetlen{2} \valuations[\asgd{1}]
+			\paren[\Big]{ \remvalue* - \lostsetlen{2} \cdot \valuations[\asgd{1}]
 				- \smashoperator{\sum_{r'=2}^{\alloclen[\phaseii]-1 \mathstrut}} \lostsetlen{r'+1} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] \\
 				- \valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii]-1}] } \Big/ \paren[\Big]{ \attoptlen{0} - \sum_{l = 1}^{\alloclen[\phaseii] \mathstrut} \lostsetlen{l} } + \valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii] - 1}]  % \Big/ has better spacing than \Bigm/.
 		\end{multlined} \\
@@ -141,23 +141,61 @@ This, finally, enables us to give a lower bound on the valuation of the whole bu
 	\todo[inline, inlinewidth=5cm, noinlinepar]{possibly not or shorter}
 \end{remark}
 
+After having obtained a lower bound on the valuation of items assigned in phase \phaseii*, we need a lower bound for phase \phaseiii*{} as well.
+To this end, we introduce the concept of \emph{overly good} items, that is items which some agent \(i\) values at least as high as her most valuable optimal item~\(\asgd*{1}\).
+The set of overly good items for an agent \(i\) is denoted by
+\begin{equation}
+	\overlygoodset \coloneq \{\, j \in \goods \given \valuations[j] \geq \valuations[\asgd*{1}] \,\}.
+\end{equation}
+
 \begin{lemma}
-	about phase \phasei* \& \phaseiii*
+	\label{lem:overly_good_matching}
+	In the beginning of phase \phaseiii*, there exists a matching such that each agent \(i \in \agents\) is matched to one of her overly good items in \(\mathop{\bigcup\hspace{-1pt}_{i' \in \agents}} \alloc[\phasei][i']\).
 \end{lemma}
+\begin{proof}
+	\todo[info, inline]{%
+		\(\mathbfit{i}\): Due to my departure and my other university obligations, I was unable to finish this proof.
+		It could be that I understand the source of confusion but I cannot guarantee this yet.
+		I guess I'll have to inform you via email next week...
+	}
+%	Imagine that, in the beginning of phase \phaseiii*, only the items which where assigned in the rounds \(1, \dots, t\) of phase \phasei*{} were released, for all \(t = 1, \dots, \ceil{\log n}+1\).
+%	Choose some matching \(\matching[t]\) which maximises the number of agents matched with one of their overly good items, and denote by \(\unluckyagents\) the set of agents who are \emph{not} matched with one of their overly good items.
+%	We prove by induction on the number \(t\) of rounds that it holds \(\abs{\unluckyagents} \leq n/2^t\).
+%	The lemma follows since there are \(\ceil{\log_2 n}+1\) rounds in phase \phasei*.
+%
+%	In the base case \(t=1\), none of the items are assigned initially.
+%	Denote by \(\unluckyagents[1]\) the number of agents who did not get assigned one of their overly good items in the very first matching computed by \RepReMatch.
+%	If \(\unluckyagents[1] \leq n/2\), the base case is obviously proven.
+%	Otherwise, all items in the sets \(\overlygoodset\)
+%	\begin{caseintext}{2}{\(\abs{\unluckyagents} > n/2\)}
+%		All items in the sets \(\overlygoodset\) of overly good items of all \(\unluckyagents\) agents \(i\) must have been assigned to some other agents \(i'\).
+%		Each set \(\overlygoodset\) uniquely contains the item \(\asgd*{1}\), so that the size \(\abs{ \mathop{\bigcup\hspace{-1pt}_{i \in \unluckyagents}} \overlygoodset }\) of their union is at least \(\abs{\unluckyagents}\).
+%	\end{caseintext}
+\end{proof}
 
 \begin{theorem}
 	\label{th:reprematch}
 	\RepReMatch{} has an approximation factor of \(2n (\log n + 2)\).
 \end{theorem}
 \begin{proof}
+	Because of \cref{lem:overly_good_matching}, we can assign each agent \(i\) an overly good item \(j_i^* \in \overlygoodset\)\todo{fix notation} of hers during the first matching of phase \phaseiii*.
+	\RepReMatch{} maximises the logarithmic Nash social welfare in that step, so we get
+	\begin{equation}
+		\log \NSW(\alloc[\phaseiii])
+		\geq \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \valuations[j_i^*, \asgd{1}, \dots, \asgd{\alloclen[\phaseii]}]
+	\end{equation}
+	as lower bound on the \NSW{} after the first matching in phase \phaseiii*, whereby \(\alloc[\phaseii] = \{ \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} \}\) is the bundle of agent \(i\) assigned in phase \phaseii*.
 
+	\lipsum[16-18]
 \end{proof}
 
 \begin{remark}
 	\todo[inline, inlinewidth=5cm, noinlinepar]{possibly not or shorter}
 \end{remark}
 
-%\lipsum[1-29]
+Other text in this section:
+
+\lipsum[19-28]
 
 \begin{algorithm*}[p]
 	\KwIn{%
@@ -171,10 +209,10 @@ This, finally, enables us to give a lower bound on the valuation of the whole bu
 	\phaseisep
 	\(\alloc[\phasei] \gets \emptyset \quad\forall i \in \agents\)\;
 	\(\goodsrem \gets \goods\)\;
-	\For{\(t \gets 0, \dots, \ceil{\log n}-1\)}{
+	\For{\(t \gets 1, \dots, \ceil{\log_2 n}+2\)}{
 		\If{\(\goodsrem \neq \emptyset\)}{
-			\(\weights \gets \{\,  \weight \cdot \log\paren[\big]{ \valuations[j] } \given[\bigm] i \in \agents, j \in \goods \,\}\)\;
-			\(\bipartitegraph \gets (\agents, \goods, \weights)\)\;
+			\(\weights \gets \{\,  \weight \cdot \log\paren[\big]{ \valuations[j] } \given[\bigm] i \in \agents, j \in \goodsrem \,\}\)\;
+			\(\bipartitegraph \gets (\agents, \goodsrem, \weights)\)\;
 			\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
 			\(\alloc[\phasei] \gets \alloc[\phasei] \cup \{j\} \quad \forall(i, j) \in \matching\)\;
 			\(\goodsrem \gets \goodsrem \setminus \{\, j \given (i, j) \in \matching \,\}\)\;
@@ -183,16 +221,16 @@ This, finally, enables us to give a lower bound on the valuation of the whole bu
 	\phaseiisep
 	\(\alloc[\phaseii] \gets \emptyset \quad\forall i \in \agents\)   \tct*{put allocation \(\alloc[\phasei][]\) aside and start a new one}
 	\While{\(\goodsrem \neq \emptyset\)}{
-		\(\weights \gets \{\,  \weight \cdot \log\paren[\big]{ \valuations[ \alloc[\phaseii] \cup \{j\} ] } \given[\bigm] i \in \agents, j \in \goods \,\}\)\;
-		\(\bipartitegraph \gets (\agents, \goods, \weights)\)\;
+		\(\weights \gets \{\,  \weight \cdot \log\paren[\big]{ \valuations[ \alloc[\phaseii] \cup \{j\} ] } \given[\bigm] i \in \agents, j \in \goodsrem \,\}\)\;
+		\(\bipartitegraph \gets (\agents, \goodsrem, \weights)\)\;
 		\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
 		\(\alloc[\phaseii] \gets \alloc[\phaseii] \cup \{j\} \quad \forall(i, j) \in \matching\)\;
 		\(\goodsrem \gets \goodsrem \setminus \{\, j \given (i, j) \in \matching \,\}\)\;
 	}
 	\phaseiiisep
-	\(\goodsrem \gets \mathop{\bigcup\hspace{-1pt}_{i \in \agents}} \alloc[\phasei]\)  \tct*{release items assigned in phase \phasei*}
-	\(\weights \gets \{\,  \weight \cdot \log\paren[\big]{ \valuations[ \alloc[\phaseii] \cup \{j\} ] } \given[\bigm] i \in \agents, j \in \goods \,\}\)\;
-	\(\bipartitegraph \gets (\agents, \goods, \weights)\)\;
+	\(\goodsrem \gets \mathop{\bigcup\hspace{-1pt}_{i \in \agents}} \alloc[\phasei]\)  \tct*{release items assigned in phase \phasei*} \label{ln:goodsrem}
+	\(\weights \gets \{\,  \weight \cdot \log\paren[\big]{ \valuations[ \alloc[\phaseii] \cup \{j\} ] } \given[\bigm] i \in \agents, j \in \goodsrem \,\}\)\;
+	\(\bipartitegraph \gets (\agents, \goodsrem, \weights)\)  \label{ln:bipartitegraph}\;
 	\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
 	\(\alloc[\phaseiii] \gets \alloc[\phaseii] \cup \{j\} \quad\forall(i, j) \in \matching\)\;
 	\(\goodsrem \gets \goodsrem \setminus \{\, j \given (i, j) \in \matching \,\}\)\;
