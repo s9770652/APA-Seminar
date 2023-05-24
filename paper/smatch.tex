@@ -100,7 +100,7 @@ The addend \(\remvalue\) serves as estimation of the valuation of items assigned
 	= \valuations[ \goodsordered{2n+1}, \dots, \goodsordered{m} ].
 \end{equation}
 The set \(\genericset\) has less than \(2n\) elements only if there are less than \(2n\) items in total.
-From the second matching onwards, the edge weights are defined as \(\weight \log\paren[\big]{ \valuations[j] + \valuations[\alloc] }\), where \(\alloc\) is the continuously updated bundle of agent \(i\).
+From the second matching onwards, the edge weights are defined as \(\weight \log\paren[\big]{ \valuations[j] + \valuations[\alloc] }\), where~\(\alloc\) is the continuously updated bundle of agent \(i\).
 The addend \(\valuations[\alloc]\) could lead to better allocations in applications, but does not improve the approximation factor asymptotically.
 
 \begin{algorithm*}[t]
@@ -157,8 +157,8 @@ We can now establish \(\remvalue/n = \valuations[ \goodsordered{2n+1}, \dots, \g
 	Together, this yields
 	\begin{align}
 		 \valuations[\asgd{2}, \dots, \asgd{\alloclen}]
-		&= \sum_{t=2}^{\alloclen} \valuations[\asgd{t}]
-		 \geq \sum_{t=2}^{\alloclen} \frac{1}{n} \valuations[ \goodsordered{tn}, \dots, \goodsordered{tn + n-1} ] \\
+		&= \sum_{t=2}^{\alloclen \mathstrut} \valuations[\asgd{t}]
+		 \geq \sum_{t=2}^{\alloclen \mathstrut} \frac{1}{n} \valuations[ \goodsordered{tn}, \dots, \goodsordered{tn + n-1} ] \\
 		&\geq \frac{1}{n} \valuations[ \goodsordered{2n}, \dots, \goodsordered{m-1} ]
 		 \geq \frac{1}{n} \valuations[ \goodsordered{2n+1}, \dots, \goodsordered{m} ]
 		 = \frac{\remvalue}{n} \label{eq:lower_bound_later_items}
