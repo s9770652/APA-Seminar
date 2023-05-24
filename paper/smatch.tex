@@ -105,8 +105,8 @@ The addend \(\valuations[\alloc]\) could lead to better allocations in applicati
 
 \begin{algorithm*}[t]
 	\KwIn{%
-		set \(\agents = \{ 1, \dots, n \}\) of agents with weights \(\weight \forall i \in \agents\),
-		set \(\goods = \{ 1, \dots, m \}\) of indivisible items,
+		set \(\agents\) of \(n\) agents with weights \(\weight\) for all agents \(i \in \agents\),
+		set \(\goods\) of indivisible \(m\) items,
 		additive valuations \(\valuations \colon \powerset[\goods] \to \realposzero\) where \(\valuations[\genericset]\) is the valuation of agent \(i \in \agents\) for each set \(\genericset \subset \goods\) of items
 	}
 	\KwOut{%
@@ -181,16 +181,16 @@ This allows us to calculate an approximation factor for \SMatch{} by comparing i
 	\Cref{lem:lower_bound_later_items} can be plugged into the logarithmic \NSW:
 	\begin{align}
 		\log \NSW(\alloc[][])
-		&= \frac{1}{\sum_{i=1}^{n} \weight} \cdot \sum_{i=1}^{n} \weight \log \valuations[\asgd{1}, \dots, \asgd{\alloclen}] \\
-		&= \frac{1}{\sum_{i=1}^{n} \weight} \cdot \sum_{i=1}^{n} \weight \log \paren[\big]{ \valuations[\asgd{1}] + \valuations[\asgd{2}, \dots, \asgd{\alloclen}] } \\
-		&\geq \frac{1}{\sum_{i=1}^{n} \weight} \cdot \sum_{i=1}^{n} \weight \log \paren[\big]{ \valuations[\asgd{1}] + \remvalue / n } \label{eq:smatch_maximising}
+		&= \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \valuations[\asgd{1}, \dots, \asgd{\alloclen}] \\
+		&= \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \paren[\big]{ \valuations[\asgd{1}] + \valuations[\asgd{2}, \dots, \asgd{\alloclen}] } \\
+		&\geq \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \paren[\big]{ \valuations[\asgd{1}] + \remvalue / n } \label{eq:smatch_maximising}
 	\end{align}
 	Notice that the first matching of \SMatch{} maximises the sum in \cref{eq:smatch_maximising}.
 	Thus, assigning all agents \(i\) their respective most highly valued item \(\asgd*{1}\) in an optimal bundle~\(\alloc* = \{ \asgd*{1}, \dots, \asgd*{\alloclen*} \}\) yields the even lower bound
 	\begin{equation}
 		\label{eq:smatch_approx_factor_lower_bound}
 		\log \NSW(\alloc[][])
-		\geq \frac{1}{\sum_{i=1}^{n} \weight} \cdot \sum_{i=1}^{n} \weight \log \paren[\big]{ \valuations[\asgd*{1}] + \remvalue / n }.
+		\geq \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \paren[\big]{ \valuations[\asgd*{1}] + \remvalue / n }.
 	\end{equation}
 	Recall the definition of \(\remvalue\) from \cref{eq:def_remvalue}.
 	Consider a slightly modified variant:
@@ -211,9 +211,10 @@ This allows us to calculate an approximation factor for \SMatch{} by comparing i
 	We can substitute these two inequalities into \cref{eq:smatch_approx_factor_lower_bound} and prove the theorem thereby:
 	\begin{align}
 		\log \NSW(\alloc[][])
-		&\geq \frac{1}{\sum_{i=1}^{n} \weight} \cdot \sum_{i=1}^{n} \weight \log \paren[\bigg]{ \frac{\valuations[\genericset*[i]]}{2 n} + \frac{\valuations[\alloc* \setminus \genericset*[i]]}{n} } \\
-		&\geq \frac{1}{\sum_{i=1}^{n} \weight} \cdot \sum_{i=1}^{n} \weight \log \paren[\bigg]{ \frac{\valuations[\alloc*]}{2n} }
+		&\geq \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \paren[\bigg]{ \frac{\valuations[\genericset*[i]]}{2 n} + \frac{\valuations[\alloc* \setminus \genericset*[i]]}{n} } \\
+		&\geq \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \paren[\bigg]{ \frac{\valuations[\alloc*]}{2n} }
 		 = \log \paren[\bigg]{\frac{\NSW(\alloc*[][])}{2 n}}
 	\end{align}
-	\vspace*{-5mm}\qedhere
+	\vspace*{-5mm}
+	\qedhere
 \end{proof}
