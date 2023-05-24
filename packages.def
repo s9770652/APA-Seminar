@@ -14,6 +14,8 @@
 ]{unicode-math}  % für kursive gr. Großbuchstaben und aufrechtes ∂ benützt
 \let\mathbb\mathbbold  % kehre zu herkömmlichen Buchstaben mit Doppelstrich und Serifen zurück; neue Zeichen wie 1 mittels \symbb{1} verfügbar
 \RequirePackage{xfrac}  % schräge Brüche; vor fontspec zu laden!
+\RequirePackage{mleftright}  % behebt falschen Freiraum um \left und \right
+\mleftright  % aktiviere Freiraumbehebung für \left und \right (ansonsten benutze \mleft und \mright)
 
 \RequirePackage[protrusion=true]{microtype}  % für hängende Interpunktion
 \RequirePackage{tabularx}  % bessere Trenner und Zeilentypen

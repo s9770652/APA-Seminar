@@ -50,13 +50,6 @@
 \DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
 \DeclarePairedDelimiter{\paren}{\lparen}{\rparen}
 
-% Removes excess space when using \left(..\right).
-% taken from: https://www.reddit.com/r/LaTeX/comments/64derj/comment/dg2fpcz/?utm_source=share&utm_medium=web2x&context=3
-\let\originalleft\left
-\let\originalright\right
-\renewcommand{\left}{\mathopen{}\mathclose\bgroup\originalleft}
-\renewcommand{\right}{\aftergroup\egroup\originalright}
-
 
 %%% Operators.
 % Cups with dots inside for disjoint unions.
