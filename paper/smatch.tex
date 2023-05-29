@@ -10,15 +10,15 @@ The geometric mean of the \NSW{} favours allocations with similarly valued bundl
 
 \begin{figure*}
 	\tikzset{
-		lbl/.style = {},
-		agent/.style = {draw, circle},
-		item/.style = {draw, rectangle},
-		dots/.style = {},
-		weight/.style = {font=\small},
+		lbl/.style = {font=\small},
+		agent/.style = {draw, circle, font=\small},
+		item/.style = {draw, rectangle, font=\small},
+		dots/.style = {font=\small},
+		weight/.style = {font=\footnotesize},
 		edgeopt/.style = {},
 		edgealg/.style = {},
 		edgegry/.style = {},
-		node distance=10mm and 27mm,
+		node distance=7mm and 20mm,
 	}
 	\def\allocationexample{
 		\begin{tikzpicture}
@@ -47,15 +47,14 @@ The geometric mean of the \NSW{} favours allocations with similarly valued bundl
 		\end{tikzpicture}
 	}
 	\centering
-	\begin{subfigure}{0.31\textwidth}
+	\begin{subfigure}{0.325\textwidth}
 		\allocationexample
 		\caption{%
 			problem instance
-			\todo[info]{\(\mathbfit{i}\): might delete if document in two columns → unused edges in grey}
 		}
 	\end{subfigure}
 	\hfill
-	\begin{subfigure}{0.31\textwidth}
+	\begin{subfigure}{0.325\textwidth}
 		\tikzset{
 			edgealg/.style = {white},
 			edgegry/.style = {white},
@@ -66,7 +65,7 @@ The geometric mean of the \NSW{} favours allocations with similarly valued bundl
 		}
 	\end{subfigure}
 	\hfill
-	\begin{subfigure}{0.31\textwidth}
+	\begin{subfigure}{0.325\textwidth}
 		\tikzset{
 			edgeopt/.style = {white},
 			edgegry/.style = {white},
@@ -77,12 +76,14 @@ The geometric mean of the \NSW{} favours allocations with similarly valued bundl
 		}
 	\end{subfigure}
 	\caption{%
+		An example showing that simple repeated matching without consideration of the future leads to an approximation factor dependent on the number \(m\) of items.
 		Agent \(1\) values item \(1\) at \(m + \epsilon\) and all other items at \(1\).
-		Agent \(2\) values item \(1\) at \(m\), item \(m+1\) at \(1\) and all other items at \(0\).
+		Agent \(2\) values item \(1\) at \(m\), item \(m+1\) at~\(1\) and all other items at \(0\).
 		In an optimal allocation, item \(1\) would be assigned to agent \(2\) and all other items to agent \(1\), resulting in a NSW of \(\sqrt{m \cdot m} = m\).
 		A repeated maximum matching algorithm would greedily assign item \(1\) to agent \(1\) and item \(m+1\) to agent \(2\) in the first round.
 		Even if all remaining items were going to be assigned to agent \(1\), the NSW will never surpass \(\sqrt{(2m + \epsilon - 1) \cdot 1} < \sqrt{2m}\).
 		The approximation factor \(\alpha \approx \sqrt{m/2}\) therefore depends on the number of items.
+		\todo{fix pos of subcaptions \& of agent 2}
 	}
 	\label{fig:allocation}
 \end{figure*}

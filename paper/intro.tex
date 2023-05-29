@@ -24,7 +24,7 @@
 \(\vdots\)
 
 \begin{definition}
-	Given a set \(\goods\) of items and a set \(\agents\) of agents with \emph{valuations} \(\valuations \colon \powerset[\goods] \to \real\)\todo[info]{\(\mathbfit{i}\): less strict def of valuations; restriction for our case later on} and \emph{agent weights} \(\eta_i\) for all agents \(i \in \agents\), the \emph{Nash Social Welfare problem} (\NSW) is to find an allocation maximising the weighted geometric mean of valuations, that is
+	Given a set \(\goods\) of items and a set \(\agents\) of agents with \emph{valuations} \(\valuations \colon \powerset[\goods] \to \real\) and \emph{agent weights} \(\eta_i\) for all agents \(i \in \agents\), the \emph{Nash Social Welfare problem} (\NSW) is to find an allocation maximising the weighted geometric mean of valuations, that is
 	\begin{equation*}
 		\argmax_{\alloc[][] \in \allallocs{n}{\goods}} \braces[\bigg]{ \paren[\Big]{ \smashoperator{\prod_{i \in \agents}} \valuations[\alloc]^{\weight} }^{1 / \sum_{i \in \agents} \weight} }
 	\end{equation*}
