@@ -139,7 +139,7 @@ For convenience, we order the items in the final bundle \(\alloc = \{\asgd{1}, \
 To calculate the approximation factor of \SMatch, we first need to establish a lower bound on the valuation of single items.
 \begin{lemma}
 	\label{lem:lower_bound_single_item}
-	For each agent \(i \in \agents\) and her final bundle \(\alloc = \{\asgd{1}, \dots, \asgd{\alloclen}\}\), the item \(\asgd{t}\) is worth at least as much as the overall \(tn\)-th most highly valued item \(\goodsordered{tn}\), \ie{} \(\valuations[\asgd{t}] \geq \valuations[\goodsordered{tn}]\), for all \(t = 1, \dots, \alloclen\).
+	For each agent \(i \in \agents\), her final bundle \(\alloc = \{\asgd{1}, \dots, \asgd{\alloclen}\}\), and her \(tn\)-th most highly valued item \(\goodsordered{tn}\), it holds \(\valuations[\asgd{t}] \geq \valuations[\goodsordered{tn}]\) for all \(t = 1, \dots, \alloclen\).
 \end{lemma}
 \begin{proof}
 	At the start of the \(t\)-th round, no more than \((t-1) n\) items out of the \(tn\) most highly valued items \(\goodsordered{1}, \dots, \goodsordered{tn}\) have been assigned in previous rounds since at most~\(n\) items are assigned in each iteration.
