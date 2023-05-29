@@ -64,11 +64,8 @@
 \overlygoodset[agent]#m
 
 \phasei#m
-\phasei*#n
 \phaseii#m
-\phaseii*#n
 \phaseiii#m
-\phaseiii*#n
 
 \remvalue#m
 \remvalue*#m

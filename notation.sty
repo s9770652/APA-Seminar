@@ -254,14 +254,14 @@
 \NewDocumentCommand{\overlygoodset}{O{i}}{
 	\goods^{+}\IfEmptyF{#1}{_{\!#1}}
 }
-\NewDocumentCommand{\phasei}{s}{%
-	\IfBooleanTF{#1}{I}{\mathup{I}}%
+\NewDocumentCommand{\phasei}{}{%
+	\relax\ifmmode{\mathup{I}}\else{I}\fi%
 }
-\NewDocumentCommand{\phaseii}{s}{%
-	\IfBooleanTF{#1}{II}{\mathup{II}}%
+\NewDocumentCommand{\phaseii}{}{%
+	\relax\ifmmode{\mathup{II}}\else{II}\fi%
 }
-\NewDocumentCommand{\phaseiii}{s}{%
-	\IfBooleanTF{#1}{III}{\mathup{III}}%
+\NewDocumentCommand{\phaseiii}{}{%
+	\relax\ifmmode{\mathup{III}}\else{III}\fi%
 }
 \NewDocumentCommand{\remvalue}{s O{i}}{
 	u\IfBooleanT{#1}{^*}\IfEmptyF{#2}{_{#2}}
@@ -283,9 +283,9 @@
 \SetKwFunction{maxweightmatching}{max\_weight\_matching}
 \SetKwFunction{arballoc}{arbitrary\_allocation}
 
-\NewDocumentCommand{\phaseisep}{}{\nonl\CommentSty{Phase \phasei*:}\;}
-\NewDocumentCommand{\phaseiisep}{}{\vspace{0.25em}\nonl\CommentSty{Phase \phaseii*:}\;}
-\NewDocumentCommand{\phaseiiisep}{}{\vspace{0.25em}\nonl\CommentSty{Phase \phaseiii*:}\;}
+\NewDocumentCommand{\phaseisep}{}{\nonl\CommentSty{Phase \phasei:}\;}
+\NewDocumentCommand{\phaseiisep}{}{\vspace{0.25em}\nonl\CommentSty{Phase \phaseii:}\;}
+\NewDocumentCommand{\phaseiiisep}{}{\vspace{0.25em}\nonl\CommentSty{Phase \phaseiii:}\;}
 
 % Texts.
 \NewDocumentCommand{\abb}{m}{#1}  % actually defined in theme.sty
