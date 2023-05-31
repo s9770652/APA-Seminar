@@ -35,7 +35,7 @@
 
 \(\vdots\)
 
-In a slight abuse of notation, we omit curly braces delimiting a set in the arguments of a valuation function, so, for example, we write \(\valuations[j_1, j_2, \dots][]\) but mean \(\valuations[\{j_1, j_2, \dots\}][]\).
+In a slight abuse of notation, we omit curly braces delimiting a set in the arguments of a valuation function, so, for example, we write \(\valuations[j_1, j_2, \dots][][]\) but mean \(\valuations[\{j_1, j_2, \dots\}][][]\).
 
 \(\vdots\)
 
@@ -43,7 +43,7 @@ In a slight abuse of notation, we omit curly braces delimiting a set in the argu
 
 \(\vdots\)
 
-Garg, Kulkarni and Kulkarni~\cite{APNSWuSVþUM} consider five different types of non-negative monotonically non-decreasing valuation functions of which we are going to consider only the following two due to space constraints:
+\Citeauthor{APNSWuSVþUM}~\cite{APNSWuSVþUM} consider five different types of non-negative monotonically non-decreasing valuation functions of which we are going to consider only the following two due to space constraints:
 \begin{description}
 	\item[Additive]
 	The valuation \(\valuations[\genericset]\) of an agent \(i\) for a set \(\genericset \subset \goods\) of items \(j\) is the sum of individual valuations \(\valuations[j]\), that is \(\valuations[\genericset] = \sum_{j \in \genericset} \valuations[j]\).
@@ -51,6 +51,7 @@ Garg, Kulkarni and Kulkarni~\cite{APNSWuSVþUM} consider five different types of
 	\item[Submodular]
 	Let \(\valuations[\genericset[1] \given \genericset[2]] \coloneq \valuations[\genericset[1] \cup \genericset[2]] - \valuations[\genericset[2]]\) denote the marginal valuation\todo{or rather utility?} of agent~\(i\) for a set \(\genericset[1] \subset \goods\) of items over a \emph{disjoint} set \(\genericset[2] \subset \goods\).
 	This valuation functions satisfies the submodularity constraint \(\valuations[j \given \genericset[1] \cup \genericset[2]] \leq \valuations[j \given \genericset[1]]\) for all agents \(i \in \agents\), items \(j \in \goods\) and sets \(\genericset[1], \genericset[2] \subset \goods\) of items.
+	\todo[inline]{What is the motivation for submodular functions?}
 \end{description}
 We use \emph{additive \NSW} and \emph{submodular \NSW} as shorthands for the Nash social welfare problems with additive and submodular valuation functions, respectively.
 
