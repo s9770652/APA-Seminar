@@ -280,7 +280,7 @@
 	a^-_{#1}
 }
 \NewDocumentCommand{\valuations}{O{} O{i}}{
-	\operatorname{v}\IfEmptyF{#2}{_{\!#2}}\IfEmptyF{#1}{(#1)}
+	v\IfEmptyF{#2}{_{#2}}\IfEmptyF{#1}{(#1)}
 }
 \NewDocumentCommand{\weight}{O{i}}{
 	\eta\IfEmptyF{#1}{_{#1}}
