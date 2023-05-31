@@ -17,7 +17,7 @@
 \RequirePackage{mleftright}  % behebt falschen Freiraum um \left und \right
 \mleftright  % aktiviere Freiraumbehebung für \left und \right (ansonsten benutze \mleft und \mright)
 
-\RequirePackage[protrusion=true]{microtype}  % für hängende Interpunktion
+\RequirePackage[protrusion]{microtype}  % für hängende Interpunktion
 \RequirePackage{tabularx}  % bessere Trenner und Zeilentypen
 \makeatletter
 \@ifclassloaded{beamer}{}{\RequirePackage[inline]{enumitem}}  % bessere Aufzählung (mit *-Variante für Aufzählungen innerhalb eines Textes); für 'beamer' ausgeschaltet
