@@ -40,8 +40,8 @@ First, we give a lower bound one the valuation of an agent \(i\) for her optimal
 	\end{align}
 	where the second inequality can be shown inductively with the definition of submodularity\todo{Do that or, alternatively, find a paper showing the other def.}, and the third inequality is due all \(\lostsetlen{2}\) items \(j\) in \(\lostset{2}\) being attainable but not assigned in round \(1\), implying \(\valuations[j] \leq \valuations[\asgd{1}]\).
 
-	As induction hypothesis, we assume that the lemma is true for all rounds up to some \(r\).
-	For the induction step \(r \to r+1\), we differentiate the same two cases again:
+	For the induction hypothesis, we assume that the lemma holds true for all rounds up to some~\(r\).
+	In the induction step \(r \to r+1\), we differentiate the same two cases again:
 	\begin{caseintext}{1}{\(\asgd{r} \in \attopt{r}\)}
 		Again we use the submodularity of valuations \todo{ditto} to obtain a lower bound on the marginal valuation of \(\attopt{r+1}\).
 		\begin{align}
@@ -143,7 +143,7 @@ This, finally, enables us to give a lower bound on the valuation of the whole bu
 \end{remark}
 
 After having obtained a lower bound on the valuation of items assigned in phase \phaseii, we need a lower bound for phase \phaseiii{} as well.
-To this end, we introduce the concept of \emph{overly good} items, that is items which some agent \(i\) values at least as high as her most valuable optimal item~\(\asgd*{1}\).
+Therefor we introduce the concept of \emph{overly good} items, that is items which some agent \(i\) values at least as high as her most valuable optimal item~\(\asgd*{1}\).
 The set of overly good items for an agent \(i\) is denoted by
 \begin{equation}
 	\overlygoodset \coloneq \{\, j \in \goods \given \valuations[j] \geq \valuations[\asgd*{1}] \,\}.
@@ -154,13 +154,9 @@ The set of overly good items for an agent \(i\) is denoted by
 	In the beginning of phase \phaseiii, there exists a matching such that each agent \(i \in \agents\) is matched to one of her overly good items in \(\mathop{\bigcup\hspace{-1pt}_{i' \in \agents}} \alloc[\phasei][i']\).
 \end{lemma}
 \begin{proof}
-	\todo[info, inline]{%
-		\(\mathbfit{i}\): Due to my departure and my other university obligations, I was unable to finish this proof.
-		But I think I got it.
-	}
 %	Imagine that, in the beginning of phase \phaseiii, only the items which where assigned in the rounds \(1, \dots, t\) of phase \phasei{} were released, for all \(t = 1, \dots, \ceil{\log n}+1\).
-%	Choose some matching \(\matching[t]\) which maximises the number of agents matched with one of their overly good items, and denote by \(\unluckyagents\) the set of agents who are \emph{not} matched with one of their overly good items.
-%	We prove by induction on the number \(t\) of rounds that it holds \(\abs{\unluckyagents} \leq n/2^t\).
+%	Now choose some matching \(\matching[t]\) which maximises the number of agents matched with one of their overly good items, and denote by \(\unluckyagents{t}\) the set of agents who are \emph{not} matched with one of their overly good items.
+%	We prove by induction on the number \(t\) of rounds that it holds \(\abs{\unluckyagents{t}} \leq n/2^t\).
 %	The lemma follows since there are \(\ceil{\log_2 n}+1\) rounds in phase \phasei.
 %
 %	In the base case \(t=1\), none of the items are assigned initially.
@@ -171,22 +167,86 @@ The set of overly good items for an agent \(i\) is denoted by
 %		All items in the sets \(\overlygoodset\) of overly good items of all \(\unluckyagents\) agents \(i\) must have been assigned to some other agents \(i'\).
 %		Each set \(\overlygoodset\) uniquely contains the item \(\asgd*{1}\), so that the size \(\abs{ \mathop{\bigcup\hspace{-1pt}_{i \in \unluckyagents}} \overlygoodset }\) of their union is at least \(\abs{\unluckyagents}\).
 %	\end{caseintext}
+
+	Imagine that for some \(t\) only the items assigned in the first~\(t\) rounds of phase~\phasei{} were released in the beginning of phase~\phaseiii.
+	Denote the set of released items by \(\goodsreleased{t}\).
+	Now choose some matching \(\matching[t]\) with the following properties:
+	\begin{enumerate}
+		\item
+		\label[property]{enum:matching:agent}
+		If for an agent \(i\) all overly good items were amongst the released items, \ie, \(\overlygoodset \subset \goodsreleased{t}\), she gets matched with an overly good item \(j \in \overlygoodset\).
+
+		\item
+		\label[property]{enum:matching:max}
+		The number of agents matched with one of their overly good items is maximal amongst all matchings fulfilling \cref{enum:matching:agent}.
+	\end{enumerate}
+	\Cref{enum:matching:agent} is always satisfiable as each set \(\overlygoodset\) uniquely contains the item \(\asgd*{1}\), which can be matched with agent \(i\).
+	\Cref{enum:matching:max} leads to all agents being matched with an overly good item for \(t = \ceil{\log_2 n}+1\), \ie{} the number of rounds in phase \phasei, whence the lemma follows.
+	To prove this, we denote by \(\unluckyagents{t}\) the set of agents who are \emph{not} matched with one of their overly good items, and show by induction on \(t\) that it holds \(\abs{\unluckyagents{t}} \leq n/2^t\).
+
+	In the base case \(t=1\), none of the items are assigned initially.
+	Denote by \(\unluckyagentsalgo{1}\) the number of agents who were not assigned an overly good item in the first round of phase \phasei.
+	If \(\unluckyagentsalgo{1} \leq n/2\), then a matching \(\matching[1]\) obviously exists and the base case is immediately proven.
+	Otherwise, all items from at least \(\unluckyagentsalgo{1}\) many sets \(\overlygoodset\) got assigned to someone.
+	Again:
+	Each set \(\overlygoodset\) is the only one containing the item \(\asgd*{1}\), so the union of these sets contains at least~\(\unluckyagentsalgo{1}\) items which can be matched with at least \(\unluckyagentsalgo{1}\) agents upon release.
+	This then leaves at most~\(n-\alpha < n/2\) agents not matched with an overly good item.
+
+	For the induction hypothesis, we assume that the statement holds true for all rounds up to some \(t\).
+	In the induction step \(t \to t+1\), there is, by \cref{enum:matching:agent}, at least one unassigned item in each set \(\overlygoodset[i']\) for all agents \(i' \in \unluckyagents{t}\) at the start of round \(t+1\).
+	Analogously to the base case, for at least half of those agents \(i'\) these unassigned items will be assigned to them or someone else.
+	By the induction hypothesis, it holds \(\abs{\unluckyagents{t+1}} \leq \abs{\unluckyagents{t}}/2 \leq n/2^t\!/2 = n/2^{t+1}\).
 \end{proof}
 
+This allows us to calculate an approximation factor for \RepReMatch{} by comparing its output with an optimal allocation \(\alloc*[][]\).
 \begin{theorem}
 	\label{th:reprematch}
-	\RepReMatch{} has an approximation factor of \(2n (\log n + 2)\).
+	\RepReMatch{} has an approximation factor of \(2n (\log_2 n + 2)\).
 \end{theorem}
 \begin{proof}
-	Because of \cref{lem:overly_good_matching}, we can assign each agent \(i\) an overly good item \(j_i^* \in \overlygoodset\)\todo{fix notation} of hers during the first matching of phase \phaseiii.
-	\RepReMatch{} maximises the logarithmic Nash social welfare in that step, so we get
+	By \cref{lem:overly_good_matching}, we can assign each agent \(i\) an overly good item \(\overlygooditem \in \overlygoodset\) in the beginning of phase \phaseiii.
+	\RepReMatch{} maximises the logarithmic Nash social welfare, so we get
 	\begin{equation}
+		\label{eq:reprematch_approx_factor_lower_bound}
 		\log \NSW(\alloc[\phaseiii])
-		\geq \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \valuations[j_i^*, \asgd{1}, \dots, \asgd{\alloclen[\phaseii]}]
+		\geq \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \valuations[\overlygooditem, \asgd{1}, \dots, \asgd{\alloclen[\phaseii]}]
 	\end{equation}
 	as lower bound on the \NSW{} after the first matching in phase \phaseiii, whereby \(\alloc[\phaseii] = \{ \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} \}\) is the bundle of agent \(i\) assigned in phase \phaseii.
 
-	\lipsum[16-18]
+	Phase \phasei{} runs for at most \(\ceil{\log_2 n}+1\) rounds and in each iteration at most \(n\) items are assigned.
+	Therefore, at most \(n (\log_2 n + 2)\) optimal items are assigned in that phase, \ie, \(\abs{ \alloc* \setminus \attopt{0} } \leq n (\log_2 n + 2)\).
+	Further, remember that in each round of phase \phaseii, at most \(n\) optimal items are assigned to other agents, so it holds \(n \geq \lostsetlen{1} = \abs{\lostset{1}}\).
+	Together with the monotonicity of valuations, this yields
+	\begin{equation}
+		\label{eq:overly_good_item_lower_bound}
+		\valuations[ \overlygooditem, \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} ]
+		\geq \valuations[\overlygooditem]
+		\geq \valuations[\asgd*{1}]
+		\geq \frac{\valuations[ (\alloc* \setminus \attopt{0}) \cup \lostset{1} ]}{n(\log_2 n + 3)}
+	\end{equation}
+	\todo[inline]{Was ist das für eine Gleichung?}
+	\Cref{lem:lower_bound_later_items} and the monotonicity of valuations yield
+	\begin{equation}
+		\label{eq:assigned_items_lower_bound}
+		\valuations[ \overlygooditem, \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} ]
+		\geq \valuations[ \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} ]
+		\geq \frac{\remvalue*}{n}
+		\geq \frac{\remvalue*}{n(\log_2 n + 3)}
+		= \frac{\valuations[ \attopt{0} \setminus \lostset{1} ]}{n(\log_2 n + 3)}.
+	\end{equation}
+	The mean of \crefrange{eq:overly_good_item_lower_bound}{eq:assigned_items_lower_bound} and the monotonicity of valuations gives the concise lower bound
+	\begin{align}
+		\valuations[ \overlygooditem, \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} ]
+		&\geq \frac{1}{2} \paren*{ \frac{\valuations[ (\alloc* \setminus \attopt{0}) \cup \lostset{1} ]}{n(\log_2 n + 3)} + \frac{\valuations[ \attopt{0} \setminus \lostset{1} ]}{n(\log_2 n + 3)} } \\
+		&\geq \frac{1}{2} \cdot \frac{ \valuations[ \paren[\big]{(\alloc* \setminus \attopt{0}) \cup \lostset{1}} \cup \paren[\big]{\attopt{0} \setminus \lostset{1}} ] }{n(\log_2 n + 3)} \\
+		&= \frac{ \valuations[\alloc*] }{2n(\log_2 n + 3)}.
+	\end{align}
+	We can insert this lower bound into \cref{eq:reprematch_approx_factor_lower_bound} and prove the theorem thereby:
+	\begin{equation}
+		\log \NSW(\alloc[\phaseiii])
+		\geq \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \frac{ \valuations[\alloc*] }{2n(\log_2 n + 3)}
+		= \log \paren[\bigg]{\frac{\NSW(\alloc*[][])}{2n(\log_2 n + 3)}}
+	\end{equation}
 \end{proof}
 
 \begin{remark}
@@ -195,7 +255,7 @@ The set of overly good items for an agent \(i\) is denoted by
 
 Other text in this section:
 
-\lipsum[19-28]
+\lipsum[19-24]
 
 \begin{algorithm*}[p]
 	\KwIn{%
@@ -204,7 +264,7 @@ Other text in this section:
 		submodular valuations \(\valuations \colon \powerset[\goods] \to \realposzero\) where \(\valuations[\genericset]\) is the valuation of agent \(i \in \agents\) for each set \(\genericset \subset \goods\) of items
 	}
 	\KwOut{%
-		\(\frac{1}{2n(\log n + 2)}\)-approximation \(\alloc[\phaseiii][] = (\alloc[\phaseiii][1], \dots, \alloc[\phaseiii][n])\) of an optimal allocation
+		\(\frac{1}{2n(\log_2 n + 2)}\)-approximation \(\alloc[\phaseiii][] = (\alloc[\phaseiii][1], \dots, \alloc[\phaseiii][n])\) of an optimal allocation
 	}
 	\phaseisep
 	\(\alloc[\phasei] \gets \emptyset \quad\forall i \in \agents\)\;

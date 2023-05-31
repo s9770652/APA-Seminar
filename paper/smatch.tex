@@ -209,7 +209,7 @@ This allows us to calculate an approximation factor for \SMatch{} by comparing i
 	\end{equation}
 	We get the lower bound \(\valuations[\asgd*{1}] \geq \frac{1}{2 n} \valuations[\genericset*]\) from a similar argument as in the proof of \cref{lem:lower_bound_later_items}.
 	Further, it holds \(\remvalue = \valuations[\goods \setminus \genericset[i]] \geq \valuations[\alloc* \setminus \genericset[i]] \geq \valuations[\alloc* \setminus \genericset*[i]]\).
-	We can substitute these two inequalities into \cref{eq:smatch_approx_factor_lower_bound} and prove the theorem thereby:
+	We can insert these two inequalities into \cref{eq:smatch_approx_factor_lower_bound} and prove the theorem thereby:
 	\begin{align}
 		\log \NSW(\alloc[][])
 		&\geq \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \paren[\bigg]{ \frac{\valuations[\genericset*[i]]}{2 n} + \frac{\valuations[\alloc* \setminus \genericset*[i]]}{n} } \\

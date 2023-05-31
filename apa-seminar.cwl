@@ -51,6 +51,7 @@
 
 \goodsordered{rank}#m
 \goodsordered{rank}[agent]#m
+\goodsreleased{round}#m
 
 \lostset{round}#m
 \lostset{round}[agent]#m
@@ -59,17 +60,25 @@
 \lostsetlen{round}[agent]#m
 
 \matching#m
+\matching[round]#m
 
+\overlygooditem#m
+\overlygooditem[agent]#m
 \overlygoodset#m
 \overlygoodset[agent]#m
 
-\phasei#m
-\phaseii#m
-\phaseiii#m
+\phasei
+\phaseii
+\phaseiii
+
 
 \remvalue#m
 \remvalue*#m
 \remvalue[agent]#m
+
+\unluckyagents{round}#m
+\unluckyagentsalgo{round}#m
+\unluckyagentslen{round}#m
 
 \valuations#m
 \valuations[item]#m

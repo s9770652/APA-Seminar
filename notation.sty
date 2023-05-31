@@ -238,10 +238,11 @@
 	\mathcal{S}\IfBooleanT{#1}{^*}\IfEmptyF{#2}{_{#2}}
 }
 \NewDocumentCommand{\goods}{}{\mathcal{G}}
-\NewDocumentCommand{\goodsrem}{}{\mathcal{G}^{\mathup{rem}}}
 \NewDocumentCommand{\goodsordered}{m O{i}}{
 	\goods\IfEmptyF{#2}{_{\!#2}}^{\thinspace\smash{#1}}
 }
+\NewDocumentCommand{\goodsreleased}{m}{\goods^{\mathup{rel}}_{#1}}
+\NewDocumentCommand{\goodsrem}{}{\mathcal{G}^{\mathup{rem}}}
 \NewDocumentCommand{\lostset}{m O{i}}{
 	\mathcal{L}_{\smash{\IfEmptyF{#2}{#2, } #1}}
 }
@@ -250,6 +251,9 @@
 }
 \NewDocumentCommand{\matching}{O{}}{
 	\mathcal{M}\IfEmptyF{#1}{_{\hspace{-.1em}#1}}
+}
+\NewDocumentCommand{\overlygooditem}{O{i}}{
+	j^{+}\IfEmptyF{#1}{_{#1}}
 }
 \NewDocumentCommand{\overlygoodset}{O{i}}{
 	\goods^{+}\IfEmptyF{#1}{_{\!#1}}
@@ -266,11 +270,14 @@
 \NewDocumentCommand{\remvalue}{s O{i}}{
 	u\IfBooleanT{#1}{^*}\IfEmptyF{#2}{_{#2}}
 }
-\NewDocumentCommand{\unluckyagents}{O{t}}{
-	\agents^-\IfEmptyF{#1}{_{#1}}
+\NewDocumentCommand{\unluckyagents}{m}{
+	\agents^-_{#1}
 }
-\NewDocumentCommand{\unluckyagentslen}{O{t}}{
-	a^-\IfEmptyF{#1}{_{#1}}
+\NewDocumentCommand{\unluckyagentsalgo}{m}{
+	\alpha
+}
+\NewDocumentCommand{\unluckyagentslen}{m}{
+	a^-_{#1}
 }
 \NewDocumentCommand{\valuations}{O{} O{i}}{
 	v\IfEmptyF{#2}{_{#2}}\IfEmptyF{#1}{(#1)}
@@ -293,3 +300,6 @@
 \NewDocumentCommand{\NSW}{}{\abb{NSW}}
 \NewDocumentCommand{\RepReMatch}{}{\abb{RepReMatch}}
 \NewDocumentCommand{\SMatch}{}{\abb{SMatch}}
+
+\crefname{property}{property}{properties}
+\Crefname{property}{Property}{Properties}
