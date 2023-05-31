@@ -82,7 +82,8 @@
 
 \valuations#m
 \valuations[item]#m
-\valuations[item][agent]#m
+\valuations[item][parensize]#m
+\valuations[item][parensize][agent]#m
 
 \weight#m
 \weight[agent]#m

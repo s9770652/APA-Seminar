@@ -279,8 +279,8 @@
 \NewDocumentCommand{\unluckyagentslen}{m}{
 	a^-_{#1}
 }
-\NewDocumentCommand{\valuations}{O{} O{i}}{
-	v\IfEmptyF{#2}{_{#2}}\IfEmptyF{#1}{(#1)}
+\NewDocumentCommand{\valuations}{O{} o O{i}}{
+	v\IfEmptyF{#3}{_{#3}}\IfEmptyF{#1}{\paren[#2]{#1}}
 }
 \NewDocumentCommand{\weight}{O{i}}{
 	\eta\IfEmptyF{#1}{_{#1}}
