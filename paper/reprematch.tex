@@ -46,25 +46,28 @@
 	\label{alg:reprematch}
 \end{algorithm*}
 
-The algorithm \SMatch{} estimates the valuation of lowest-value items by determining the set of highest-value items and then valuing the remaining items.
+The algorithm \SMatch{} estimates the valuation of the lowest-value items by determining the set of highest-value items and then valuing the remaining items.
 This approach does not work for submodular valuations in general because taking the set of highest-value items away may not leave a set of lowest-value items.
 In fact, it can be shown \cite{submodular_low_value} that determining the set of lowest-value items is approximable only within a factor of \(\bigomega(\sqrt{m / \ln m})\).
 
-As a consequence, the algorithm \RepReMatch, described in \cref{alg:reprematch}, relies on an approach with three phases and achieves an approximation factor of \(2n(\log_2 n + 3)\) (cf.\@ \cref{th:reprematch}).
+For this reason the algorithm \RepReMatch, described in \cref{alg:reprematch}, relies on an approach with three phases and achieves an approximation factor of \(2n(\log_2 n + 3)\) (cf.\@ \cref{th:reprematch}).
 In phase~\phasei, a sufficiently big set of high-value items is determined through repeated matchings.
 This phase serves only to determine this set, so matched items are temporarily put away but not assigned.
 The edge weights reflect this by taking the valuations of only single items into account.
 
 In phase~\phaseii, the remaining items are assigned normally through repeated matchings.
-Each edge weight is, thence, the weighted logarithm of the valuation of the set of both the respective item and the set of items assigned so far.
+Consequently, each edge weight is updated in each round to be the weighted logarithm of the valuation of both the respective item and the items assigned so far.
 
 In phase~\phaseiii, the high-value items put away in phase~\phasei{} are brought back.
 With the knowledge of items assigned in phase~\phaseii, one maximum weight matching is calculated, and the matched items are assigned accordingly.
-Again each edge weight is the weighted logarithm of the valuation of the set of both the respective item and the set of items assigned so far.
+Again each edge weight is the weighted logarithm of the valuation of both the respective item and the respective agent's bundle from phase \phaseii.
 The remaining items are assigned arbitrarily.
 
-We start with analysing phase~\phaseii{} as it is the first phase with final assignments.
-First, we give a lower bound one the valuation of an agent \(i\) for her optimal items which still may be assigned to her in phase~\phaseii.
+We start by analysing phase~\phaseii{} as it is the first phase with definitive assignments.
+To this end, we look at the set \(\lostset{r}\) of \emph{lost items}, that is the optimal items of an agent \(i\) which are assigned to other agents \(i' \neq i\) in round \(r\),
+and the set \(\attopt{r}\) of \emph{optimal and attainable items}, that is the optimal items of agent \(i\) minus all lost items in \(\lostset{1} \cup \dots \cup \lostset{r}\) and minus the items assigned to her up until round \(r-1\).
+We denote their sizes by \(\lostsetlen{r}\ \coloneq \abs{\lostset{r}}\) and \(\attoptlen{r} \coloneq \abs{\attopt{r}}\), respectively.
+First, we give a lower bound on the valuation of agent \(i\) for her optimal and attainable items.
 \begin{lemma}
 	\label{lem:induction}
 	During phase~\phaseii, each agent \(i \in \agents\) gets assigned a bundle \(\alloc[\phaseii] = \{ \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} \}\).
@@ -150,7 +153,7 @@ The lemma can be used to find a lower bound on the marginal valuation of the ite
 				- \valuations[\asgd{1}, \dots, \asgd{r-1}] } \Bigm/ \attoptlen{r}
 		\end{multlined}
 	\end{equation*}
-	where \(\attoptlen{r} \coloneq \abs{\attopt{0}}\) denotes the number of optimal and attainable items in \(r\) round.
+	where \(\attoptlen{r}\) denotes the number of optimal and attainable items in round \(r\).
 \end{corollary}
 \begin{proof}
 %	There are \(\attoptlen{0}\) optimal and attainable items in \(\attopt{0}\) at the start of phase~\phaseii.
@@ -196,7 +199,7 @@ This, finally, enables us to give a lower bound on the valuation of the whole bu
 \end{proof}
 
 After having obtained a lower bound on the valuation of items assigned in phase~\phaseii, we need a lower bound for phase~\phaseiii{} as well.
-Therefor we introduce the concept of \emph{overly good} items, that is items which some agent \(i\) values at least as high as her most valuable optimal item~\(\asgd*{1}\).
+Therefor we introduce the concept of \emph{overly good items}, that is items which some agent \(i\) values at least as high as her most valuable optimal item~\(\asgd*{1}\).
 The set of overly good items for an agent \(i\) is denoted by
 \begin{equation}
 	\overlygoodset \coloneq \{\, j \in \goods \given \valuations[j] \geq \valuations[\asgd*{1}] \,\}.
@@ -293,3 +296,4 @@ This allows us to calculate an approximation factor for \RepReMatch{} by compari
 
 \todo[inline]{released → brought back; Notation ändern}
 \todo[inline]{phase aus Algo entfernen}
+\todo[inline]{more comments in algo}
