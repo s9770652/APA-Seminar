@@ -216,8 +216,12 @@
 
 %%% APA seminar.
 % Maths & algo.
-\NewDocumentCommand{\agents}{}{\mathcal{A}}
-\NewDocumentCommand{\allallocs}{m m}{\Pi_{#1}(#2)}
+\NewDocumentCommand{\agents}{}{
+	\mathcal{A}
+}
+\NewDocumentCommand{\allallocs}{m m}{
+	\Pi_{#1}(#2)
+}
 \NewDocumentCommand{\alloc}{s O{} O{i}}{
 	\mathbfit{x}\IfEmptyF{#3}{_{#3}}\IfEmptyTF{#2}{\IfBooleanT{#1}{^*}}{^{\IfBooleanT{#1}{*}#2}}
 }
@@ -233,16 +237,24 @@
 \NewDocumentCommand{\attoptlen}{m O{i}}{
 	\smash{\bar{\tau}^*_{#2, #1}}
 }
-\NewDocumentCommand{\bipartitegraph}{}{G}
+\NewDocumentCommand{\bipartitegraph}{}{
+	G
+}
 \NewDocumentCommand{\genericset}{s O{}}{
 	\mathcal{S}\IfBooleanT{#1}{^*}\IfEmptyF{#2}{_{#2}}
 }
-\NewDocumentCommand{\goods}{}{\mathcal{G}}
+\NewDocumentCommand{\goods}{}{
+	\mathcal{G}
+}
 \NewDocumentCommand{\goodsordered}{m O{i}}{
 	\goods\IfEmptyF{#2}{_{\!#2}}^{\thinspace\smash{#1}}
 }
-\NewDocumentCommand{\goodsreleased}{m}{\goods^{\mathup{rel}}_{#1}}
-\NewDocumentCommand{\goodsrem}{}{\mathcal{G}^{\mathup{rem}}}
+\NewDocumentCommand{\goodsreleased}{m}{
+	\goods^{\mathup{rel}}_{#1}
+}
+\NewDocumentCommand{\goodsrem}{}{
+	\mathcal{G}^{\mathup{rem}}
+}
 \NewDocumentCommand{\lostset}{m O{i}}{
 	\mathcal{L}_{\smash{\IfEmptyF{#2}{#2, } #1}}
 }
@@ -285,7 +297,9 @@
 \NewDocumentCommand{\weight}{O{i}}{
 	\eta\IfEmptyF{#1}{_{#1}}
 }
-\NewDocumentCommand{\weights}{}{\mathcal{W}}
+\NewDocumentCommand{\weights}{}{
+	\mathcal{W}
+}
 
 \SetKwFunction{maxweightmatching}{max\_weight\_matching}
 \SetKwFunction{arballoc}{arbitrary\_allocation}
