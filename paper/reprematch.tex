@@ -11,11 +11,11 @@
 		\(\frac{1}{2n(\log_2 n + 3)}\)-approximation \(\alloc[\phaseiii][] = (\alloc[\phaseiii][1], \dots, \alloc[\phaseiii][n])\) of an optimal allocation
 	}
 	\phaseisep
-	\(\alloc[\phasei] \gets \emptyset \quad\forall i \in \agents\)\;
+	\(\alloc[\phasei] \gets \emptyset\)\;
 	\(\goodsrem \gets \goods\)\;
 	\For{\(t \gets 1, \dots, \ceil{\log_2 n}+1\)}{
 		\If{\(\goodsrem \neq \emptyset\)}{
-			\(\weights \gets \{\,  \weight \cdot \log\paren[\big]{ \valuations[j] } \given[\bigm] i \in \agents, j \in \goodsrem \,\}\)\;
+			\(\weights \gets \{\,  \weight \cdot \log\paren[\big]{ \valuations[j] } \given[\bigm] i \in \agents, j \in \goodsrem \,\}\)   \tct*{valuation of single item}
 			\(\bipartitegraph \gets (\agents, \goodsrem, \weights)\)\;
 			\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
 			\(\alloc[\phasei] \gets \alloc[\phasei] \cup \{j\} \quad \forall(i, j) \in \matching\)\;
@@ -25,20 +25,20 @@
 	\phaseiisep
 	\(\alloc[\phaseii] \gets \emptyset \quad\forall i \in \agents\)   \tct*{put allocation \(\alloc[\phasei][]\) away and start a new one}
 	\While{\(\goodsrem \neq \emptyset\)}{
-		\(\weights \gets \{\,  \weight \cdot \log\paren[\big]{ \valuations[ \alloc[\phaseii] \cup \{j\} ] } \given[\bigm] i \in \agents, j \in \goodsrem \,\}\)\;
+		\(\weights \gets \{\,  \weight \cdot \log\paren[\big]{ \valuations[ \alloc[\phaseii] \cup \{j\} ] } \given[\bigm] i \in \agents, j \in \goodsrem \,\}\)   \tct*{val. of item \& cur. bundle}
 		\(\bipartitegraph \gets (\agents, \goodsrem, \weights)\)\;
 		\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
 		\(\alloc[\phaseii] \gets \alloc[\phaseii] \cup \{j\} \quad \forall(i, j) \in \matching\)\;
 		\(\goodsrem \gets \goodsrem \setminus \{\, j \given (i, j) \in \matching \,\}\)\;
 	}
 	\phaseiiisep
-	\(\goodsrem \gets \mathop{\bigcup\hspace{-1pt}_{i \in \agents}} \alloc[\phasei]\)  \tct*{release items assigned in phase~\phasei} \label{ln:goodsrem}
-	\(\weights \gets \{\,  \weight \cdot \log\paren[\big]{ \valuations[ \alloc[\phaseii] \cup \{j\} ] } \given[\bigm] i \in \agents, j \in \goodsrem \,\}\)\;
+	\(\goodsrem \gets \mathop{\bigcup\hspace{-1pt}_{i \in \agents}} \alloc[\phasei]\)  \tct*{bring back items assigned in phase~\phasei} \label{ln:goodsrem}
+	\(\weights \gets \{\,  \weight \cdot \log\paren[\big]{ \valuations[ \alloc[\phaseii] \cup \{j\} ] } \given[\bigm] i \in \agents, j \in \goodsrem \,\}\)   \tct*{val. of item \& cur. bundle}
 	\(\bipartitegraph \gets (\agents, \goodsrem, \weights)\)  \label{ln:bipartitegraph}\;
 	\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
 	\(\alloc[\phaseiii] \gets \alloc[\phaseii] \cup \{j\} \quad\forall(i, j) \in \matching\)\;
 	\(\goodsrem \gets \goodsrem \setminus \{\, j \given (i, j) \in \matching \,\}\)\;
-	\(\alloc[\phaseiii] \gets \arballoc( \agents, \goodsrem, \alloc[\phaseiii], (\valuations)_{i \in \agents} )\)\;
+	\(\alloc[\phaseiii][] \gets \arballoc( \agents, \goodsrem, \alloc[\phaseiii][], (\valuations)_{i \in \agents} )\)\;
 	\Return{\(\alloc[\phaseiii][]\)}
 	\caption{%
 		\RepReMatch{} for the Asymmetric Submodular \NSW{} problem
@@ -47,13 +47,13 @@
 \end{algorithm*}
 
 The algorithm \SMatch{} estimates the valuation of the lowest-value items by determining the set of highest-value items and then valuing the remaining items.
-This approach does not work for submodular valuations in general because taking the set of highest-value items away may not leave a set of lowest-value items.
+Unfortunately, this approach does not work for general submodular valuations because taking the set of highest-value items away does not necessarily leave a set of lowest-value items.
 In fact, it can be shown \cite{submodular_low_value} that determining the set of lowest-value items is approximable only within a factor of \(\bigomega(\sqrt{m / \ln m})\).
 
-For this reason the algorithm \RepReMatch, described in \cref{alg:reprematch}, relies on an approach with three phases and achieves an approximation factor of \(2n(\log_2 n + 3)\) (cf.\@ \cref{th:reprematch}).
+For this reason, the algorithm \RepReMatch, described in \cref{alg:reprematch}, relies on an approach with three phases, achieving an approximation factor of \(2n(\log_2 n + 3)\) (cf.\@ \cref{th:reprematch}).
 In phase~\phasei, a sufficiently big set of high-value items is determined through repeated matchings.
 This phase serves only to determine this set, so matched items are temporarily put away but not assigned.
-The edge weights reflect this by taking the valuations of only single items into account.
+The edge weights reflect this by taking only the valuations of single items into account.
 
 In phase~\phaseii, the remaining items are assigned normally through repeated matchings.
 Consequently, each edge weight is updated in each round to be the weighted logarithm of the valuation of both the respective item and the items assigned so far.
@@ -150,7 +150,7 @@ The lemma can be used to find a lower bound on the marginal valuation of the ite
 	\begin{equation*}
 		\valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ] \geq \begin{multlined}[t]
 			\paren[\Big]{ \remvalue* - \lostsetlen{2} \cdot \valuations[\asgd{1}] - \smashoperator{\sum_{r'=2}^{r-1}} \lostsetlen{r'+1} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] \\
-				- \valuations[\asgd{1}, \dots, \asgd{r-1}] } \Bigm/ \attoptlen{r}
+				- \valuations[\asgd{1}, \dots, \asgd{r-1}] } \Bigm/ \attoptlen{r},
 		\end{multlined}
 	\end{equation*}
 	where \(\attoptlen{r}\) denotes the number of optimal and attainable items in round \(r\).
