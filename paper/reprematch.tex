@@ -214,12 +214,12 @@ Therefor we introduce a third type of item set.
 
 \begin{lemma}
 	\label{lem:overly_good_matching}
-	In the beginning of phase~\phaseiii, there exists a matching such that each agent \(i \in \agents\) is matched to one of her overly good items in \(\mathop{\bigcup\hspace{-1pt}_{i' \in \agents}} \alloc[\phasei][i']\).
+	In the beginning of phase~\phaseiii, there exists a matching such that each agent \(i \in \agents\) is matched to one of her overly good items in the set \(\mathop{\bigcup\hspace{-1pt}_{i' \in \agents}} \alloc[\phasei][i']\) of released items.
 \end{lemma}
 \begin{proof}
-	If in phase~\phasei{} all items were matched, \ie, \(\goodsrem = \emptyset\), then the optimal item \(\asgd*{1}\) of each agent \(i\) is released in phase~\phaseiii{} and can be assigned to her;
+	If all items were matched in phase~\phasei, \ie, \(\mathop{\bigcup\hspace{-1pt}_{i' \in \agents}} \alloc[\phasei][i'] = \goods\), then all optimal items are released in phase~\phaseiii{} and each agent can be matched to one;
 	the lemma is proven immediately.
-	If not, imagine for some \(t\) that only the items assigned in the first~\(t\) rounds of phase~\phasei{} were released.
+	If not, imagine for some~\(t\) that only the items assigned in the first~\(t\) rounds of phase~\phasei{} were released.
 %	Denote the set of released items by \(\goodsreleased{t}\).
 	Now choose some matching \(\matching[t]\) with the following properties:
 	\begin{enumerate}[topsep=0.1em, itemsep=0.1em, parsep=0pt]
