@@ -32,7 +32,7 @@
 		\(\goodsrem \gets \goodsrem \setminus \{\, j \given (i, j) \in \matching \,\}\)\;
 	}
 	\phaseiiisep
-	\(\goodsrem \gets \mathop{\bigcup\hspace{-1pt}_{i \in \agents}} \alloc[\phasei]\)  \tct*{bring back items assigned in phase~\phasei} \label{ln:goodsrem}
+	\(\goodsrem \gets \mathop{\bigcup\hspace{-1pt}_{i \in \agents}} \alloc[\phasei]\)  \tct*{release items assigned in phase~\phasei} \label{ln:goodsrem}
 	\(\weights \gets \{\,  \weight \cdot \log\paren[\big]{ \valuations[ \alloc[\phaseii] \cup \{j\} ] } \given[\bigm] i \in \agents, j \in \goodsrem \,\}\)   \tct*{val. of item \& cur. bundle}
 	\(\bipartitegraph \gets (\agents, \goodsrem, \weights)\)  \label{ln:bipartitegraph}\;
 	\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
@@ -52,21 +52,21 @@ In fact, it can be shown \cite{submodular_low_value} that determining the set of
 
 For this reason, the algorithm \RepReMatch, described in \cref{alg:reprematch}, relies on an approach with three phases, achieving an approximation factor of \(2n(\log_2 n + 3)\) (cf.\@ \cref{th:reprematch}).
 In phase~\phasei, a sufficiently big set of high-value items is determined through repeated matchings.
-This phase serves only to determine this set, so matched items are temporarily put away but not assigned.
-The edge weights reflect this by taking only the valuations of single items into account.
+This phase serves merley to determine this set, so items are assigned temporarily only.
+The edge weights reflect this by taking the valuations of just single items into account.
 
 In phase~\phaseii, the remaining items are assigned normally through repeated matchings.
 Consequently, each edge weight is updated in each round to be the weighted logarithm of the valuation of both the respective item and the items assigned so far.
 
-In phase~\phaseiii, the high-value items put away in phase~\phasei{} are brought back.
+In phase~\phaseiii, the high-value items assigned in phase \phasei{} are released.
 With the knowledge of items assigned in phase~\phaseii, one maximum weight matching is calculated, and the matched items are assigned accordingly.
 Again each edge weight is the weighted logarithm of the valuation of both the respective item and the respective agent's bundle from phase \phaseii.
-The remaining items are assigned arbitrarily.
+The remaining released items are assigned arbitrarily.
 
 We start by analysing phase~\phaseii{} as it is the first phase with definitive assignments.
 To this end, we introduce two types of item sets.
-Note that the term \emph{round} is used to refer to the iterations of the \texttt{while}-loop in phase \phaseii{} and later also for the \texttt{for}-loop in phase \phasei.
-For ease of notation, we refer to the moment before the first iteration in phase \phaseii{} as round 0.
+Note that we use the term \emph{round} to refer to the iterations of the loops in the phases~\phasei{} and~\phaseii.
+For ease of notation, we refer to the moment before the first iteration in phase~\phaseii{} as round 0.
 \begin{definition}
 	Let \(\alloc*\) be an optimal allocation of some agent \(i \in \agents\).
 	For any round \(r \ge 1\) in phase~\phaseii, the set \(\lostset{r} \subset \alloc*\) of \emph{lost} items is the set of all items \(j \in \alloc*\) assigned to other agents \(i' \neq i\) in that round.
@@ -217,10 +217,10 @@ Therefor we introduce a third type of item set.
 	In the beginning of phase~\phaseiii, there exists a matching such that each agent \(i \in \agents\) is matched to one of her overly good items in \(\mathop{\bigcup\hspace{-1pt}_{i' \in \agents}} \alloc[\phasei][i']\).
 \end{lemma}
 \begin{proof}
-	If in phase~\phasei{} all items are put aside, \ie, \(\goodsrem = \emptyset\), then the optimal item \(\asgd*{1}\) of each agent \(i\) is brought back in phase~\phaseiii{} and can be assigned to her;
+	If in phase~\phasei{} all items were matched, \ie, \(\goodsrem = \emptyset\), then the optimal item \(\asgd*{1}\) of each agent \(i\) is released in phase~\phaseiii{} and can be assigned to her;
 	the lemma is proven immediately.
-	If not, imagine for some \(t\) that only the items assigned in the first~\(t\) rounds of phase~\phasei{} were brought back.
-	Denote the set of brought-back items by \(\goodsreleased{t}\).
+	If not, imagine for some \(t\) that only the items assigned in the first~\(t\) rounds of phase~\phasei{} were released.
+	Denote the set of released items by \(\goodsreleased{t}\).
 	Now choose some matching \(\matching[t]\) with the following properties:
 	\begin{enumerate}[topsep=0.1em, itemsep=0.1em, parsep=0pt]
 		\item
@@ -300,5 +300,3 @@ This allows us to calculate an approximation factor for \RepReMatch{} by compari
 		= \log \paren[\bigg]{ \frac{\NSW(\alloc*[][])}{2n(\log_2 n + 3)} }
 	\end{equation}
 \end{proof}
-
-\todo[inline]{brought back → released}
