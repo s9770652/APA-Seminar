@@ -73,7 +73,6 @@
 
 
 \remvalue#m
-\remvalue*#m
 \remvalue[agent]#m
 
 \unluckyagents{round}#m

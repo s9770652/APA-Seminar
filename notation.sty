@@ -279,8 +279,8 @@
 \NewDocumentCommand{\phaseiii}{}{%
 	\relax\ifmmode{\mathup{III}}\else{III}\fi%
 }
-\NewDocumentCommand{\remvalue}{s O{i}}{
-	u\IfBooleanT{#1}{^*}\IfEmptyF{#2}{_{#2}}
+\NewDocumentCommand{\remvalue}{O{i}}{
+	u\IfEmptyF{#1}{_{#1}}
 }
 \NewDocumentCommand{\unluckyagents}{m}{
 	\agents^-_{#1}
