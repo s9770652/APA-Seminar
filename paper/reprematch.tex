@@ -64,25 +64,32 @@ Again each edge weight is the weighted logarithm of the valuation of both the re
 The remaining items are assigned arbitrarily.
 
 We start by analysing phase~\phaseii{} as it is the first phase with definitive assignments.
-To this end, we look at the set \(\lostset{r}\) of \emph{lost items}, that is the optimal items of an agent \(i\) which are assigned to other agents \(i' \neq i\) in round \(r\),
-and the set \(\attopt{r}\) of \emph{optimal and attainable items}, that is the optimal items of agent \(i\) minus all lost items in \(\lostset{1} \cup \dots \cup \lostset{r}\) and minus the items assigned to her up until round \(r-1\).
-We denote their sizes by \(\lostsetlen{r}\ \coloneq \abs{\lostset{r}}\) and \(\attoptlen{r} \coloneq \abs{\attopt{r}}\), respectively.
-First, we give a lower bound on the valuation of agent \(i\) for her optimal and attainable items.
+To this end, we introduce two types of item sets.
+Note that the term \emph{round} is used to refer to the iterations of the \texttt{while}-loop in phase \phaseii{} and later also for the \texttt{for}-loop in phase \phasei.
+For ease of notation, we refer to the moment before the first iteration in phase \phaseii{} as round 0.
+\begin{definition}
+	Let \(\alloc*\) be an optimal allocation of some agent \(i \in \agents\).
+	For any round \(r \ge 1\) in phase~\phaseii, the set \(\lostset{r} \subset \alloc*\) of \emph{lost} items is the set of all items \(j \in \alloc*\) assigned to other agents \(i' \neq i\) in that round.
+\end{definition}
+\begin{definition}
+	Let \(\alloc*\) be an optimal allocation of some agent \(i \in \agents\) and \(\alloc[\phaseii] = \{ \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} \}\) be her bundle in phase \phaseii.
+	The set \(\attopt{r}\) of \emph{optimal and attainable} items is defined as \(\attopt{0} \coloneq \alloc* \setminus \mathop{\bigcup\hspace{-1pt}_{i' \in \agents}} \alloc[\phasei][i']\) in round \(0\) and as \(\attopt{r} \coloneq \attopt{r-1} \setminus ( \lostset{r} \cup \{\asgd{r-1}\}\) in round \(r \in [1, \alloclen[\phaseii]]\).
+\end{definition}
+We denote their sizes by \(\lostsetlen{r}\ \coloneq \abs{\lostset{r}}\) and \(\attoptlen{r} \coloneq \abs{\attopt{r}}\), respectively.\todo[info]{\(\mathbfit{i}\): Would it be \enquote{dirty} to include notation in the definitions?}
+First, we give a lower bound on the valuations of optimal and attainable items.
 \begin{lemma}
 	\label{lem:induction}
-	During phase~\phaseii, each agent \(i \in \agents\) gets assigned a bundle \(\alloc[\phaseii] = \{ \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} \}\).
-	For all rounds \(r = 2, \dots, \alloclen[\phaseii]\), the following inequality about her set \(\attopt{r}\) of optimal and attainable items holds true:
+	For each agent \(i \in \agents\) and her bundle \(\alloc[\phaseii] = \{ \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} \}\), it holds in all rounds \(r = 2, \dots, \alloclen[\phaseii]\) of phase \phaseii{} that
 	\begin{equation*}
-		\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] \geq \remvalue* - \lostsetlen{2} \cdot \valuations[\asgd{1}] - \smashoperator{\sum_{r'=2}^{r-1}} \lostsetlen{r'} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] - \valuations[\asgd{1}, \dots, \asgd{r-1}],
+		\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] \geq \valuations[\attopt{1}] - \lostsetlen{2} \cdot \valuations[\asgd{1}] - \smashoperator{\sum_{r'=2}^{r-1}} \lostsetlen{r'} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] - \valuations[\asgd{1}, \dots, \asgd{r-1}].
 	\end{equation*}
-	where \(\lostsetlen{l}\) is the size of her set \(\lostset{l} \subset \attopt{l-1}\) of optimal items which were attainable in round \(l-1\) and were assigned to other agents in round \(l\), and \(\remvalue* = \valuations[\attopt{1}]\) is her valuation of attainable and optimal items during the first round.
 \end{lemma}
 \begin{proof}
 	We prove the lemma by induction on the number \(r\) of rounds.
-	In the beginning of the base case \(r=2\), agent \(i\) has already been assigned item \(\asgd{1}\) but not the items in set~\(\lostset{1}\).
-	For each of the remaining optimal and attainable items~\(j\) in round \(1\), the marginal valuation \(\valuations[j \given \emptyset]\) over the empty set is at most \(\valuations[\asgd{1} \given \emptyset]\), as otherwise item~\(\asgd{1}\) would not have been assigned first.
-	Furthermore, the marginal valuation \(\valuations[j \given \asgd{1}]\) over \(\{\asgd{1}\}\) is upper-bounded by \(\valuations[\asgd{1} \given \emptyset]\) due to the submodularity of valuations.
-	During the round, a further \(\lostsetlen{2}\) out of these items are assigned to other agents, and item \(\asgd{2}\) is assigned to agent \(i\).
+	In the beginning of the base case \(r=2\), agent \(i\) has already been assigned item \(\asgd{1}\).
+	For each of the optimal and attainable items~\(j \in \attopt{1}\) in round \(1\), the marginal valuation \(\valuations[j \given \emptyset]\) over the empty set was at most \(\valuations[\asgd{1} \given \emptyset]\), as otherwise item~\(\asgd{1}\) would not have been assigned first.
+	The marginal valuation \(\valuations[j \given \asgd{1}]\) over \(\{\asgd{1}\}\) is upper-bounded by \(\valuations[\asgd{1} \given \emptyset]\), too, due to the submodularity of valuations.
+	During round \(2\), a further \(\lostsetlen{2}\) of these items \(j\) are assigned to other agents, and item \(\asgd{2}\) is assigned to agent \(i\).
 	We can bound the marginal valuation of the remaining optimal and attainable items in round \(2\) in the following way:
 	\begin{caseintext}{1}{\(\asgd{1} \in \attopt{1}\)}
 		It holds \(\valuations[ \attopt{2} \given \asgd{1} ] = \valuations[ \attopt{2} \cup \{\asgd{1}\} ] - \valuations[\asgd{1}] = \valuations[\attopt{1} \setminus \lostset{2}] -  \valuations[\asgd{1}]\).
@@ -95,15 +102,15 @@ First, we give a lower bound on the valuation of agent \(i\) for her optimal and
 	\begin{align}
 		\valuations[ \attopt{2} \given \asgd{1} ]
 		&\geq \valuations[\attopt{1} \setminus \lostset{2}] -  \valuations[\asgd{1}] \\
-		&\geq \valuations[ \attopt{2} ] - \valuations[\lostset{2}] - \valuations[\asgd{1}] \\
-		&\geq \remvalue* - \lostsetlen{2} \valuations[\asgd{1}] - \valuations[\asgd{1}],
+		&\geq \valuations[ \attopt{1} ] - \valuations[\lostset{2}] - \valuations[\asgd{1}] \\
+		&\geq \valuations[ \attopt{1} ] - \lostsetlen{2} \valuations[\asgd{1}] - \valuations[\asgd{1}],
 	\end{align}
-	where the second inequality can be shown inductively with the definition of submodularity\todo{Do that or, alternatively, find a paper showing the other def.}, and the third inequality is due all \(\lostsetlen{2}\) items \(j\) in \(\lostset{2}\) being attainable but not assigned in round \(1\), implying \(\valuations[j] \leq \valuations[\asgd{1}]\).
+	where the second inequality can be shown inductively with the definition of submodularity\todo{Do that or, alternatively, find a paper showing the other def.}, and the third inequality is due all \(\lostsetlen{2}\) items \(j\) in set \(\lostset{2}\) not being assigned in round \(1\) although attainable, implying \(\valuations[j] \leq \valuations[\asgd{1}]\).
 
 	For the induction hypothesis, we assume that the lemma holds true for all rounds up to some~\(r\).
 	In the induction step \(r \to r+1\), we differentiate the same two cases again:
 	\begin{caseintext}{1}{\(\asgd{r} \in \attopt{r}\)}
-		Again we use the submodularity of valuations \todo{ditto} to obtain a lower bound on the marginal valuation of \(\attopt{r+1}\).
+		Again we exploit the submodularity of valuations \todo{ditto} to obtain a lower bound on the marginal valuation of \(\attopt{r+1}\).
 		\begin{align}
 			\valuations[ \attopt{r+1} \given \asgd{1}, \dots, \asgd{r} ]
 			&= \valuations[ \attopt{r+1} \cup \{\asgd{r}\} \given \asgd{1}, \dots, \asgd{r-1} ] - \valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ] \\
@@ -115,7 +122,7 @@ First, we give a lower bound on the valuation of agent \(i\) for her optimal and
 		\end{align}
 	\end{caseintext}
 	\begin{caseintext}{2}{\(\asgd{r} \notin \attopt{r}\)}
-		We use the monotonicity of valuations for the inequality
+		At first, we use the monotonicity of valuations to get the inequality
 		\begin{align}
 			\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r} ]
 			&= \valuations[ \attopt{r} \cup \{ \asgd{1}, \dots, \asgd{r} \} ] - \valuations[\asgd{1}, \dots, \asgd{r}] \\
@@ -126,7 +133,7 @@ First, we give a lower bound on the valuation of agent \(i\) for her optimal and
 			\end{multlined} \\
 			&= \valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] - \valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ].
 		\end{align}
-		Together with the submodularity of valuation we obtain the same lower bound again:
+		Together with the submodularity of valuation, we obtain the same lower bound again:
 		\begin{align}
 			\valuations[ \attopt{r+1} \given \asgd{1}, \dots, \asgd{r} ]
 			&= \valuations[ \attopt{r} \setminus \lostset{r+1} \given \asgd{1}, \dots, \asgd{r} ] \\
@@ -149,17 +156,16 @@ The lemma can be used to find a lower bound on the marginal valuation of the ite
 	From \cref{lem:induction} follows
 	\begin{equation*}
 		\valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ] \geq \begin{multlined}[t]
-			\paren[\Big]{ \remvalue* - \lostsetlen{2} \cdot \valuations[\asgd{1}] - \smashoperator{\sum_{r'=2}^{r-1}} \lostsetlen{r'+1} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] \\
-				- \valuations[\asgd{1}, \dots, \asgd{r-1}] } \Bigm/ \attoptlen{r},
+			\paren[\Big]{ \valuations[\attopt{1}] - \lostsetlen{2} \cdot \valuations[\asgd{1}] - \smashoperator{\sum_{r'=2}^{r-1}} \lostsetlen{r'+1} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] \\
+				- \valuations[\asgd{1}, \dots, \asgd{r-1}] } \Bigm/ \attoptlen{r}.
 		\end{multlined}
 	\end{equation*}
-	where \(\attoptlen{r}\) denotes the number of optimal and attainable items in round \(r\).
 \end{corollary}
 \begin{proof}
 %	There are \(\attoptlen{0}\) optimal and attainable items in \(\attopt{0}\) at the start of phase~\phaseii.
 %	Of those, \(\lostsetlen{l}\) many are assigned to other agents in each round \(l \leq r\), and also some items \(\asgd{l}\) assigned to agent \(i\) may be optimal, whence an upper bound of \(\attoptlen{0} - \sum_{l=1}^{r} \lostsetlen{l}\) on the number \(\attoptlen{r}\) of items in the set \(\attopt{r}\).\todo{Possibly this whole estimation can be omitted as we ditch it in the following lemma.}
 
-	The valuations are monotonic, \ie, \(\valuations[\genericset[1]] \leq \valuations[\genericset[2]]\) for all sets \(\genericset[1] \subset \genericset[2] \subset \goods\) of items.
+	The valuations are monotonic, \ie, \(\valuations[\genericset[1]] \leq \valuations[\genericset[2]]\) for all item sets \(\genericset[1] \subset \genericset[2] \subset \goods\).\todo{change proof when intro is finished}
 	Induction shows that there must be an item \(j \in \attopt{r}\) with a marginal valuation of at least \(\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] / \attoptlen{r}\).
 	As item \(\asgd{r}\) was the one to be assigned, the marginal valuation of it cannot be smaller.
 	Using \cref{lem:induction} for the value of \(\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ]\) proves the corollary.
@@ -167,43 +173,44 @@ The lemma can be used to find a lower bound on the marginal valuation of the ite
 
 This, finally, enables us to give a lower bound on the valuation of the whole bundle assigned in phase~\phaseii.
 \begin{lemma}
-	For each agent \(i \in \agents\) and her bundle \(\alloc[\phaseii] = \{\asgd{1}, \dots, \asgd{\alloclen[\phaseii]}\}\) assigned in phase~\phaseii, her valuation \(\valuations[\alloc[\phaseii]]\) of her bundle is lower-bounded by her valuation \(\remvalue* = \valuations[\attopt{1}]\) of the optimal and attainable items in \(\attopt{1}\) after the first round divided by the number \(n\) of agents, \ie,
+	\label{lem:lower_bound_all_items}
+	For each agent \(i \in \agents\) and her bundle \(\alloc[\phaseii] = \{\asgd{1}, \dots, \asgd{\alloclen[\phaseii]}\}\), it holds
 	\begin{equation*}
-		\valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii]}] \geq \remvalue* / n.
+		\valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii]}] \geq \valuations[\attopt{1}] / n.
 	\end{equation*}
 \end{lemma}
 \begin{proof}
 	In each round \(r = 1, \dots, \alloclen[\phaseii]\), \(\lostsetlen{r}\) optimal and attainable items of agent \(i\) are assigned to other agents.
 	As there are \(n\) agents in total, \(n-1\) is an upper bound on \(\lostsetlen{r}\).
-	Furthermore, after \(\alloclen[\phaseii]\) rounds, the number \(\attoptlen{\alloclen[\phaseii]}\) of optimal and attainable items is at most \(n-1 \leq n\) else agent \(i\) would have been assigned yet another item.
+	Furthermore, after \(\alloclen[\phaseii]\) rounds, the number \(\attoptlen{\alloclen[\phaseii]}\) of optimal and attainable items is at most \(n-1 \leq n\) elsewise agent \(i\) would have been assigned yet another item.
 	Together with \cref{cor:lower_bound_single_item}, this proves the lemma:
 	\begin{align}
 		\valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii]}]
 		&= \valuations[ \asgd{\alloclen[\phaseii]} \given \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} ] + \valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii] - 1}] \\
 		&\geq \begin{multlined}[t]
-			\paren[\Big]{ \remvalue* - \lostsetlen{2} \cdot \valuations[\asgd{1}]
+			\paren[\Big]{ \valuations[\attopt{1}] - \lostsetlen{2} \cdot \valuations[\asgd{1}]
 				- \smashoperator{\sum_{r'=2}^{\alloclen[\phaseii]-1 \mathstrut}} \lostsetlen{r'+1} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] \\
-				- \valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii]-1}] } \Big/ \paren[\Big]{ \attoptlen{0} - \sum_{l = 1}^{\alloclen[\phaseii] \mathstrut} \lostsetlen{l} } + \valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii] - 1}]  % \Big/ has better spacing than \Bigm/.
+				- \valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii]-1}] } \Big/ \attoptlen{r} + \valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii] - 1}]  % \Big/ has better spacing than \Bigm/.
 		\end{multlined} \\
 		&\geq \begin{multlined}[t]
-			\paren[\Big]{ \remvalue* - (n-1) \valuations[\asgd{1}]
-				- \smashoperator{\sum_{r'=2}^{\alloclen[\phaseii]-1 \mathstrut}} (n-1) \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] \\
+			\paren[\Big]{ \valuations[\attopt{1}] - (n-1) \valuations[\asgd{1}]
+				- \smashoperator{\sum_{r'=2}^{\alloclen[\phaseii]-1 \mathstrut}} (n-1) \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] \\
 				- \valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii]-1}] } \Big/ n + \valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii] - 1}]
 		\end{multlined} \\
 		&\geq \begin{multlined}[t]
-			\paren[\big]{ \remvalue* - (n-1) \valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii]-1}] - \valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii]-1}] } \big/ n \\
+			\paren[\big]{ \valuations[\attopt{1}] - (n-1) \valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii]-1}] - \valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii]-1}] } \big/ n \\
 			+ \valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii] - 1}]
 		\end{multlined} \\
-		&= \remvalue*/n
+		&= \valuations[\attopt{1}] / n
 	\end{align}
 \end{proof}
 
 After having obtained a lower bound on the valuation of items assigned in phase~\phaseii, we need a lower bound for phase~\phaseiii{} as well.
-Therefor we introduce the concept of \emph{overly good items}, that is items which some agent \(i\) values at least as high as her most valuable optimal item~\(\asgd*{1}\).
-The set of overly good items for an agent \(i\) is denoted by
-\begin{equation}
-	\overlygoodset \coloneq \{\, j \in \goods \given \valuations[j] \geq \valuations[\asgd*{1}] \,\}.
-\end{equation}
+Therefor we introduce a third type of item set.
+\begin{definition}
+	Let \(\alloc* = \{ \asgd*{1}, \dots, \asgd{\alloclen*}\}\) be an optimal allocation of some agent \(i \in \agents\).
+	The set \(\overlygoodset\) of \emph{overly good} items is defined as \(\overlygoodset \coloneq \{\, j \in \goods \given \valuations[j] \geq \valuations[\asgd*{1}] \,\}\).
+\end{definition}
 
 \begin{lemma}
 	\label{lem:overly_good_matching}
@@ -212,10 +219,10 @@ The set of overly good items for an agent \(i\) is denoted by
 \begin{proof}
 	If in phase~\phasei{} all items are put aside, \ie, \(\goodsrem = \emptyset\), then the optimal item \(\asgd*{1}\) of each agent \(i\) is brought back in phase~\phaseiii{} and can be assigned to her;
 	the lemma is proven immediately.
-	If not, imagine that for some \(t\) only the items assigned in the first~\(t\) rounds of phase~\phasei{} were brought back.
+	If not, imagine for some \(t\) that only the items assigned in the first~\(t\) rounds of phase~\phasei{} were brought back.
 	Denote the set of brought-back items by \(\goodsreleased{t}\).
 	Now choose some matching \(\matching[t]\) with the following properties:
-	\begin{enumerate}
+	\begin{enumerate}[topsep=0.1em, itemsep=0.1em, parsep=0pt]
 		\item
 		\label[property]{enum:matching:agent}
 		If for an agent \(i\) all overly good items were amongst the released items, \ie, \(\overlygoodset \subset \goodsreleased{t}\), she gets matched with an overly good item \(j \in \overlygoodset\).
@@ -224,7 +231,7 @@ The set of overly good items for an agent \(i\) is denoted by
 		\label[property]{enum:matching:max}
 		The number of agents matched with one of their overly good items is maximal amongst all matchings fulfilling \cref{enum:matching:agent}.
 	\end{enumerate}
-	\Cref{enum:matching:agent} is always satisfiable as each set \(\overlygoodset\) uniquely contains the item \(\asgd*{1}\), which can be matched with agent \(i\).
+	\Cref{enum:matching:agent} is always satisfiable as each set \(\overlygoodset\) is the only one to contain the item \(\asgd*{1}\), which can be matched with agent \(i\).
 	\Cref{enum:matching:max} leads to all agents being matched with an overly good item for \(t = \ceil{\log_2 n}+1\), \ie{} the number of rounds in phase~\phasei, whence the lemma follows.
 	To prove this, we denote by \(\unluckyagents{t}\) the set of agents who are \emph{not} matched with one of their overly good items, and show by induction on \(t\) that it holds \(\abs{\unluckyagents{t}} \leq n/2^t\).
 
@@ -238,7 +245,7 @@ The set of overly good items for an agent \(i\) is denoted by
 
 	For the induction hypothesis, we assume that the statement holds true for all rounds up to some \(t\).
 	In the induction step \(t \to t+1\), by \cref{enum:matching:agent}, there is at least one unassigned item in each set \(\overlygoodset[i']\) for all agents \(i' \in \unluckyagents{t}\) at the start of round \(t+1\).
-	Analogously to the base case, for at least half of those agents \(i'\) these unassigned items will be assigned to them or someone else.
+	Analogously to the base case, for at least half of those agents \(i'\) these unassigned items will be assigned to them or someone else and it can be argued accordingly.
 	By the induction hypothesis, it holds \(\abs{\unluckyagents{t+1}} \leq \abs{\unluckyagents{t}}/2 \leq (n/2^t)/2 = n/2^{t+1}\).
 \end{proof}
 
@@ -255,12 +262,12 @@ This allows us to calculate an approximation factor for \RepReMatch{} by compari
 		\log \NSW(\alloc[\phaseiii][])
 		\geq \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \valuations[\overlygooditem, \asgd{1}, \dots, \asgd{\alloclen[\phaseii]}]
 	\end{equation}
-	is a lower bound on the \NSW{} after the first matching in phase~\phaseiii, whereby \(\{ \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} \}\) is the bundle of agent \(i\) assigned in phase~\phaseii.
+	is a lower bound on the logarithmic \NSW{} after the first matching in phase~\phaseiii, whereby \(\alloc[\phaseii] = \{ \asgd{1}, \dots, \allowbreak \asgd{\alloclen[\phaseii]} \}\) is the bundle of agent \(i\) from phase~\phaseii.
 
 	Item \(\overlygooditem\) was released in phase~\phaseiii, which means it was assigned in phase~\phasei, implying \(\overlygooditem \in \alloc* \setminus \attopt{0}\) and, subsequently, \(\overlygooditem \in (\alloc* \setminus \attopt{0}) \cup \lostset{1}\).
-	Phase~\phasei{} runs for at most \(\ceil{\log_2 n}+1\)\todo[info]{Error in paper‽ see also \cref{lem:overly_good_matching}} rounds, and at most \(n\) items are assigned in each iteration.
+	Phase~\phasei{} runs for at most \(\ceil{\log_2 n}+1\)\todo[info]{\(\mathbfit{i}\): Error in paper‽ see also \cref{lem:overly_good_matching}} rounds, and at most \(n\) items are assigned in each iteration.
 	Therefore, at most \(n (\log_2 n + 2)\) optimal items are assigned in that phase, \ie, \(\abs{ \alloc* \setminus \attopt{0} } \leq n (\log_2 n + 2)\).
-	Furthermore, in each round of phase~\phaseii, at most \(n\) optimal items are assigned to other agents, so that it holds \(n \geq \lostsetlen{1} = \abs{\lostset{1}}\).
+	Furthermore, it holds \(n \geq \lostsetlen{1} = \abs{\lostset{1}}\) as in \cref{lem:lower_bound_all_items}.
 	Together with the monotonicity of valuations, this yields
 	\begin{equation}
 		\label{eq:overly_good_item_lower_bound}
@@ -268,14 +275,14 @@ This allows us to calculate an approximation factor for \RepReMatch{} by compari
 		\geq \valuations[\overlygooditem]
 		\geq \frac{\valuations[ (\alloc* \setminus \attopt{0}) \cup \lostset{1} ][\big]}{n(\log_2 n + 3)}
 	\end{equation}
-	as lower bound on the individual valuations of assigned bundles.
+	as lower bound on the valuations of bundles.
 	Moreover, \cref{lem:lower_bound_later_items} and the monotonicity of valuations yield
 	\begin{equation}
 		\label{eq:assigned_items_lower_bound}
 		\valuations[ \overlygooditem, \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} ]
 		\geq \valuations[ \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} ]
-		\geq \frac{\remvalue*}{n}
-		\geq \frac{\remvalue*}{n(\log_2 n + 3)}
+		\geq \frac{\valuations[\attopt{1}]}{n}
+		\geq \frac{\valuations[\attopt{1}]}{n(\log_2 n + 3)}
 		= \frac{\valuations[ \attopt{0} \setminus \lostset{1} ]}{n(\log_2 n + 3)}
 	\end{equation}
 	as yet another lower bound.
@@ -289,11 +296,9 @@ This allows us to calculate an approximation factor for \RepReMatch{} by compari
 	We can insert this lower bound into \cref{eq:reprematch_approx_factor_lower_bound} and prove the theorem thereby:
 	\begin{equation}
 		\log \NSW(\alloc[\phaseiii][])
-		\geq \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \frac{ \valuations[\alloc*] }{2n(\log_2 n + 3)}
-		= \log \paren[\bigg]{\frac{\NSW(\alloc*[][])}{2n(\log_2 n + 3)}}
+		\geq \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \paren[\bigg]{ \frac{ \valuations[\alloc*] }{2n(\log_2 n + 3)} }
+		= \log \paren[\bigg]{ \frac{\NSW(\alloc*[][])}{2n(\log_2 n + 3)} }
 	\end{equation}
 \end{proof}
 
-\todo[inline]{released → brought back; Notation ändern}
-\todo[inline]{phase aus Algo entfernen}
-\todo[inline]{more comments in algo}
+\todo[inline]{brought back → released}
