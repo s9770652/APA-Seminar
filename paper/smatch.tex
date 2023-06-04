@@ -89,7 +89,7 @@ The geometric mean of the \NSW{} favours allocations with similarly valued bundl
 \end{figure*}
 
 The algorithm \SMatch{}, described in \cref{alg:smatch}, eliminates the flaw by first gaining foresight of the valuations of items assigned after the first matching, achieving an approximation factor of \(2 n\) (cf.\@ \cref{th:smatch} later on).
-For a fixed agent \(i\), order the items in descending order of the valuations by agent \(i\) and denote the \(j\)-th most liked item by \(\goodsordered{j}\).
+For a fixed agent \(i\), order the items in descending order of the valuations by agent \(i\) and denote the \(j\)-th most liked item by~\(\goodsordered{j}\).
 To obtain a well-defined order, items of equal rank are further ordered numerically.
 \SMatch, too, does repeatedly match items.
 During the first matching, however, the edge weights are defined as \(\weight \log\paren[\big]{ \valuations[j] + \remvalue/n } \) for an edge between agent \(i\) and item \(j\).
