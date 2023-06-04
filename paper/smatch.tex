@@ -137,6 +137,7 @@ The addend \(\valuations[\alloc]\) could lead to better allocations in applicati
 
 To calculate the approximation factor of \SMatch, we first need to establish a lower bound on the valuation of single items.
 For convenience, we order the items in the final bundle \(\alloc = \{\asgd{1}, \dots, \asgd{\alloclen}\}\) of agent \(i\) by the order in which they were assigned, so that item \(\asgd{t}\) is assigned according to the \(t\)-th matching.
+Note that it holds \(\valuations[\asgd{t}] \ge \valuations[\asgd{t'}]\) for all \(t' \ge t\).
 \begin{lemma}
 	\label{lem:lower_bound_single_item}
 	For each agent \(i \in \agents\), her final bundle \(\alloc = \{\asgd{1}, \dots, \asgd{\alloclen}\}\), and her \(tn\)-th most highly valued item \(\goodsordered{tn}\), it holds \(\valuations[\asgd{t}] \geq \valuations[\goodsordered{tn}]\) for all \(t = 1, \dots, \alloclen\).
