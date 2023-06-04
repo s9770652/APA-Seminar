@@ -115,7 +115,7 @@ The addend \(\valuations[\alloc]\) could lead to better allocations in applicati
 	}
 
 	\(\alloc \gets \emptyset \quad\forall i \in \agents\)\;
-	\(\remvalue \gets \valuations[ \goodsordered{2n+1}, \dots, \goodsordered{m} ] \quad\forall i \in \agents\)  \tct*{est. valuations after the 1st matching}
+	\(\remvalue \gets \valuations[ \goodsordered{2n+1}, \dots, \goodsordered{m} ] \quad\forall i \in \agents\)  \tct*{estimation of future valuations}
 	\(\weights \gets \{\,  \weight \cdot \log\paren[\big]{ \valuations[j] + \remvalue/n } \given[\bigm] i \in \agents, j \in \goods \,\}\)  \tct*{edge weights}
 	\(\bipartitegraph \gets (\agents, \goods, \weights)\)  \tct*{bipartite graph}
 	\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
