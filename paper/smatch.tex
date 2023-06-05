@@ -221,5 +221,13 @@ This allows us to calculate an approximation factor for \SMatch{} by comparing i
 	\qedhere
 \end{proof}
 
-\todo[inline]{tightness}
-\todo[inline]{envy-freeness?}
+The analysis is asymptotically tight.
+It is possible to design an instance for the asym\-metric \NSW{} such that \SMatch{} achieves an approximation ratio approaching \(2/n\).
+It remains to be shown whether this is also true for the symmetric \NSW{}.~\cite[Section 6.3]{APNSWuSVþUM}
+
+\begin{remark}
+	\SMatch{} produces \emph{fair} allocations which are \emph{envy-free up to one item} (\abb{EF1}).
+	An allocation \(\alloc[][]\) is \abb{EF1} if, for every pair \((i_1, i_2) \in \agents^2\) of agents, one needs to remove at most one item from the bundle \(\alloc[][i_2]\) of agent \(i_2\) so that agent \(i_1\) does not envy her. In other words, either it holds \(\valuations[\alloc[][i_1]][][i_1] \ge \valuations[\alloc[][i_2]][][i_2]\) or there is an item \(j \in \alloc[][i_2]\) such that \(\valuations[\alloc[][i_1]][][i_1] \ge \valuations[\alloc[][i_2] \setminus \{j\}][][i_2]\).~\cite[Section 5.2]{APNSWuSVþUM}
+\end{remark}
+
+\todo[inline]{remove indices from allocations}
