@@ -44,6 +44,7 @@
 %%% Delimiters.
 \DeclarePairedDelimiter{\abs}{\vert}{\vert}
 \DeclarePairedDelimiter{\braces}{\{}{\}}
+\DeclarePairedDelimiter{\brackets}{[}{]}
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
 \NewDocumentCommand{\given}{O{}}{\mathrel{#1\vert}}
@@ -220,7 +221,7 @@
 	\mathcal{A}
 }
 \NewDocumentCommand{\allallocs}{m m}{
-	\Pi_{#1}(#2)
+	\mathbfit{X}_{#1}(#2)
 }
 \NewDocumentCommand{\alloc}{s O{} O{i}}{
 	\mathbfit{x}\IfEmptyF{#3}{_{#3}}\IfEmptyTF{#2}{\IfBooleanT{#1}{^*}}{^{\IfBooleanT{#1}{*}#2}}
@@ -239,6 +240,9 @@
 }
 \NewDocumentCommand{\bipartitegraph}{}{
 	G
+}
+\NewDocumentCommand{\colouringconstant}{}{
+	c
 }
 \NewDocumentCommand{\genericset}{s O{}}{
 	\mathcal{S}\IfBooleanT{#1}{^*}\IfEmptyF{#2}{_{#2}}
@@ -282,6 +286,9 @@
 \NewDocumentCommand{\remvalue}{O{i}}{
 	u\IfEmptyF{#1}{_{#1}}
 }
+\NewDocumentCommand{\swconstant}{}{
+	C
+}
 \NewDocumentCommand{\unluckyagents}{m}{
 	\agents^-_{#1}
 }
@@ -311,9 +318,13 @@
 % Texts.
 \NewDocumentCommand{\abb}{m}{#1}  % actually defined in theme.sty
 
+\NewDocumentCommand{\Gap}{}{\abb{Gap-Max-3-Colouring}}
+\NewDocumentCommand{\No}{}{\abb{No}~instance}
 \NewDocumentCommand{\NSW}{}{\abb{NSW}}
 \NewDocumentCommand{\RepReMatch}{}{\abb{RepReMatch}}
 \NewDocumentCommand{\SMatch}{}{\abb{SMatch}}
+\NewDocumentCommand{\SW}{}{\abb{SW}}
+\NewDocumentCommand{\Yes}{}{\abb{Yes}~instance}
 
 \crefname{property}{property}{properties}
 \Crefname{property}{Property}{Properties}
