@@ -233,7 +233,7 @@ Therefor we introduce a third type of item set.
 		\label[property]{enum:matching:max}
 		The number of agents matched with one of their overly good items is maximal amongst all matchings fulfilling \cref{enum:matching:agent}.
 	\end{enumerate}
-	\Cref{enum:matching:agent} is always satisfiable as each set \(\overlygoodset\) is the only one to contain the item \(\asgd*{1}\), which can be matched with agent \(i\).
+	\Cref{enum:matching:agent} is always satisfiable as each set \(\overlygoodset\) is the only one to contain the item \(\asgd*{1}\), which can be matched with agent \(i\).\todo{wrong! the union contains it though}
 	\Cref{enum:matching:max} leads to all agents being matched with an overly good item for \(t = \ceil{\log_2 n}+1\), \ie{} the number of rounds in phase~\phasei, whence the lemma follows.
 	To prove this, we denote by \(\unluckyagents{t}\) the set of agents who are \emph{not} matched with one of their overly good items, and show by induction on \(t\) that it holds \(\abs{\unluckyagents{t}} \leq n/2^t\).
 
