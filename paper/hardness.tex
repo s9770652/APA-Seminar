@@ -3,12 +3,13 @@
 
 \Citeauthor{APNSWuSVþUM}~\cite[Sction 4]{APNSWuSVþUM} provide the following hardness result.
 \begin{theorem}
-	The submodular \NSW{} is not approximable within a factor of \(\frac{\euler}{\euler - 1}\)\todo[info]{\(\mathbfit{i}\): Should it not be \(\frac{\euler - 1}{\euler} - \epsilon\)?} in polynomial time unless \(\P = \NP\).
+	The submodular \NSW{} is not approximable within a factor of \(\frac{\euler}{\euler - 1}\)\todo[info]{\normalshape\(\mathbfit{i}\): Should it not be \(\frac{\euler - 1}{\euler} - \epsilon\)?} in polynomial time unless \(\P = \NP\).
 \end{theorem}
 \begin{proof}
 	Consider the related \SW{} problem\footnotemark.
 	\begin{problem}
-		Given a set \(\goods\) of indivisible items and a set \(\agents\) of agents with monotonic, submodular valuation functions \(\valuations \colon \powerset[\goods] \to \real\) for all agents \(i \in \agents\), the \emph{symmetric submodular Social Welfare problem} (\SW) is to find an allocation maximising the sum of valuations, that is
+		\label{prob:sw}
+		Given a set \(\goods\) of indivisible items and a set \(\agents\) of agents with monotonic, submodular valuation functions \(\valuations \colon \powerset[\goods] \to \real\) for all agents \(i \in \agents\), the \emph{symmetric submodular Utilitarian Social Welfare problem} (\SW) is to find an allocation maximising the sum of valuations, that is
 		\begin{equation*}
 			\argmax_{\alloc[][] \in \allallocs{n}{\goods}} \braces[\bigg]{ \smashoperator{\sum_{i \in \agents}} \valuations[\alloc] }
 		\end{equation*}
@@ -35,7 +36,7 @@
 
 		\item[\No]
 		The \SW{} is \(\frac{\euler - 1}{\euler} n \swconstant\).
-		Applying the inequality of arithmetic and geometric means, \ie{}, \((x_1 + \dots + x_n)/n \ge \sqrt[n]{x_1 \cdot \dots \cdot x_n}\) for all nonnegative numbers \(x_1, \dots, x_n \in \realposzero\), reveals that the \NSW{} of the instance is at most \(\frac{\euler - 1}{\euler} \swconstant\).
+		Applying the inequality of arithmetic and geometric means, \ie{}, \((x_1 + \dots + x_n)/n \ge \sqrt[n]{x_1 \dotsm x_n}\) for all nonnegative numbers \(x_1, \dots, x_n \in \realposzero\), reveals that the \NSW{} of the instance is at most \(\frac{\euler - 1}{\euler} \swconstant\).
 	\end{description}
 	Thereout follows that the submodular \NSW{} problem, even when symmetric and with identical valuation functions, cannot be approximated within a factor better than \(\frac{\euler}{\euler - 1}\);
 	otherwise one could decide the \(c\)-\Gap{} problem in polynomial time by checking whether the corresponding \NSW{} instance has a value above \(\frac{\euler - 1}{\euler} \swconstant\).
@@ -44,6 +45,6 @@
 For a constant number of agents, \citeauthor{APNSWuSVþUM}~\cite[Section 5.1]{APNSWuSVþUM} describe a family \((A_{\epsilon})_{\epsilon > 0}\) of algorithms for the asymmetric submodular \NSW{} problem where each algorithm \(A_\epsilon\) achieves an approximation factor of \(\frac{\euler}{\euler - 1} + \epsilon\).
 
 \footnotetext{
-	\Citeauthor{APNSWuSVþUM} call it the \enquote{Allocation problem}.
+	\Citeauthor{APNSWuSVþUM} (and many others) call \cref{prob:sw} the \enquote{Allocation problem}.
 	We changed the name to match the naming scheme of the \NSW{} problem and to avoid confusion, as both problems are about allocations.
 }

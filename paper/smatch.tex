@@ -1,4 +1,4 @@
-\section{SMatch}
+\section{\texorpdfstring{\SMatch}{SMatch}}
 \label{sec:smatch}
 
 In the case of an equal number of agents and items, \ie, \(n = m\), the \emph{additive} \NSW{} can be solved exactly by finding a maximum matching on a bipartite graph with the sets of agents and of items as its parts;
@@ -89,11 +89,11 @@ The geometric mean of the \NSW{} favours allocations with similarly valued bundl
 \end{figure*}
 
 The algorithm \SMatch{}, described in \cref{alg:smatch}, eliminates the flaw by first gaining foresight of the valuations of items assigned after the first matching, achieving an approximation factor of \(2 n\) (cf.\@ \cref{th:smatch} later on).
-For a fixed agent \(i\), order the items in descending order of the valuations by agent \(i\) and denote the \(j\)-th most liked item by~\(\goodsordered{j}\).
+For a fixed agent \(i\), order the items in descending order of valuations and denote the \(j\)-th most liked item by~\(\goodsordered{j}\).
 To obtain a well-defined order, items of equal rank are further ordered numerically.
-\SMatch, too, does repeatedly match items.
+\SMatch{} does in fact repeatedly match items.
 During the first matching, however, the edge weights are defined as \(\weight \log\paren[\big]{ \valuations[j] + \remvalue/n } \) for an edge between agent \(i\) and item \(j\).
-The addend \(\remvalue\) serves as estimation of the valuation of items assigned after the first matching and is defined as
+The addend \(\remvalue\) serves as estimation of the valuation of items assigned after the first matching (cf. \cref{lem:lower_bound_later_items}) and is defined as
 \begin{equation}
 	\label{eq:def_remvalue}
 	\remvalue
@@ -106,9 +106,8 @@ The addend \(\valuations[\alloc]\) could lead to better allocations in applicati
 
 \begin{algorithm*}[t]
 	\KwIn{%
-		set \(\agents\) of \(n\) agents with weights \(\weight\) for all agents \(i \in \agents\),
-		set \(\goods\) of indivisible \(m\) items,
-		additive valuations \(\valuations \colon \powerset[\goods] \to \realposzero\) where \(\valuations[\genericset]\) is the valuation of agent \(i \in \agents\) for each set \(\genericset \subset \goods\) of items
+		set \(\goods\) of \(m\) items,
+		set \(\agents\) of \(n\) agents, additive valuation functions \(\valuations \colon \powerset[\goods] \to \realposzero\) and weights \(\weight\) for all agents \(i \in \agents\)
 	}
 	\KwOut{%
 		\(\frac{1}{2n}\)-approximation \(\alloc[][] = (\alloc)_{i \in \agents}\) of an optimal allocation
@@ -143,35 +142,33 @@ Note that it holds \(\valuations[\asgd{t}] \ge \valuations[\asgd{t'}]\) for all 
 	For each agent \(i \in \agents\), her final bundle \(\alloc = \{\asgd{1}, \dots, \asgd{\alloclen}\}\), and her \(tn\)-th most highly valued item \(\goodsordered{tn}\), it holds \(\valuations[\asgd{t}] \ge \valuations[\goodsordered{tn}]\) for all \(t = 1, \dots, \alloclen\).
 \end{lemma}
 \begin{proof}
-	At the start of the \(t\)-th round, no more than \((t-1) n\) items out of the \(tn\) most highly valued items \(\goodsordered{1}, \dots, \goodsordered{tn}\) have been assigned in previous rounds since at most~\(n\) items are assigned in each iteration.
-	During the \(t\)-th round, at most \(n-1\) more of those highly valued items could be assigned to all other agents \(i' \neq i\), leaving at least one item in \(\goodsordered{1}, \dots, \goodsordered{tn}\) unassigned.
+	Before the \(t\)-th matching, no more than \((t-1) n\) items out of the \(tn\) most highly valued items \(\goodsordered{1}, \dots, \goodsordered{tn}\) have been assigned in previous matchings since at most~\(n\) many out of those items are assigned each time.
+	Because of the \(t\)-th matching, at most \(n-1\) more could be assigned to all other agents \(i' \neq i\), leaving at least one item of \(\goodsordered{1}, \dots, \goodsordered{tn}\) unassigned.
 	Since \(\valuations[\goodsordered{k}] \ge \valuations[\goodsordered{tn}]\) for all \(k \le tn\) by definition of \(\goodsordered{\cdot}\), the lemma follows.
 \end{proof}
 
 We can now establish \(\remvalue/n = \valuations[ \goodsordered{2n+1}, \dots, \goodsordered{m} ]/n\) as lower bound on  the valuations of items assigned after the first matching.
 \begin{lemma}
 	\label{lem:lower_bound_later_items}
-	For each agent \(i \in \agents\) and her final bundle \(\alloc = \{\asgd{1}, \dots, \asgd{\alloclen}\}\), it holds \(\valuations[ \asgd{2}, \dots, \asgd{\alloclen} ] \ge \remvalue/n\), where \(n\) is the number of items and \(\remvalue = \valuations[ \goodsordered{2n+1}, \dots, \goodsordered{m} ]\).
+	For each agent \(i \in \agents\) and her final bundle \(\alloc = \{\asgd{1}, \dots, \asgd{\alloclen}\}\), it holds \(\valuations[ \asgd{2}, \dots, \asgd{\alloclen} ] \ge \remvalue/n\).
 \end{lemma}
 \begin{proof}
-	By \cref{lem:lower_bound_single_item} and definition of \(\goodsordered{\cdot}\), every item \(\asgd{t}\) is worth at least as much as each item \(\goodsordered{tn+k}\) with \(k \in \{0, \dots, n-1\}\) and, consequently, its valuation \(\valuations[\asgd{t}]\) is at least as high as the mean valuation \(\frac{1}{n} \valuations[ \goodsordered{tn}, \dots, \goodsordered{tn + n-1} ]\).
-	Further, it holds \(\alloclen n + n \ge m \) since each agent receives items for at least \(\floor{\frac{m}{n}} \ge \frac{m}{n} - 1\) rounds.
-	Together, this yields
-	\begin{align}
-		 \valuations[\asgd{2}, \dots, \asgd{\alloclen}]
-		&= \sum_{t=2}^{\alloclen \mathstrut} \valuations[\asgd{t}]
-		 \ge \sum_{t=2}^{\alloclen \mathstrut} \frac{1}{n} \valuations[ \goodsordered{tn}, \dots, \goodsordered{tn + n-1} ] \\
-		&\ge \frac{1}{n} \valuations[ \goodsordered{2n}, \dots, \goodsordered{m-1} ]
-		 \ge \frac{1}{n} \valuations[ \goodsordered{2n+1}, \dots, \goodsordered{m} ]
-		 = \frac{\remvalue}{n} \label{eq:lower_bound_later_items}
-	\end{align}
-	with the last inequality stemming from \(\valuations[\goodsordered{2n}] \ge \valuations[\goodsordered{m}]\).
+	By \cref{lem:lower_bound_single_item} and definition of \(\goodsordered{\cdot}\), every item \(\asgd{t}\) is worth at least as much as each item \(\goodsordered{tn+k}\) with \(k \in \{1, \dots, n\}\) and, consequently, its valuation \(\valuations[\asgd{t}]\) is at least as high as the mean valuation \(\frac{1}{n} \valuations[ \goodsordered{tn+1}, \dots, \goodsordered{tn + n} ]\).
+	Further, it holds \(\alloclen n + n \ge m \) since agent~\(i\) gets assigned \(\alloclen \ge \floor{\frac{m}{n}} \ge \frac{m}{n} - 1\) many items.
+	Together, this yields\todo[info]{\(\mathbfit{i}\): I do not get the reason for the extra step in the original paper.}
+	\begin{equation}
+		\valuations[\asgd{2}, \dots, \asgd{\alloclen}]
+		= \sum_{t=2}^{\alloclen \mathstrut} \valuations[\asgd{t}]
+		\ge \sum_{t=2}^{\alloclen \mathstrut} \frac{1}{n} \valuations[ \goodsordered{tn+1}, \dots, \goodsordered{tn + n} ]
+		\ge \frac{1}{n} \valuations[ \goodsordered{2n+1}, \dots, \goodsordered{m} ]
+		= \frac{\remvalue}{n} \label{eq:lower_bound_later_items}.
+	\end{equation}
 \end{proof}
 
 \begin{remark}
 	In \cref{lem:lower_bound_later_items}, we assumed non-zero valuations for all items, hence the bundle lengths of \(\alloclen \ge \floor{\frac{m}{n}}\).
 	Of course in an actual program, one would not assign items to agents who value them at zero.
-	Inasmuch as additional zeros in \cref{eq:lower_bound_later_items} do not change the sum, \cref{lem:lower_bound_later_items} still holds nevertheless.
+	Nevertheless, \cref{lem:lower_bound_later_items} still holds inasmuch as additional zero valuations in \cref{eq:lower_bound_later_items} do not change the sum.
 \end{remark}
 
 This allows us to calculate an approximation factor for \SMatch{} by comparing its output with an optimal allocation \(\alloc*[][]\).
@@ -197,8 +194,8 @@ This allows us to calculate an approximation factor for \SMatch{} by comparing i
 	Recall the definition of \(\remvalue\) from \cref{eq:def_remvalue}.
 	Consider a slightly modified variant:
 	\begin{equation}
-		\remvalue = \smashoperator{\min_{\substack{\genericset \subset \goods \\ \abs{\genericset} \le 2n}}} \{ \valuations[\goods \setminus \genericset] \}
-		\textnormal{\quad or, alternatively,\quad}
+		%\remvalue = \smashoperator{\min_{\substack{\genericset \subset \goods \\ \abs{\genericset} \le 2n}}} \{ \valuations[\goods \setminus \genericset] \}
+		%\textnormal{\quad or, alternatively,\quad}
 		\remvalue = \valuations[\goods \setminus \genericset[i]]
 		\textnormal{ with }
 		\genericset[i] \coloneq \smashoperator{\argmin_{\substack{\genericset \subset \goods \\ \abs{\genericset} \le 2n}}} \{ \valuations[\goods \setminus \genericset] \}
@@ -208,14 +205,14 @@ This allows us to calculate an approximation factor for \SMatch{} by comparing i
 		\genericset*[i]
 		\coloneq \smashoperator{\argmin_{\substack{\genericset \subset \goods \\ \abs{\genericset} \le 2n}}} \{ \valuations[\alloc* \setminus \genericset] \}.
 	\end{equation}
-	We get the lower bound \(\valuations[\asgd*{1}] \ge \frac{1}{2 n} \valuations[\genericset*]\) from a similar argument as in the proof of \cref{lem:lower_bound_later_items}.
-	Further, it holds \(\remvalue = \valuations[\goods \setminus \genericset[i]] \ge \valuations[\alloc* \setminus \genericset[i]] \ge \valuations[\alloc* \setminus \genericset*[i]]\).
+	It holds \(\valuations[\asgd*{1}] \ge \frac{1}{2 n} \valuations[\genericset*[i]]\) because of \(\valuations[\asgd*{1}] \ge \valuations[j]\) for all \(j \in \genericset*[i]\).
+	Furthermore0, it holds \(\remvalue = \valuations[\goods \setminus \genericset[i]] \ge \valuations[\alloc* \setminus \genericset[i]] \ge \valuations[\alloc* \setminus \genericset*[i]]\).
 	We can insert these two inequalities into \cref{eq:smatch_approx_factor_lower_bound} and prove the theorem thereby:
 	\begin{align}
 		\log \NSW(\alloc[][])
 		&\ge \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \paren[\bigg]{ \frac{\valuations[\genericset*[i]]}{2 n} + \frac{\valuations[\alloc* \setminus \genericset*[i]]}{n} } \\
-		&\ge \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \paren[\bigg]{ \frac{\valuations[\alloc*]}{2n} }
-		 = \log \paren[\bigg]{\frac{\NSW(\alloc*[][])}{2 n}}
+		&\ge \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \paren[\bigg]{ \frac{\valuations[\alloc*]}{2n} } \\
+		&= \log \paren[\bigg]{\frac{\NSW(\alloc*[][])}{2 n}}
 	\end{align}
 	\vspace*{-5mm}
 	\qedhere
@@ -227,5 +224,6 @@ It remains to be shown whether the symmetric \NSW{} is equally hard.~\cite[Secti
 
 \begin{remark}
 	\SMatch{} produces \emph{fair} allocations which are \emph{envy-free up to one item} (\abb{EF1}).
-	An allocation \(\alloc[][]\) is \abb{EF1} if, for every pair \((i_1, i_2) \in \agents^2\) of agents, one needs to remove at most one item from the bundle \(\alloc[][i_2]\) of agent \(i_2\) so that agent \(i_1\) does not envy her. In other words, either it holds \(\valuations[\alloc[][i_1]][][i_1] \ge \valuations[\alloc[][i_2]][][i_2]\) or there is an item \(j \in \alloc[][i_2]\) such that \(\valuations[\alloc[][i_1]][][i_1] \ge \valuations[\alloc[][i_2] \setminus \{j\}][][i_2]\).~\cite[Section 5.2]{APNSWuSVþUM}
+	An allocation \(\alloc[][]\) is \abb{EF1} if, for every pair \((i_1, i_2) \in \agents^2\) of agents, one needs to remove at most one item from the bundle \(\alloc[][i_2]\) of agent \(i_2\) so that agent \(i_1\) does not want to swap bundles.
+	In other words, either it holds \(\valuations[\alloc[][i_1]][][i_1] \ge \valuations[\alloc[][i_2]][][i_2]\) or there is an item \(j \in \alloc[][i_2]\) such that \(\valuations[\alloc[][i_1]][][i_1] \ge \valuations[\alloc[][i_2] \setminus \{j\}][][i_2]\).~\cite[Section 5.2]{APNSWuSVþUM}
 \end{remark}
