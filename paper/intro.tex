@@ -17,7 +17,7 @@
 
 \begin{definition}
 	Let \(\goods\) be a set of \(m\) indivisible \emph{items} and \(\agents\) be a set of \(n\) \emph{agents}.
-	An \emph{allocation} is a tuple \(\alloc[][] = ( \alloc[][1], \dots, \alloc[][n] )\) of \emph{bundles}\todo{redefine} \(\alloc \subset \goods\) such that each item is element of exactly one bundle, that is \(\mathop{\bigcup\hspace{-1pt}_{i \in \agents}} \alloc = \goods\) and \(\alloc \cap \alloc[][i'] = \emptyset\) for all \(i \neq i'\).
+	An \emph{allocation} is a tuple \(\alloc[][] = (\alloc)_{i \in \agents}\) of \emph{bundles}\todo{redefine} \(\alloc \subset \goods\) such that each item is element of exactly one bundle, that is \(\mathop{\bigcup\hspace{-1pt}_{i \in \agents}} \alloc = \goods\) and \(\alloc \cap \alloc[][i'] = \emptyset\) for all \(i \neq i'\).
 	An item~\(j \in \goods\) is \emph{assigned}\todo{or rather \enquote{allocated}?} to agent \(i \in \agents\) if \(j \in \alloc\) holds.
 \end{definition}
 

@@ -111,7 +111,7 @@ The addend \(\valuations[\alloc]\) could lead to better allocations in applicati
 		additive valuations \(\valuations \colon \powerset[\goods] \to \realposzero\) where \(\valuations[\genericset]\) is the valuation of agent \(i \in \agents\) for each set \(\genericset \subset \goods\) of items
 	}
 	\KwOut{%
-		\(\frac{1}{2n}\)-approximation \(\alloc[][] = (\alloc[][1], \dots, \alloc[][n])\) of an optimal allocation
+		\(\frac{1}{2n}\)-approximation \(\alloc[][] = (\alloc)_{i \in \agents}\) of an optimal allocation
 	}
 
 	\(\alloc \gets \emptyset \quad\forall i \in \agents\)\;
@@ -229,5 +229,3 @@ It remains to be shown whether the symmetric \NSW{} is equally hard.~\cite[Secti
 	\SMatch{} produces \emph{fair} allocations which are \emph{envy-free up to one item} (\abb{EF1}).
 	An allocation \(\alloc[][]\) is \abb{EF1} if, for every pair \((i_1, i_2) \in \agents^2\) of agents, one needs to remove at most one item from the bundle \(\alloc[][i_2]\) of agent \(i_2\) so that agent \(i_1\) does not envy her. In other words, either it holds \(\valuations[\alloc[][i_1]][][i_1] \ge \valuations[\alloc[][i_2]][][i_2]\) or there is an item \(j \in \alloc[][i_2]\) such that \(\valuations[\alloc[][i_1]][][i_1] \ge \valuations[\alloc[][i_2] \setminus \{j\}][][i_2]\).~\cite[Section 5.2]{APNSWuSVþUM}
 \end{remark}
-
-\todo[inline]{remove indices from allocations}
