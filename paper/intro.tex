@@ -57,4 +57,94 @@ In a slight abuse of notation, we omit curly braces delimiting a set in the argu
 \end{description}
 We use \emph{additive \NSW} and \emph{submodular \NSW} as shorthands for the Nash social welfare problems with additive and submodular valuation functions, respectively.
 
-\lipsum[9-15]
+\begin{itemize}
+	\item
+	non-sharable indivisible resources -> items; opposed to divisible and sharable ones like money, electricity, network connections
+
+	\item
+	different types of efficiency: Pareto optimal, utilitarian, egalitarian, Nash
+
+	\item
+	additive:
+	\NP-hard 1,069 (https://www.semanticscholar.org/reader/1c5347490b006dc6c498131a9ee01281a31edbe7)
+
+	\item
+	submodularity:
+	discrete analogue of concavity and arises naturally in economic setting since it caputres the property that marginal utilities are decreasing as we allocate more goods
+	\begin{itemize}
+		\item
+		alt def: https://www.semanticscholar.org/reader/1c5347490b006dc6c498131a9ee01281a31edbe7
+	\end{itemize}
+	matroids?
+
+	\item
+	NSW [Lee17] [CKM\textsuperscript{+}16]:
+	\NP-hard 1,5819, EF1, PO, approximation recover most guarantees;
+	https://www.semanticscholar.org/reader/1c5347490b006dc6c498131a9ee01281a31edbe7:
+	invariance under scaling
+
+	\item
+	mention Nash's name in footnote
+
+	\item
+	especially asymmetric case less understood
+	https://www.semanticscholar.org/reader/bef4514574543720bc45ea235df4c4556e97efe0
+
+	\item
+	Utilitarian SW completely resolved [Von08] [KLMM08]:
+	constant-factor \(\frac{\euler}{\euler - 1}\), hardness result
+
+	\item
+	maximin somewhat resolved [AS10] [KP07] [BD05]:
+	additive \(\O(\sqrt{n} \log^3 n)\)-factor;
+	submodular \(\O(n)\)-factor;
+	hardness of \(2\) for both
+
+	\item
+	symmetric additive(-like) NSW [BKV18]:
+	\(\euler^{1/\euler}\)-factor
+
+	\item
+	asymmetric submodular NSW [NR14] [CDG\textsuperscript{+}17]:
+	not much known;
+	\(\O(m)\)-factor
+
+	\item
+	applications
+	\begin{itemize}
+		\item
+		industrial procurement:
+		capture of preferences?
+		in bundles or singular?
+		capture of business rules (physical objects, configuration, synergy)
+		\cite{survey}
+
+		\item
+		earth observation satellite:
+		co-founded -> weights reflecting investment -> utility must reflect that;
+		sharable as data can be distributed multiple times
+		\cite{survey}
+
+		\item
+		manufacturing system:
+		task scheduling across production resources -> network of dependencies;
+		dynamic, real-time calculation (feasibility) more important than optimality because of disturbance -> distributedway by means of cooperation and coordination; rescheduling
+		\cite{survey}
+
+		\item
+		combinatorial auctions:
+		FCC auction of spectrum licenses
+		\cite{inapproximability}
+
+		\item
+		edge computing:
+		\enquote{paradigm in which the resources for communication, computation, control and storage are placed at the edge of the Internet, in close proximity to mobile devices, sensors, actuators, connected things and end users.};
+		highly competitive environment;
+		locality, latency, security, incentivisation
+		\cite{edge_computing_auction, edge_computing_report}
+	\end{itemize}
+
+	\item
+	B. R. Chaudhury, Y. K. Cheung, J. Garg, N. Garg, M. Hoefer, and K. Mehlhorn. Fair division
+	of indivisible goods for a class of concave valuations. J. Artif. Intell. Res., 74:111–142, 2022
+\end{itemize}
