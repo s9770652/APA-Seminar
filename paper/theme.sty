@@ -136,6 +136,33 @@
 \SetKwInOut{KwOut}{Output\!}
 
 
+%%% Bibliography.
+% Correct placement of dots and capitalisation when using doi+urldate.
+% taken from: https://github.com/plk/biblatex/issues/112#issuecomment-17075734
+\renewbibmacro*{doi+eprint+url}{%
+	\iftoggle{bbx:doi}
+		{\printfield{doi}}
+		{}%
+	\newunit\newblock
+	\iftoggle{bbx:eprint}
+		{\usebibmacro{eprint}}
+		{}%
+	\ifboolexpr{test {\iftoggle{bbx:url}} and test {\iffieldundef{url}} and not test {\iffieldundef{urlyear}}}
+		{\setunit{\addspace}}
+		{\newunit\newblock}%
+	\iftoggle{bbx:url}
+		{\usebibmacro{url+urldate}}
+		{}
+}
+\NewDocumentCommand{\mybibliography}{O{}}{
+	\begingroup
+%	\renewcommand*\ttdefault{cmvtt}  % proportional type writer font
+	\sloppy  % for justified urls
+	\printbibliography[#1]
+	\endgroup
+}
+
+
 %%% PDF options.
 \hypersetup{
 	pdfdisplaydoctitle=true,
