@@ -6,19 +6,21 @@
 	The submodular \NSW{} is not approximable within a factor of \(\frac{\euler}{\euler - 1}\)\todo[info]{\normalshape\(\mathbfit{i}\): Should it not be \(\frac{\euler - 1}{\euler} - \epsilon\)?} in polynomial time unless \(\P = \NP\).
 \end{theorem}
 \begin{proof}
-	Consider the related \SW{} problem\footnotemark.
+	Consider the related \USW{} problem\footnotemark.
 	\begin{problem}
 		\label{prob:sw}
-		Given a set \(\goods\) of indivisible items and a set \(\agents\) of agents with monotonic, submodular valuation functions \(\valuations \colon \powerset[\goods] \to \real\) for all agents \(i \in \agents\), the \emph{symmetric submodular Utilitarian Social Welfare problem} (\SW) is to find an allocation maximising the sum of valuations, that is
+		Given a set \(\goods\) of indivisible items and a set \(\agents\) of agents with monotonic, submodular valuation functions \(\valuations \colon \powerset[\goods] \to \real\) for all agents \(i \in \agents\), the \emph{symmetric submodular utilitarian social welfare (\USW) problem} is to find an allocation maximising the sum of valuations, that is
 		\begin{equation*}
-			\argmax_{\alloc[][] \in \allallocs{n}{\goods}} \braces[\bigg]{ \smashoperator{\sum_{i \in \agents}} \valuations[\alloc] }
+			\argmax_{\alloc[][] \in \allallocs{\agents}{\goods}} \braces{ \USW(\alloc[][]) }
+			\quad\text{with~}
+			\USW(\alloc[][]) \coloneq \smashoperator{\sum_{i \in \agents}} \valuations[\alloc]
 		\end{equation*}
-		where \(\allallocs{n}{\goods}\) is the set of all possible allocations of the items in \(\goods\) amongst \(n\) agents.
+		where \(\allallocs{\agents}{\goods}\) is the set of all possible allocations of the items in \(\goods\) amongst \(n\) agents.
 	\end{problem}
 
 	Note that this problem is identical to the symmetric submodular \NSW{} except for the sum in the target function instead of a product.
-	We will exploit this fact to calculate the \NSW{} of instances for \SW.
-	\citeauthor{inapproximability}~\cite{inapproximability} supply a polynomial-time reduction of \SW{} from the following problem:
+	We will exploit this fact to calculate the \NSW{} of instances for \USW.
+	\citeauthor{inapproximability}~\cite{inapproximability} supply a polynomial-time reduction of \USW{} from the following problem:
 	\begin{problem}
 		Given a graph \(G = (V, E)\) and a constant \(\colouringconstant \le 1\), the \emph{\(\colouringconstant\)-\Gap{} problem} is to decide whether, for any 3-colouring of graph \(G\) which maximises the number of edges with different coloured endpoints, the number of such edges is~\(\abs{E}\) (\emph{\Yes}) or \(\colouringconstant \abs{E}\) and below (\emph{\No}).
 	\end{problem}
@@ -27,24 +29,24 @@
 	\begin{proposition}
 		There exists a constant \(\colouringconstant \le 1\) such that the \(\colouringconstant\)-\Gap{} problem is \NP-hard.
 	\end{proposition}
-	Reducing an instance of the \(c\)-\Gap{} problem yields an instance of the symmetric submodular \SW{} problem with identical valuation functions.
+	Reducing an instance of the \(c\)-\Gap{} problem yields an instance of the symmetric submodular \USW{} problem with identical valuation functions.
 	Its properties are as follows:
 	\begin{description}
 		\item[\Yes]
-		The \SW{} is \(n \swconstant\) because every agent values her bundle at \(n\), whereby \(\swconstant\) is a constant depending on the input graph.
-		The \NSW{} of the instance would be \(\swconstant\).
+		The \USW{} is \(n \USWconstant\) because every agent values her bundle at \(n\), whereby \(\USWconstant\) is a constant depending on the input graph.
+		The \NSW{} of the instance would be \(\USWconstant\).
 
 		\item[\No]
-		The \SW{} is \(\frac{\euler - 1}{\euler} n \swconstant\).
-		Applying the inequality of arithmetic and geometric means, \ie{}, \((x_1 + \dots + x_n)/n \ge \sqrt[n]{x_1 \dotsm x_n}\) for all nonnegative numbers \(x_1, \dots, x_n \in \realposzero\), reveals that the \NSW{} of the instance is at most \(\frac{\euler - 1}{\euler} \swconstant\).
+		The \USW{} is \(\frac{\euler - 1}{\euler} n \USWconstant\).
+		Applying the inequality of arithmetic and geometric means, \ie{}, \((x_1 + \dots + x_n)/n \ge \sqrt[n]{x_1 \dotsm x_n}\) for all nonnegative numbers \(x_1, \dots, x_n \in \realposzero\), reveals that the \NSW{} of the instance is at most \(\frac{\euler - 1}{\euler} \USWconstant\).
 	\end{description}
 	Thereout follows that the submodular \NSW{} problem, even when symmetric and with identical valuation functions, cannot be approximated within a factor better than \(\frac{\euler}{\euler - 1}\);
-	otherwise one could decide the \(c\)-\Gap{} problem in polynomial time by checking whether the corresponding \NSW{} instance has a value above \(\frac{\euler - 1}{\euler} \swconstant\).
+	otherwise one could decide the \(c\)-\Gap{} problem in polynomial time by checking whether the corresponding \NSW{} instance has a value above \(\frac{\euler - 1}{\euler} \USWconstant\).
 \end{proof}
 
 For a constant number of agents, \citeauthor{APNSWuSVþUM}~\cite[Section 5.1]{APNSWuSVþUM} describe a family \((A_{\epsilon})_{\epsilon > 0}\) of algorithms for the asymmetric submodular \NSW{} problem where each algorithm \(A_\epsilon\) achieves an approximation factor of \(\frac{\euler}{\euler - 1} + \epsilon\).
 
 \footnotetext{
 	\Citeauthor{APNSWuSVþUM} (and many others) call \cref{prob:sw} the \enquote{Allocation problem}.
-	We changed the name to match the naming scheme of the \NSW{} problem and to avoid confusion, as both problems are about allocations.
+	We changed the name to match the naming scheme of the \NSW{} problem and to avoid confusion, as both problems are about finding allocations.
 }

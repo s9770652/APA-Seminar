@@ -4,7 +4,7 @@
 \begin{algorithm*}[!b]
 	\KwIn{%
 		set \(\goods\) of \(m\) items,
-		set \(\agents\) of \(n\) agents, additive valuation functions \(\valuations \colon \powerset[\goods] \to \realposzero\) and weights \(\weight\) for all agents \(i \in \agents\)
+		set \(\agents\) of \(n\) agents, additive valuation functions \(\valuations \colon \powerset[\goods] \to \realposzero\) and weights \(\weight \in \realpos\) for all agents \(i \in \agents\)
 	}
 	\KwOut{%
 		\(\frac{1}{2n(\log_2 n + 3)}\)-approximation \(\alloc[\phaseiii][] = (\alloc[\phaseiii])_{i \in \agents}\) of an optimal allocation
@@ -102,7 +102,7 @@ First, we give a lower bound on the valuations of optimal and attainable items.
 		\valuations[ \attopt{2} \given \asgd{1} ]
 		&\ge \valuations[\attopt{1} \setminus \lostset{2}] -  \valuations[\asgd{1}] \\
 		&\ge \valuations[ \attopt{1} ] - \valuations[\lostset{2}] - \valuations[\asgd{1}] \\
-		&\ge \valuations[ \attopt{1} ] - \lostsetlen{2} \valuations[\asgd{1}] - \valuations[\asgd{1}],
+		&\ge \valuations[ \attopt{1} ] - \lostsetlen{2} \cdot \valuations[\asgd{1}] - \valuations[\asgd{1}],
 	\end{align}
 	where the second inequality can be shown inductively with the definition of submodularity\todo{Do that or, alternatively, find a paper showing the other def. [IRfCAwSUF]}, and the third inequality is due all \(\lostsetlen{2}\) items \(j\) in set \(\lostset{2}\) not being assigned in round \(1\) although attainable, implying \(\valuations[j] \le \valuations[\asgd{1}]\).
 

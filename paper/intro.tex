@@ -1,43 +1,41 @@
 \section{Introduction}
 \label{sec:intro}
 
-\begin{itemize}
-	\item
-	problem introduction, motivation, applications
+The study of distributing resources amongst one or more receivers is an interdisciplinary field and is analysed from both a computational (how to find an allocation) and a qualitative (what a good allocation makes) standpoint~\cite{survey}.
+Its areas of application are manifold:
+industrial procurement, where the preferences of buyers and sellers need be appropriately captured and real-world constraints on goods and services be taken into account~\cite{survey};
+mobile edge computing, where computation and storage are taken on by physically close cloud systems but participation has to be incentivised~\cite{edge_computing_auction, edge_computing_report};
+manufacturing processes, where tasks should be scheduled efficiently within and between many production sites and disturbances be quickly paid heed to~\cite{survey};
+water management, where hostile countries must come to mutual agreements on the withdrawal from contested rivers~\cite{water_management}.
 
-	\item
-	formal problem definition (incl. why geometric mean?)
-
-	\item
-	short literature review: What is known, what not? New findings?
-
-	\item
-	content \& structure of paper
-\end{itemize}
-
+In this seminar paper, we focus on non-sharable and indivisible resources, so-called \emph{items}.
+The receivers of those items are called \emph{agents}.
+The distributions of items amongst agents are modelled through allocations:
 \begin{definition}
-	Let~\(\goods\) be a set of size \(m\) and~\(\agents\) be a set of size \(n\).
-	The elements of set~\(\goods\) are called \emph{items}, and the elements of set~\(\agents\) are called \emph{agents}.
-	An \emph{allocation} is a tuple \(\alloc[][] = (\alloc)_{i \in \agents}\) of so-called \emph{bundles} \(\alloc \subset \goods\) such that each item is element of exactly one bundle, that is \(\mathop{\bigcup\hspace{-1pt}_{i \in \agents}} \alloc = \goods\) and \(\alloc \cap \alloc[][i'] = \emptyset\) for all \(i \neq i'\).
+	Let~\(\goods\) be a set of \(m\) items and~\(\agents\) be a set of \(n\) agents.
+	An \emph{allocation} is a tuple \(\alloc[][] = (\alloc)_{i \in \agents}\) of \emph{bundles} \(\alloc \subset \goods\) such that each item is element of exactly one bundle, that is \(\mathop{\bigcup\hspace{-1pt}_{i \in \agents}} \alloc = \goods\) and \(\alloc \cap \alloc[][i'] = \emptyset\) for all \(i \neq i'\).
 	An item~\(j \in \goods\) is \emph{assigned}\todo{or rather \enquote{allocated}?} to agent \(i \in \agents\) if \(j \in \alloc\) holds.
 \end{definition}
-\todo[inline]{mention divisibility}
 
-\(\vdots\)
+The satisfaction of an agent \(i\) with her bundle \(\alloc\) is measured by her \emph{valuation function}~\(\valuations\), which assigns each set of items a value.
+We always assume that valuation functions are non-negative, \ie, \(\valuations[\genericset] \ge 0\) \(\forall \genericset \subset \goods\), and monotonically non-decreasing, \ie, \(\valuations[\genericset[1]] \le \valuations[\genericset[2]]\) \(\forall \genericset[1] \subset \genericset[2] \subset \goods\).
+In addition, the empty set is always valued at zero, \ie, \(\valuations[\emptyset] = 0\).
+In a slight abuse of notation, we sometimes omit curly braces delimiting a set, so we write \(\valuations[j_1, j_2, \dots]\) but mean \(\valuations[\{j_1, j_2, \dots\}]\) for example.
 
+In order to measure and maximise the overall satisfaction of all agents, one needs to combine their valuations.
+Several options arise here;
+common choices are the utilitarian social welfare, that is the sum of all valuations~\cite{inapproximability, survey, APNSWuSVþUM, water_management, edge_computing_auction}, and the egalitarian social welfare, that is the minimum of all valuations~\cite{survey, APNSWuSVþUM}.
+We consider a third one, the Nash social welfare.
 \begin{problem}
-	Given a set \(\goods\) of items and a set \(\agents\) of agents with \emph{valuation functions} \(\valuations \colon \powerset[\goods] \to \real\) and \emph{agent weights} \(\eta_i\) for all agents \(i \in \agents\), the \emph{Nash Social Welfare problem} (\NSW) is to find an allocation maximising the weighted geometric mean of valuations, that is
+	Given a set \(\goods\) of items and a set \(\agents\) of agents with monotonically non-decreasing valuation functions \(\valuations \colon \powerset[\goods] \to \realposzero\) and agent weights \(\eta_i \in \realpos\) for all agents \(i \in \agents\), the \emph{Nash social welfare (\NSW) problem} is to find an allocation maximising the weighted geometric mean of valuations, that is,
 	\begin{equation*}
-		\argmax_{\alloc[][] \in \allallocs{n}{\goods}} \braces[\bigg]{ \paren[\Big]{ \smashoperator{\prod_{i \in \agents}} \valuations[\alloc]^{\weight} }^{1 / \sum_{i \in \agents} \weight} }
+		\argmax_{\alloc[][] \in \allallocs{\agents}{\goods}} \braces{ \NSW(\alloc[][]) }
+		\quad\text{with~}
+		\NSW(\alloc[][]) \coloneq \paren[\Big]{ \smashoperator{\prod_{i \in \agents}} \valuations[\alloc]^{\weight} }^{1 / \sum_{i \in \agents} \weight}
 	\end{equation*}
-	where \(\allallocs{n}{\goods}\) is the set of all possible allocations of the items in \(\goods\) amongst \(n\) agents.
+	where \(\allallocs{\agents}{\goods}\) is the set of all possible allocations.
 	The problem is called \emph{symmetric} if all agent weights \(\weight\) are equal, and \emph{asymmetric} otherwise.
 \end{problem}
-\todo[inline]{agents without items assigned have valuation zero → prevent}
-
-\(\vdots\)
-
-In a slight abuse of notation, we omit curly braces delimiting a set in the arguments of a valuation function, so we write \(\valuations[j_1, j_2, \dots]\) but mean \(\valuations[\{j_1, j_2, \dots\}]\) for example.
 
 \(\vdots\)
 
@@ -48,7 +46,7 @@ In a slight abuse of notation, we omit curly braces delimiting a set in the argu
 \Citeauthor{APNSWuSVþUM}~\cite{APNSWuSVþUM} consider five different types of non-negative monotonically non-decreasing valuation functions of which we are going to consider only the following two due to space constraints:
 \begin{description}
 	\item[Additive]
-	The valuation \(\valuations[\genericset]\) of an agent \(i\) for a set \(\genericset \subset \goods\) of items \(j\) is the sum of individual valuations \(\valuations[j]\), that is \(\valuations[\genericset] = \sum_{j \in \genericset} \valuations[j]\).
+	The valuation \(\valuations[\genericset]\) of an agent \(i\) for a set \(\genericset \subset \goods\) of items \(j\) is the sum of individual valuations \(\valuations[j]\), that is, \(\valuations[\genericset] = \sum_{j \in \genericset} \valuations[j]\).
 
 	\item[Submodular]
 	Let \(\valuations[\genericset[1] \given \genericset[2]] \coloneq \valuations[\genericset[1] \cup \genericset[2]] - \valuations[\genericset[2]]\) denote the marginal valuation\todo{or rather utility?} of agent~\(i\) for a set \(\genericset[1] \subset \goods\) of items over a \emph{disjoint} set \(\genericset[2] \subset \goods\).
@@ -58,11 +56,17 @@ In a slight abuse of notation, we omit curly braces delimiting a set in the argu
 We use \emph{additive \NSW} and \emph{submodular \NSW} as shorthands for the Nash social welfare problems with additive and submodular valuation functions, respectively.
 
 \begin{itemize}
-	\item
-	non-sharable indivisible resources -> items; opposed to divisible and sharable ones like money, electricity, network connections
+%	\item
+%	non-sharable indivisible resources -> items; opposed to divisible and sharable ones like money, electricity, network connections
+
+%	\item
+%	different types of efficiency: Pareto optimal, utilitarian, egalitarian, Nash
 
 	\item
-	different types of efficiency: Pareto optimal, utilitarian, egalitarian, Nash
+	NSW [Lee17] [CKM\textsuperscript{+}16]:
+	\NP-hard 1,5819, EF1, PO, approximation recover most guarantees;
+	https://www.semanticscholar.org/reader/1c5347490b006dc6c498131a9ee01281a31edbe7:
+	invariance under scaling
 
 	\item
 	additive:
@@ -77,27 +81,21 @@ We use \emph{additive \NSW} and \emph{submodular \NSW} as shorthands for the Nas
 	\end{itemize}
 	matroids?
 
-	\item
-	NSW [Lee17] [CKM\textsuperscript{+}16]:
-	\NP-hard 1,5819, EF1, PO, approximation recover most guarantees;
-	https://www.semanticscholar.org/reader/1c5347490b006dc6c498131a9ee01281a31edbe7:
-	invariance under scaling
-
-	\item
-	mention Nash's name in footnote
+%	\item
+%	mention Nash's name in footnote
 
 	\item
 	especially asymmetric case less understood
 	https://www.semanticscholar.org/reader/bef4514574543720bc45ea235df4c4556e97efe0
 
 	\item
-	Utilitarian SW completely resolved [Von08] [KLMM08]:
+	USW completely resolved [Von08] [KLMM08]:
 	constant-factor \(\frac{\euler}{\euler - 1}\), hardness result
 
 	\item
-	maximin somewhat resolved [AS10] [KP07] [BD05]:
-	additive \(\O(\sqrt{n} \log^3 n)\)-factor;
-	submodular \(\O(n)\)-factor;
+	ESW somewhat resolved [AS10] [KP07] [BD05]:
+	additive \(\bigo(\sqrt{n} \log^3 n)\)-factor;
+	submodular \(\bigo(n)\)-factor;
 	hardness of \(2\) for both
 
 	\item
@@ -107,42 +105,42 @@ We use \emph{additive \NSW} and \emph{submodular \NSW} as shorthands for the Nas
 	\item
 	asymmetric submodular NSW [NR14] [CDG\textsuperscript{+}17]:
 	not much known;
-	\(\O(m)\)-factor
+	\(\bigo(m)\)-factor
 
-	\item
-	applications
-	\begin{itemize}
-		\item
-		industrial procurement:
-		capture of preferences?
-		in bundles or singular?
-		capture of business rules (physical objects, configuration, synergy)
-		\cite{survey}
-
-		\item
-		earth observation satellite:
-		co-founded -> weights reflecting investment -> utility must reflect that;
-		sharable as data can be distributed multiple times
-		\cite{survey}
-
-		\item
-		manufacturing system:
-		task scheduling across production resources -> network of dependencies;
-		dynamic, real-time calculation (feasibility) more important than optimality because of disturbance -> distributedway by means of cooperation and coordination; rescheduling
-		\cite{survey}
-
-		\item
-		combinatorial auctions:
-		FCC auction of spectrum licenses
-		\cite{inapproximability}
-
-		\item
-		edge computing:
-		\enquote{paradigm in which the resources for communication, computation, control and storage are placed at the edge of the Internet, in close proximity to mobile devices, sensors, actuators, connected things and end users.};
-		highly competitive environment;
-		locality, latency, security, incentivisation
-		\cite{edge_computing_auction, edge_computing_report}
-	\end{itemize}
+%	\item
+%	applications
+%	\begin{itemize}
+%		\item
+%		industrial procurement:
+%		capture of preferences?
+%		in bundles or singular?
+%		capture of business rules (physical objects, configuration, synergy)
+%		\cite{survey}
+%
+%		\item
+%		earth observation satellite:
+%		co-founded -> weights reflecting investment -> utility must reflect that;
+%		sharable as data can be distributed multiple times
+%		\cite{survey}
+%
+%		\item
+%		manufacturing system:
+%		task scheduling across production resources -> network of dependencies;
+%		dynamic, real-time calculation (feasibility) more important than optimality because of disturbance -> distributedway by means of cooperation and coordination; rescheduling
+%		\cite{survey}
+%
+%		\item
+%		combinatorial auctions:
+%		FCC auction of spectrum licenses
+%		\cite{inapproximability}
+%
+%		\item
+%		edge computing:
+%		\enquote{paradigm in which the resources for communication, computation, control and storage are placed at the edge of the Internet, in close proximity to mobile devices, sensors, actuators, connected things and end users.};
+%		highly competitive environment;
+%		locality, latency, security, incentivisation
+%		\cite{edge_computing_auction, edge_computing_report}
+%	\end{itemize}
 
 	\item
 	B. R. Chaudhury, Y. K. Cheung, J. Garg, N. Garg, M. Hoefer, and K. Mehlhorn. Fair division

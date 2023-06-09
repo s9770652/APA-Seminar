@@ -83,7 +83,7 @@ The geometric mean of the \NSW{} favours allocations with similarly valued bundl
 		A repeated maximum matching algorithm would greedily assign item \(1\) to agent \(1\) and item \(m+1\) to agent \(2\) in the first round.
 		Even if all remaining items were going to be assigned to agent \(1\), the NSW will never surpass \(\sqrt{(2m + \epsilon - 1) \cdot 1} < \sqrt{2m}\).
 		The approximation factor \(\alpha \approx \sqrt{m/2}\) therefore depends on the number of items.
-		\todo{fix pos of subcaptions \& of agent 2}
+		\todo{fix pos of subcaptions \& of agent 2; mention symmetry}
 	}
 	\label{fig:allocation}
 \end{figure*}
@@ -107,7 +107,7 @@ The addend \(\valuations[\alloc]\) could lead to better allocations in applicati
 \begin{algorithm*}[t]
 	\KwIn{%
 		set \(\goods\) of \(m\) items,
-		set \(\agents\) of \(n\) agents, additive valuation functions \(\valuations \colon \powerset[\goods] \to \realposzero\) and weights \(\weight\) for all agents \(i \in \agents\)
+		set \(\agents\) of \(n\) agents, additive valuation functions \(\valuations \colon \powerset[\goods] \to \realposzero\) and weights \(\weight \in \realpos\) for all agents \(i \in \agents\)
 	}
 	\KwOut{%
 		\(\frac{1}{2n}\)-approximation \(\alloc[][] = (\alloc)_{i \in \agents}\) of an optimal allocation

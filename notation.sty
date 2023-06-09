@@ -286,7 +286,7 @@
 \NewDocumentCommand{\remvalue}{O{i}}{
 	u\IfEmptyF{#1}{_{#1}}
 }
-\NewDocumentCommand{\swconstant}{}{
+\NewDocumentCommand{\USWconstant}{}{
 	C
 }
 \NewDocumentCommand{\unluckyagents}{m}{
@@ -319,11 +319,16 @@
 \NewDocumentCommand{\abb}{m}{#1}  % actually defined in theme.sty
 
 \NewDocumentCommand{\Gap}{}{\abb{Gap-Max-3-Colouring}}
+\NewDocumentCommand{\MARA}{}{\abb{MARA}}
 \NewDocumentCommand{\No}{}{\abb{No}~instance}
-\NewDocumentCommand{\NSW}{}{\abb{NSW}}
+\NewDocumentCommand{\NSW}{}{%
+	\relax\ifmmode{\operatorname{NSW}}\else{\abb{NSW}}\fi%
+}
 \NewDocumentCommand{\RepReMatch}{}{\abb{RepReMatch}}
 \NewDocumentCommand{\SMatch}{}{\abb{SMatch}}
-\NewDocumentCommand{\SW}{}{\abb{USW}}
+\NewDocumentCommand{\USW}{}{%
+	\relax\ifmmode{\operatorname{USW}}\else{\abb{USW}}\fi%
+}
 \NewDocumentCommand{\Yes}{}{\abb{Yes}~instance}
 
 \crefname{property}{property}{properties}
