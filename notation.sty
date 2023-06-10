@@ -115,9 +115,10 @@
 
 
 %%% Constants and specifiers.
+\def\APX{\ensuremath{\mathcal{APX}}}
 \def\euler{\ensuremath{\mathup{e}}}
-\def\P{\ensuremath{\mathcal{P}}}
 \def\NP{\ensuremath{\mathcal{NP}}}
+\def\P{\ensuremath{\mathcal{P}}}
 
 % Sets of numbers.
 \def\nat{\mathbb{N}}
@@ -319,7 +320,9 @@
 \NewDocumentCommand{\abb}{m}{#1}  % actually defined in theme.sty
 
 \NewDocumentCommand{\Gap}{}{\abb{Gap-Max-3-Colouring}}
-\NewDocumentCommand{\MARA}{}{\abb{MARA}}
+\NewDocumentCommand{\ESW}{}{%
+	\relax\ifmmode{\operatorname{ESW}}\else{\abb{ESW}}\fi%
+}
 \NewDocumentCommand{\No}{}{\abb{No}~instance}
 \NewDocumentCommand{\NSW}{}{%
 	\relax\ifmmode{\operatorname{NSW}}\else{\abb{NSW}}\fi%

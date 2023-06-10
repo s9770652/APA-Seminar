@@ -1,8 +1,8 @@
 \section{Introduction}
 \label{sec:intro}
 
-The study of distributing resources amongst one or more receivers is an interdisciplinary field and is analysed from both a computational (how to find an allocation) and a qualitative (what a good allocation makes) standpoint~\cite{survey}.
-Its areas of application are manifold:
+The study of distributing resources amongst one or more receivers is an interdisciplinary field and is interesting from both a computational (how to find an allocation) and a qualitative (what a good allocation makes) standpoint~\cite{survey}.
+Its areas of application are mani\-fold:
 industrial procurement, where the preferences of buyers and sellers need be appropriately captured and real-world constraints on goods and services be taken into account~\cite{survey};
 mobile edge computing, where computation and storage are taken on by physically close cloud systems but participation has to be incentivised~\cite{edge_computing_auction, edge_computing_report};
 manufacturing processes, where tasks should be scheduled efficiently within and between many production sites and disturbances be quickly paid heed to~\cite{survey};
@@ -24,12 +24,12 @@ In a slight abuse of notation, we sometimes omit curly braces delimiting a set, 
 
 In order to measure and maximise the overall satisfaction of all agents, one needs to combine their valuations.
 Several options arise here;
-common choices are the utilitarian social welfare, that is the sum of all valuations~\cite{inapproximability, survey, APNSWuSVþUM, water_management, edge_computing_auction}, and the egalitarian social welfare, that is the minimum of all valuations~\cite{survey, APNSWuSVþUM}.
-We consider a third one, the Nash social welfare.
+common choices are the utilitarian social welfare (\USW), that is the sum of all valuations~\cite{inapproximability, survey, APNSWuSVþUM, water_management, edge_computing_auction}, and the egalitarian social welfare (\ESW), that is the minimum of all valuations~\cite{survey, APNSWuSVþUM}.
+We consider a third one, the Nash social welfare (\NSW).
 \begin{problem}
-	Given a set \(\goods\) of items and a set \(\agents\) of agents with monotonically non-decreasing valuation functions \(\valuations \colon \powerset[\goods] \to \realposzero\) and agent weights \(\eta_i \in \realpos\) for all agents \(i \in \agents\), the \emph{Nash social welfare (\NSW) problem} is to find an allocation maximising the weighted geometric mean of valuations, that is,
+	Given a set \(\goods\) of items and a set \(\agents\) of agents with monotonically non-decreasing valuation functions \(\valuations \colon \powerset[\goods] \to \realposzero\) and agent weights \(\eta_i \in \realpos\) for all agents \(i \in \agents\), the \emph{Nash social welfare problem} is to find an allocation \(\alloc*[][]\) maximising the weighted geometric mean of valuations, that is,
 	\begin{equation*}
-		\argmax_{\alloc[][] \in \allallocs{\agents}{\goods}} \braces{ \NSW(\alloc[][]) }
+		\alloc*[][] \overset{!}{=} \argmax_{\alloc[][] \in \allallocs{\agents}{\goods}} \braces{ \NSW(\alloc[][]) }
 		\quad\text{with~}
 		\NSW(\alloc[][]) \coloneq \paren[\Big]{ \smashoperator{\prod_{i \in \agents}} \valuations[\alloc]^{\weight} }^{1 / \sum_{i \in \agents} \weight}
 	\end{equation*}
@@ -37,13 +37,23 @@ We consider a third one, the Nash social welfare.
 	The problem is called \emph{symmetric} if all agent weights \(\weight\) are equal, and \emph{asymmetric} otherwise.
 \end{problem}
 
+For the techniques employed in later sections, it is beneficial to consider the logarithmic \NSW{}, that is,
+\begin{equation}
+	\log \NSW(\alloc[][])
+	= \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \valuations[\alloc],
+\end{equation}
+which is a sum instead of a product.
+The \NSW{} serves as middle ground between the \USW{} and the \ESW{}, which focus on efficiency and fairness, respectively.
+In addition, it exhibits scale-freeness, that is invariance to the scales in which each valuation is expressed, rendering \eg{} relative instead of absolute valuations unproblematic.
+Even though the \NSW{} problem is \NP-hard and \APX-hard, approximate solutions largely keep the properties of optimal allocations.~\cite{approximating_the_nsw_with_indiv_items, the_unreasonable_fairness_of_max_nsw, approximating_the_nsw_with_indiv_items}
+We use the following definition for the approximation factor.
+\begin{definition}
+	An algorithm for the \NSW{} problem is \(\alpha\)-approximative if, for every output allocation~\(\alloc[][]\), it holds \(\NSW(\alloc[][]) \ge \NSW(\alloc*[][])/\alpha\).
+\end{definition}
+
 \(\vdots\)
 
-\todo[inline]{definition of approximation factor [def environment or in-text?]}
-
-\(\vdots\)
-
-\Citeauthor{APNSWuSVþUM}~\cite{APNSWuSVþUM} consider five different types of non-negative monotonically non-decreasing valuation functions of which we are going to consider only the following two due to space constraints:
+\Citeauthor{APNSWuSVþUM}~\cite{APNSWuSVþUM} consider five different types of valuation functions of which we are going to consider only the following two due to space constraints:
 \begin{description}
 	\item[Additive]
 	The valuation \(\valuations[\genericset]\) of an agent \(i\) for a set \(\genericset \subset \goods\) of items \(j\) is the sum of individual valuations \(\valuations[j]\), that is, \(\valuations[\genericset] = \sum_{j \in \genericset} \valuations[j]\).
@@ -62,11 +72,11 @@ We use \emph{additive \NSW} and \emph{submodular \NSW} as shorthands for the Nas
 %	\item
 %	different types of efficiency: Pareto optimal, utilitarian, egalitarian, Nash
 
-	\item
-	NSW [Lee17] [CKM\textsuperscript{+}16]:
-	\NP-hard 1,5819, EF1, PO, approximation recover most guarantees;
-	https://www.semanticscholar.org/reader/1c5347490b006dc6c498131a9ee01281a31edbe7:
-	invariance under scaling
+%	\item
+%	NSW [Lee17] [CKM\textsuperscript{+}16]:
+%	\NP-hard 1,5819, EF1, PO, approximation recover most guarantees;
+%	https://www.semanticscholar.org/reader/1c5347490b006dc6c498131a9ee01281a31edbe7;
+%	not guaranteed to exists, the most widely implemented solution in practice \cite{approximating_the_nsw_with_indiv_items}
 
 	\item
 	additive:

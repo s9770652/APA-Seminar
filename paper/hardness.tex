@@ -9,9 +9,9 @@
 	Consider the related \USW{} problem\footnotemark.
 	\begin{problem}
 		\label{prob:sw}
-		Given a set \(\goods\) of indivisible items and a set \(\agents\) of agents with monotonic, submodular valuation functions \(\valuations \colon \powerset[\goods] \to \real\) for all agents \(i \in \agents\), the \emph{symmetric submodular utilitarian social welfare (\USW) problem} is to find an allocation maximising the sum of valuations, that is
+		Given a set \(\goods\) of indivisible items and a set \(\agents\) of agents with monotonic, submodular valuation functions \(\valuations \colon \powerset[\goods] \to \real\) for all agents \(i \in \agents\), the \emph{symmetric submodular utilitarian social welfare problem} is to find an allocation \(\alloc*[][]\) maximising the sum of valuations, that is,
 		\begin{equation*}
-			\argmax_{\alloc[][] \in \allallocs{\agents}{\goods}} \braces{ \USW(\alloc[][]) }
+			\alloc*[][] \overset{!}{=} \argmax_{\alloc[][] \in \allallocs{\agents}{\goods}} \braces{ \USW(\alloc[][]) }
 			\quad\text{with~}
 			\USW(\alloc[][]) \coloneq \smashoperator{\sum_{i \in \agents}} \valuations[\alloc]
 		\end{equation*}
