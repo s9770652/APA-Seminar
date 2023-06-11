@@ -2,7 +2,7 @@
 \label{sec:smatch}
 
 In the case of an equal number of agents and items, \ie, \(n = m\), the \emph{additive} \NSW{} can be solved exactly by finding a maximum matching on a bipartite graph with the sets of agents and of items as its parts;
-as weight of the edge between agent \(i\) and item \(j\), use \(\weight \log \valuations[j]\), that is the weighted valuation of item \(j\) by agent \(i\) in the \emph{logarithmic} Nash social welfare.
+as weight of the edge between agent \(i\) and item \(j\), use \(\weight \log \valuations[j]\), that is the weighted valuation of item \(j\) by agent \(i\) in the logarithmic Nash social welfare.
 Should there be more items than agents, then it would be obvious at first to just repeatedly find a maximum matching and assign the items accordingly until all items are assigned.
 The flaw of this idea is that such a greedy algorithm only considers the valuations of items in the current matching and perhaps the valuations of items already assigned.
 As the example in \cref{fig:allocation} demonstrates, this leads to an algorithm with an approximation factor dependent on the number \(m\) of items.
@@ -228,3 +228,5 @@ It remains to be shown whether the symmetric \NSW{} is equally hard.~\cite[Secti
 	An allocation \(\alloc[][]\) is \abb{EF1} if, for every pair \((i_1, i_2) \in \agents^2\) of agents, one needs to remove at most one item from the bundle \(\alloc[][i_2]\) of agent \(i_2\) so that agent \(i_1\) does not want to swap bundles.
 	In other words, either it holds \(\valuations[\alloc[][i_1]][][i_1] \ge \valuations[\alloc[][i_2]][][i_2]\) or there is an item \(j \in \alloc[][i_2]\) such that \(\valuations[\alloc[][i_1]][][i_1] \ge \valuations[\alloc[][i_2] \setminus \{j\}][][i_2]\).~\cite[Section 5.2]{APNSWuSVþUM}
 \end{remark}
+
+\todo[inline]{Pigou-Dalton-Prinzip?}

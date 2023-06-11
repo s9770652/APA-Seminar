@@ -10,18 +10,83 @@
 	Its content would mostly depend on what recent research has not yet answered.
 	\begin{itemize}
 		\item
+		\cite{approximating_nsw_under_rado_valuations}:
+		Rado valuations = class of special submodular functions;
+		sym NSW = \(256\euler^{3/\euler} \approx 772\);
+		\(\weight \in [1, \gamma-1]\) -> asym NSW = \(256\gamma^{3}\), asym add NSW = \(16 \gamma\);
+		five phases where phase I computes a set of high-value items and phase II assigns the rest, other phases refinement (ie. recombining / release), heavy use of Linear programming;
+		gross substitute valuations: include prices, superclass of Rado
+
+		\item
+		\cite{a_constfactor_approx_algo_for_nsw_with_submod_valuations}:
+		randomised 380 for sym submod NSW;
+		five-phase approach, again with division into high-value items and others;
+		built upon \cite{approximating_nsw_under_rado_valuations}
+
+		\item
+		\cite{sublin_approx_algo_for_nsw_with_xos_valuations}:
+		sym XOS = superclass of submodular functions;
+		four-phase approach \(\bigo(n^{53/54})\) using reprematch and the discrete moving-knife method;
+		\(\frac{\euler}{\euler - 1}\) would require an exponential number of queries in value oracle model, therefore demand and XOS queries;
+		built upon \cite{approximating_nsw_under_rado_valuations}
+
+		\item
+		\cite{approx_nsw_by_matching_and_local_search}:
+		improves \cite{a_constfactor_approx_algo_for_nsw_with_submod_valuations};
+		det \(4 + \epsilon\) for sym submod NSW;
+		det \((\omega + 2 + \epsilon)\euler\) for asym submod NSW where \(\omega = n \cdot \max \weight\);
+		all polynomial in \(1/\epsilon\);
+
+		\item
+		\cite{fair_division_of_indiv_goods_for_a_class_of_concave_valuations}:
+		SPLC/CASC \(\euler^{1/\euler}\)-approx NSW, 1/2-approx EF1, 1-approx PO;
+		SMatch would be \(2n\)
+
+		\item
 		conclusion of \cite{min_envy_and_max_avg_nsw_in_the_alloc_of_indiv_goods}
 
 		\item
 		cf. \cite{min_envy_and_max_avg_nsw_in_the_alloc_of_indiv_goods}: do not only approximate efficiency but also fairness
+		\begin{itemize}
+			\item
+			\cite{approx_nsw_by_matching_and_local_search}:
+			\(\sfrac{1}{2}\)-EFX and \(8 + \epsilon\)-approx for sym submod NSW, polynomial in \(1/\epsilon\)
+
+			\item
+			\cite{approx_nsw_by_matching_and_local_search}:
+			\enquote{Prior work on EFX and related notions The existence of EFX allocations has not been
+				settled despite significant efforts [14,17,43,44]. This problem is open for more than two agents with
+				general monotone valuations (including submodular), and for more than three agents with additive
+				valuations. This necessitated the study of its relaxations α-EFX for α ∈ (0, 1) and partial EFX
+				allocations. For the notion of α-EFX, the best-known α is 0.618 for additive [1] and 0.5 for general
+				monotone valuations (including submodular) [43].
+				For the notion of partial EFX allocations, the existence is known for general monotone valuations
+				if we do not allocate at most n − 2 items [9, 19, 40], albeit without any efficiency guarantees. For
+				additive valuations, although n − 2 is still the best bound known, there exist partial EFX allocations
+				with 2-approximation to the NSW problem [13].
+
+				A well-studied weaker notion is envy-freeness up to one item (EF1), where no agent envies
+				another agent after the removal of some item from the envied agent’s bundle. EF1 allocations are
+				known to exist for general monotone valuations and can also be computed in polynomial-time [39].
+				However, an EF1 allocation alone is not desirable because it might be highly inefficient in terms
+				of any welfare objective. For additive valuations, the allocations maximizing NSW are EF1 [14].
+				Although the NSW problem is APX-hard [36], there exists a pseduopolynomial time algorithm
+				to find an allocation that is EF1 and 1.45-approximation to the NSW problem under additive
+				valuations [8]. For capped-SPLC valuations, [16] shows the existence of an allocation that is 1/2-
+				EF1 and 1.45-approximation to the NSW problem. The existence of an EF1 allocation with high
+				NSW is open for submodular valuations.
+				Subsequent to our work, [24] improves Theorem 1.2 to show the existence of an allocation T
+				that is 1/2-EFX and NSW(T ) ≥ 2/3 NSW(S) for a given allocation S.}
+		\end{itemize}
 
 		\item
 		https://www.semanticscholar.org/reader/bef4514574543720bc45ea235df4c4556e97efe0
 
 		\item
-		B. R. Chaudhury, Y. K. Cheung, J. Garg, N. Garg, M. Hoefer, and K. Mehlhorn. Fair division
-		of indivisible goods for a class of concave valuations. J. Artif. Intell. Res., 74:111–142, 2022
+		\cite{fair_division_of_indiv_goods_for_a_class_of_concave_valuations}:
+		\enquote{There is a considerable gap inthe lower bound (1.069) on the approximation factor that is hard to achieve (see Garg et al.(2019)) and the approximation factor of 1.445, even for the additive valuations.  It will beinteresting to close this gap.}
 	\end{itemize}
 \end{itemize}
 
-\lipsum[1-5]
+\todo[inline]{survey: https://arxiv.org/pdf/2208.08782.pdf}
+\todo[inline]{interesting? https://www.semanticscholar.org/reader/4c9f2058a5bdd536562415e08f3a7f1e1245fd2b}

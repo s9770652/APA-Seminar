@@ -13,7 +13,7 @@ The receivers of those items are called \emph{agents}.
 The distributions of items amongst agents are modelled through allocations.
 \begin{definition}
 	Let~\(\goods\) be a set of \(m\) items and~\(\agents\) be a set of \(n\) agents.
-	An \emph{allocation} is a tuple \(\alloc[][] = (\alloc)_{i \in \agents}\) of \emph{bundles} \(\alloc \subset \goods\) such that each item is element of exactly one bundle, that is \(\mathop{\bigcup\hspace{-1pt}_{i \in \agents}} \alloc = \goods\) and \(\alloc \cap \alloc[][i'] = \emptyset\) for all \(i \neq i'\).
+	An \emph{allocation} is a tuple \(\alloc[][] = (\alloc)_{i \in \agents}\) of \emph{bundles} \(\alloc \subset \goods\) such that each item is element of exactly one bundle, that is, \(\mathop{\bigcup\hspace{-1pt}_{i \in \agents}} \alloc = \goods\) and \(\alloc \cap \alloc[][i'] = \emptyset\) for all \(i \neq i'\).
 	An item~\(j \in \goods\) is \emph{assigned}\todo{or rather \enquote{allocated}?} to agent \(i \in \agents\) if \(j \in \alloc\) holds.
 \end{definition}
 
@@ -64,10 +64,10 @@ Even though the \NSW{} problem is \NP-hard and \APX-hard, approximate solutions 
 We use the following definition for the approximation factor.
 \begin{definition}
 	An algorithm for a maximisation problem is \(\alpha\)-approximative if, for every problem instance \(I\) and output \(\operatorname{ALG}(I)\), it holds \(\operatorname{ALG}(I) \ge \operatorname{OPT}(I)/\alpha\), where \(\operatorname{OPT}(I)\) is the optimal value.
+	\todo{rephrase}
 \end{definition}
 
-\todo{check if asymmetric}
-As reference, a quick overview of the research situation\footnotemark[1] of the \USW{} and \ESW{}:
+As reference, a quick overview of the research situation\footnotemark[1] of the \USW{} and \ESW{}:\todo{check if asymmetric}
 For the submodular \USW{}, a lower bound of \(\frac{\euler}{\euler - 1}\) on the approximation factor was proven~\cite{inapprox_results_for_combi_auctions_with_submod_utility_funcs} and an approximation algorithm achieving said factor shown~\cite{opt_approx_for_the_submod_nsw_in_the_value_oracle_model} \emdash{} the additive \USW{} is trivially solvable through repeated maximum matchings.
 For the additive \ESW, a randomised \((320 \sqrt{n} \log^3 n)\)-approximative algorithm employing linear programming~\cite{an_approx_algo_for_maxmin_fair_alloc_of_indiv_goods} and a hardness of \(2\)~\cite{allocating_indiv_goods} are know.
 An \((2n-1)\)-approximative algorithm exists for the submodular \ESW~\cite{approx_algo_for_the_maxmin_alloc_problem}.
@@ -130,7 +130,7 @@ In \cref{sec:hardness}, we analyse the hardness of the submodular \NSW.
 %		\item
 %		alt def: https://www.semanticscholar.org/reader/1c5347490b006dc6c498131a9ee01281a31edbe7
 %	\end{itemize}
-	matroids?
+	matroids? preliminaries \cite{approximating_nsw_under_rado_valuations}
 
 %	\item
 %	mention Nash's name in footnote
@@ -196,4 +196,7 @@ In \cref{sec:hardness}, we analyse the hardness of the submodular \NSW.
 	\item
 	exponentially many subsets;
 	additive vs. submodular?
+
+	\item
+	hardness; constant additive in 2015; \(\bigo(n)\) for sym. subadditive but hard to improve for special cases; unbounded integrality grap \cite{approximating_nsw_under_rado_valuations}
 \end{itemize}
