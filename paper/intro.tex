@@ -30,7 +30,7 @@ We will discuss additive and submodular functions in greater detail.
 
 	\item[Submodular]
 	Let \(\valuations[\genericset[1] \given \genericset[2]] \coloneq \valuations[\genericset[1] \cup \genericset[2]] - \valuations[\genericset[2]]\) denote the marginal valuation\todo{or rather utility?} of agent~\(i\) for a set \(\genericset[1] \subset \goods\) of items over a disjoint set \(\genericset[2] \subset \goods\).
-	This valuation functions satisfies the submodularity constraint \(\valuations[j \given \genericset[1] \cup \genericset[2]] \le \valuations[j \given \genericset[1]]\) for all agents \(i \in \agents\), items \(j \in \goods\) and sets \(\genericset[1], \genericset[2] \subset \goods\) of items.
+	This valuation function satisfies the submodularity constraint \(\valuations[j \given \genericset[1] \cup \genericset[2]] \le \valuations[j \given \genericset[1]]\) for all agents \(i \in \agents\), items \(j \in \goods\) and sets \(\genericset[1], \genericset[2] \subset \goods\) of items.
 
 	Submodular valuation functions (which are a superclass to additive ones) have the property that the gain from assigning new items is smaller, the bigger the bundles are.
 	Diminishing returns are a common phenomenon in economics, making submodular functions worthwhile to study.~\cite{inapprox_results_for_combi_auctions_with_submod_utility_funcs}
@@ -126,10 +126,10 @@ In \cref{sec:hardness}, we analyse the hardness of the submodular \NSW.
 	\item
 %	submodularity:
 %	discrete analogue of concavity and arises naturally in economic setting since it caputres the property that marginal utilities are decreasing as we allocate more goods
-	\begin{itemize}
-		\item
-		alt def: https://www.semanticscholar.org/reader/1c5347490b006dc6c498131a9ee01281a31edbe7
-	\end{itemize}
+%	\begin{itemize}
+%		\item
+%		alt def: https://www.semanticscholar.org/reader/1c5347490b006dc6c498131a9ee01281a31edbe7
+%	\end{itemize}
 	matroids?
 
 %	\item
@@ -192,4 +192,8 @@ In \cref{sec:hardness}, we analyse the hardness of the submodular \NSW.
 %		locality, latency, security, incentivisation
 %		\cite{edge_computing_auction, edge_computing_report}
 %	\end{itemize}
+
+	\item
+	exponentially many subsets;
+	additive vs. submodular?
 \end{itemize}

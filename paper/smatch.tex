@@ -5,7 +5,7 @@ In the case of an equal number of agents and items, \ie, \(n = m\), the \emph{ad
 as weight of the edge between agent \(i\) and item \(j\), use \(\weight \log \valuations[j]\), that is the weighted valuation of item \(j\) by agent \(i\) in the \emph{logarithmic} Nash social welfare.
 Should there be more items than agents, then it would be obvious at first to just repeatedly find a maximum matching and assign the items accordingly until all items are assigned.
 The flaw of this idea is that such a greedy algorithm only considers the valuations of items in the current matching and perhaps the valuations of items already assigned.
-As the example in \cref{fig:allocation} demonstrates, this leads to an algorithm with an approximation factor dependent on the number \(m\) of items.\todo{What is the factor?}
+As the example in \cref{fig:allocation} demonstrates, this leads to an algorithm with an approximation factor dependent on the number \(m\) of items.
 The geometric mean of the \NSW{} favours allocations with similarly valued bundles, wherefore it may be beneficial to give items to agents who cannot expect many more valuable items in the future instead of to agents who value the item a bit more but do so for other items as well.
 
 \begin{figure*}

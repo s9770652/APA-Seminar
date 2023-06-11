@@ -104,12 +104,12 @@ First, we give a lower bound on the valuations of optimal and attainable items.
 		&\ge \valuations[ \attopt{1} ] - \valuations[\lostset{2}] - \valuations[\asgd{1}] \\
 		&\ge \valuations[ \attopt{1} ] - \lostsetlen{2} \cdot \valuations[\asgd{1}] - \valuations[\asgd{1}],
 	\end{align}
-	where the second inequality can be shown inductively with the definition of submodularity\todo{Do that or, alternatively, find a paper showing the other def. [IRfCAwSUF]}, and the third inequality is due all \(\lostsetlen{2}\) items \(j\) in set \(\lostset{2}\) not being assigned in round \(1\) although attainable, implying \(\valuations[j] \le \valuations[\asgd{1}]\).
+	where the second inequality is shown easily using an alternative definition of submodularity (\(\valuations[\genericset[1] \cup \genericset[2]] + \valuations[\genericset[1] \cap \genericset[2]] \le \valuations[\genericset[1]] + \valuations[\genericset[2]]\) with \(\genericset[1] = \attopt{1} \setminus \lostset{2}\) and \(\genericset[2] = \lostset{2} \)~\cite{inapprox_results_for_combi_auctions_with_submod_utility_funcs}), and the third inequality is due all \(\lostsetlen{2}\) items \(j\) in set \(\lostset{2}\) not being assigned in round \(1\) although attainable, implying \(\valuations[j] \le \valuations[\asgd{1}]\).
 
 	For the induction hypothesis, we assume that the lemma holds true for all rounds up to some~\(r\).
 	In the induction step \(r \to r+1\), we differentiate the same two cases again:
 	\begin{caseintext}{1}{\(\asgd{r} \in \attopt{r}\)}
-		Again we exploit the submodularity of the valuation functions \todo{ditto} to obtain a lower bound on the marginal valuation of \(\attopt{r+1}\).
+		Again we exploit the submodularity of the valuation functions to obtain a lower bound on the marginal valuation of \(\attopt{r+1}\).
 		\begin{align}
 			\valuations[ \attopt{r+1} \given \asgd{1}, \dots, \asgd{r} ]
 			&= \valuations[ \attopt{r+1} \cup \{\asgd{r}\} \given \asgd{1}, \dots, \asgd{r-1} ] - \valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ] \\
@@ -146,7 +146,6 @@ First, we give a lower bound on the valuations of optimal and attainable items.
 	\end{caseintext}
 	In both cases, we can replace \(\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ]\) by the induction hypothesis and \(\valuations[ \lostset{r+1} \given \asgd{1}, \dots, \asgd{r-1} ]\) by \(\lostsetlen{r+1} \cdot \valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ]\) to prove the lemma.
 	For a detailed calculation we refer to \citeauthor{APNSWuSVþUM}~\cite[14]{APNSWuSVþUM}.
-	\todo{include if space enough}
 \end{proof}
 
 The lemma can be used to find a lower bound on the marginal valuation of the items assigned in each round \(r\).
@@ -164,10 +163,10 @@ The lemma can be used to find a lower bound on the marginal valuation of the ite
 %	There are \(\attoptlen{0}\) optimal and attainable items in \(\attopt{0}\) at the start of phase~\phaseii.
 %	Of those, \(\lostsetlen{l}\) many are assigned to other agents in each round \(l \le r\), and also some items \(\asgd{l}\) assigned to agent \(i\) may be optimal, whence an upper bound of \(\attoptlen{0} - \sum_{l=1}^{r} \lostsetlen{l}\) on the number \(\attoptlen{r}\) of items in the set \(\attopt{r}\).\todo{Possibly this whole estimation can be omitted as we ditch it in the following lemma.}
 
-	The valuation functions are monotonic, \ie, \(\valuations[\genericset[1]] \le \valuations[\genericset[2]]\) for all item sets \(\genericset[1] \subset \genericset[2] \subset \goods\).\todo{change proof when intro is finished}
-	Induction shows that there must be an item \(j \in \attopt{r}\) with a marginal valuation of at least \(\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] / \attoptlen{r}\).
-	As item \(\asgd{r}\) was the one to be assigned, the marginal valuation of it cannot be smaller.
-	Using \cref{lem:induction} for the value of \(\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ]\) proves the corollary.
+	Remember that valuation functions are monotonic if \(\valuations[\genericset[1]] \le \valuations[\genericset[2]]\) holds for all sets \(\genericset[1] \subset \genericset[2] \subset \goods\).
+	Induction shows that there must be an item \(j \in \genericset[2]\) with valuation \(\valuations[j] \ge \valuations[\genericset[2]] / \abs{\genericset[2]}\), otherwise it would hold \(\valuations[\emptyset] > 0\).
+	Applied to \cref{lem:induction}, this means that there must be an item \(j \in \attopt{r}\) with a marginal valuation of at least \(\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] / \attoptlen{r}\).
+	As item \(\asgd{r}\) was the one to be assigned, its marginal valuation cannot be smaller.
 \end{proof}
 
 This, finally, enables us to give a lower bound on the valuation of the bundles \(\alloc[\phaseii]\).
@@ -232,7 +231,7 @@ Therefor we introduce a third type of item set.
 		\label[property]{enum:matching:max}
 		The number of agents matched with one of their overly good items is maximal amongst all matchings fulfilling \cref{enum:matching:agent}.
 	\end{enumerate}
-	\Cref{enum:matching:agent} is always satisfiable as each set \(\overlygoodset\) is the only one to contain the item \(\asgd*{1}\), which can be matched with agent \(i\).\todo{wrong! the union contains it though}
+	\Cref{enum:matching:agent} is always satisfiable as the union of \(k\) many sets \(\overlygoodset\) contains \(k\) different items~\(\asgd*{1}\), which can be matched with agents \(i\).
 	\Cref{enum:matching:max} leads to all agents being matched with an overly good item for \(t = \ceil{\log_2 n}+1\), \ie{} the number of rounds in phase~\phasei, whence the lemma follows.
 	To prove this, we denote by \(\unluckyagents{t}\) the set of agents who are \emph{not} matched with one of their overly good items, and show by induction on \(t\) that it holds \(\abs{\unluckyagents{t}} \le n/2^t\).
 
