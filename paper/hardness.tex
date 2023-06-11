@@ -3,7 +3,7 @@
 
 \Citeauthor{APNSWuSVþUM}~\cite[Sction 4]{APNSWuSVþUM} provide the following hardness result.
 \begin{theorem}
-	The submodular \NSW{} is not approximable within a factor of \(\frac{\euler}{\euler - 1}\)\todo[info]{\normalshape\(\mathbfit{i}\): Should it not be \(\frac{\euler - 1}{\euler} - \epsilon\)?} in polynomial time unless \(\P = \NP\).
+	The submodular \NSW{} is not approximable within a factor of \(\frac{\euler}{\euler - 1}\)\todo[info]{\normalshape\(\mathbfit{i}\): Should it not be \(\frac{\euler}{\euler-1} - \epsilon\)?} in polynomial time unless \(\P = \NP\), even when the agents have equal weights and valuation functions.
 \end{theorem}
 \begin{proof}
 	Consider the related \USW{} problem\footnotemark.
@@ -20,7 +20,7 @@
 
 	Note that this problem is identical to the symmetric submodular \NSW{} except for the sum in the target function instead of a product.
 	We will exploit this fact to calculate the \NSW{} of instances for \USW.
-	\citeauthor{inapproximability}~\cite{inapproximability} supply a polynomial-time reduction of \USW{} from the following problem:
+	\citeauthor{inapprox_results_for_combi_auctions_with_submod_utility_funcs}~\cite{inapprox_results_for_combi_auctions_with_submod_utility_funcs} supply a polynomial-time reduction of \USW{} from the following problem:
 	\begin{problem}
 		Given a graph \(G = (V, E)\) and a constant \(\colouringconstant \le 1\), the \emph{\(\colouringconstant\)-\Gap{} problem} is to decide whether, for any 3-colouring of graph \(G\) which maximises the number of edges with different coloured endpoints, the number of such edges is~\(\abs{E}\) (\emph{\Yes}) or \(\colouringconstant \abs{E}\) and below (\emph{\No}).
 	\end{problem}

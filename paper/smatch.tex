@@ -174,7 +174,7 @@ We can now establish \(\remvalue/n = \valuations[ \goodsordered{2n+1}, \dots, \g
 This allows us to calculate an approximation factor for \SMatch{} by comparing its output with an optimal allocation \(\alloc*[][]\).
 \begin{theorem}
 	\label{th:smatch}
-	\SMatch{} has an approximation factor of \(2 n\).
+	\SMatch{} is \(2 n\)-approximative.
 \end{theorem}
 \begin{proof}
 	\Cref{lem:lower_bound_later_items} can be plugged into the logarithmic \NSW:
@@ -223,6 +223,7 @@ It is possible to design an instance for the asym\-metric \NSW{} such that \SMat
 It remains to be shown whether the symmetric \NSW{} is equally hard.~\cite[Section 6.3]{APNSWuSVþUM}
 
 \begin{remark}
+	\label{rem:ef1}
 	\SMatch{} produces \emph{fair} allocations which are \emph{envy-free up to one item} (\abb{EF1}).
 	An allocation \(\alloc[][]\) is \abb{EF1} if, for every pair \((i_1, i_2) \in \agents^2\) of agents, one needs to remove at most one item from the bundle \(\alloc[][i_2]\) of agent \(i_2\) so that agent \(i_1\) does not want to swap bundles.
 	In other words, either it holds \(\valuations[\alloc[][i_1]][][i_1] \ge \valuations[\alloc[][i_2]][][i_2]\) or there is an item \(j \in \alloc[][i_2]\) such that \(\valuations[\alloc[][i_1]][][i_1] \ge \valuations[\alloc[][i_2] \setminus \{j\}][][i_2]\).~\cite[Section 5.2]{APNSWuSVþUM}
