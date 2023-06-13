@@ -206,7 +206,7 @@ This allows us to calculate an approximation factor for \SMatch{} by comparing i
 		\coloneq \smashoperator{\argmin_{\substack{\genericset \subset \goods \\ \abs{\genericset} \le 2n}}} \{ \valuations[\alloc* \setminus \genericset] \}.
 	\end{equation}
 	It holds \(\valuations[\asgd*{1}] \ge \frac{1}{2 n} \valuations[\genericset*[i]]\) because of \(\valuations[\asgd*{1}] \ge \valuations[j]\) for all \(j \in \genericset*[i]\).
-	Furthermore0, it holds \(\remvalue = \valuations[\goods \setminus \genericset[i]] \ge \valuations[\alloc* \setminus \genericset[i]] \ge \valuations[\alloc* \setminus \genericset*[i]]\).
+	Furthermore, it holds \(\remvalue = \valuations[\goods \setminus \genericset[i]] \ge \valuations[\alloc* \setminus \genericset[i]] \ge \valuations[\alloc* \setminus \genericset*[i]]\).
 	We can insert these two inequalities into \cref{eq:smatch_approx_factor_lower_bound} and prove the theorem thereby:
 	\begin{align}
 		\log \NSW(\alloc[][])
@@ -225,8 +225,9 @@ It remains to be shown whether the symmetric \NSW{} is equally hard.~\cite[Secti
 \begin{remark}
 	\label{rem:ef1}
 	\SMatch{} produces \emph{fair} allocations which are \emph{envy-free up to one item} (\abb{EF1}).
-	An allocation \(\alloc[][]\) is \abb{EF1} if, for every pair \((i_1, i_2) \in \agents^2\) of agents, one needs to remove at most one item from the bundle \(\alloc[][i_2]\) of agent \(i_2\) so that agent \(i_1\) does not want to swap bundles.
+	An allocation \(\alloc[][]\) is \EFone{} if, for every pair \((i_1, i_2) \in \agents^2\) of agents, one needs to remove at most one item from the bundle \(\alloc[][i_2]\) of agent \(i_2\) so that agent \(i_1\) does not want to swap bundles.
 	In other words, either it holds \(\valuations[\alloc[][i_1]][][i_1] \ge \valuations[\alloc[][i_2]][][i_2]\) or there is an item \(j \in \alloc[][i_2]\) such that \(\valuations[\alloc[][i_1]][][i_1] \ge \valuations[\alloc[][i_2] \setminus \{j\}][][i_2]\).~\cite[Section 5.2]{APNSWuSVþUM}
 \end{remark}
 
 \todo[inline]{Pigou-Dalton-Prinzip?}
+\todo[inline]{PO?}

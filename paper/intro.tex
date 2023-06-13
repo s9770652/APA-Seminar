@@ -8,7 +8,7 @@ mobile edge computing, where computation and storage are taken on by physically 
 manufacturing processes, where tasks should be scheduled efficiently within and between many production sites and disturbances be quickly paid heed to~\cite{survey};
 water management, where hostile countries must come to mutual agreements on the withdrawal from contested rivers~\cite{water_management}.
 
-In this seminar paper, we focus on non-sharable and indivisible resources, which we term \emph{items}.
+In this seminar paper, we focus on unsharable and indivisible resources, which we term \emph{items}.
 The receivers of those items are called \emph{agents}.
 The distributions of items amongst agents are modelled through allocations.
 \begin{definition}
@@ -17,9 +17,8 @@ The distributions of items amongst agents are modelled through allocations.
 	An item~\(j \in \goods\) is \emph{assigned}\todo{or rather \enquote{allocated}?} to agent \(i \in \agents\) if \(j \in \alloc\) holds.
 \end{definition}
 
-The satisfaction of an agent \(i\) with her bundle \(\alloc\) is measured by her \emph{valuation function}~\(\valuations\), which assigns each set of items a value.
-We always assume that valuation functions are non-negative, \ie, \(\valuations[\genericset] \ge 0\) \(\forall \genericset \subset \goods\), and monotonically non-decreasing, \ie, \(\valuations[\genericset[1]] \le \valuations[\genericset[2]]\) \(\forall \genericset[1] \subset \genericset[2] \subset \goods\).
-In addition, the empty set is always valued at zero, \ie, \(\valuations[\emptyset] = 0\).
+The satisfaction of an agent \(i\) with her bundle \(\alloc\) is measured by her \emph{valuation function}~\(\valuations\), which assigns each set of items a real value.
+We always assume that valuation functions are non-negative, \ie, \(\valuations[\genericset] \ge 0\) \(\forall \genericset \subset \goods\), monotonically non-decreasing, \ie, \(\valuations[\genericset[1]] \le \valuations[\genericset[2]]\) \(\forall \genericset[1] \subset \genericset[2] \subset \goods\), and normalised, \ie, \(\valuations[\emptyset] = 0\).
 Besides fulfilling these properties, the valuation functions can come from a plethora of function families.
 We will discuss additive and submodular functions in greater detail.
 \begin{description}
@@ -32,7 +31,7 @@ We will discuss additive and submodular functions in greater detail.
 	Let \(\valuations[\genericset[1] \given \genericset[2]] \coloneq \valuations[\genericset[1] \cup \genericset[2]] - \valuations[\genericset[2]]\) denote the marginal valuation\todo{or rather utility?} of agent~\(i\) for a set \(\genericset[1] \subset \goods\) of items over a disjoint set \(\genericset[2] \subset \goods\).
 	This valuation function satisfies the submodularity constraint \(\valuations[j \given \genericset[1] \cup \genericset[2]] \le \valuations[j \given \genericset[1]]\) for all agents \(i \in \agents\), items \(j \in \goods\) and sets \(\genericset[1], \genericset[2] \subset \goods\) of items.
 
-	Submodular valuation functions (which are a superclass to additive ones) have the property that the gain from assigning new items is smaller, the bigger the bundles are.
+	Submodular valuation functions (which encompass additive ones) have the property that the gain from assigning new items is smaller, the bigger the bundles are.
 	Diminishing returns are a common phenomenon in economics, making submodular functions worthwhile to study.~\cite{inapprox_results_for_combi_auctions_with_submod_utility_funcs}
 \end{description}
 In a slight abuse of notation, we sometimes omit curly braces delimiting a set, so we write \(\valuations[j_1, j_2, \dots]\) but mean \(\valuations[\{j_1, j_2, \dots\}]\) for example.
@@ -58,7 +57,7 @@ For the techniques employed in later sections, it is beneficial to consider the 
 	= \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \valuations[\alloc],
 \end{equation}
 which is a sum instead of a product.
-The \NSW{} serves as middle ground between the \USW{} and the \ESW{}, which focus on efficiency and fairness, respectively.
+The \NSW{} strikes as middle ground between the \USW{} and the \ESW{}, which focus on efficiency (height of overalls satisfaction) and fairness (how agents value other agents' bundles), respectively.
 In addition, it exhibits scale-freeness, that is invariance to the scales in which each valuation is expressed, rendering \eg{} relative instead of absolute valuations unproblematic.
 Even though the \NSW{} problem is \NP-hard and \APX-hard, approximate solutions largely keep the properties of optimal allocations.~\cite[cf. \cref{rem:ef1}]{approximating_the_nsw_with_indiv_items, the_unreasonable_fairness_of_max_nsw, min_envy_and_max_avg_nsw_in_the_alloc_of_indiv_goods, finding_fair_and_efficient_allocs}
 We use the following definition for the approximation factor.

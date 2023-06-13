@@ -317,7 +317,9 @@
 % Texts.
 \NewDocumentCommand{\abb}{m}{#1}  % actually defined in theme.sty
 
+\NewDocumentCommand{\CASC}{}{\abb{CASC}}
 \NewDocumentCommand{\Gap}{}{\abb{Gap-Max-3-Colouring}}
+\NewDocumentCommand{\EFone}{}{\abb{EF1}}
 \NewDocumentCommand{\ESW}{}{%
 	\relax\ifmmode{\operatorname{ESW}}\else{\abb{ESW}}\fi%
 }
@@ -325,11 +327,14 @@
 \NewDocumentCommand{\NSW}{}{%
 	\relax\ifmmode{\operatorname{NSW}}\else{\abb{NSW}}\fi%
 }
+\NewDocumentCommand{\OXS}{}{\abb{OXS}}
 \NewDocumentCommand{\RepReMatch}{}{\abb{RepReMatch}}
 \NewDocumentCommand{\SMatch}{}{\abb{SMatch}}
+\NewDocumentCommand{\SPLC}{}{\abb{SPLC}}
 \NewDocumentCommand{\USW}{}{%
 	\relax\ifmmode{\operatorname{USW}}\else{\abb{USW}}\fi%
 }
+\NewDocumentCommand{\XOS}{}{\abb{XOS}}
 \NewDocumentCommand{\Yes}{}{\abb{Yes}~instance}
 
 \crefname{property}{property}{properties}
