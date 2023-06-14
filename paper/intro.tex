@@ -67,7 +67,7 @@ We use the following definition for the approximation factor.
 \end{definition}
 
 As reference, a quick overview of the research situation\footnotemark[1] of the \USW{} and \ESW{}:\todo{check if asymmetric}
-For the submodular \USW{}, a lower bound of \(\frac{\euler}{\euler - 1}\) on the approximation factor was proven~\cite{inapprox_results_for_combi_auctions_with_submod_utility_funcs} and an approximation algorithm achieving said factor shown~\cite{opt_approx_for_the_submod_nsw_in_the_value_oracle_model} \emdash{} the additive \USW{} is trivially solvable through repeated maximum matchings.
+For the submodular \USW{}, a lower bound of \(\frac{\euler}{\euler - 1}\) on the approximation factor was proven~\cite{inapprox_results_for_combi_auctions_with_submod_utility_funcs} and an approximation algorithm achieving said factor shown~\cite{opt_approx_for_the_submod_nsw_in_the_value_oracle_model} \Dash the additive \USW{} is trivially solvable through repeated maximum matchings.
 For the additive \ESW, a randomised \((320 \sqrt{n} \log^3 n)\)-approximative algorithm employing linear programming~\cite{an_approx_algo_for_maxmin_fair_alloc_of_indiv_goods} and a hardness of \(2\)~\cite{allocating_indiv_goods} are know.
 An \((2n-1)\)-approximative algorithm exists for the submodular \ESW~\cite{approx_algo_for_the_maxmin_alloc_problem}.
 
@@ -78,7 +78,7 @@ For the symmetric submodular \NSW, a \((m - n + 1)\)-approximative algorithm has
 Both approaches exploit the symmetry of the studied problem and fail to be extended to the asymmetric case.
 Moreover, an approximation factor dependant on the number of items is not desirable as the number of items vastly exceeds the number of agents in many applications.
 
-\Citeauthor{APNSWuSVþUM}~\cite{APNSWuSVþUM} fill this knowledge gap by providing two algorithms.
+\Citeauthor{APNSWuSVþUM}~\cite{APNSWuSVþUM} fill this knowledge gap by providing two algorithms with polynomial runtime.
 The first one, \emph{\SMatch}, computes an allocation for the asymmetric additive \NSW{} and is \(2n\)-approximative.
 It does so by \emph{s}martly \emph{match}ing agents and items in a bipartite graph.
 The second one, \emph{\RepReMatch}, computes an allocation for the asymmetric submodular \NSW{} and is \(\paren[\big]{2n (\log_2 n + 3)}\)-approximative.
