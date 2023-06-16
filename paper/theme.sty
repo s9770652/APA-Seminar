@@ -125,15 +125,37 @@
 
 
 %%% Algorithms.
-\DontPrintSemicolon
-\SetKwComment{tct}{\raisebox{0.10em}{\scriptsize\(\rhd\)}\,}{}
-\SetAlCapFnt{\accentcolor\maybesffamily}
-\SetFuncSty{setoperatorname}
-\SetCommentSty{emph}
+\RestyleAlgo{plainruled}  % bar above and below algo + after caption
+\AtBeginDocument{\SetAlgoNoLine}  % vertical lines indicating blocks
+\AtBeginDocument{\SetAlgoLongEnd}  % end if, end while, ...
+\DontPrintSemicolon  % semicolon at end of lines not printed
+\SetFillComment  % end mark of comment put directly at end
+\LinesNumbered  % numbered lines
+\IncMargin{0.3em}  % increase margin such that two-digit line numbers do not extend outwards
+\SetAlCapHSkip{0em}  % no skip in front of algorithm label
+\SetAlCapSkip{0.0em}  % skip between caption and body
+\SetAlgoSkip{}  % remove extra skip above and below algorithm floats
+\SetAlCapFnt{\accentcolor\maybesffamily}  % print algorithm label like a caption label
+\SetKwComment{tct}{\raisebox{0.10em}{\scriptsize\(\rhd\)}\,}{}  % triangle as comment symbol
+\SetFuncSty{textrm}  % print function names like usual operators
+\SetCommentSty{emph}  % print comments as set with \emph
 %\SetKwInOut{KwIn}{\maybesffamily Input}
 %\SetKwInOut{KwOut}{\maybesffamily Output\!}
-\SetKwInOut{KwIn}{Input}
+\SetKwInOut{KwIn}{Input}  % colon of Input and Output aligned
 \SetKwInOut{KwOut}{Output\!}
+
+\makeatletter
+% Remove right-hand margin in algorithm
+% taken from: https://tex.stackexchange.com/a/520407
+\patchcmd{\@algocf@start}% <cmd>
+	{-1.5em}% <search>
+	{-0.0em}% <replace>
+	{}{}% <success><failure>
+
+% Put caption on top and add whitespace between caption and body.
+\renewcommand{\@algocf@pre@plainruled}{\kern\interspacealgoruled\hrule  height\algoheightrule\kern3pt\relax}%
+\renewcommand{\@algocf@capt@plainruled}{above}% formerly {bottom}
+\makeatother
 
 
 %%% Bibliography.

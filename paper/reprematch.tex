@@ -10,7 +10,7 @@
 		\(2n(\log_2 n + 3)\)-approximation \(\alloc[\phaseiii][] = (\alloc[\phaseiii])_{i \in \agents}\) of an optimal allocation
 	}
 	\phaseisep
-	\(\alloc[\phasei] \gets \emptyset\)\;
+	\(\alloc[\phasei] \gets \emptyset \quad\forall i \in \agents\)\;
 	\(\goodsrem \gets \goods\)\;
 	\For{\(t \gets 1, \dots, \ceil{\log_2 n}+1\)}{
 		\If{\(\goodsrem \neq \emptyset\)}{
@@ -40,7 +40,7 @@
 	\(\alloc[\phaseiii][] \gets \arballoc( \agents, \goodsrem, \alloc[\phaseiii][], (\valuations)_{i \in \agents} )\)\;
 	\Return{\(\alloc[\phaseiii][]\)}
 	\caption{%
-		\RepReMatch{} for the Asymmetric Submodular \NSW{} problem
+		\RepReMatch{} for the asymmetric submodular \NSW{}
 	}
 	\label{alg:reprematch}
 \end{algorithm*}
