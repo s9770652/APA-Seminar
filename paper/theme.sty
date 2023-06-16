@@ -89,9 +89,9 @@
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}
 %\AfterEndEnvironment{definition}{\noindent\ignorespaces}
-\newtheorem{example}{Example}
-\newtheorem{condition}{Condition}
-\newtheorem{problem}{Problem}
+\newtheorem{example}[definition]{Example}
+\newtheorem{condition}[definition]{Condition}
+\newtheorem{problem}[definition]{Problem}
 
 % Environments in italic style with bold title.
 \newtheoremstyle{plain}
@@ -105,12 +105,12 @@
 	{}          % CUSTOM-HEAD-SPEC
 
 \theoremstyle{plain}
-\newtheorem{theorem}{Theorem}
-\newtheorem{proposition}{Proposition}
-\newtheorem{lemma}{Lemma}
-\newtheorem{corollary}{Corollary}
-\newtheorem{observation}{Observation}
-\newtheorem{conjecture}{Conjecture}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{corollary}[definition]{Corollary}
+\newtheorem{observation}[definition]{Observation}
+\newtheorem{conjecture}[definition]{Conjecture}
 
 % Environments in roman style with italic title.
 \newtheoremstyle{remark}
@@ -124,13 +124,13 @@
 	{}          % CUSTOM-HEAD-SPEC
 
 \theoremstyle{remark}
-\newtheorem{remark}{Remark}
-\newtheorem{annotation}{Annotation}
-\newtheorem{claim}{Claim}
+\newtheorem{remark}[definition]{Remark}
+\newtheorem{annotation}[definition]{Annotation}
+\newtheorem{claim}[definition]{Claim}
 \newtheorem*{note}{Note}  % No numbering
-\newtheorem{case}{Case}
-\newtheorem{acknowledgment}{Acknowledgment}
-\newtheorem{conclusion}{Conclusion}
+\newtheorem{case}[definition]{Case}
+\newtheorem{acknowledgment}[definition]{Acknowledgment}
+\newtheorem{conclusion}[definition]{Conclusion}
 
 % Proof marker in roman style.
 \xpatchcmd{\proof}{\itshape}{\maybesffamily\accentcolor}{}{}
