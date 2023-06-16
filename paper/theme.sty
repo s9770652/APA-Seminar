@@ -1,6 +1,6 @@
 %%% Font.
-%\RequirePackage{libertinus}
-\RequirePackage[regular]{newcomputermodern}  % newest version of Computer Modern (regular: display weight)
+\RequirePackage[osf]{libertinus}
+%\RequirePackage[regular]{newcomputermodern}  % newest version of Computer Modern (regular: display weight)
 
 \RenewDocumentCommand{\abb}{m}{\text{#1}}  % abbreviations
 \setkomafont{captionlabel}{\usekomafont{descriptionlabel}}
@@ -17,13 +17,13 @@
 
 % Colours in titles.
 %\NewDocumentCommand{\accentcolor}{}{\color[RGB]{118, 13, 28}}  % Mordred's red
-%\NewDocumentCommand{\accentcolor}{}{\color[RGB]{51, 0, 102}}  % algo's violet
-\NewDocumentCommand{\accentcolor}{}{\color{black}}
+\NewDocumentCommand{\accentcolor}{}{\color[RGB]{51, 0, 102}}  % algo's violet
+%\NewDocumentCommand{\accentcolor}{}{\color{black}}
 \addtokomafont{captionlabel}{\accentcolor}
 \addtokomafont{disposition}{\accentcolor}
 \addtokomafont{labelinglabel}{\accentcolor}
 \addtokomafont{itemizelabel}{\accentcolor}
-\addtokomafont{descriptionlabel}{\accentcolor}
+\addtokomafont{descriptionlabel}{\accentcolor\textsbf}
 
 % Title page.
 \setkomafont{publishers}{}  % \publishers in normal font
@@ -62,6 +62,7 @@
 %%% Lists.
 \setlist[itemize]{leftmargin=*, nosep}
 \setlist[enumerate]{topsep=0.1em, itemsep=0.1em, parsep=0pt, left=0.5em}
+\setlist[description]{topsep=0.15em, itemsep=0.1em, parsep=0.1em}
 
 
 %%% Page style.
@@ -70,7 +71,8 @@
 \captionsetup{format=plain}
 \KOMAoptions{
 	abstract,
-	titlepage
+	titlepage,
+	headings=normal
 }
 
 
@@ -144,7 +146,9 @@
 \DontPrintSemicolon  % semicolon at end of lines not printed
 \SetFillComment  % end mark of comment put directly at end
 \LinesNumbered  % numbered lines
-\IncMargin{0.3em}  % increase margin such that two-digit line numbers do not extend outwards
+\SetNlSty{texttt}{}{}
+\SetAlgoNlRelativeSize{-1}  % size of line numbers
+\IncMargin{0.4em}  % increase margin such that two-digit line numbers do not extend outwards
 \SetAlCapHSkip{0em}  % no skip in front of algorithm label
 \SetAlCapSkip{0.0em}  % skip between caption and body
 \SetAlgoSkip{}  % remove extra skip above and below algorithm floats

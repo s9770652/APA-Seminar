@@ -117,7 +117,7 @@
 %%% Constants and specifiers.
 \def\APX{\ensuremath{\mathcal{APX}}}
 \def\euler{\ensuremath{\mathup{e}}}
-\def\NP{\ensuremath{\mathcal{NP}}}
+\def\NP{\ensuremath{\mathcal{N\kern-0.05em P}}}
 \def\P{\ensuremath{\mathcal{P}}}
 
 % Sets of numbers.
@@ -250,7 +250,7 @@
 	\mathcal{G}
 }
 \NewDocumentCommand{\goodsordered}{m O{i}}{
-	\goods\IfEmptyF{#2}{_{\!#2}}^{\thinspace\smash{#1}}
+	\goods\IfEmptyF{#2}{_{#2}}^{\smash{#1}}
 }
 \NewDocumentCommand{\goodsreleased}{m}{
 	\goods^{\mathup{rel}}_{#1}

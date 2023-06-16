@@ -35,7 +35,7 @@
 \RequirePackage{algorithm2e}  % Algorithmen setzen
 
 \RequirePackage[final]{hyperref}  % klickbare Verweise
-\RequirePackage[nameinlink]{cleveref}  % Namen in Verweisen
+\RequirePackage[nameinlink, capitalize]{cleveref}  % Namen in Verweisen
 
 \RequirePackage{fixdif}  % bessere Ableitungsoperatoren; benötigt 'unicode-math'; nach 'hyperref' zu laden
 

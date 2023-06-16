@@ -1,5 +1,8 @@
-\section{Conclusion and Outlook}
+\section{Conclusion}
 \label{sec:conclusion}
+
+\subsection{Summary}
+\label{subsec:conclusion:summary}
 
 In this seminar report, we presented two polynomial-time algorithms for the asymmetric Nash social welfare problem (\NSW), based on a paper by \citeauthor{APNSWuSVþUM}~\cite{APNSWuSVþUM}.
 The asymmetric \NSW{} asks to find an allocation of unsharable and indivisible items amongst agents such that the weighted geometric mean of their valuations is maximised.
@@ -18,7 +21,8 @@ In phase \phaseiii, the high-value items are finally assigned to the agents.
 Lastly, it was shown that any polynomial-time algorithm for the submodular \NSW{} must have an approximation factor of at least \(\frac{\euler}{\euler - 1}\) unless \(\P = \NP\).
 This holds even when the problem is symmetric and the valuation functions equal.
 
-\medskip
+\subsection{Review on Recent Works and Open Questions}
+\label{subsec:conclusion:outlook}
 
 \Citeauthor{APNSWuSVþUM}~\cite{APNSWuSVþUM} conjecture that \SMatch{} has a better approximation factor for the symmetric additive \NSW{} though neither were they able to prove a better factor nor could they prove the tightness of their given analysis.
 Additionally, they forbore to prove the tightness of the analysis of \RepReMatch{}, and we suspect there to be quite some constants to be saved \Dash admittedly, the benefits of a more thorough analysis are questionable.
@@ -30,7 +34,7 @@ To identify more general open questions, we need to take a look at new publicati
 	\Citeauthor{approximating_nsw_under_rado_valuations}~\cite{approximating_nsw_under_rado_valuations} developed an algorithm for the Rado \NSW, which is independent from both the number of items and the number of agents.
 	%
 	For the symmetric Rado \NSW, their algorithm achieves an approximation factor of \(256 \euler^{3/\euler} \approx 772\).
-	For the asymmetric Rado \NSW, the approximation factor is \(256 \gamma^3\) with \(\gamma \coloneq \max_{i \in \agents} \braces{\weight} / \min_{i \in \agents} \braces{\weight}\).
+	For the asymmetric Rado \NSW, the approximation factor is \(256 \gamma^3\) with \(\gamma \coloneq \max_{i \in \agents} \,\braces{\weight} / \min_{i \in \agents} \,\braces{\weight}\).
 	Interestingly, the algorithm is \(16 \gamma\)-approximative in case of the asymmetric additive \NSW, so it outperforms \SMatch{} in many instances.
 	Remarkably enough, the algorithm is divided into five phases, and the first phase serves to determine a set of high-value items.
 %	Other than that, heavy use of linear programming is made.
@@ -39,7 +43,7 @@ To identify more general open questions, we need to take a look at new publicati
 	\citeauthor{a_constfactor_approx_algo_for_nsw_with_submod_valuations}~\cite{a_constfactor_approx_algo_for_nsw_with_submod_valuations} introduced a randomised, \(380\)-approximative algorithm for the symmetric submodular \NSW.
 	Later, \citeauthor{approx_nsw_by_matching_and_local_search}~\cite{approx_nsw_by_matching_and_local_search} devised a family of deterministic algorithms for every \(\epsilon > 0\).
 	%, whose running times are polynomial in \(n\), \(m\), and \(1/\euler\).
-	They are \((4+\epsilon)\)-approximative in the symmetric case and \(\euler(n \cdot \max_{i \in \agents} \braces{\weight} + 2 + \epsilon)\)-approximative in the asymmetric one.
+	They are \((4+\epsilon)\)-approximative in the symmetric case and \(\euler(n \cdot \max_{i \in \agents} \,\braces{\weight} + 2 + \epsilon)\)-approximative in the asymmetric one.
 
 	\item
 	\XOS{} functions are a superclass of submodular functions, for which the approximation factor of \RepReMatch{} is not independent of the number of items anymore~\cite[Section 6.2]{APNSWuSVþUM}.
@@ -66,13 +70,13 @@ A selection of new developments:
 	\Citeauthor{bobw_agents_with_entitlements}~\cite{bobw_agents_with_entitlements} use it to provide fair allocations for the asymmetric additive \NSW{} and the symmetric \XOS{} \NSW.
 
 	\item
-	\Citeauthor{on_optimal_tradeoffs_between_efx_and_nsw}~\cite{on_optimal_tradeoffs_between_efx_and_nsw} show a \(\frac{1}{\alpha + 1}\)-approximative algorithm computing allocations which are \(\alpha\)-\EFX{} for the symmetric additive \NSW{} with \(\alpha \in [0, 1]\).
-	They also show a \(\frac{1}{\alpha+1}\)-approximative algorithm computing allocations which are \(\alpha\)-\EFX{} for the symmetric subadditive \NSW{} with \(\alpha \in [0, \frac{1}{2}]\).
+	\Citeauthor{on_optimal_tradeoffs_between_efx_and_nsw}~\cite{on_optimal_tradeoffs_between_efx_and_nsw} show a \((\alpha + 1)\)-approximative algorithm computing allocations which are \(\alpha\)-\EFX{} for the symmetric additive \NSW{} with \(\alpha \in [0, 1]\).
+	They also show a \((\alpha+1)\)-approximative algorithm computing allocations which are \(\alpha\)-\EFX{} for the symmetric subadditive \NSW{} with \(\alpha \in [0, \sfrac{1}{2}]\).
 	Subadditive functions are a superclass for \XOS{} functions.
 \end{itemize}
 As seen, the research on the \NSW{} gained pace in the last years, and some points raised by \citeauthor{APNSWuSVþUM} have been addressed.
 Apart from devising algorithms with other valuation functions or restrictions close to reality, it could be rewarding to look at more basic cases.
-For example, \citeauthor{satiation_in_fisher_markets_and_approx_of_nsw}~\cite{satiation_in_fisher_markets_and_approx_of_nsw} provide a hardness of \(\sqrt{8/7} > 1.069\) for the symmetric additive \NSW, but the best known algorithm is that of \citeauthor{finding_fair_and_efficient_allocs}~\cite{finding_fair_and_efficient_allocs} with an approximation factor of \(\euler^{1/\euler} \approx 1.45\).
+For example, \citeauthor{satiation_in_fisher_markets_and_approx_of_nsw}~\cite{satiation_in_fisher_markets_and_approx_of_nsw} provide a hardness of \(\smash{\sqrt{8/7}} > 1.069\) for the symmetric additive \NSW, but the best known algorithm is that of \citeauthor{finding_fair_and_efficient_allocs}~\cite{finding_fair_and_efficient_allocs} with an approximation factor of \(\euler^{1/\euler} \approx 1.45\).
 
 %\begin{itemize}
 %		\item
