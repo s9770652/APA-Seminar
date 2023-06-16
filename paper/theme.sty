@@ -5,7 +5,15 @@
 \RenewDocumentCommand{\abb}{m}{\text{#1}}  % abbreviations
 \setkomafont{captionlabel}{\usekomafont{descriptionlabel}}
 
-\RenewDocumentCommand{\caseintextfont}{}{\maybesffamily\itshape}
+\RenewDocumentCommand{\caseintextfont}{}{\maybesffamily\itshape}  % font used for case labels (e. g., Case 1 -- x > 1; Case 1 -- x <= 1)
+
+\renewcommand{\qedsymbol}{  % coloured proof sign (bold tombstone)
+	\accentcolor\ensuremath{%
+		\setlength\fboxrule{0.3ex}%
+		\setlength\fboxsep{0ex}%
+		\raisebox{0.3ex}{\fbox{\phantom{\rule{1ex}{1ex}}}}%
+	}%
+}
 
 % Colours in titles.
 %\NewDocumentCommand{\accentcolor}{}{\color[RGB]{118, 13, 28}}  % Mordred's red
