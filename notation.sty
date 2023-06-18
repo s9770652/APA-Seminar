@@ -117,7 +117,7 @@
 %%% Constants and specifiers.
 \def\APX{\ensuremath{\mathcal{APX}}}
 \def\euler{\ensuremath{\mathup{e}}}
-\def\NP{\ensuremath{\mathcal{N\kern-0.05em P}}}
+\def\NP{\ensuremath{\mathcal{N\kern-0.025em P}}}
 \def\P{\ensuremath{\mathcal{P}}}
 
 % Sets of numbers.
@@ -304,7 +304,7 @@
 	\eta\IfEmptyF{#1}{_{#1}}
 }
 \NewDocumentCommand{\weights}{}{
-	\mathcal{W}
+	E
 }
 
 \SetKwFunction{maxweightmatching}{max\_weight\_matching}
@@ -319,7 +319,7 @@
 
 \NewDocumentCommand{\CASC}{}{\abb{CASC}}
 \NewDocumentCommand{\Gap}{}{\abb{Gap-Max-3-Colouring}}
-\NewDocumentCommand{\EFone}{}{\abb{EF1}}
+\NewDocumentCommand{\EFone}{}{\abb{EF\liningnums{1}}}
 \NewDocumentCommand{\EFX}{}{\abb{EFX}}
 \NewDocumentCommand{\ESW}{}{%
 	\relax\ifmmode{\operatorname{ESW}}\else{\abb{ESW}}\fi%
@@ -329,8 +329,9 @@
 	\relax\ifmmode{\operatorname{NSW}}\else{\abb{NSW}}\fi%
 }
 \NewDocumentCommand{\OXS}{}{\abb{OXS}}
-\NewDocumentCommand{\RepReMatch}{}{\abb{RepReMatch}}
-\NewDocumentCommand{\SMatch}{}{\abb{SMatch}}
+\NewDocumentCommand{\PO}{}{\abb{PO}}
+\NewDocumentCommand{\RepReMatch}{}{\Lss02{RepReMatch}}
+\NewDocumentCommand{\SMatch}{}{SMatch}
 \NewDocumentCommand{\SPLC}{}{\abb{SPLC}}
 \NewDocumentCommand{\USW}{}{%
 	\relax\ifmmode{\operatorname{USW}}\else{\abb{USW}}\fi%

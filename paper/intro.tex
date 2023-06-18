@@ -1,15 +1,33 @@
 \section{Introduction}
 \label{sec:intro}
 
-The study of distributing goods amongst one or more receivers is an interdisciplinary field and is interesting from both a computational (how to find an allocation) and a qualitative (what a good allocation makes) standpoint~\cite{survey}.
-Its areas of application are mani\-fold:
-industrial procurement, where the preferences of buyers and sellers need be appropriately captured and real-world constraints on wares and services be taken into account~\cite{survey};
-mobile edge computing, where computation and storage are taken on by physically close servers, but participation has to be incentivised~\cite{edge_computing_auction, edge_computing_report};
-manufacturing processes, where tasks should be scheduled efficiently within and between many production sites, and disturbances be quickly paid heed to~\cite{survey};
-water management, where hostile countries must come to mutual agreements on the withdrawal from contested rivers~\cite{water_management}.
+\subsection{Motivation}
+\label{subsec:intro:motivation}
 
-In this seminar paper, we focus on unsharable and indivisible resources, which we term \emph{items}.
-The receivers of those items are called \emph{agents}.
+The study of distributing goods amongst several receivers is an interdisciplinary field, pursued as early as the 1940s~\cite{the_problem_of_fair_division}.
+It is interesting both computationally \Dash how to distribute fast \Dash and qualitatively \Dash how to distribute well.
+Its areas of application are manifold:
+\begin{itemize}
+	\item
+	For industrial procurement, the preferences of buyers and sellers need be appropriately captured and real-world constraints on goods and services be taken into account.~\cite{survey}
+
+	\item
+	Mobile Edge Computing describes a technique where mobile devices compete for computational and storage capabilities of physically close servers.
+	However, the participation of users and the provision of the serves has to be incentivised and monetised.~\cite{edge_computing_auction, edge_computing_report}
+
+	\item
+	Many production sites, machines, etc. are required for manufacturing, and the tasks between them must be scheduled efficiently.
+	Disturbances must be quickly paid heed to.~\cite{survey}
+
+	\item
+	Water is a crucial resource, and even hostile countries must come to mutual agreements on the withdrawal from contested rivers.~\cite{water_management}
+\end{itemize}
+
+\subsection{Preliminaries}
+\label{subsec:intro:prelim}
+
+In this seminar paper, we focus on unsharable and indivisible goods, which we term \emph{items}.
+The receivers of those items are termed \emph{agents}.
 The distributions of items amongst agents are modelled through allocations.
 \begin{definition}
 	Let~\(\goods\) be a set of \(m\) items and~\(\agents\) be a set of \(n\) agents.
@@ -29,12 +47,12 @@ We discuss additive and submodular functions in greater detail.
 	Additive functions are fairly simple but also useful, and many expansions exist.~\cite{satiation_in_fisher_markets_and_approx_of_nsw, APNSWuSVþUM}
 
 	\item[Submodular]
-	Let \(\valuations[\genericset[1] \given \genericset[2]] \coloneq \valuations[\genericset[1] \cup \genericset[2]] - \valuations[\genericset[2]]\) denote the marginal valuation\todo{or rather utility?} of agent~\(i\) for a set \(\genericset[1] \subset \goods\) of items over a disjoint set \(\genericset[2] \subset \goods\).
+	Let \(\valuations[\genericset[1] \given \genericset[2]] \coloneq \valuations[\genericset[1] \cup \genericset[2]] - \valuations[\genericset[2]]\) denote the marginal valuation of agent~\(i\) for a set \(\genericset[1] \subset \goods\) of items over a disjoint set \(\genericset[2] \subset \goods\).
 	This valuation function satisfies the submodularity constraint \(\valuations[\{j\} \given \genericset[1] \cup \genericset[2]] \le \valuations[\{j\} \given \genericset[1]]\) for all agents \(i \in \agents\), items \(j \in \goods\) and sets \(\genericset[1], \genericset[2] \subset \goods\) of items.
 
-	Submodular valuation functions (which encompass additive ones) have the property that the gain from assigning new items decreases with increasing bundle size.
+	Submodular valuation functions, which encompass additive ones, have the property that the gain from assigning new items decreases with increasing bundle size.
 	Diminishing returns are a common phenomenon in economics, making submodular functions worthwhile to study.~\cite{inapprox_results_for_combi_auctions_with_submod_utility_funcs}
-	Their relations to matroids make them interesting from a theoretical point of view, too.~\cite{submodular_low_value, approximating_nsw_under_rado_valuations, opt_approx_for_the_submod_nsw_in_the_value_oracle_model}
+	Their relations to matroids~\cite{submodular_low_value, approximating_nsw_under_rado_valuations, opt_approx_for_the_submod_nsw_in_the_value_oracle_model} make them interesting from a theoretical point of view, too.
 \end{description}
 In a slight abuse of notation, we sometimes omit curly braces delimiting a set, so we write \(\valuations[j_1, j_2, \dots]\) but mean \(\valuations[\{j_1, j_2, \dots\}]\) for example.
 
@@ -59,39 +77,40 @@ For the techniques employed in later sections, it is beneficial to consider the 
 	= \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \valuations[\alloc],
 \end{equation}
 which is a sum instead of a product.
-The Nash social welfare strikes as middle ground between the utilitarian and egalitarian social welfare, which focus on efficiency (height of overall satisfaction) and fairness (how agents value other agents' bundles), respectively.
+The Nash social welfare strike as middle ground between the utilitarian and egalitarian social welfare, which focus on efficiency (height of overall satisfaction) and fairness (how agents value other agents' bundles), respectively.
 In addition, it exhibits scale-freeness, that is invariance to the scales in which the valuations are expressed.
 Even though the \NSW{} is \APX-hard, approximate solutions largely keep the properties of optimal allocations.~\cite[see also \cref{rem:ef1}]{approximating_the_nsw_with_indiv_items, the_unreasonable_fairness_of_max_nsw, min_envy_and_max_avg_nsw_in_the_alloc_of_indiv_goods, finding_fair_and_efficient_allocs}
-We use the following definition for the approximation factor.
-\begin{definition}
-	An algorithm for a maximisation problem is \(\alpha\)-approximative if, for every problem instance \(I\) and output \(\operatorname{ALG}(I)\), it holds \(\operatorname{ALG}(I) \ge \operatorname{OPT}(I)/\alpha\), where \(\operatorname{OPT}(I)\) is the optimal value.
-	\todo{rephrase}
-\end{definition}
 
-As reference, we give a quick overview\footnotemark[1] of the research on the utilitarian and egalitarian social welfare:\todo{check if asymmetric}
-For the submodular utilitarian social welfare, a lower bound of \(\frac{\euler}{\euler - 1}\) on the approximation factor was proven~\cite{inapprox_results_for_combi_auctions_with_submod_utility_funcs} and an approximation algorithm achieving said factor shown~\cite{opt_approx_for_the_submod_nsw_in_the_value_oracle_model} \Dash the additive case is trivially solvable through repeated maximum matchings.
-For the additive egalitarian social welfare, a randomised \((320 \sqrt{n} \log^3 n)\)-approximative algorithm employing linear programming~\cite{an_approx_algo_for_maxmin_fair_alloc_of_indiv_goods} and a hardness of \(2\)~\cite{allocating_indiv_goods} are know.
-An \((2n-1)\)-approximative algorithm exists for the submodular case~\cite{approx_algo_for_the_maxmin_alloc_problem}.
+\subsection{Related Work and Contribution}
+\label{subsec:intro:contribution}
 
-In contrast, the \NSW{} is less well understood\footnotemark[1].
-A \(1.45\)-approximative algorithm is known for the symmetric additive \NSW~\cite{finding_fair_and_efficient_allocs}.
-For the symmetric submodular \NSW, a \((m - n + 1)\)-approximative algorithm has been devised~\cite{min_envy_and_max_avg_nsw_in_the_alloc_of_indiv_goods}.
+The research on the \NSW{} is rather young and less advanced than the research on other allocation problems.
+As reference\footnotemark[1], for the submodular utilitarian social welfare problem, a hardness of \(\frac{\euler}{\euler - 1}\) was proven in \citeyear{inapprox_results_for_combi_auctions_with_submod_utility_funcs}~\cite{inapprox_results_for_combi_auctions_with_submod_utility_funcs}, and an \(\frac{\euler}{\euler - 1}\)-approximation algorithm was shown in \citeyear{opt_approx_for_the_submod_nsw_in_the_value_oracle_model}~\cite{opt_approx_for_the_submod_nsw_in_the_value_oracle_model} \Dash the additive case is trivially solvable through repeated maximum matchings anyway.
+For the egalitarian social welfare problem, a randomised \((320 \sqrt{n} \log^3 n)\)-approximation algorithm for additive valuations~\cite{an_approx_algo_for_maxmin_fair_alloc_of_indiv_goods} and an \((2n-1)\)-approximation algorithm for submodular valuations~\cite{approx_algo_for_the_maxmin_alloc_problem} have been devised in \citeyear{an_approx_algo_for_maxmin_fair_alloc_of_indiv_goods} and \citeyear{approx_algo_for_the_maxmin_alloc_problem}, respectively.
+These may not be the best algorithms, though, as the best known lower bound on the approximation factor is \(2\)~\cite{allocating_indiv_goods}.
+
+In contrast, for the symmetric additive \NSW{}, an approximation hardness of \(1.069\) was shown in \citeyear{satiation_in_fisher_markets_and_approx_of_nsw}~\cite{satiation_in_fisher_markets_and_approx_of_nsw}, but only an \(1.45\)-approximation algorithm has been found in \citeyear{finding_fair_and_efficient_allocs}~\cite{finding_fair_and_efficient_allocs}.
+For the symmetric submodular \NSW, a \((m - n + 1)\)-approximation algorithm has been devised in \citeyear{min_envy_and_max_avg_nsw_in_the_alloc_of_indiv_goods}~\cite{min_envy_and_max_avg_nsw_in_the_alloc_of_indiv_goods}.
 %There are also some works on the \NSW{} problem with related valuation functions (\eg~\cite{satiation_in_fisher_markets_and_approx_of_nsw}), but they, too, exploit the symmetry of the studied \NSW.
-Both approaches exploit the symmetry of the studied problem and fail to be extended to the asymmetric case.
-Moreover, an approximation factor dependant on the number of items is not desirable as the number of items vastly exceeds the number of agents in many applications.
+However, an approximation factor dependant on the number of items is not desirable as the number of items vastly exceeds the number of agents in many applications.
+Moreover, both approaches exploit the symmetry of the studied problem and fail to extend to the asymmetric case.
 
-\Citeauthor{APNSWuSVþUM}~\cite{APNSWuSVþUM} fill this knowledge gap by providing two algorithms with polynomial runtime.
-The first one, \emph{\SMatch}, computes an allocation for the asymmetric additive \NSW{} and is \(2n\)-approximative.
-It does so by \emph{s}martly \emph{match}ing agents and items in a bipartite graph.
-The second one, \emph{\RepReMatch}, computes an allocation for the asymmetric submodular \NSW{} and is \(\paren[\big]{2n (\log_2 n + 3)}\)-approximative.
+\Citeauthor{APNSWuSVþUM}~\cite{APNSWuSVþUM} further the research by contributing two polynomial-time algorithms for the asymmetric \NSW.
+The first one, \emph{\SMatch}, computes a \(2n\)-approximative allocation when the valuation functions are additive.
+It does so by \emph{s}martly \emph{match}ing agents and items which make up the parts of a bipartite graph.
+The second one, \emph{\RepReMatch}, computes a \(\paren[\big]{2n (\log_2 n + 3)}\)-approximative allocation when the valuation functions are submodular.
 It does so by \emph{rep}eatedly computing \emph{match}ings, which then get partly annulled, so that items can be \emph{re}matched.
-We present and analyse both algorithms in \cref{sec:smatch} and \cref{sec:reprematch} of our seminar report, respectively.
-In \cref{sec:hardness}, we analyse the hardness of the submodular \NSW.
-\Cref{sec:conclusion} comprises the conclusion, a summary of newly published work since 2020, and an outlook on open questions.
+
+\subsection{Structure of the Paper}
+\label{subsec:intro:structure}
+
+We present and analyse \SMatch{} in \cref{sec:smatch} and \RepReMatch{} in \cref{sec:reprematch}.
+In \cref{sec:hardness}, we give an analysis of the hardness of the submodular \NSW.
+\Cref{sec:conclusion} contains the summary, an overview of newly published work since 2020, and an outlook on open questions.
 
 
 \footnotetext[1]{
-	The overview is given as the state of research was roughly at the end of the year 2019, when \citeauthor{APNSWuSVþUM} wrote their paper~\cite{APNSWuSVþUM} on which this seminar report is based.
+	The overview is given on the state of research as it was roughly at the end of the year 2019, when \citeauthor{APNSWuSVþUM} wrote their paper~\cite{APNSWuSVþUM} on which this seminar report is based.
 }
 
 
@@ -107,7 +126,7 @@ In \cref{sec:hardness}, we analyse the hardness of the submodular \NSW.
 %\end{description}
 %We use \emph{additive \NSW} and \emph{submodular \NSW} as shorthands for the Nash social welfare problems with additive and submodular valuation functions, respectively.
 
-\begin{itemize}
+%\begin{itemize}
 %	\item
 %	non-sharable indivisible resources -> items; opposed to divisible and sharable ones like money, electricity, network connections
 
@@ -194,10 +213,10 @@ In \cref{sec:hardness}, we analyse the hardness of the submodular \NSW.
 %		\cite{edge_computing_auction, edge_computing_report}
 %	\end{itemize}
 
-	\item
-	exponentially many subsets;
-	additive vs. submodular?
+%	\item
+%	exponentially many subsets;
+%	additive vs. submodular?
 
-	\item
-	hardness; constant additive in 2015; \(\bigo(n)\) for sym. subadditive but hard to improve for special cases; unbounded integrality grap \cite{approximating_nsw_under_rado_valuations}
-\end{itemize}
+%	\item
+%	hardness; constant additive in 2015; \(\bigo(n)\) for sym. subadditive but hard to improve for special cases; unbounded integrality grap \cite{approximating_nsw_under_rado_valuations}
+%\end{itemize}

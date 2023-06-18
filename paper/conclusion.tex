@@ -4,8 +4,8 @@
 \subsection{Summary}
 \label{subsec:conclusion:summary}
 
-In this seminar report, we presented two polynomial-time algorithms for the asymmetric Nash social welfare problem (\NSW), based on a paper by \citeauthor{APNSWuSVþUM}~\cite{APNSWuSVþUM}.
-The asymmetric \NSW{} asks to find an allocation of unsharable and indivisible items amongst agents such that the weighted geometric mean of their valuations is maximised.
+The asymmetric Nash social welfare problem (\NSW) asks to find an allocation of unsharable and indivisible items amongst agents such that the weighted geometric mean of their valuations is maximised.
+In this seminar report, we presented two polynomial-time algorithms for the asymmetric \NSW, based on a paper by \citeauthor{APNSWuSVþUM}~\cite{APNSWuSVþUM}.
 The novelty lies in both algorithms having an approximation factor dependant on the number \(n\) of agents but not on the number \(m\) of items.
 
 The first algorithm, \SMatch, finds a \(2n\)-approximative allocation if the valuation functions are additive.
@@ -21,7 +21,7 @@ In phase \phaseiii, the high-value items are finally assigned to the agents.
 Lastly, it was shown that any polynomial-time algorithm for the submodular \NSW{} must have an approximation factor of at least \(\frac{\euler}{\euler - 1}\) unless \(\P = \NP\).
 This holds even when the problem is symmetric and the valuation functions equal.
 
-\subsection{Review on Recent Works and Open Questions}
+\subsection{Recent Works and Open Questions}
 \label{subsec:conclusion:outlook}
 
 \Citeauthor{APNSWuSVþUM}~\cite{APNSWuSVþUM} conjecture that \SMatch{} has a better approximation factor for the symmetric additive \NSW{} though neither were they able to prove a better factor nor could they prove the tightness of their given analysis.
@@ -35,7 +35,7 @@ To identify more general open questions, we need to take a look at new publicati
 	%
 	For the symmetric Rado \NSW, their algorithm achieves an approximation factor of \(256 \euler^{3/\euler} \approx 772\).
 	For the asymmetric Rado \NSW, the approximation factor is \(256 \gamma^3\) with \(\gamma \coloneq \max_{i \in \agents} \,\braces{\weight} / \min_{i \in \agents} \,\braces{\weight}\).
-	Interestingly, the algorithm is \(16 \gamma\)-approximative in case of the asymmetric additive \NSW, so it outperforms \SMatch{} in many instances.
+	Interestingly, the algorithm is \(16 \gamma\)-approximative in case of the asymmetric additive \NSW, so it outperforms both \SMatch{} and \RepReMatch{} in many instances.
 	Remarkably enough, the algorithm is divided into five phases, and the first phase serves to determine a set of high-value items.
 %	Other than that, heavy use of linear programming is made.
 
@@ -46,20 +46,20 @@ To identify more general open questions, we need to take a look at new publicati
 	They are \((4+\epsilon)\)-approximative in the symmetric case and \(\euler(n \cdot \max_{i \in \agents} \,\braces{\weight} + 2 + \epsilon)\)-approximative in the asymmetric one.
 
 	\item
-	\XOS{} functions are a superclass of submodular functions, for which the approximation factor of \RepReMatch{} is not independent of the number of items anymore~\cite[Section 6.2]{APNSWuSVþUM}.
+	\XOS{} functions encompass submodular functionsa and, when used, the approximation factor of \RepReMatch{} is not independent of the number of items anymore~\cite[Section 6.2]{APNSWuSVþUM}.
 	\Citeauthor{sublin_approx_algo_for_nsw_with_xos_valuations}~\cite{sublin_approx_algo_for_nsw_with_xos_valuations} used both \RepReMatch{} and the discrete moving-knife method to get an \(\bigo(n^{53/54})\)-approximative algorithm for the symmetric \XOS{} \NSW.
 	However, the algorithm uses demand and \XOS{} queries, whereas \RepReMatch{} needs only the weaker value queries.
 
 	\item
-	\CASC{} (also known as \SPLC) functions are a superclass of additive functions, which can model diminishing returns.
-	\Citeauthor{fair_division_of_indiv_goods_for_a_class_of_concave_valuations}~\cite{fair_division_of_indiv_goods_for_a_class_of_concave_valuations} came up with an \(\euler^{1/\euler}\)-approximative algorithm for the symmetric \CASC{} \NSW.
+	\CASC{} (also known as \SPLC) functions encompass additive functions, which can also model diminishing returns.
+	\Citeauthor{fair_division_of_indiv_goods_for_a_class_of_concave_valuations}~\cite{fair_division_of_indiv_goods_for_a_class_of_concave_valuations} came up with an \(\euler^{1/\euler}\)-approximation algorithm for the symmetric \CASC{} \NSW.
 
 	\item
 	\Citeauthor{tractable_fragments_of_the_max_nsw_problem}~\cite{tractable_fragments_of_the_max_nsw_problem} offer (fully) polynomial-time approximation schemes and even an optimal algorithm for some types of the symmetric and asymmetric additive \NSW.
 \end{itemize}
-Besides efficiency, fairness is also a property towards which algorithm can be designed, although \SMatch{} and \RepReMatch{} advance little in that regard.
+Besides efficiency, fairness is also a property towards which algorithm can be designed, although \SMatch{} and \RepReMatch{} advanced little in that regard.
 Especially \RepReMatch{} with no fairness guarantees is unsatisfactory.
-Research is made complex because of the myriad of notions of fairness, though some sort of envy-freeness is commonly used.
+Research is made complex because of the myriad of notions of fairness.
 A selection of new developments:
 \begin{itemize}
 	\item
@@ -70,13 +70,13 @@ A selection of new developments:
 	\Citeauthor{bobw_agents_with_entitlements}~\cite{bobw_agents_with_entitlements} use it to provide fair allocations for the asymmetric additive \NSW{} and the symmetric \XOS{} \NSW.
 
 	\item
-	\Citeauthor{on_optimal_tradeoffs_between_efx_and_nsw}~\cite{on_optimal_tradeoffs_between_efx_and_nsw} show a \((\alpha + 1)\)-approximative algorithm computing allocations which are \(\alpha\)-\EFX{} for the symmetric additive \NSW{} with \(\alpha \in [0, 1]\).
-	They also show a \((\alpha+1)\)-approximative algorithm computing allocations which are \(\alpha\)-\EFX{} for the symmetric subadditive \NSW{} with \(\alpha \in [0, \sfrac{1}{2}]\).
-	Subadditive functions are a superclass for \XOS{} functions.
+	Subadditive functions encompass \XOS{} functions.
+	\Citeauthor{on_optimal_tradeoffs_between_efx_and_nsw}~\cite{on_optimal_tradeoffs_between_efx_and_nsw} show a \((\alpha + 1)\)-approximation algorithm computing allocations which are \(\alpha\)-\EFX{} for the symmetric additive \NSW{} with \(\alpha \in [0, 1]\).
+	They also show a \((\alpha+1)\)-approximation algorithm computing allocations which are \(\alpha\)-\EFX{} for the symmetric subadditive \NSW{} with \(\alpha \in [0, \sfrac{1}{2}]\).
 \end{itemize}
-As seen, the research on the \NSW{} gained pace in the last years, and some points raised by \citeauthor{APNSWuSVþUM} have been addressed.
-Apart from devising algorithms with other valuation functions or restrictions close to reality, it could be rewarding to look at more basic cases.
-For example, \citeauthor{satiation_in_fisher_markets_and_approx_of_nsw}~\cite{satiation_in_fisher_markets_and_approx_of_nsw} provide a hardness of \(\smash{\sqrt{8/7}} > 1.069\) for the symmetric additive \NSW, but the best known algorithm is that of \citeauthor{finding_fair_and_efficient_allocs}~\cite{finding_fair_and_efficient_allocs} with an approximation factor of \(\euler^{1/\euler} \approx 1.45\).
+As seen, the research on the \NSW{} gained pace in the last years, and some questions left unanswered by \citeauthor{APNSWuSVþUM} have been addressed.
+Apart from devising more algorithms for other valuation functions or with features close to reality, it could be rewarding to look at more basic cases.
+For example, as mentioned in \cref{subsec:intro:contribution}, the hardness of the symmetric additive \NSW{} could not be shown to be higher than \(\smash{\sqrt{8/7}} > 1.069\), but the best known algorithm, to the best of our knowledge to this day, has an approximation factor of about \(1.45\)~\cite{finding_fair_and_efficient_allocs}.
 
 %\begin{itemize}
 %		\item

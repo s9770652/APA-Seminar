@@ -7,13 +7,14 @@
 
 \RenewDocumentCommand{\caseintextfont}{}{\maybesffamily\itshape}  % font used for case labels (e. g., Case 1 -- x > 1; Case 1 -- x <= 1)
 
-\renewcommand{\qedsymbol}{  % coloured proof sign (bold tombstone)
-	\accentcolor\ensuremath{%
-		\setlength\fboxrule{0.3ex}%
-		\setlength\fboxsep{0ex}%
-		\raisebox{0.3ex}{\fbox{\phantom{\rule{1ex}{1ex}}}}%
-	}%
-}
+\renewcommand{\qedsymbol}{\accentcolor\square}  % coloured proof sign (tombstone)
+%\renewcommand{\qedsymbol}{  % coloured proof sign (bold tombstone)
+%	\accentcolor\ensuremath{%
+%		\setlength\fboxrule{0.3ex}%
+%		\setlength\fboxsep{0ex}%
+%		\raisebox{0.3ex}{\fbox{\phantom{\rule{1ex}{1ex}}}}%
+%	}%
+%}
 
 % Colours in titles.
 %\NewDocumentCommand{\accentcolor}{}{\color[RGB]{118, 13, 28}}  % Mordred's red
@@ -23,19 +24,10 @@
 \addtokomafont{disposition}{\accentcolor}
 \addtokomafont{labelinglabel}{\accentcolor}
 \addtokomafont{itemizelabel}{\accentcolor}
-\addtokomafont{descriptionlabel}{\accentcolor\textsbf}
+\addtokomafont{descriptionlabel}{\accentcolor\maybesffamily}
 
 % Title page.
 \setkomafont{publishers}{}  % \publishers in normal font
-
-% Logic notation.
-\let\oldforall\forall
-\renewcommand{\forall}{\oldforall \, }
-
-\let\oldexist\exists
-\renewcommand{\exists}{\oldexist \: }
-
-\newcommand\existsnot{\oldexist! \: }
 
 % Links.
 \hypersetup{
