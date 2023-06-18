@@ -21,11 +21,12 @@ In phase \phaseiii, the high-value items are finally assigned to the agents.
 Lastly, it was shown that any polynomial-time algorithm for the submodular \NSW{} must have an approximation factor of at least \(\frac{\euler}{\euler - 1}\) unless \(\P = \NP\).
 This holds even when the problem is symmetric and the valuation functions equal.
 
-\subsection{Recent Works and Open Questions}
+\subsection{Recent Work and Open Questions}
 \label{subsec:conclusion:outlook}
 
 \Citeauthor{APNSWuSVþUM}~\cite{APNSWuSVþUM} conjecture that \SMatch{} has a better approximation factor for the symmetric additive \NSW{} though neither were they able to prove a better factor nor could they prove the tightness of their given analysis.
 Additionally, they forbore to prove the tightness of the analysis of \RepReMatch{}, and we suspect there to be quite some constants to be saved \Dash admittedly, the benefits of a more thorough analysis are questionable.
+
 To identify more general open questions, we need to take a look at new publications since 2020, the year of the publication of the paper by \citeauthor{APNSWuSVþUM}.
 \begin{itemize}
 	\item
@@ -52,11 +53,14 @@ To identify more general open questions, we need to take a look at new publicati
 
 	\item
 	\CASC{} (also known as \SPLC) functions encompass additive functions, which can also model diminishing returns.
-	\Citeauthor{fair_division_of_indiv_goods_for_a_class_of_concave_valuations}~\cite{fair_division_of_indiv_goods_for_a_class_of_concave_valuations} came up with an \(\euler^{1/\euler}\)-approximation algorithm for the symmetric \CASC{} \NSW.
+	\SMatch{} can be modified to work for the \CASC{} \NSW{}, achieving an approximation factor of \(2n\)~\cite[Theorem 2.2]{APNSWuSVþUM}.
+	\Citeauthor{fair_division_of_indiv_goods_for_a_class_of_concave_valuations}~\cite{fair_division_of_indiv_goods_for_a_class_of_concave_valuations} came up with an \(\euler^{1/\euler}\)-approximation algorithm for the symmetric case.
 
 	\item
 	\Citeauthor{tractable_fragments_of_the_max_nsw_problem}~\cite{tractable_fragments_of_the_max_nsw_problem} offer (fully) polynomial-time approximation schemes and even an optimal algorithm for some types of the symmetric and asymmetric additive \NSW.
 \end{itemize}
+
+\smallskip\noindent
 Besides efficiency, fairness is also a property towards which algorithm can be designed, although \SMatch{} and \RepReMatch{} advanced little in that regard.
 Especially \RepReMatch{} with no fairness guarantees is unsatisfactory.
 Research is made complex because of the myriad of notions of fairness.
@@ -74,9 +78,11 @@ A selection of new developments:
 	\Citeauthor{on_optimal_tradeoffs_between_efx_and_nsw}~\cite{on_optimal_tradeoffs_between_efx_and_nsw} show a \((\alpha + 1)\)-approximation algorithm computing allocations which are \(\alpha\)-\EFX{} for the symmetric additive \NSW{} with \(\alpha \in [0, 1]\).
 	They also show a \((\alpha+1)\)-approximation algorithm computing allocations which are \(\alpha\)-\EFX{} for the symmetric subadditive \NSW{} with \(\alpha \in [0, \sfrac{1}{2}]\).
 \end{itemize}
+
+\smallskip\noindent
 As seen, the research on the \NSW{} gained pace in the last years, and some questions left unanswered by \citeauthor{APNSWuSVþUM} have been addressed.
 Apart from devising more algorithms for other valuation functions or with features close to reality, it could be rewarding to look at more basic cases.
-For example, as mentioned in \cref{subsec:intro:contribution}, the hardness of the symmetric additive \NSW{} could not be shown to be higher than \(\smash{\sqrt{8/7}} > 1.069\), but the best known algorithm, to the best of our knowledge to this day, has an approximation factor of about \(1.45\)~\cite{finding_fair_and_efficient_allocs}.
+For example, as mentioned in \cref{subsec:intro:contribution}, the hardness of the symmetric additive \NSW{} could not be shown to be higher than \(\smash{\sqrt{8/7}} > 1.069\)~\cite{satiation_in_fisher_markets_and_approx_of_nsw}, but the best known algorithm, to the best of our knowledge to this day, has an approximation factor of about \(1.45\)~\cite{finding_fair_and_efficient_allocs}.
 
 %\begin{itemize}
 %		\item
