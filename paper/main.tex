@@ -11,7 +11,6 @@
 \title{Approximating Nash Social Welfare under Submodular Valuations through (Un)Matchings}
 \subtitle{Based on a paper of the same name by \citeauthor{APNSWuSVþUM}~\cite{APNSWuSVþUM}.}
 \author{Zeno Adrian \texorpdfstring{\Lss05{W\kern-1.5pt}}{W}eil}
-\publishers{Supervisor: Dr Giovanna Varricchio}
 \publishers{\begin{tabular}{r @{~}l}
 	Examiner: & Prof Dr Martin Hoefer \\
 	Supervisor: & Dr Giovanna Varricchio
@@ -29,6 +28,8 @@
 \begin{document}
 	\maketitle
 
+	\pagenumbering{gobble}  % turn off pagenumbering
+
 	\begin{abstract}
 		\lipsum[6-8]
 	\end{abstract}
@@ -36,6 +37,11 @@
 	\tableofcontents
 
 	\listoftodos
+
+	\begingroup
+	\clearpage
+	\pagenumbering{arabic}  % turn on pagenumbering
+	\endgroup
 
 	\include{intro}
 
