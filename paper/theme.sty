@@ -27,6 +27,7 @@
 \addtokomafont{descriptionlabel}{\accentcolor\maybesffamily}
 
 % Title page.
+\addtokomafont{title}{\color{black}}
 \setkomafont{publishers}{}  % \publishers in normal font
 
 % Links.
@@ -62,9 +63,9 @@
 
 \captionsetup{format=plain}
 \KOMAoptions{
-	abstract,
-	titlepage,
-	headings=normal
+	abstract,  % heading for abstract
+	titlepage,  % dedicated titlepage without abstract
+	headings=normal  % smaller headings
 }
 
 
