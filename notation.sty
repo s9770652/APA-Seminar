@@ -116,28 +116,28 @@
 
 %%% Constants and specifiers.
 \def\APX{\ensuremath{\mathcal{APX}}}
-\def\euler{\ensuremath{\mathup{e}}}
+\def\euler{\ensuremath{\symup{e}}}
 \def\NP{\ensuremath{\mathcal{N\kern-0.025em P}}}
 \def\P{\ensuremath{\mathcal{P}}}
 
 % Sets of numbers.
-\def\nat{\mathbb{N}}
-\def\natzero{\mathbb{N}_{0}}
-\def\natnozero{\mathbb{N}_{>0}}
-\def\real{\mathbb{R}}
-\def\realpos{\mathbb{R}^+}
-\def\realposzero{\mathbb{R}_0^+}
+\def\nat{\symbb{N}}
+\def\natzero{\symbb{N}_{0}}
+\def\natnozero{\symbb{N}_{>0}}
+\def\real{\symbb{R}}
+\def\realpos{\symbb{R}^+}
+\def\realposzero{\symbb{R}_0^+}
 
 
 %%% Power set.
 \NewDocumentCommand{\powerset}{so}{
 	\IfNoValueTF{#2}{
-		\mathcal{P}
+		\symcal{P}
 	}{
 		\IfBooleanTF{#1}{
-			\mathcal{P}\left(#2\right)
+			\symcal{P}\left(#2\right)
 		}{
-			\mathcal{P}(#2)
+			\symcal{P}(#2)
 		}
 	}
 }
@@ -145,18 +145,18 @@
 
 
 %%% Bachmann-Landau notation.
-\def\bigo{\ensuremath{\mathcal{O}}} % TODO: Schreibweisen angleichen
-\def\bigomega{\ensuremath{\upOmega}}
+\def\bigo{\symcal{O}} % TODO: Schreibweisen angleichen
+\def\bigomega{\upOmega}
 
 
 %%% Stochastic notation.
-\NewDocumentCommand\Prob{sm}{\IfBooleanTF{#1}{\mathbb{P}\!\left[#2\right]}{\mathbb{P}[#2]}}
-\NewDocumentCommand\Erw{sm}{\IfBooleanTF{#1}{\mathbb{E}\!\left[#2\right]}{\mathbb{E}[#2]}}
+\NewDocumentCommand\Prob{sm}{\IfBooleanTF{#1}{\symbb{P}\!\left[#2\right]}{\symbb{P}[#2]}}
+\NewDocumentCommand\Erw{sm}{\IfBooleanTF{#1}{\symbb{E}\!\left[#2\right]}{\symbb{E}[#2]}}
 \NewDocumentCommand\Var{sm}{\IfBooleanTF{#1}{\operatorname{Var}\!\left[#2\right]}{\operatorname{Var}[#2]}}
 \NewDocumentCommand\Cov{sm}{\IfBooleanTF{#1}{\operatorname{Cov}\!\left[#2\right]}{\operatorname{Cov}[#2]}}
 
-\def\Unif{\mathfrak{U}}
-\def\Norm{\mathfrak{N}}
+\def\Unif{\symfrak{U}}
+\def\Norm{\symfrak{N}}
 
 
 %%% Abbreviation in texts.
@@ -217,13 +217,13 @@
 %%% APA seminar.
 % Maths & algo.
 \NewDocumentCommand{\agents}{}{
-	\mathcal{A}
+	\symcal{A}
 }
 \NewDocumentCommand{\allallocs}{m m}{
-	\mathbfit{X}_{#1}(#2)
+	\symbf{X}_{#1}(#2)
 }
 \NewDocumentCommand{\alloc}{s O{} O{i}}{
-	\mathbfit{x}\IfEmptyF{#3}{_{#3}}\IfEmptyTF{#2}{\IfBooleanT{#1}{^*}}{^{\IfBooleanT{#1}{*}#2}}
+	\symbf{x}\IfEmptyF{#3}{_{#3}}\IfEmptyTF{#2}{\IfBooleanT{#1}{^*}}{^{\IfBooleanT{#1}{*}#2}}
 }
 \NewDocumentCommand{\alloclen}{s O{} O{i}}{
 	\smash{\tau\IfEmptyF{#3}{_{#3}}\IfEmptyTF{#2}{\IfBooleanT{#1}{^*}}{^{\IfBooleanT{#1}{*}#2}}}
@@ -232,7 +232,7 @@
 	\IfBooleanTF{#1}{g}{h}\IfEmptyF{#3}{_{#3}}^{#2}
 }
 \NewDocumentCommand{\attopt}{m O{i}}{
-	\bar{\mathbfit{x}}^*_{\smash{#2, #1}}
+	\bar{\symbf{x}}^*_{\smash{#2, #1}}
 }
 \NewDocumentCommand{\attoptlen}{m O{i}}{
 	\smash{\bar{\tau}^*_{#2, #1}}
@@ -244,28 +244,25 @@
 	c
 }
 \NewDocumentCommand{\genericset}{s O{}}{
-	\mathcal{S}\IfBooleanT{#1}{^*}\IfEmptyF{#2}{_{#2}}
+	\symcal{S}\IfBooleanT{#1}{^*}\IfEmptyF{#2}{_{#2}}
 }
 \NewDocumentCommand{\goods}{}{
-	\mathcal{G}
+	\symcal{G}
 }
 \NewDocumentCommand{\goodsordered}{m O{i}}{
 	\goods\IfEmptyF{#2}{_{#2}}^{\smash{#1}}
 }
-\NewDocumentCommand{\goodsreleased}{m}{
-	\goods^{\mathup{rel}}_{#1}
-}
 \NewDocumentCommand{\goodsrem}{}{
-	\mathcal{G}^{\mathup{rem}}
+	\symcal{G}^{\mathup{rem}}
 }
 \NewDocumentCommand{\lostset}{m O{i}}{
-	\mathcal{L}_{\smash{\IfEmptyF{#2}{#2, } #1}}
+	\symcal{L}_{\smash{\IfEmptyF{#2}{#2, } #1}}
 }
 \NewDocumentCommand{\lostsetlen}{m O{i}}{
 	\ell_{\smash{\IfEmptyF{#2}{#2, } #1}}
 }
 \NewDocumentCommand{\matching}{O{}}{
-	\mathcal{M}\IfEmptyF{#1}{_{\hspace{-.1em}#1}}
+	\symcal{M}\IfEmptyF{#1}{_{\hspace{-.1em}#1}}
 }
 \NewDocumentCommand{\overlygooditem}{O{i}}{
 	j^{+}\IfEmptyF{#1}{_{#1}}

@@ -5,14 +5,12 @@
 
 \RequirePackage{amsmath, amssymb, amsthm}  % mathematische Grundlagen
 \RequirePackage[intlimits]{mathtools}  % stellt u. a. \DeclarePairedDelimiter zur Verfügung + weitere Verbesserungen für amsmath
-\let\mathbbold\mathbb  % speichere herkömmliche Buchstaben mit Doppelstrich und Serifen
 \RequirePackage[
 	math-style=ISO,
 	bold-style=ISO,
 	partial=upright,
 	warnings-off={mathtools-colon,mathtools-overbracket},
 ]{unicode-math}  % für kursive gr. Großbuchstaben und aufrechtes ∂ benützt
-\let\mathbb\mathbbold  % kehre zu herkömmlichen Buchstaben mit Doppelstrich und Serifen zurück; neue Zeichen wie 1 mittels \symbb{1} verfügbar
 \RequirePackage{xfrac}  % schräge Brüche; vor fontspec zu laden!
 \RequirePackage{mleftright}  % behebt falschen Freiraum um \left und \right
 \mleftright  % aktiviere Freiraumbehebung für \left und \right (ansonsten benutze \mleft und \mright)

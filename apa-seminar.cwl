@@ -51,7 +51,6 @@
 
 \goodsordered{rank}#m
 \goodsordered{rank}[agent]#m
-\goodsreleased{round}#m
 
 \lostset{round}#m
 \lostset{round}[agent]#m
