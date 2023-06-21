@@ -104,14 +104,15 @@ The addend \(\remvalue\) serves as estimation of the valuation of items assigned
 	\coloneq \smashoperator{\min_{\substack{\genericset \subset \goods \\ \abs{\genericset} \le 2n}}} \,\{ \valuations[\goods \setminus \genericset] \}
 	= \valuations[ \goodsordered{2n+1}, \dots, \goodsordered{m} ].
 \end{equation}
-Note that set \(\genericset\) has less than \(2n\) elements only if there are less than \(2n\) items in total.
+Note that the set \(\genericset\) realizing the minimum of \(\valuations[\goods \setminus \genericset]\) may have less than \(2n\) elements if there are less than \(2n\) items in total or if some items have a valuation of zero.
 From the second matching onwards, the edge weights are defined as \(\weight \log\paren[\big]{ \valuations[j] + \valuations[\alloc] }\), where~\(\alloc\) is the continuously updated bundle of agent \(i\).
 The addend \(\valuations[\alloc]\) could lead to better allocations in applications but does not improve the approximation factor asymptotically and so is of no further interest in the analysis.
 
 \begin{algorithm*}[t]
 	\KwIn{%
-		set \(\goods\) of \(m\) items,
-		set \(\agents\) of \(n\) agents, additive valuation functions \(\valuations \colon \powerset[\goods] \to \realposzero\) and weights \(\weight \in \realpos\) for all agents \(i \in \agents\)
+		a set \(\goods\) of \(m\) items,
+		a set \(\agents\) of \(n\) agents,
+		additive valuation functions \(\valuations \colon \powerset[\goods] \to \realposzero\) and weights \(\weight \in \realpos\) for all agents \(i \in \agents\)
 	}
 	\KwOut{%
 		\(2n\)-approximation \(\alloc[][] = (\alloc)_{i \in \agents}\) of an optimal allocation
@@ -121,10 +122,10 @@ The addend \(\valuations[\alloc]\) could lead to better allocations in applicati
 	\(\weights \gets \braces[\big]{\, \paren[\big]{ i, j, \weight \log\paren{ \valuations[j] + \remvalue/n } } \given[\bigm] i \in \agents, j \in \goods \,}\)  \tct*{weighted edges using estimation}
 	\(\bipartitegraph \gets (\agents, \goods, \weights)\)  \tct*{bipartite graph}
 	\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
-	\(\alloc \gets \{\, j \given (i, j) \in \matching \,\} \quad\forall i \in \agents\)  \tct*{assign according to matching}
+	\(\alloc \gets \{\, j \given (i, j) \in \matching \,\} \quad\forall i \in \agents\)  \tct*{assign according to matching \(\matching\)}
 	\(\goodsrem \gets \goods \setminus \{\, j \given (i, j) \in \matching \,\}\)  \tct*{remove assigned items}
 	\While{\(\goodsrem \neq \emptyset\)}{
-		\(\weights \gets \braces[\big]{\, \paren[\big]{ i, j, \weight \log\paren{ \valuations[j] + \valuations[\alloc] } } \given[\bigm] i \in \agents, j \in \goodsrem \,}\)\;
+		\(\weights \gets \braces[\big]{\, \paren[\big]{ i, j, \weight \log\paren{ \valuations[j] + \valuations[\alloc] } } \given[\bigm] i \in \agents, j \in \goodsrem \,}\)  \tct*{weighted edges using only valuations}
 		\(\bipartitegraph \gets (\agents, \goodsrem, \weights)\)\;
 		\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
 		\(\alloc \gets \alloc \cup \{\, j \given (i, j) \in \matching \,\} \quad\forall i \in \agents\)\;
@@ -142,7 +143,7 @@ The addend \(\valuations[\alloc]\) could lead to better allocations in applicati
 \label{subsec:smatch:analysis}
 
 To calculate the approximation factor of \SMatch, we first need to establish a lower bound on the valuation of single items.
-For convenience, we order the items in a bundle \(\alloc = \{\asgd{1}, \asgd{2}, \dots \}\) by the order in which they were assigned to agent \(i\), so that item \(\asgd{t}\) is assigned according to the \(t\)th matching.
+For convenience, we order the items in any bundle \(\{\asgd{1}, \asgd{2}, \dots \}\) by the order in which they were assigned to agent \(i\), so that item \(\asgd{t}\) is assigned according to the \(t\)th matching.
 Note that it holds \(\valuations[\asgd{t}] \ge \valuations[\asgd{t'}]\) for all \(t' \ge t\).
 \begin{lemma}
 	\label{lem:lower_bound_single_item}
@@ -162,7 +163,7 @@ We can now establish \(\remvalue/n = \valuations[ \goodsordered{2n+1}, \dots, \g
 \begin{proof}
 	By \cref{lem:lower_bound_single_item} and definition of \(\goodsordered{tn}\), every item \(\asgd{t}\) is worth at least as much as each item \(\goodsordered{tn+k}\) with \(k \in \{1, \dots, n\}\) and, consequently, its valuation \(\valuations[\asgd{t}]\) is at least as high as the mean valuation \(\frac{1}{n} \valuations[ \goodsordered{tn+1}, \dots, \goodsordered{tn + n} ]\).
 	Also, it holds \(\alloclen n + n \ge m \) since agent~\(i\) gets assigned \(\alloclen \ge \floor*{\frac{m}{n}} \ge \frac{m}{n} - 1\) many items.
-	This yields\todo[info]{\(\mathbfit{i}\): I do not get the reason for the extra step in the original paper.}
+	This yields
 	\begin{equation}
 		\valuations[\asgd{2}, \dots, \asgd{\alloclen}]
 		= \sum_{t=2}^{\alloclen \mathstrut} \valuations[\asgd{t}]
@@ -192,7 +193,7 @@ This allows us to calculate an approximation factor for \SMatch{} by comparing i
 		&\ge \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \paren[\big]{ \valuations[\asgd{1}] + \remvalue / n } \label{eq:smatch_maximising}
 	\end{align}
 	Notice that the first matching of \SMatch{} maximises the sum in \cref{eq:smatch_maximising}.
-	Thus, assigning all agents~\(i\) their respective most highly valued item \(\asgd*{1}\) in an optimal bundle~\(\alloc* = \{ \asgd*{1}, \dots, \asgd*{\alloclen*} \}\) yields the even lower bound
+	Thus, assigning all agents~\(i\) their respective most highly valued item \(\asgd*{1}\) from an optimal bundle~\(\alloc*\) yields the even lower bound
 	\begin{equation}
 		\label{eq:smatch_approx_factor_lower_bound}
 		\log \NSW(\alloc[][])

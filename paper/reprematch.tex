@@ -3,28 +3,29 @@
 
 \begin{algorithm*}[!b]
 	\KwIn{%
-		set \(\goods\) of \(m\) items,
-		set \(\agents\) of \(n\) agents, additive valuation functions \(\valuations \colon \powerset[\goods] \to \realposzero\) and weights \(\weight \in \realpos\) for all agents \(i \in \agents\)
+		a set \(\goods\) of \(m\) items,
+		a set \(\agents\) of \(n\) agents,
+		additive valuation functions \(\valuations \colon \powerset[\goods] \to \realposzero\) and weights \(\weight \in \realpos\) for all agents \(i \in \agents\)
 	}
 	\KwOut{%
 		\(2n(\log_2 n + 3)\)-approximation \(\alloc[\phaseiii][] = (\alloc[\phaseiii])_{i \in \agents}\) of an optimal allocation
 	}
 	\phaseisep
-	\(\alloc[\phasei] \gets \emptyset \quad\forall i \in \agents\)\;
-	\(\goodsrem \gets \goods\)\;
+	\(\alloc[\phasei] \gets \emptyset \quad\forall i \in \agents\)  \tct*{initialise temporary allocation}
+	\(\goodsrem \gets \goods\)  \tct*{set of unassigned items}
 	\For{\(t \gets 1, \dots, \ceil{\log_2 n}+1\)}{
 		\If{\(\goodsrem \neq \emptyset\)}{
-			\(\weights \gets \braces[\big]{\, \paren[\big]{ i, j, \weight \log\paren{ \valuations[j] } } \given[\bigm] i \in \agents, j \in \goodsrem \,}\)   \tct*{valuation of single item}
-			\(\bipartitegraph \gets (\agents, \goodsrem, \weights)\)\;
+			\(\weights \gets \braces[\big]{\, \paren[\big]{ i, j, \weight \log{ \valuations[j] } } \given[\bigm] i \in \agents, j \in \goodsrem \,}\)   \tct*{weighted edges using val. of single item}
+			\(\bipartitegraph \gets (\agents, \goodsrem, \weights)\)  \tct*{bipartite graph}
 			\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
-			\(\alloc[\phasei] \gets \alloc[\phasei] \cup \{j\} \quad \forall(i, j) \in \matching\)\;
-			\(\goodsrem \gets \goodsrem \setminus \{\, j \given (i, j) \in \matching \,\}\)\;
+			\(\alloc[\phasei] \gets \alloc[\phasei] \cup \{j\} \quad \forall(i, j) \in \matching\)  \tct*{assign according to matching \(\matching\)}
+			\(\goodsrem \gets \goodsrem \setminus \{\, j \given (i, j) \in \matching \,\}\)  \tct*{remove assigned items}
 		}
 	}
 	\phaseiisep
-	\(\alloc[\phaseii] \gets \emptyset \quad\forall i \in \agents\)   \tct*{put allocation \(\alloc[\phasei][]\) away and start a new one}
+	\(\alloc[\phaseii] \gets \emptyset \quad\forall i \in \agents\)   \tct*{put allocation \(\alloc[\phasei][]\) away \& initialise new, definite one}
 	\While{\(\goodsrem \neq \emptyset\)}{
-		\(\weights \gets \braces[\big]{\, \paren[\big]{ i, j, \weight \log\paren{ \valuations[ \alloc[\phaseii] \cup \{j\} ] } } \given[\bigm] i \in \agents, j \in \goodsrem \,}\)   \tct*{val. of item \& cur. bundle}
+		\(\weights \gets \braces[\big]{\, \paren[\big]{ i, j, \weight \log{ \valuations[ \alloc[\phaseii] \cup \{j\} ] } } \given[\bigm] i \in \agents, j \in \goodsrem \,}\)   \tct*{valuation of item \& current bundle}
 		\(\bipartitegraph \gets (\agents, \goodsrem, \weights)\)\;
 		\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
 		\(\alloc[\phaseii] \gets \alloc[\phaseii] \cup \{j\} \quad \forall(i, j) \in \matching\)\;
@@ -32,12 +33,12 @@
 	}
 	\phaseiiisep
 	\(\goodsrem \gets \bigcup_{i \in \agents} \alloc[\phasei]\)  \tct*{release items assigned in phase~\phasei} \label{ln:goodsrem}
-	\(\weights \gets \braces[\big]{\, \paren[\big]{ i, j, \weight \log\paren{ \valuations[ \alloc[\phaseii] \cup \{j\} ] } } \given[\bigm] i \in \agents, j \in \goodsrem \,}\)   \tct*{val. of item \& cur. bundle}
-	\(\bipartitegraph \gets (\agents, \goodsrem, \weights)\)  \label{ln:bipartitegraph}\;
+	\(\weights \gets \braces[\big]{\, \paren[\big]{ i, j, \weight \log{ \valuations[ \alloc[\phaseii] \cup \{j\} ] } } \given[\bigm] i \in \agents, j \in \goodsrem \,}\)   \tct*{valuation of item \& current bundle}
+	\(\bipartitegraph \gets (\agents, \goodsrem, \weights)\)\;
 	\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
-	\(\alloc[\phaseiii] \gets \alloc[\phaseii] \cup \{j\} \quad\forall(i, j) \in \matching\)\;
+	\(\alloc[\phaseiii] \gets \alloc[\phaseii] \cup \{j\} \quad\forall(i, j) \in \matching\)  \tct*{initialise final allocation}
 	\(\goodsrem \gets \goodsrem \setminus \{\, j \given (i, j) \in \matching \,\}\)\;
-	\(\alloc[\phaseiii][] \gets \arballoc( \agents, \goodsrem, \alloc[\phaseiii][], (\valuations)_{i \in \agents} )\)\;
+	\(\alloc[\phaseiii][] \gets \arballoc( \agents, \goodsrem, \alloc[\phaseiii][], (\valuations)_{i \in \agents} )\)  \tct*{assign remainder of items arbitrarily}
 	\Return{\(\alloc[\phaseiii][]\)}
 	\caption{%
 		\RepReMatch{} for the asymmetric submodular \NSW{}
@@ -77,10 +78,11 @@ To this end, we introduce two types of item sets.
 	For any round \(r \ge 1\) in phase~\phaseii, the set \(\lostset{r} \subset \alloc*\) of \emph{lost items} is the set of all items \(j \in \alloc*\) assigned to other agents \(i' \neq i\) in that round.
 \end{definition}
 \begin{definition}
-	Let \(\alloc*\) be an optimal bundle of an agent \(i \in \agents\) and \(\alloc[\phaseii] = \{ \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} \}\) be her bundle from phase \phaseii.
+	Let \(\alloc*\) be an optimal bundle of an agent \(i \in \agents\) and \(\alloc[\phaseii] = \{ \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} \}\) be her bundle at the end of phase \phaseii.
 	The set of \emph{optimal and attainable items} is defined as \(\attopt{0} \coloneq \alloc* \setminus \bigcup_{i' \in \agents} \alloc[\phasei][i']\) for round~\(0\) and as \(\attopt{r} \coloneq \attopt{r-1} \setminus ( \lostset{r} \cup \{\asgd{r-1}\}\) for round \(r \in [1, \alloclen[\phaseii]]\).
 \end{definition}
-We denote their sizes by \(\lostsetlen{r}\ \coloneq \abs{\lostset{r}}\) and \(\attoptlen{r} \coloneq \abs{\attopt{r}}\), respectively.\todo[info]{\(\mathbfit{i}\): Would it be \enquote{dirty} to move this into the definitions?}
+\noindent
+We denote their sizes by \(\lostsetlen{r}\ \coloneq \abs{\lostset{r}}\) and \(\attoptlen{r} \coloneq \abs{\attopt{r}}\), respectively.
 First, we give a lower bound on the valuations of optimal and attainable items.
 \begin{lemma}
 	\label{lem:induction}
@@ -265,7 +267,7 @@ This allows us to calculate an approximation factor for \RepReMatch{} by compari
 	is a lower bound on the logarithmic \NSW{} after the first matching in phase~\phaseiii, with \(\alloc[\phaseii] = \{ \asgd{1}, \dots, \allowbreak \asgd{\alloclen[\phaseii]} \}\) being the bundle of agent \(i\) from phase~\phaseii.
 
 	Item \(\overlygooditem\) was released in phase~\phaseiii, which means it was assigned in phase~\phasei, implying \(\overlygooditem \in \alloc* \setminus \attopt{0}\) and, subsequently, \(\overlygooditem \in (\alloc* \setminus \attopt{0}) \cup \lostset{1}\).
-	Phase~\phasei{} runs for at most \(\ceil{\log_2 n}+1\)\todo[info]{\(\mathbfit{i}\): Error in paper‽ see also \cref{lem:overly_good_matching}} rounds, and at most~\(n\) items are assigned in each iteration.
+	Phase~\phasei{} runs for at most \(\ceil{\log_2 n}+1\) rounds, and at most~\(n\) items are assigned in each iteration.
 	Therefore, at most \(n (\log_2 n + 2)\) optimal items are assigned in that phase, \ie, \(\abs{ \alloc* \setminus \attopt{0} } \le n (\log_2 n + 2)\).
 	As in \cref{lem:lower_bound_all_items}, it also holds \(n \ge \lostsetlen{1} = \abs{\lostset{1}}\).
 	Together with the monotonicity of the valuation functions, this yields

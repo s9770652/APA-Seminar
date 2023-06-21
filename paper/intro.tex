@@ -50,11 +50,11 @@ We discuss additive and submodular functions in greater detail.
 	Let \(\valuations[\genericset[1] \given \genericset[2]] \coloneq \valuations[\genericset[1] \cup \genericset[2]] - \valuations[\genericset[2]]\) denote the marginal valuation of agent~\(i\) for a set \(\genericset[1] \subset \goods\) of items over a disjoint set \(\genericset[2] \subset \goods\).
 	This valuation function satisfies the submodularity constraint \(\valuations[\{j\} \given \genericset[1] \cup \genericset[2]] \le \valuations[\{j\} \given \genericset[1]]\) for all agents \(i \in \agents\), items \(j \in \goods\) and sets \(\genericset[1], \genericset[2] \subset \goods\) of items.
 
-	Submodular valuation functions, which encompass additive ones, have the property that the gain from assigning new items decreases with increasing bundle size.
-	Diminishing returns are a common phenomenon in economics, making submodular functions worthwhile to study.~\cite{inapprox_results_for_combi_auctions_with_submod_utility_funcs}
+	Submodular valuation functions, which encompass the additive ones, have the property that the gain from assigning new items decreases with increasing bundle size.
+	Diminishing returns are a common phenomenon in economics, making submodular functions worthwhile to study~\cite{inapprox_results_for_combi_auctions_with_submod_utility_funcs}.
 	Their relations to matroids~\cite{submodular_low_value, approximating_nsw_under_rado_valuations, opt_approx_for_the_submod_nsw_in_the_value_oracle_model} make them interesting from a theoretical point of view, too.
 \end{description}
-In a slight abuse of notation, we sometimes omit curly braces delimiting a set, so we write \(\valuations[j_1, j_2, \dots]\) but mean \(\valuations[\{j_1, j_2, \dots\}]\) for example.
+In a slight abuse of notation, we sometimes omit curly braces delimiting a set, so we write \(\valuations[j_1, j_2, \dots]\) instead of \(\valuations[\{j_1, j_2, \dots\}]\) for example.
 
 In order to measure and maximise the overall satisfaction of all agents, one needs to combine their valuations.
 Several options arise here;
