@@ -113,12 +113,6 @@
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 
-% Custom \bar.
-% taken from: https://tex.stackexchange.com/a/583573
-\newcommand{\mybar}[3]{%
-	\mathrlap{\hspace{#2}\overline{\scalebox{#1}[1]{\phantom{\ensuremath{#3}}}}}\ensuremath{#3}
-}
-
 
 %%% Constants and specifiers.
 \def\APX{\ensuremath{\mathcal{APX}}}
@@ -133,6 +127,12 @@
 \def\real{\symbb{R}}
 \def\realpos{\symbb{R}^+}
 \def\realposzero{\symbb{R}_0^+}
+
+% Custom \bar.
+% taken from: https://tex.stackexchange.com/a/583573
+\newcommand{\mybar}[3]{%
+	\mathrlap{\hspace{#2}\overline{\scalebox{#1}[1]{\phantom{\ensuremath{#3}}}}}\ensuremath{#3}
+}
 
 
 %%% Power set.
@@ -149,7 +149,6 @@
 }
 
 
-
 %%% Bachmann-Landau notation.
 \def\bigo{\symcal{O}} % TODO: Schreibweisen angleichen
 \def\bigomega{\upOmega}
@@ -163,6 +162,12 @@
 
 \def\Unif{\symfrak{U}}
 \def\Norm{\symfrak{N}}
+
+
+%%% Period in math environments.
+\NewDocumentCommand{\mperiod}{O{.}}{%
+	\relax\ifmmode{\,\rlap{#1}}\else{\thinspace#1\@ }\fi%
+}
 
 
 %%% Abbreviation in texts.

@@ -88,7 +88,7 @@ First, we give a lower bound on the valuations of optimal and attainable items.
 	\label{lem:induction}
 	For each agent \(i \in \agents\) and her bundle \(\alloc[\phaseii] = \{ \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} \}\), it holds in all rounds \(r = 2, \dots, \alloclen[\phaseii]\) of phase \phaseii{} that
 	\begin{equation*}
-		\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] \ge \valuations[\attopt{1}] - \lostsetlen{2} \cdot \valuations[\asgd{1}] - \smashoperator{\sum_{r'=2}^{r-1}} \lostsetlen{r'+1} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] - \valuations[\asgd{1}, \dots, \asgd{r-1}].
+		\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] \ge \valuations[\attopt{1}] - \lostsetlen{2} \cdot \valuations[\asgd{1}] - \smashoperator{\sum_{r'=2}^{r-1}} \lostsetlen{r'+1} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] - \valuations[\asgd{1}, \dots, \asgd{r-1}] \mperiod
 	\end{equation*}
 \end{lemma}
 \begin{proof}
@@ -110,7 +110,7 @@ First, we give a lower bound on the valuations of optimal and attainable items.
 		\valuations[ \attopt{2} \given \asgd{1} ]
 		\ge \valuations[\attopt{1} \setminus \lostset{2}] -  \valuations[\asgd{1}]
 		\ge \valuations[ \attopt{1} ] - \valuations[\lostset{2}] - \valuations[\asgd{1}]
-		\ge \valuations[ \attopt{1} ] - \lostsetlen{2} \cdot \valuations[\asgd{1}] - \valuations[\asgd{1}],
+		\ge \valuations[ \attopt{1} ] - \lostsetlen{2} \cdot \valuations[\asgd{1}] - \valuations[\asgd{1}] \mperiod[,]
 	\end{equation}
 	where the second inequality is shown easily using an alternative definition of submodularity (\(\valuations[\genericset[1] \cup \genericset[2]] + \valuations[\genericset[1] \cap \genericset[2]] \le \valuations[\genericset[1]] + \valuations[\genericset[2]]\) with \(\genericset[1] = \attopt{1} \setminus \lostset{2}\) and \(\genericset[2] = \lostset{2} \)~\cite{inapprox_results_for_combi_auctions_with_submod_utility_funcs}), and the third inequality is due to all \(\lostsetlen{2}\) items \(j\) in set \(\lostset{2}\) not being assigned in round \(1\) although attainable, implying \(\valuations[j] \le \valuations[\asgd{1}]\).
 
@@ -135,7 +135,7 @@ First, we give a lower bound on the valuations of optimal and attainable items.
 				\paren[\big]{ \valuations[ \attopt{r} \cup \{ \asgd{1}, \dots, \asgd{r-1} \} ] - \valuations[\asgd{1}, \dots, \asgd{r-1}] } \\
 				- \paren[\big]{ \valuations[\asgd{1}, \dots, \asgd{r}] - \valuations[\asgd{1}, \dots, \asgd{r-1}] }
 			\end{multlined} \\
-			&= \valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] - \valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ].
+			&= \valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] - \valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ] \mperiod
 		\end{align}
 		Together with the submodularity of valuation, we obtain the same lower bound again:
 		\begin{align}
@@ -163,7 +163,7 @@ The lemma can be used to find a lower bound on the marginal valuation of the ite
 	From \cref{lem:induction} follows
 	\begin{equation*}
 		\valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ]
-		\ge \paren[\Big]{ \valuations[\attopt{1}] - \lostsetlen{2} \cdot \valuations[\asgd{1}] - \smashoperator{\sum_{r'=2}^{r-1}} \lostsetlen{r'+1} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] - \valuations[\asgd{1}, \dots, \asgd{r-1}] } \Big/ \attoptlen{r}.
+		\ge \paren[\Big]{ \valuations[\attopt{1}] - \lostsetlen{2} \cdot \valuations[\asgd{1}] - \smashoperator{\sum_{r'=2}^{r-1}} \lostsetlen{r'+1} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] - \valuations[\asgd{1}, \dots, \asgd{r-1}] } \Big/ \attoptlen{r} \mperiod
 	\end{equation*}
 \end{corollary}
 \begin{proof}
@@ -172,7 +172,7 @@ The lemma can be used to find a lower bound on the marginal valuation of the ite
 
 	Remember that valuation functions are monotonic if \(\valuations[\genericset[1]] \le \valuations[\genericset[2]]\) holds for all sets \(\genericset[1] \subset \genericset[2] \subset \goods\).
 	Induction shows that there must be an item \(j \in \genericset[2]\) with valuation \(\valuations[j] \ge \valuations[\genericset[2]] / \abs{\genericset[2]}\), otherwise it would hold \(\valuations[\emptyset] > 0\).
-	Applied to \cref{lem:induction}, this means that there must be an item \(j \in \attopt{r}\) with a marginal valuation of at least \(\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] / \attoptlen{r}\).
+	Applied to \cref{lem:induction}, this means that there must be an item \(j \in \attopt{r}\) with a marginal valuation of at least \(\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] / \attoptlen{r}\)\mperiod
 	As item \(\asgd{r}\) was the one to be assigned, its marginal valuation cannot be smaller.
 \end{proof}
 
@@ -181,7 +181,7 @@ This, finally, enables us to give a lower bound on the valuation of the bundles 
 	\label{lem:lower_bound_all_items}
 	For each agent \(i \in \agents\) and her bundle \(\alloc[\phaseii] = \{\asgd{1}, \dots, \asgd{\alloclen[\phaseii]}\}\), it holds
 	\begin{equation*}
-		\valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii]}] \ge \valuations[\attopt{1}] / n.
+		\valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii]}] \ge \valuations[\attopt{1}] / n \mperiod
 	\end{equation*}
 \end{lemma}
 \begin{proof}
@@ -293,7 +293,7 @@ This allows us to calculate an approximation factor for \RepReMatch{} by compari
 		\valuations[ \overlygooditem, \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} ]
 		&\ge \frac{1}{2} \paren*{ \frac{\valuations[ (\alloc* \setminus \attopt{0}) \cup \lostset{1} ][\big]}{n(\log_2 n + 3)} + \frac{\valuations[ \attopt{0} \setminus \lostset{1} ][\big]}{n(\log_2 n + 3)} } \\
 		&\ge \frac{1}{2} \cdot \frac{ \valuations[ \paren{(\alloc* \setminus \attopt{0}) \cup \lostset{1}} \cup \paren{\attopt{0} \setminus \lostset{1}} ][\big] }{n(\log_2 n + 3)} \\
-		&= \frac{ \valuations[\alloc*] }{2n(\log_2 n + 3)}.
+		&= \frac{ \valuations[\alloc*] }{2n(\log_2 n + 3)} \mperiod
 	\end{align}
 	We can insert this lower bound into \cref{eq:reprematch_approx_factor_lower_bound} and prove the theorem thereby:
 	\begin{equation}

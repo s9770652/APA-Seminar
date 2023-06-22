@@ -14,6 +14,9 @@
 \norm{formula}#m
 \paren[size]{formula}#m
 
+\mperiod
+\mperiod[symbol]
+
 # specific
 \agents#m
 

@@ -110,7 +110,7 @@ The addend \(\remvalue\) serves as estimation of the valuation of items assigned
 	\label{eq:def_remvalue}
 	\remvalue
 	\coloneq \smashoperator{\min_{\substack{\genericset \subset \goods \\ \abs{\genericset} \le 2n}}} \,\{ \valuations[\goods \setminus \genericset] \}
-	= \valuations[ \goodsordered{2n+1}, \dots, \goodsordered{m} ].
+	= \valuations[ \goodsordered{2n+1}, \dots, \goodsordered{m} ] \mperiod
 \end{equation}
 Note that the set \(\genericset\) realizing the minimum of \(\valuations[\goods \setminus \genericset]\) may have less than \(2n\) elements if there are less than \(2n\) items in total or if some items have a valuation of zero.
 From the second matching onwards, the edge weights are defined as \(\weight \log\paren[\big]{ \valuations[j] + \valuations[\alloc] }\), where~\(\alloc\) is the continuously updated bundle of agent \(i\).
@@ -177,7 +177,7 @@ We can now establish \(\remvalue/n = \valuations[ \goodsordered{2n+1}, \dots, \g
 		= \sum_{t=2}^{\alloclen \mathstrut} \valuations[\asgd{t}]
 		\ge \sum_{t=2}^{\alloclen \mathstrut} \frac{1}{n} \valuations[ \goodsordered{tn+1}, \dots, \goodsordered{tn + n} ]
 		\ge \frac{1}{n} \valuations[ \goodsordered{2n+1}, \dots, \goodsordered{m} ]
-		= \frac{\remvalue}{n} \label{eq:lower_bound_later_items}.
+		= \frac{\remvalue}{n} \label{eq:lower_bound_later_items} \mperiod
 	\end{equation}
 \end{proof}
 
@@ -205,7 +205,7 @@ This allows us to calculate an approximation factor for \SMatch{} by comparing i
 	\begin{equation}
 		\label{eq:smatch_approx_factor_lower_bound}
 		\log \NSW(\alloc[][])
-		\ge \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \paren[\big]{ \valuations[\asgd*{1}] + \remvalue / n }.
+		\ge \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \paren[\big]{ \valuations[\asgd*{1}] + \remvalue / n } \mperiod
 	\end{equation}
 	Recall the definition of \(\remvalue\) from \cref{eq:def_remvalue}.
 	Consider a slightly modified variant:
@@ -219,7 +219,7 @@ This allows us to calculate an approximation factor for \SMatch{} by comparing i
 	Now consider the set \(\genericset*[i]\) of the (at most) \(2n\) most highly valued items in the optimal bundle \(\alloc*\), \ie
 	\begin{equation}
 		\genericset*[i]
-		\coloneq \smashoperator{\argmin_{\substack{\genericset \subset \alloc* \\ \abs{\genericset} \le 2n}}} \{ \valuations[\alloc* \setminus \genericset] \}.
+		\coloneq \smashoperator{\argmin_{\substack{\genericset \subset \alloc* \\ \abs{\genericset} \le 2n}}} \{ \valuations[\alloc* \setminus \genericset] \} \mperiod
 	\end{equation}
 	It holds \(\valuations[\asgd*{1}] \ge \frac{1}{2 n} \valuations[\genericset*[i]]\) because of \(\valuations[\asgd*{1}] \ge \valuations[j]\) for all items \(j \in \genericset*[i]\).
 	Furthermore, it holds \(\remvalue = \valuations[\goods \setminus \genericset[i]] \ge \valuations[\alloc* \setminus \genericset[i]] \ge \valuations[\alloc* \setminus \genericset*[i]]\).
