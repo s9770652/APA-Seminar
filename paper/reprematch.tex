@@ -79,7 +79,7 @@ To this end, we introduce two types of item sets.
 \end{definition}
 \begin{definition}
 	Let \(\alloc*\) be an optimal bundle of an agent \(i \in \agents\) and \(\alloc[\phaseii] = \{ \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} \}\) be her bundle at the end of phase \phaseii.
-	The set of \emph{optimal and attainable items} is defined as \(\attopt{0} \coloneq \alloc* \setminus \bigcup_{i' \in \agents} \alloc[\phasei][i']\) for round~\(0\) and as \(\attopt{r} \coloneq \attopt{r-1} \setminus ( \lostset{r} \cup \{\asgd{r-1}\}\) for round \(r \in [1, \alloclen[\phaseii]]\).
+	The set of \emph{optimal and attainable items} is defined as \(\attopt{0} \coloneq \alloc* \setminus \bigcup_{i' \in \agents} \alloc[\phasei][i']\) for round~\(0\) and as \(\attopt{r} \coloneq \attopt{r-1} \setminus ( \lostset{r} \cup \{\asgd{r-1}\} )\) for round \(r = 1, \dots, \alloclen[\phaseii]\).
 \end{definition}
 \noindent
 We denote their sizes by \(\lostsetlen{r}\ \coloneq \abs{\lostset{r}}\) and \(\attoptlen{r} \coloneq \abs{\attopt{r}}\), respectively.
