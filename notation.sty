@@ -113,6 +113,12 @@
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 
+% Custom \bar.
+% taken from: https://tex.stackexchange.com/a/583573
+\newcommand{\mybar}[3]{%
+	\mathrlap{\hspace{#2}\overline{\scalebox{#1}[1]{\phantom{\ensuremath{#3}}}}}\ensuremath{#3}
+}
+
 
 %%% Constants and specifiers.
 \def\APX{\ensuremath{\mathcal{APX}}}
@@ -232,10 +238,10 @@
 	\IfBooleanTF{#1}{g}{h}\IfEmptyF{#3}{_{#3}}^{#2}
 }
 \NewDocumentCommand{\attopt}{m O{i}}{
-	\overline{\symbf{x}}^*_{\smash{#2, #1}}
+	\mybar{0.95}{0.07em}{\symbf{x}}^*_{\smash{#2, #1}}
 }
 \NewDocumentCommand{\attoptlen}{m O{i}}{
-	\smash{\overline{\tau}^*_{#2, #1}}
+	\smash{\mybar{1.2}{0.02em}{\tau}^{*}_{#2, #1}}
 }
 \NewDocumentCommand{\bipartitegraph}{}{
 	G
