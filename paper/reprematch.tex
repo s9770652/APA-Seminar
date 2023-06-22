@@ -264,7 +264,7 @@ This allows us to calculate an approximation factor for \RepReMatch{} by compari
 		\log \NSW(\alloc[\phaseiii][])
 		\ge \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \valuations[\overlygooditem, \asgd{1}, \dots, \asgd{\alloclen[\phaseii]}]
 	\end{equation}
-	is a lower bound on the logarithmic \NSW{} after the first matching in phase~\phaseiii, with \(\alloc[\phaseii] = \{ \asgd{1}, \dots, \allowbreak \asgd{\alloclen[\phaseii]} \}\) being the bundle of agent \(i\) from phase~\phaseii.
+	is a lower bound on the logarithmic \NSW{} after the first matching in phase~\phaseiii, with \(\alloc[\phaseii] = \{ \asgd{1}, \dots, \allowbreak \asgd{\alloclen[\phaseii]} \}\) being the bundle of agent \(i\) at the end of phase~\phaseii.
 
 	Item \(\overlygooditem\) was released in phase~\phaseiii, which means it was assigned in phase~\phasei, implying \(\overlygooditem \in \alloc* \setminus \attopt{0}\) and, subsequently, \(\overlygooditem \in (\alloc* \setminus \attopt{0}) \cup \lostset{1}\).
 	Phase~\phasei{} runs for at most \(\ceil{\log_2 n}+1\) rounds, and at most~\(n\) items are assigned in each iteration.
