@@ -30,6 +30,26 @@ Additionally, they forbore to prove the tightness of the analysis of \RepReMatch
 To identify more general open questions, we need to take a look at new publications since 2020, the year of the publication of the paper by \citeauthor{APNSWuSVþUM}.
 \begin{itemize}
 	\item
+	\XOS{} functions encompass the submodular functions.
+	Unfortunately, \RepReMatch{} does not guarantee an approximation factor independent of the number of items even for the symmetric \XOS{} \NSW~\cite[Section 6.2]{APNSWuSVþUM}.
+	\Citeauthor{sublin_approx_algo_for_nsw_with_xos_valuations}~\cite{sublin_approx_algo_for_nsw_with_xos_valuations} used both \RepReMatch{} and the discrete moving-knife method to get an \(\bigo(n^{53/54})\)-approximation algorithm.
+	However, the algorithm uses demand and \XOS{} queries, whereas \RepReMatch{} needs only the weaker value queries.
+
+	\item
+	\Citeauthor{tractable_fragments_of_the_max_nsw_problem}~\cite{tractable_fragments_of_the_max_nsw_problem} offer (fully) polynomial-time approximation schemes and even an optimal algorithm for some types of the symmetric and asymmetric additive \NSW.
+
+	\item
+%	\citeauthor{a_constfactor_approx_algo_for_nsw_with_submod_valuations}~\cite{a_constfactor_approx_algo_for_nsw_with_submod_valuations} introduced a randomised, \(380\)-approximative algorithm for the symmetric submodular \NSW.
+	For the submodular \NSW, \citeauthor{approx_nsw_by_matching_and_local_search}~\cite{approx_nsw_by_matching_and_local_search} devised a family of deterministic algorithms for every \(\epsilon > 0\).
+	%, whose running times are polynomial in \(n\), \(m\), and \(1/\euler\).
+	They are \((4+\epsilon)\)-approximative in the symmetric case and \(\euler(n \cdot \max_{i \in \agents} \,\braces{\weight} + 2 + \epsilon)\)-approximative in the asymmetric one.
+
+%	\item
+%	\CASC{} (also known as \SPLC) functions encompass additive functions and can also model diminishing returns.
+%	\SMatch{} can be modified to work for the \CASC{} \NSW{}, achieving an approximation factor of \(2n\)~\cite[Theorem 2.2]{APNSWuSVþUM}.
+%	\Citeauthor{fair_division_of_indiv_goods_for_a_class_of_concave_valuations}~\cite{fair_division_of_indiv_goods_for_a_class_of_concave_valuations} came up with an \(\euler^{1/\euler}\)-approximation algorithm for the symmetric case.
+
+		\item
 	Rado valuations are a special class of submodular functions and stem from a generalisation of \OXS{} valuations.
 	\Citeauthor{APNSWuSVþUM} emphatically mentioned the lack of research into the \OXS{} \NSW.
 	\Citeauthor{approximating_nsw_under_rado_valuations}~\cite{approximating_nsw_under_rado_valuations} developed an algorithm for the Rado \NSW, which is independent from both the number of items and the number of agents.
@@ -37,47 +57,26 @@ To identify more general open questions, we need to take a look at new publicati
 	For the symmetric Rado \NSW, their algorithm achieves an approximation factor of \(256 \euler^{3/\euler} \approx 772\).
 	For the asymmetric Rado \NSW, the approximation factor is \(256 \gamma^3\) with \(\gamma \coloneq \max_{i \in \agents} \,\braces{\weight} / \min_{i \in \agents} \,\braces{\weight}\).
 	Interestingly, the algorithm is \(16 \gamma\)-approximative in case of the asymmetric additive \NSW, so it outperforms both \SMatch{} and \RepReMatch{} in many instances.
-	Remarkably enough, the algorithm is divided into five phases, and the first phase serves to determine a set of high-value items.
-%	Other than that, heavy use of linear programming is made.
-
-	\item
-	\citeauthor{a_constfactor_approx_algo_for_nsw_with_submod_valuations}~\cite{a_constfactor_approx_algo_for_nsw_with_submod_valuations} introduced a randomised, \(380\)-approximative algorithm for the symmetric submodular \NSW.
-	Later, \citeauthor{approx_nsw_by_matching_and_local_search}~\cite{approx_nsw_by_matching_and_local_search} devised a family of deterministic algorithms for every \(\epsilon > 0\).
-	%, whose running times are polynomial in \(n\), \(m\), and \(1/\euler\).
-	They are \((4+\epsilon)\)-approximative in the symmetric case and \(\euler(n \cdot \max_{i \in \agents} \,\braces{\weight} + 2 + \epsilon)\)-approximative in the asymmetric one.
-
-	\item
-	\XOS{} functions encompass submodular functionsa and, when used, the approximation factor of \RepReMatch{} is not independent of the number of items anymore~\cite[Section 6.2]{APNSWuSVþUM}.
-	\Citeauthor{sublin_approx_algo_for_nsw_with_xos_valuations}~\cite{sublin_approx_algo_for_nsw_with_xos_valuations} used both \RepReMatch{} and the discrete moving-knife method to get an \(\bigo(n^{53/54})\)-approximative algorithm for the symmetric \XOS{} \NSW.
-	However, the algorithm uses demand and \XOS{} queries, whereas \RepReMatch{} needs only the weaker value queries.
-
-	\item
-	\CASC{} (also known as \SPLC) functions encompass additive functions, which can also model diminishing returns.
-	\SMatch{} can be modified to work for the \CASC{} \NSW{}, achieving an approximation factor of \(2n\)~\cite[Theorem 2.2]{APNSWuSVþUM}.
-	\Citeauthor{fair_division_of_indiv_goods_for_a_class_of_concave_valuations}~\cite{fair_division_of_indiv_goods_for_a_class_of_concave_valuations} came up with an \(\euler^{1/\euler}\)-approximation algorithm for the symmetric case.
-
-	\item
-	\Citeauthor{tractable_fragments_of_the_max_nsw_problem}~\cite{tractable_fragments_of_the_max_nsw_problem} offer (fully) polynomial-time approximation schemes and even an optimal algorithm for some types of the symmetric and asymmetric additive \NSW.
+	The algorithm is divided into five phases with purposes related to the ideas of \RepReMatch.
+	%	Other than that, heavy use of linear programming is made.
 \end{itemize}
-
-\smallskip\noindent
 Besides efficiency, fairness is also a property towards which algorithm can be designed, although \SMatch{} and \RepReMatch{} advanced little in that regard.
 Especially \RepReMatch{} with no fairness guarantees is unsatisfactory.
-Research is made complex because of the myriad of notions of fairness.
-A selection of new developments:
-\begin{itemize}
-	\item
-	The algorithm of \citeauthor{fair_division_of_indiv_goods_for_a_class_of_concave_valuations}~\cite{fair_division_of_indiv_goods_for_a_class_of_concave_valuations} computes an allocation which is \(\sfrac{1}{2}\)-\EFone{} and approximately Pareto-optimal.
-
-	\item
-	Best of Both Worlds describes an approach where randomisation for fairness in expectation and a relaxation of fairness criteria are combined.
-	\Citeauthor{bobw_agents_with_entitlements}~\cite{bobw_agents_with_entitlements} use it to provide fair allocations for the asymmetric additive \NSW{} and the symmetric \XOS{} \NSW.
-
-	\item
-	Subadditive functions encompass \XOS{} functions.
-	\Citeauthor{on_optimal_tradeoffs_between_efx_and_nsw}~\cite{on_optimal_tradeoffs_between_efx_and_nsw} show a \((\alpha + 1)\)-approximation algorithm computing allocations which are \(\alpha\)-\EFX{} for the symmetric additive \NSW{} with \(\alpha \in [0, 1]\).
-	They also show a \((\alpha+1)\)-approximation algorithm computing allocations which are \(\alpha\)-\EFX{} for the symmetric subadditive \NSW{} with \(\alpha \in [0, \sfrac{1}{2}]\).
-\end{itemize}
+%Research is made complex because of the myriad of notions of fairness.
+%A selection of new developments:
+%\begin{itemize}
+%	\item
+%	The algorithm of \citeauthor{fair_division_of_indiv_goods_for_a_class_of_concave_valuations}~\cite{fair_division_of_indiv_goods_for_a_class_of_concave_valuations} computes an allocation which is \(\sfrac{1}{2}\)-\EFone{} and approximately Pareto-optimal.
+%
+%	\item
+%	Best of Both Worlds describes an approach where randomisation for fairness in expectation and a relaxation of fairness criteria are combined.
+%	\Citeauthor{bobw_agents_with_entitlements}~\cite{bobw_agents_with_entitlements} use it to provide fair allocations for the asymmetric additive \NSW{} and the symmetric \XOS{} \NSW.
+%
+%	\item
+%	Subadditive functions encompass \XOS{} functions.
+%	\Citeauthor{on_optimal_tradeoffs_between_efx_and_nsw}~\cite{on_optimal_tradeoffs_between_efx_and_nsw} show a \((\alpha + 1)\)-approximation algorithm computing allocations which are \(\alpha\)-\EFX{} for the symmetric additive \NSW{} with \(\alpha \in [0, 1]\).
+%	They also show a \((\alpha+1)\)-approximation algorithm computing allocations which are \(\alpha\)-\EFX{} for the symmetric subadditive \NSW{} with \(\alpha \in [0, \sfrac{1}{2}]\).
+%\end{itemize}
 
 \smallskip\noindent
 As seen, the research on the \NSW{} gained pace in the last years, and some questions left unanswered by \citeauthor{APNSWuSVþUM} have been addressed.
