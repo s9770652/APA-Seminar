@@ -243,6 +243,9 @@
 \NewDocumentCommand{\colouringconstant}{}{
 	c
 }
+\NewDocumentCommand{\genericitem}{O{}}{
+	j\IfEmptyF{#1}{^{#1}}
+}
 \NewDocumentCommand{\genericset}{s O{}}{
 	\symcal{S}\IfBooleanT{#1}{^*}\IfEmptyF{#2}{_{#2}}
 }

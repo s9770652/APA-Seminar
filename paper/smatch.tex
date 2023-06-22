@@ -151,8 +151,8 @@ The addend \(\valuations[\alloc]\) could lead to better allocations in applicati
 \label{subsec:smatch:analysis}
 
 To calculate the approximation factor of \SMatch, we first need to establish a lower bound on the valuation of single items.
-For convenience, we order the items in any bundle \(\{\asgd{1}, \asgd{2}, \dots \}\) by the order in which they were assigned to agent \(i\), so that item \(\asgd{t}\) is assigned according to the \(t\)th matching.
-Note that it holds \(\valuations[\asgd{t}] \ge \valuations[\asgd{t'}]\) for all \(t' \ge t\).
+For convenience, we order the items of any set \(\genericset = \{ \genericitem[1], \genericitem[2], \dots \}\) in descreasing order of valuation, so that it holds \(\valuations[\genericitem[k]] \ge \valuations[\genericitem[k']]\) for all \(k < k'\).
+Note that if set \(\genericset\) happens to be a bundle, then item \(\genericitem[k]\) was assigned according to the \(k\)th matching.
 \begin{lemma}
 	\label{lem:lower_bound_single_item}
 	For each agent \(i \in \agents\) and her final bundle \(\alloc = \{\asgd{1}, \dots, \asgd{\alloclen}\}\), it holds \(\valuations[\asgd{t}] \ge \valuations[\goodsordered{tn}]\) for all \(t = 1, \dots, \alloclen\).
@@ -201,7 +201,7 @@ This allows us to calculate an approximation factor for \SMatch{} by comparing i
 		&\ge \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \paren[\big]{ \valuations[\asgd{1}] + \remvalue / n } \label{eq:smatch_maximising}
 	\end{align}
 	Notice that the first matching of \SMatch{} maximises the sum in \cref{eq:smatch_maximising}.
-	Thus, assigning all agents~\(i\) their respective most highly valued item \(\asgd*{1}\) from an optimal bundle~\(\alloc*\) yields the even lower bound
+	Thus, assigning all agents~\(i\) their respective most highly valued item \(\asgd*{1}\) from an optimal bundle~\(\alloc* = \{ \asgd*{1}, \dots, \asgd*{\alloclen*} \}\) yields the even lower bound
 	\begin{equation}
 		\label{eq:smatch_approx_factor_lower_bound}
 		\log \NSW(\alloc[][])

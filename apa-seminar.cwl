@@ -40,6 +40,9 @@
 
 \bipartitegraph#m
 
+\genericitem#m
+\genericitem[superscript]#m
+
 \genericset#m
 \genericset[subscript]#m
 \genericset*#m
