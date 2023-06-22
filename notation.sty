@@ -150,10 +150,10 @@
 
 
 %%% Stochastic notation.
-\NewDocumentCommand\Prob{sm}{\IfBooleanTF{#1}{\symbb{P}\!\left[#2\right]}{\symbb{P}[#2]}}
-\NewDocumentCommand\Erw{sm}{\IfBooleanTF{#1}{\symbb{E}\!\left[#2\right]}{\symbb{E}[#2]}}
-\NewDocumentCommand\Var{sm}{\IfBooleanTF{#1}{\operatorname{Var}\!\left[#2\right]}{\operatorname{Var}[#2]}}
-\NewDocumentCommand\Cov{sm}{\IfBooleanTF{#1}{\operatorname{Cov}\!\left[#2\right]}{\operatorname{Cov}[#2]}}
+\NewDocumentCommand\Prob{sm}{\IfBooleanTF{#1}{\symbb{P}\left[#2\right]}{\symbb{P}[#2]}}
+\NewDocumentCommand\Erw{sm}{\IfBooleanTF{#1}{\symbb{E}\left[#2\right]}{\symbb{E}[#2]}}
+\NewDocumentCommand\Var{sm}{\IfBooleanTF{#1}{\operatorname{Var}\left[#2\right]}{\operatorname{Var}[#2]}}
+\NewDocumentCommand\Cov{sm}{\IfBooleanTF{#1}{\operatorname{Cov}\left[#2\right]}{\operatorname{Cov}[#2]}}
 
 \def\Unif{\symfrak{U}}
 \def\Norm{\symfrak{N}}
@@ -268,7 +268,7 @@
 	j^{+}\IfEmptyF{#1}{_{#1}}
 }
 \NewDocumentCommand{\overlygoodset}{O{i}}{
-	\goods^{+}\IfEmptyF{#1}{_{\!#1}}
+	\goods^{+}\IfEmptyF{#1}{_{#1}}
 }
 \NewDocumentCommand{\phasei}{}{%
 	Ⅰ%
