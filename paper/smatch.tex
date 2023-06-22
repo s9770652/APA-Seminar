@@ -8,7 +8,17 @@ In the case of an equal number of agents and items, \ie, \(n = m\), the \emph{ad
 the weight of an edge between agent \(i\) and item \(j\) would be the weighted logarithmic valuation of item \(j\) by agent \(i\), \ie{} \(\weight \log \valuations[j]\).
 Should there be more items than agents, then it would seem natural to just repeat this process until all items are assigned.
 The flaw of this idea is that such a greedy algorithm considers only the valuations of items in the current graph and perhaps the valuations of items already assigned.
-As \cref{fig:allocation} demonstrates, this leads to an algorithm with an approximation factor dependent on the number \(m\) of items.
+As the following examples demonstrates, this leads to an algorithm with an approximation factor dependent on the number \(m\) of items.
+\begin{example}
+	\label{ex:bad_idea}
+	There are two agents \(\agents_{1}\) and \(\agents_{2}\) of equal weight and \(m+1\) items \(\goods_{1}, \dots, \goods_{m+1}\).
+	Agent \(\agents_{1}\) values item~\(\goods_{1}\) at \(m + \epsilon\) and all other items at~\(1\).
+	Agent \(\agents_{2}\) values item~\(\goods_{1}\) at \(m\), item \(\goods_{m+1}\) at~\(1\) and all other items at~\(0\) (\cref{fig:bad_idea:instance}).
+	In an optimal allocation, item \(\goods_{1}\) would be assigned to agent~\(\agents_{2}\) and all other items to agent~\(\agents_{1}\), resulting in a Nash social welfare of \(\sqrt{m \cdot m} = m\) (\cref{fig:bad_idea:opt}).
+	A repeated maximum matching algorithm would greedily assign item \(\goods_{1}\) to agent \(\agents_{1}\) and item \(\goods_{m+1}\) to agent \(\agents_{2}\) in the first round.
+	Even if all remaining items were going to be assigned to agent \(\agents_{1}\), the Nash social welfare would never surpass \(\smash{\sqrt{(2m + \epsilon - 1) \cdot 1}} < \sqrt{2m}\) (\cref{fig:bad_idea:alg}).
+	The approximation factor therefore is at least \(\sqrt{m/2}\) and, thus, depends on the number of items.
+\end{example}
 The geometric mean is high when bundles are valued similarly, wherefore it may be beneficial to give an item to agents who cannot expect many more valuable items in the future instead of to agents who value the item a bit more but do so for other items as well.
 This is known as the Pigou-Dalton transfer principle~\cite{sublin_approx_algo_for_nsw_with_xos_valuations}.
 
@@ -57,6 +67,7 @@ This is known as the Pigou-Dalton transfer principle~\cite{sublin_approx_algo_fo
 		\caption{%
 			problem instance
 		}
+		\label{fig:bad_idea:instance}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.325\textwidth}
@@ -68,6 +79,7 @@ This is known as the Pigou-Dalton transfer principle~\cite{sublin_approx_algo_fo
 		\caption{%
 			\(\OPT = \sqrt{m \cdot m}\)
 		}
+		\label{fig:bad_idea:opt}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.325\textwidth}
@@ -79,17 +91,13 @@ This is known as the Pigou-Dalton transfer principle~\cite{sublin_approx_algo_fo
 		\caption{%
 			\(\ALG \le \sqrt{(2m + \epsilon - 1) \cdot 1}\)
 		}
+		\label{fig:bad_idea:alg}
 	\end{subfigure}
 	\caption{%
-		An example with two symmetric agents showing that simple, repeated matching without consideration of the future leads to an approximation factor dependent on the number of items.
-		Agent \(\agents_{1}\) values item~\(\goods_{1}\) at \(m + \epsilon\) and all other items at~\(1\).
-		Agent \(\agents_{2}\) values item~\(\goods_{1}\) at \(m\), item \(\goods_{m+1}\) at~\(1\) and all other items at~\(0\).
-		In an optimal allocation, item \(\goods_{1}\) would be assigned to agent \(\agents_{2}\) and all other items to agent~\(\agents_{1}\), resulting in a NSW of \(\sqrt{m \cdot m} = m\).
-		A repeated maximum matching algorithm would greedily assign item \(\goods_{1}\) to agent \(\agents_{1}\) and item \(\goods_{m+1}\) to agent \(\agents_{2}\) in the first round.
-		Even if all remaining items were going to be assigned to agent \(\agents_{1}\), the NSW would never surpass \(\sqrt{(2m + \epsilon - 1) \cdot 1} < \sqrt{2m}\).
-		The approximation factor therefore is at least about \(\sqrt{m/2}\) and, thus, depends on the number of items.
+		Illustration of \cref{ex:bad_idea} with two symmetric agents and \(m+1\) items.
+		It shows that simple, repeated matching without consideration of the future leads to an approximation factor dependent on the number of items.
 	}
-	\label{fig:allocation}
+	\label{fig:bad_idea}
 \end{figure*}
 
 The algorithm \SMatch{} (\cref{alg:smatch}) eliminates the flaw by first gaining foresight of the valuations of items assigned after the first matching, thereby achieving an approximation factor of \(2 n\) (\cref{th:smatch}).
