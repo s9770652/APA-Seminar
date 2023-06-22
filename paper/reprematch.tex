@@ -18,7 +18,7 @@
 			\(\weights \gets \braces[\big]{\, \paren[\big]{ i, j, \weight \log{ \valuations[j] } } \given[\bigm] i \in \agents, j \in \goodsrem \,}\)   \tct*{weighted edges using val. of single item}
 			\(\bipartitegraph \gets (\agents, \goodsrem, \weights)\)  \tct*{bipartite graph}
 			\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
-			\(\alloc[\phasei] \gets \alloc[\phasei] \cup \{j\} \quad \forall(i, j) \in \matching\)  \tct*{assign according to matching \(\matching\)}
+			\(\alloc[\phasei] \gets \alloc[\phasei] \cup \{j\} \quad \forall(i, j) \in \matching\)  \tct*{assign temporarily according to matching}
 			\(\goodsrem \gets \goodsrem \setminus \{\, j \given (i, j) \in \matching \,\}\)  \tct*{remove assigned items}
 		}
 	}
@@ -28,7 +28,7 @@
 		\(\weights \gets \braces[\big]{\, \paren[\big]{ i, j, \weight \log{ \valuations[ \alloc[\phaseii] \cup \{j\} ] } } \given[\bigm] i \in \agents, j \in \goodsrem \,}\)   \tct*{valuation of item \& current bundle}
 		\(\bipartitegraph \gets (\agents, \goodsrem, \weights)\)\;
 		\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
-		\(\alloc[\phaseii] \gets \alloc[\phaseii] \cup \{j\} \quad \forall(i, j) \in \matching\)\;
+		\(\alloc[\phaseii] \gets \alloc[\phaseii] \cup \{j\} \quad \forall(i, j) \in \matching\)  \tct*{assign definitely according to matching}
 		\(\goodsrem \gets \goodsrem \setminus \{\, j \given (i, j) \in \matching \,\}\)\;
 	}
 	\phaseiiisep
@@ -36,7 +36,7 @@
 	\(\weights \gets \braces[\big]{\, \paren[\big]{ i, j, \weight \log{ \valuations[ \alloc[\phaseii] \cup \{j\} ] } } \given[\bigm] i \in \agents, j \in \goodsrem \,}\)   \tct*{valuation of item \& current bundle}
 	\(\bipartitegraph \gets (\agents, \goodsrem, \weights)\)\;
 	\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
-	\(\alloc[\phaseiii] \gets \alloc[\phaseii] \cup \{j\} \quad\forall(i, j) \in \matching\)  \tct*{initialise final allocation}
+	\(\alloc[\phaseiii] \gets \alloc[\phaseii] \cup \{j\} \quad\forall(i, j) \in \matching\)  \tct*{initialise final allocation \& assign def. according to matching}
 	\(\goodsrem \gets \goodsrem \setminus \{\, j \given (i, j) \in \matching \,\}\)\;
 	\(\alloc[\phaseiii][] \gets \arballoc( \agents, \goodsrem, \alloc[\phaseiii][], (\valuations)_{i \in \agents} )\)  \tct*{assign remainder of items arbitrarily}
 	\Return{\(\alloc[\phaseiii][]\)}

@@ -130,7 +130,7 @@ The addend \(\valuations[\alloc]\) could lead to better allocations in applicati
 	\(\weights \gets \braces[\big]{\, \paren[\big]{ i, j, \weight \log\paren{ \valuations[j] + \remvalue/n } } \given[\bigm] i \in \agents, j \in \goods \,}\)  \tct*{weighted edges using estimation}
 	\(\bipartitegraph \gets (\agents, \goods, \weights)\)  \tct*{bipartite graph}
 	\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
-	\(\alloc \gets \{\, j \given (i, j) \in \matching \,\} \quad\forall i \in \agents\)  \tct*{assign according to matching \(\matching\)}
+	\(\alloc \gets \{\, j \given (i, j) \in \matching \,\} \quad\forall i \in \agents\)  \tct*{assign according to matching}
 	\(\goodsrem \gets \goods \setminus \{\, j \given (i, j) \in \matching \,\}\)  \tct*{remove assigned items}
 	\While{\(\goodsrem \neq \emptyset\)}{
 		\(\weights \gets \braces[\big]{\, \paren[\big]{ i, j, \weight \log\paren{ \valuations[j] + \valuations[\alloc] } } \given[\bigm] i \in \agents, j \in \goodsrem \,}\)  \tct*{weighted edges using only valuations}
