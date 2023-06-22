@@ -9,18 +9,18 @@ It is interesting both computationally \Dash how to distribute fast \Dash and qu
 Its areas of application are manifold:
 \begin{itemize}
 	\item
-	For industrial procurement, the preferences of buyers and sellers need be appropriately captured and real-world constraints on goods and services be taken into account.~\cite{survey}
+	For industrial procurement, the preferences of buyers and sellers need be appropriately captured and real-world constraints on goods and services be taken into account~\cite{survey}.
 
 	\item
 	Mobile Edge Computing describes a technique where mobile devices compete for computational and storage capabilities of physically close servers.
-	However, the participation of users and the provision of the serves has to be incentivised and monetised.~\cite{edge_computing_auction, edge_computing_report}
+	However, the participation of users and the provision of the serves has to be incentivised and monetised~\cite{edge_computing_auction, edge_computing_report}.
 
 	\item
 	Many production sites, machines, etc. are required for manufacturing, and the tasks between them must be scheduled efficiently.
-	Disturbances must be quickly paid heed to.~\cite{survey}
+	Disturbances must be quickly paid heed to~\cite{survey}.
 
 	\item
-	Water is a crucial resource, and even hostile countries must come to mutual agreements on the withdrawal from contested rivers.~\cite{water_management}
+	Water is a crucial resource, and even hostile countries must come to mutual agreements on the withdrawal from contested rivers~\cite{water_management}.
 \end{itemize}
 
 \subsection{Preliminaries}
@@ -44,7 +44,7 @@ We discuss additive and submodular functions in greater detail.
 	\item[Additive]
 	The valuation \(\valuations[\genericset]\) of an agent \(i \in \agents\) for any set \(\genericset \subset \goods\) of items is the sum of the valuations of the individual items \(j \in \genericset\) in set \(\genericset\), that is, \(\valuations[\genericset] = \sum_{j \in \genericset} \valuations[\{j\}]\).
 
-	Additive functions are fairly simple but also useful, and many expansions exist.~\cite{satiation_in_fisher_markets_and_approx_of_nsw, APNSWuSVþUM}
+	Additive functions are fairly simple but also useful, and many expansions exist~\cite{satiation_in_fisher_markets_and_approx_of_nsw, APNSWuSVþUM}.
 
 	\item[Submodular]
 	Let \(\valuations[\genericset[1] \given \genericset[2]] \coloneq \valuations[\genericset[1] \cup \genericset[2]] - \valuations[\genericset[2]]\) denote the marginal valuation of agent~\(i\) for a set \(\genericset[1] \subset \goods\) of items over a disjoint set \(\genericset[2] \subset \goods\).
@@ -79,7 +79,7 @@ For the techniques employed in later sections, it is beneficial to consider the 
 which is a sum instead of a product.
 The Nash social welfare strike as middle ground between the utilitarian and egalitarian social welfare, which focus on efficiency (height of overall satisfaction) and fairness (how agents value other agents' bundles), respectively.
 In addition, it exhibits scale-freeness, that is invariance to the scales in which the valuations are expressed.
-Even though the \NSW{} is \APX-hard, approximate solutions largely keep the properties of optimal allocations.~\cite[see also \cref{rem:ef1}]{approximating_the_nsw_with_indiv_items, the_unreasonable_fairness_of_max_nsw, min_envy_and_max_avg_nsw_in_the_alloc_of_indiv_goods, finding_fair_and_efficient_allocs}
+Even though the \NSW{} is \APX-hard, approximate solutions largely keep the properties of optimal allocations~\cite[see also \cref{rem:ef1}]{approximating_the_nsw_with_indiv_items, the_unreasonable_fairness_of_max_nsw, min_envy_and_max_avg_nsw_in_the_alloc_of_indiv_goods, finding_fair_and_efficient_allocs}.
 
 \subsection{Related Work and Contribution}
 \label{subsec:intro:contribution}
