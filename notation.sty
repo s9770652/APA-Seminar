@@ -166,7 +166,7 @@
 
 %%% Period in math environments.
 \NewDocumentCommand{\mperiod}{O{.}}{%
-	\relax\ifmmode{\,\rlap{#1}}\else{\thinspace#1\@ }\fi%
+	\relax\ifmmode{\rlap{\,#1}}\else{\thinspace#1}\fi%
 }
 
 
