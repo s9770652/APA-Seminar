@@ -5,7 +5,7 @@
 	\KwIn{%
 		a set \(\goods\) of \(m\) items,
 		a set \(\agents\) of \(n\) agents,
-		additive valuation functions \(\valuations \colon \powerset[\goods] \to \realposzero\) and weights \(\weight \in \realpos\) for all agents \(i \in \agents\)
+		submodular valuation functions \(\valuations \colon \powerset[\goods] \to \realposzero\) and weights \(\weight \in \realpos\) for all agents \(i \in \agents\)
 	}
 	\KwOut{%
 		\(2n(\log_2 n + 3)\)-approximation \(\alloc[\phaseiii][] = (\alloc[\phaseiii])_{i \in \agents}\) of an optimal allocation
@@ -88,83 +88,136 @@ First, we give a lower bound on the valuations of optimal and attainable items.
 	\label{lem:induction}
 	For each agent \(i \in \agents\) and her bundle \(\alloc[\phaseii] = \{ \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} \}\), it holds in all rounds \(r = 2, \dots, \alloclen[\phaseii]\) of phase \phaseii{} that
 	\begin{equation*}
-		\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] \ge \valuations[\attopt{1}] - \lostsetlen{2} \cdot \valuations[\asgd{1}] - \smashoperator{\sum_{r'=2}^{r-1}} \lostsetlen{r'+1} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] - \valuations[\asgd{1}, \dots, \asgd{r-1}] \mperiod
+		\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] \ge \valuations[\attopt{1}] - \smashoperator{\sum_{r'=1}^{r-1}} \lostsetlen{r'+1} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] - \valuations[\asgd{1}, \dots, \asgd{r-1}] \mperiod
 	\end{equation*}
 \end{lemma}
 \begin{proof}
-	We prove the lemma by induction on the number \(r\) of rounds.
-	In the beginning of the base case \(r=2\), agent \(i\) has already been assigned item \(\asgd{1}\).
-	For each of the optimal and attainable items~\(j \in \attopt{1}\) in round \(1\), the marginal valuation \(\valuations[j \given \emptyset]\) over the empty set was at most \(\valuations[\asgd{1} \given \emptyset]\), as otherwise item~\(\asgd{1}\) would not have been assigned first.
-	The marginal valuation \(\valuations[j \given \asgd{1}]\) over \(\{\asgd{1}\}\) is upper-bounded by \(\valuations[\asgd{1} \given \emptyset]\), too, due to the submodularity of valuations.
-	During round \(2\), a further \(\lostsetlen{2}\) of these items \(j\) are assigned to other agents, and item \(\asgd{2}\) is assigned to agent \(i\).
-	We can bound the marginal valuation of the remaining optimal and attainable items in round \(2\) in the following way:
-	\begin{caseintext}{1}{\(\asgd{1} \in \attopt{1}\)}
-		It holds \(\valuations[ \attopt{2} \given \asgd{1} ] = \valuations[ \attopt{2} \cup \{\asgd{1}\} ] - \valuations[\asgd{1}] = \valuations[\attopt{1} \setminus \lostset{2}] -  \valuations[\asgd{1}]\).
-	\end{caseintext}
-	\begin{caseintext}{2}{\(\asgd{1} \notin \attopt{1}\)}
-		Due to the monotonicity of the valuation functions, it holds \(\valuations[ \attopt{2} \cup \{\asgd{1}\} ] \ge \valuations[ \attopt{2} ]\) and, therefore, \(\valuations[ \attopt{2} \given \asgd{1} ] \ge \valuations[ \attopt{2} ] - \valuations[\asgd{1}] = \valuations[\attopt{1} \setminus \lostset{2}] -  \valuations[\asgd{1}]\).
-	\end{caseintext}
-	\noindent
-	In both cases, the base case is proven because
+	The proof by \citeauthor{APNSWuSVþUM}~\cite[13\psq]{APNSWuSVþUM} consists of a lengthy induction rich in formulae and case differentiations.
+	This is why we give a different but intuitive approach.
+
+	Writing the left-hand side of the lemma out in full gives
 	\begin{equation}
-		\valuations[ \attopt{2} \given \asgd{1} ]
-		\ge \valuations[\attopt{1} \setminus \lostset{2}] -  \valuations[\asgd{1}]
-		\ge \valuations[ \attopt{1} ] - \valuations[\lostset{2}] - \valuations[\asgd{1}]
-		\ge \valuations[ \attopt{1} ] - \lostsetlen{2} \cdot \valuations[\asgd{1}] - \valuations[\asgd{1}] \mperiod[,]
+		\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ]
+		= \valuations[ \attopt{r} \cup \braces{ \asgd{1}, \dots, \asgd{r-1} } ] - \valuations[ \asgd{1}, \dots, \asgd{r-1} ] \mperiod[,]
+		\label{eq:attopt_marginal}
 	\end{equation}
-	where the second inequality is shown easily using an alternative definition of submodularity (\(\valuations[\genericset[1] \cup \genericset[2]] + \valuations[\genericset[1] \cap \genericset[2]] \le \valuations[\genericset[1]] + \valuations[\genericset[2]]\) with \(\genericset[1] = \attopt{1} \setminus \lostset{2}\) and \(\genericset[2] = \lostset{2} \)~\cite{inapprox_results_for_combi_auctions_with_submod_utility_funcs}), and the third inequality is due to all \(\lostsetlen{2}\) items \(j\) in set \(\lostset{2}\) not being assigned in round \(1\) although attainable, implying \(\valuations[j] \le \valuations[\asgd{1}]\).
+	which explains the second subtrahend on the right-hand side.
 
-	For the induction hypothesis, we assume that the lemma holds true for all rounds up to some~\(r\).
-	In the induction step \(r \to r+1\), we differentiate the same two cases again:
-	\begin{caseintext}{1}{\(\asgd{r} \in \attopt{r}\)}
-		Again we exploit the submodularity of the valuation functions to obtain a lower bound on the marginal valuation of \(\attopt{r+1}\).
-		\begin{align}
-			\valuations[ \attopt{r+1} \given \asgd{1}, \dots, \asgd{r} ]
-			&= \valuations[ \attopt{r+1} \cup \{\asgd{r}\} \given \asgd{1}, \dots, \asgd{r-1} ] - \valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ] \\
-			&= \valuations[ \attopt{r} \setminus \lostset{r+1} \given \asgd{1}, \dots, \asgd{r-1} ] - \valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ] \\
-			&\ge \valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] - \valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ] - \valuations[ \lostset{r+1} \given \asgd{1}, \dots, \asgd{r-1} ]
-		\end{align}
-	\end{caseintext}
-	\begin{caseintext}{2}{\(\asgd{r} \notin \attopt{r}\)}
-		At first, we use the monotonicity of the valuation functions to get the inequality
-		\begin{align}
-			\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r} ]
-			&= \valuations[ \attopt{r} \cup \{ \asgd{1}, \dots, \asgd{r} \} ] - \valuations[\asgd{1}, \dots, \asgd{r}] \\
-			&\ge \valuations[ \attopt{r} \cup \{ \asgd{1}, \dots, \asgd{r-1} \} ] - \valuations[\asgd{1}, \dots, \asgd{r}] \\
-			&= \begin{multlined}[t]
-				\paren[\big]{ \valuations[ \attopt{r} \cup \{ \asgd{1}, \dots, \asgd{r-1} \} ] - \valuations[\asgd{1}, \dots, \asgd{r-1}] } \\
-				- \paren[\big]{ \valuations[\asgd{1}, \dots, \asgd{r}] - \valuations[\asgd{1}, \dots, \asgd{r-1}] }
-			\end{multlined} \\
-			&= \valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] - \valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ] \mperiod
-		\end{align}
-		Together with the submodularity of valuation, we obtain the same lower bound again:
-		\begin{align}
-			\valuations[ \attopt{r+1} \given \asgd{1}, \dots, \asgd{r} ]
-			&= \valuations[ \attopt{r} \setminus \lostset{r+1} \given \asgd{1}, \dots, \asgd{r} ] \\
-			&\ge \valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r} ] - \valuations[ \lostset{r+1} \given \asgd{1}, \dots, \asgd{r} ] \\
-			&\ge \valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r} ] - \valuations[ \lostset{r+1} \given \asgd{1}, \dots, \asgd{r-1} ] \\
-			&\ge \valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] - \valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ] - \valuations[ \lostset{r+1} \given \asgd{1}, \dots, \asgd{r-1} ]
-		\end{align}
-	\end{caseintext}
-	In both cases, we can replace \(\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ]\) by the induction hypothesis and \(\valuations[ \lostset{r+1} \given \asgd{1}, \dots, \asgd{r-1} ]\) by \(\lostsetlen{r+1} \cdot \valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ]\) to prove the induction step.
-	\begin{align}
-		\valuations[ \attopt{r+1} \given \asgd{1}, \dots, \asgd{r} ]
-		&\ge \begin{multlined}[t]
-			\valuations[\attopt{1}] - \lostsetlen{2} \cdot \valuations[\asgd{1}] - \smashoperator{\sum_{r'=2}^{r-1}} \lostsetlen{r'+1} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] \\
-			- \valuations[\asgd{1}, \dots, \asgd{r-1}] - \valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ] - \lostsetlen{r+1} \cdot \valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ]
-		\end{multlined} \\
-		&= \valuations[\attopt{1}] - \lostsetlen{2} \cdot \valuations[\asgd{1}] - \smashoperator{\sum_{r'=2}^{r}} \lostsetlen{r'+1} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] - \valuations[\asgd{1}, \dots, \asgd{r}]
-	\end{align}
+	Next, we show a lower bound on \(\valuations[\attopt{r} \cup \braces{ \asgd{1}, \dots, \asgd{r-1} }]\).
+%	The set \(\attopt{r}\) of optimal and attainable items in round~\(r\) is equal to the set \(\attopt{r}\) of optimal and attainable items in round \(r-1\) minus the set \(\lostset{r}\) of lost items of round~\(r\) and, possibly, the item \(\asgd{r-1}\) assigned in round \(r-1\) if it was optimal back then, \ie, \(\asgd{r-1} \in \attopt{r-1}\).
+	The items which are optimal and attainable in round \(r\) were so in round~\(r-1\), too.
+	Additionally, the optimal but lost items of round \(r\) were attainable in round \(r-1\) as well.
+	The item \(\asgd{r}\) assigned to agent \(i\) in round \(r\) was also attainable in round \(r-1\) and may also be optimal.
+	Therefore, it holds \(\paren{ \attopt{r} \cup \braces{\asgd{r-1}} } \supset \paren{ \attopt{r-1} \setminus \lostset{r} }\) and
+	\begin{equation}
+		\valuations[\attopt{r} \cup \braces{ \asgd{1}, \dots, \asgd{r-1} }]
+		\ge \valuations[\attopt{r-1} \setminus \lostset{r} \cup \braces{ \asgd{1}, \dots, \asgd{r-2} }]
+		\ge \valuations[\attopt{r-1} \cup \braces{ \asgd{1}, \dots, \asgd{r-2} }] - \valuations[\lostset{r}] \mperiod
+		\label{eq:attopt_union}
+	\end{equation}
+	The second inequality makes intuitively sense when one thinks of diminishing returns:
+	The gain from adding the set \(\lostset{r}\) to the items in \(\attopt{r-1} \cup \braces{ \asgd{1}, \dots, \asgd{r-1} }\) cannot be higher than its subtracted valuation over the empty set.
+	If we now recursively apply \cref{eq:attopt_union}, we eventually arrive at
+	\begin{equation}
+		\valuations[\attopt{r} \cup \braces{ \asgd{1}, \dots, \asgd{r-1} }]
+		\ge \valuations[\attopt{1}] - \sum_{r'=1}^{r-1} \valuations[\lostset{r'+1}] \mperiod
+		\label{eq:attop_lost}
+	\end{equation}
+
+	Lastly, we give an upper bound on \(\valuations[\lostset{r'+1}]\).
+	The valuation \(\valuations[j \given \asgd{1}, \dots, \asgd{r'-1}]\) of any item \(j \in \lostset{r'+1}\) in round \(r'\) cannot have been higher than \(\valuations[\asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1}]\) as otherwise item \(\asgd{r'}\) would not have been assigned before item \(j\).
+	From this follows
+	\begin{equation}
+		\valuations[\lostset{r'+1}] \le \lostsetlen{r'+1} \cdot \valuations[\asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1}] \mperiod
+		\label{eq:lost}
+	\end{equation}
+	Combining \cref{eq:attopt_marginal,eq:attop_lost,eq:lost} proves the lemma.
 \end{proof}
+%\begin{lemma}
+%	\label{lem:induction}
+%	For each agent \(i \in \agents\) and her bundle \(\alloc[\phaseii] = \{ \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} \}\), it holds in all rounds \(r = 2, \dots, \alloclen[\phaseii]\) of phase \phaseii{} that
+%	\begin{equation*}
+%		\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] \ge \valuations[\attopt{1}] - \lostsetlen{2} \cdot \valuations[\asgd{1}] - \smashoperator{\sum_{r'=2}^{r-1}} \lostsetlen{r'+1} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] - \valuations[\asgd{1}, \dots, \asgd{r-1}] \mperiod
+%	\end{equation*}
+%\end{lemma}
+%\begin{proof}
+%	We prove the lemma by induction on the number \(r\) of rounds.
+%	In the beginning of the base case \(r=2\), agent \(i\) has already been assigned item \(\asgd{1}\).
+%	For each of the optimal and attainable items~\(j \in \attopt{1}\) in round \(1\), the marginal valuation \(\valuations[j \given \emptyset]\) over the empty set was at most \(\valuations[\asgd{1} \given \emptyset]\), as otherwise item~\(\asgd{1}\) would not have been assigned first.
+%	The marginal valuation \(\valuations[j \given \asgd{1}]\) over \(\{\asgd{1}\}\) is upper-bounded by \(\valuations[\asgd{1} \given \emptyset]\), too, due to the submodularity of valuations.
+%	During round \(2\), a further \(\lostsetlen{2}\) of these items \(j\) are assigned to other agents, and item \(\asgd{2}\) is assigned to agent \(i\).
+%	We can bound the marginal valuation of the remaining optimal and attainable items in round \(2\) in the following way:
+%	\begin{caseintext}{1}{\(\asgd{1} \in \attopt{1}\)}
+%		It holds \(\valuations[ \attopt{2} \given \asgd{1} ] = \valuations[ \attopt{2} \cup \{\asgd{1}\} ] - \valuations[\asgd{1}] = \valuations[\attopt{1} \setminus \lostset{2}] -  \valuations[\asgd{1}]\).
+%	\end{caseintext}
+%	\begin{caseintext}{2}{\(\asgd{1} \notin \attopt{1}\)}
+%		Due to the monotonicity of the valuation functions, it holds \(\valuations[ \attopt{2} \cup \{\asgd{1}\} ] \ge \valuations[ \attopt{2} ]\) and, therefore, \(\valuations[ \attopt{2} \given \asgd{1} ] \ge \valuations[ \attopt{2} ] - \valuations[\asgd{1}] = \valuations[\attopt{1} \setminus \lostset{2}] -  \valuations[\asgd{1}]\).
+%	\end{caseintext}
+%	\noindent
+%	In both cases, the base case is proven because
+%	\begin{equation}
+%		\valuations[ \attopt{2} \given \asgd{1} ]
+%		\ge \valuations[\attopt{1} \setminus \lostset{2}] -  \valuations[\asgd{1}]
+%		\ge \valuations[ \attopt{1} ] - \valuations[\lostset{2}] - \valuations[\asgd{1}]
+%		\ge \valuations[ \attopt{1} ] - \lostsetlen{2} \cdot \valuations[\asgd{1}] - \valuations[\asgd{1}] \mperiod[,]
+%	\end{equation}
+%	where the second inequality is shown easily using an alternative definition of submodularity (\(\valuations[\genericset[1] \cup \genericset[2]] + \valuations[\genericset[1] \cap \genericset[2]] \le \valuations[\genericset[1]] + \valuations[\genericset[2]]\) with \(\genericset[1] = \attopt{1} \setminus \lostset{2}\) and \(\genericset[2] = \lostset{2} \)~\cite{inapprox_results_for_combi_auctions_with_submod_utility_funcs}), and the third inequality is due to all \(\lostsetlen{2}\) items \(j\) in set \(\lostset{2}\) not being assigned in round \(1\) although attainable, implying \(\valuations[j] \le \valuations[\asgd{1}]\).
+%
+%	For the induction hypothesis, we assume that the lemma holds true for all rounds up to some~\(r\).
+%	In the induction step \(r \to r+1\), we differentiate the same two cases again:
+%	\begin{caseintext}{1}{\(\asgd{r} \in \attopt{r}\)}
+%		Again we exploit the submodularity of the valuation functions to obtain a lower bound on the marginal valuation of \(\attopt{r+1}\).
+%		\begin{align}
+%			\valuations[ \attopt{r+1} \given \asgd{1}, \dots, \asgd{r} ]
+%			&= \valuations[ \attopt{r+1} \cup \{\asgd{r}\} \given \asgd{1}, \dots, \asgd{r-1} ] - \valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ] \\
+%			&= \valuations[ \attopt{r} \setminus \lostset{r+1} \given \asgd{1}, \dots, \asgd{r-1} ] - \valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ] \\
+%			&\ge \valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] - \valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ] - \valuations[ \lostset{r+1} \given \asgd{1}, \dots, \asgd{r-1} ]
+%		\end{align}
+%	\end{caseintext}
+%	\begin{caseintext}{2}{\(\asgd{r} \notin \attopt{r}\)}
+%		At first, we use the monotonicity of the valuation functions to get the inequality
+%		\begin{align}
+%			\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r} ]
+%			&= \valuations[ \attopt{r} \cup \{ \asgd{1}, \dots, \asgd{r} \} ] - \valuations[\asgd{1}, \dots, \asgd{r}] \\
+%			&\ge \valuations[ \attopt{r} \cup \{ \asgd{1}, \dots, \asgd{r-1} \} ] - \valuations[\asgd{1}, \dots, \asgd{r}] \\
+%			&= \begin{multlined}[t]
+%				\paren[\big]{ \valuations[ \attopt{r} \cup \{ \asgd{1}, \dots, \asgd{r-1} \} ] - \valuations[\asgd{1}, \dots, \asgd{r-1}] } \\
+%				- \paren[\big]{ \valuations[\asgd{1}, \dots, \asgd{r}] - \valuations[\asgd{1}, \dots, \asgd{r-1}] }
+%			\end{multlined} \\
+%			&= \valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] - \valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ] \mperiod
+%		\end{align}
+%		Together with the submodularity of valuation, we obtain the same lower bound again:
+%		\begin{align}
+%			\valuations[ \attopt{r+1} \given \asgd{1}, \dots, \asgd{r} ]
+%			&= \valuations[ \attopt{r} \setminus \lostset{r+1} \given \asgd{1}, \dots, \asgd{r} ] \\
+%			&\ge \valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r} ] - \valuations[ \lostset{r+1} \given \asgd{1}, \dots, \asgd{r} ] \\
+%			&\ge \valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r} ] - \valuations[ \lostset{r+1} \given \asgd{1}, \dots, \asgd{r-1} ] \\
+%			&\ge \valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] - \valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ] - \valuations[ \lostset{r+1} \given \asgd{1}, \dots, \asgd{r-1} ]
+%		\end{align}
+%	\end{caseintext}
+%	In both cases, we can replace \(\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ]\) by the induction hypothesis and \(\valuations[ \lostset{r+1} \given \asgd{1}, \dots, \asgd{r-1} ]\) by \(\lostsetlen{r+1} \cdot \valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ]\) to prove the induction step.
+%	\begin{align}
+%		\valuations[ \attopt{r+1} \given \asgd{1}, \dots, \asgd{r} ]
+%		&\ge \begin{multlined}[t]
+%			\valuations[\attopt{1}] - \lostsetlen{2} \cdot \valuations[\asgd{1}] - \smashoperator{\sum_{r'=2}^{r-1}} \lostsetlen{r'+1} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] \\
+%			- \valuations[\asgd{1}, \dots, \asgd{r-1}] - \valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ] - \lostsetlen{r+1} \cdot \valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ]
+%		\end{multlined} \\
+%		&= \valuations[\attopt{1}] - \lostsetlen{2} \cdot \valuations[\asgd{1}] - \smashoperator{\sum_{r'=2}^{r}} \lostsetlen{r'+1} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] - \valuations[\asgd{1}, \dots, \asgd{r}]
+%	\end{align}
+%\end{proof}
 
-The lemma can be used to find a lower bound on the marginal valuation of the items assigned in each round \(r\).
+The lemma can be used to find a lower bound on the marginal valuation of the items actually assigned in each round \(r\).
 \begin{corollary}
 	\label{cor:lower_bound_single_item}
 	From \cref{lem:induction} follows
 	\begin{equation*}
 		\valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ]
-		\ge \paren[\Big]{ \valuations[\attopt{1}] - \lostsetlen{2} \cdot \valuations[\asgd{1}] - \smashoperator{\sum_{r'=2}^{r-1}} \lostsetlen{r'+1} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] - \valuations[\asgd{1}, \dots, \asgd{r-1}] } \Big/ \attoptlen{r} \mperiod
+		\ge \paren[\Big]{ \valuations[\attopt{1}] - \smashoperator{\sum_{r'=1}^{r-1}} \lostsetlen{r'+1} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] - \valuations[\asgd{1}, \dots, \asgd{r-1}] } \Big/ \attoptlen{r} \mperiod
 	\end{equation*}
+%	\begin{equation*}
+%		\valuations[ \asgd{r} \given \asgd{1}, \dots, \asgd{r-1} ]
+%		\ge \paren[\Big]{ \valuations[\attopt{1}] - \lostsetlen{2} \cdot \valuations[\asgd{1}] - \smashoperator{\sum_{r'=2}^{r-1}} \lostsetlen{r'+1} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] - \valuations[\asgd{1}, \dots, \asgd{r-1}] } \Big/ \attoptlen{r} \mperiod
+%	\end{equation*}
 \end{corollary}
 \begin{proof}
 %	There are \(\attoptlen{0}\) optimal and attainable items in \(\attopt{0}\) at the start of phase~\phaseii.
@@ -172,7 +225,7 @@ The lemma can be used to find a lower bound on the marginal valuation of the ite
 
 	Remember that valuation functions are monotonic if \(\valuations[\genericset[1]] \le \valuations[\genericset[2]]\) holds for all sets \(\genericset[1] \subset \genericset[2] \subset \goods\).
 	Induction shows that there must be an item \(j \in \genericset[2]\) with valuation \(\valuations[j] \ge \valuations[\genericset[2]] / \abs{\genericset[2]}\), otherwise it would hold \(\valuations[\emptyset] > 0\).
-	Applied to \cref{lem:induction}, this means that there must be an item \(j \in \attopt{r}\) with a marginal valuation of at least \(\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] / \attoptlen{r}\)\mperiod
+	Applied to \cref{lem:induction}, this means that there must be an item \(j \in \attopt{r}\) with a marginal valuation of at least \(\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] / \attoptlen{r}\)\mperiod{}
 	As item \(\asgd{r}\) was the one to be assigned, its marginal valuation cannot be smaller.
 \end{proof}
 
@@ -193,16 +246,30 @@ This, finally, enables us to give a lower bound on the valuation of the bundles 
 		\valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii]}]
 		&= \valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii] - 1}] + \valuations[ \asgd{\alloclen[\phaseii]} \given \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} ] \\
 		&\ge \begin{multlined}[t]
-			\valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii] - 1}] + \paren[\Big]{ \valuations[\attopt{1}] - \lostsetlen{2} \cdot \valuations[\asgd{1}] - \smashoperator{\sum_{r'=2}^{\alloclen[\phaseii]-1 \mathstrut}} \lostsetlen{r'+1} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] \\
+			\valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii] - 1}] + \paren[\Big]{ \valuations[\attopt{1}] - \smashoperator{\sum_{r'=1}^{\alloclen[\phaseii]-1 \mathstrut}} \lostsetlen{r'+1} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] \\
 				- \valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii]-1}] } \Big/ \attoptlen{\alloclen[\phaseii]}  % \Big/ has better spacing than \Bigm/.
 		\end{multlined} \\
 		&\ge \begin{multlined}[t]
-			\valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii] - 1}] + \paren[\Big]{ \valuations[\attopt{1}] - (n-1) \valuations[\asgd{1}] - \smashoperator{\sum_{r'=2}^{\alloclen[\phaseii]-1 \mathstrut}} (n-1) \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] \\
+			\valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii] - 1}] + \paren[\Big]{ \valuations[\attopt{1}] - \smashoperator{\sum_{r'=1}^{\alloclen[\phaseii]-1 \mathstrut}} (n-1) \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] \\
 				- \valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii]-1}] } \Big/ n
 		\end{multlined} \\
 		&\ge \valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii] - 1}] + \paren[\big]{ \valuations[\attopt{1}] - (n-1) \valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii]-1}] - \valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii]-1}] } \big/ n \\
 		&= \valuations[\attopt{1}] / n
 	\end{align}
+%	\begin{align}
+%		\valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii]}]
+%		&= \valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii] - 1}] + \valuations[ \asgd{\alloclen[\phaseii]} \given \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} ] \\
+%		&\ge \begin{multlined}[t]
+%			\valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii] - 1}] + \paren[\Big]{ \valuations[\attopt{1}] - \lostsetlen{2} \cdot \valuations[\asgd{1}] - \smashoperator{\sum_{r'=2}^{\alloclen[\phaseii]-1 \mathstrut}} \lostsetlen{r'+1} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] \\
+%				- \valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii]-1}] } \Big/ \attoptlen{\alloclen[\phaseii]}  % \Big/ has better spacing than \Bigm/.
+%		\end{multlined} \\
+%		&\ge \begin{multlined}[t]
+%			\valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii] - 1}] + \paren[\Big]{ \valuations[\attopt{1}] - (n-1) \valuations[\asgd{1}] - \smashoperator{\sum_{r'=2}^{\alloclen[\phaseii]-1 \mathstrut}} (n-1) \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] \\
+%				- \valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii]-1}] } \Big/ n
+%		\end{multlined} \\
+%		&\ge \valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii] - 1}] + \paren[\big]{ \valuations[\attopt{1}] - (n-1) \valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii]-1}] - \valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii]-1}] } \big/ n \\
+%		&= \valuations[\attopt{1}] / n
+%	\end{align}
 \end{proof}
 
 After having obtained a lower bound on the valuation of items assigned in phase~\phaseii, we need a lower bound for phase~\phaseiii{} as well.
