@@ -1,7 +1,20 @@
 \section{RepReMatch}
 \label{sec:reprematch}
 
-\begin{algorithm*}[!b]
+\subsection{Presentation of the Algorithm}
+\label{subsec:reprematch:presentation}
+
+The algorithm \SMatch{} estimates the valuation of the lowest-value items by determining the set of highest-value items and then valuing the remaining items.
+Unfortunately, this approach does not work for general \emph{submodular} valuation functions because taking the set of highest-value items away does not necessarily leave a set of lowest-value items.
+In fact, it can be shown \cite{submodular_low_value} that determining the set of lowest-value items is approximable only within a factor of \(\bigomega(\sqrt{m / \ln m})\).
+
+For this reason, the algorithm \RepReMatch{} (\cref{alg:reprematch}) relies on an approach with three phases, thereby achieving an approximation factor of \(2n(\log_2 n + 3)\) (\cref{th:reprematch}).
+In phase~\phasei, a sufficiently big set of high-value items is determined through repeated matchings.
+This phase serves merley to determine this set, so items are assigned temporarily only.
+The edge weights reflect this by taking the valuations of just single items into account.
+
+\vfil
+\begin{algorithm*}[H]
 	\KwIn{%
 		a set \(\goods\) of \(m\) items,
 		a set \(\agents\) of \(n\) agents,
@@ -41,29 +54,17 @@
 	\(\alloc[\phaseiii][] \gets \arballoc( \agents, \goodsrem, \alloc[\phaseiii][], (\valuations)_{i \in \agents} )\)  \tct*{assign remainder of items arbitrarily}
 	\Return{\(\alloc[\phaseiii][]\)}
 	\caption{%
-		\RepReMatch{} for the asymmetric submodular \NSW{}
+		\RepReMatch{} for the asymmetric submodular \NSW
 	}
 	\label{alg:reprematch}
 \end{algorithm*}
 
-\subsection{Presentation of the Algorithm}
-\label{subsec:reprematch:presentation}
-
-The algorithm \SMatch{} estimates the valuation of the lowest-value items by determining the set of highest-value items and then valuing the remaining items.
-Unfortunately, this approach does not work for general \emph{submodular} valuation functions because taking the set of highest-value items away does not necessarily leave a set of lowest-value items.
-In fact, it can be shown \cite{submodular_low_value} that determining the set of lowest-value items is approximable only within a factor of \(\bigomega(\sqrt{m / \ln m})\).
-
-For this reason, the algorithm \RepReMatch{} (\cref{alg:reprematch}) relies on an approach with three phases, thereby achieving an approximation factor of \(2n(\log_2 n + 3)\) (\cref{th:reprematch}).
-In phase~\phasei, a sufficiently big set of high-value items is determined through repeated matchings.
-This phase serves merley to determine this set, so items are assigned temporarily only.
-The edge weights reflect this by taking the valuations of just single items into account.
-
 In phase~\phaseii, the remaining items are assigned definitely through repeated matchings.
-Consequently, each edge weight is updated in each round to be the weighted logarithm of the valuation of both the respective item and the items assigned so far.
+Consequently, each edge weight is updated in each round to reflect the valuation of both the respective item and the items assigned so far.
 
 In phase~\phaseiii, the high-value items assigned in phase \phasei{} are released.
-With the knowledge of phase~\phaseii, one maximum weight matching is calculated, and the matched items are assigned accordingly.
-Similarly to the previous phase, each edge weight is the weighted logarithm of the valuation of both the respective item and the respective agent's bundle from phase \phaseii.
+One maximum weight matching is calculated, and the matched items are assigned accordingly.
+Similarly to the previous phase, each edge weight uses the valuation of both the respective item and the items assigned so far, \ie, the bundle from phase \phaseii.
 The remaining released items are assigned arbitrarily.
 
 \subsection{Analysis of the Algorithm}
