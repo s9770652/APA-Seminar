@@ -348,7 +348,7 @@ This allows us to calculate an approximation factor for \RepReMatch{} by compari
 	Phase~\phasei{} runs for at most \(\ceil{\log_2 n}+1\) rounds, and at most~\(n\) items are assigned in each iteration.
 	Therefore, at most \(n (\log_2 n + 2)\) optimal items are assigned in that phase, \ie, \(\abs{\bigcup_{i' \in \agents} \alloc[\phasei][i']} = \abs{ \alloc* \setminus \attopt{0} } \le n (\log_2 n + 2)\).
 	As in \cref{lem:lower_bound_all_items}, it also holds \(n \ge \lostsetlen{1} = \abs{\lostset{1}}\).
-	Since \({ (\alloc* \setminus \attopt{0}) \cup \lostset{1} } \subset \alloc*\) and \(\valuations[\asgd*{1}] \ge \valuations[\asgd*{r}]\) for all \(r \ge 1\), it holds
+	Since \({ (\alloc* \setminus \attopt{0}) \cup \lostset{1} } \subset \alloc*\) and \(\valuations[\asgd*{1}] \ge \valuations[\asgd*{r}]\) for all \(\asgd*{r} \in \alloc*\), it holds
 	\begin{equation}
 		\label{eq:overly_good_item_lower_bound}
 		\valuations[ \overlygooditem, \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} ]
@@ -361,6 +361,7 @@ This allows us to calculate an approximation factor for \RepReMatch{} by compari
 	\begin{align}
 		\valuations[ \overlygooditem, \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} ]
 		&\ge \frac{1}{2} \paren*{ \frac{\valuations[ (\alloc* \setminus \attopt{0}) \cup \lostset{1} ][\big]}{n(\log_2 n + 3)} + \frac{\valuations[ \attopt{0} \setminus \lostset{1} ][\big]}{n} } \\
+		&\ge \frac{1}{2} \cdot \frac{\valuations[ (\alloc* \setminus \attopt{0}) \cup \lostset{1} ][\big] + \valuations[ \attopt{0} \setminus \lostset{1} ][\big]}{n(\log_2 n +3)} \\
 		&\ge \frac{1}{2} \cdot \frac{ \valuations[ \paren{(\alloc* \setminus \attopt{0}) \cup \lostset{1}} \cup \paren{\attopt{0} \setminus \lostset{1}} ][\big] }{n(\log_2 n + 3)} \\
 		&= \frac{ \valuations[\alloc*] }{2n(\log_2 n + 3)} \mperiod
 	\end{align}
