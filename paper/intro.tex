@@ -73,6 +73,7 @@ We consider a third one, the Nash social welfare.
 \end{problem}
 
 For the techniques employed in later sections, it is beneficial to consider the logarithmic Nash social welfare, that is,
+\vspace{-1.5ex}
 \begin{equation}
 	\log \NSW(\alloc[][])
 	= \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \valuations[\alloc] \mperiod[,]
@@ -82,7 +83,7 @@ The Nash social welfare strike as middle ground between the utilitarian and egal
 In addition, it exhibits scale-freeness, that is invariance to the scales in which the valuations are expressed.
 Even though the \NSW{} is \APX-hard, approximate solutions largely keep the properties of optimal allocations~\cite[see also \cref{rem:ef1}]{approximating_the_nsw_with_indiv_items, the_unreasonable_fairness_of_max_nsw, min_envy_and_max_avg_nsw_in_the_alloc_of_indiv_goods, finding_fair_and_efficient_allocs}.
 
-\subsection{Related Work and Contribution}
+\subsection[Related Work and Contribution]{Related Work and Contribution by \citeauthor{APNSWuSVþUM}}
 \label{subsec:intro:contribution}
 
 The research on the \NSW{} is rather young and less advanced than the research on other allocation problems.
@@ -97,12 +98,12 @@ However, an approximation factor dependant on the number of items is not desirab
 Moreover, both approaches exploit the symmetry of the studied problem and fail to extend to the asymmetric case.
 
 \Citeauthor{APNSWuSVþUM}~\cite{APNSWuSVþUM} further the research by contributing two polynomial-time algorithms for the asymmetric \NSW.
-The first one, \emph{\SMatch}, computes a \(2n\)-approximative allocation when the valuation functions are additive.
+The first one, \emph{\SMatch}, computes a \(2n\)-approximative allocation under additive valuation functions.
 It does so by \textsl{s}martly \textsl{match}ing agents and items which make up the parts of a bipartite graph.
-The second one, \emph{\RepReMatch}, computes a \(2n (\log_2 n + 3)\)-approximative allocation when the valuation functions are submodular.
+The second one, \emph{\RepReMatch}, computes a \(2n (\log_2 n + 3)\)-approximative allocation under submodular valuation functions.
 It does so by \textsl{rep}eatedly computing \textsl{match}ings, which then get partly annulled, so that items can be \textsl{re}matched.
 
-\subsection{Structure of the Paper}
+\subsection{Structure of the Report}
 \label{subsec:intro:structure}
 
 We present and analyse \SMatch{} in \cref{sec:smatch} and \RepReMatch{} in \cref{sec:reprematch}.
