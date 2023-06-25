@@ -23,8 +23,13 @@
 \addtokomafont{captionlabel}{\accentcolor}
 \addtokomafont{disposition}{\accentcolor}
 \addtokomafont{labelinglabel}{\accentcolor}
-\addtokomafont{itemizelabel}{\accentcolor}
+\addtokomafont{itemizelabel}{\accentcolor\maybesffamily}
 \addtokomafont{descriptionlabel}{\accentcolor\maybesffamily}
+
+\setlist[enumerate,1]{font=\usekomafont{labelitemi}}
+\setlist[enumerate,2]{font=\usekomafont{labelitemii}}
+\setlist[enumerate,3]{font=\usekomafont{labelitemiii}}
+\setlist[enumerate,4]{font=\usekomafont{labelitemiv}}
 
 % Title page.
 \addtokomafont{title}{\color{black}}
