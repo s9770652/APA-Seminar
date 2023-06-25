@@ -60,6 +60,7 @@
 
 %%% Page style.
 \geometry{margin=3cm}
+\flushbottom  % the last line of all non-final pages flushed to bottom margin
 
 \captionsetup{format=plain}
 \KOMAoptions{
@@ -90,7 +91,7 @@
 % Environments in italic style with bold title.
 \newtheoremstyle{plain}
 	{\topsep}   % ABOVESPACE
-	{\topsep}   % BELOWSPACE
+	{0.2\topsep}   % BELOWSPACE
 	{\itshape}  % BODYFONT
 	{0pt}       % INDENT (empty value is the same as 0pt)
 	{\accentcolor\maybesffamily\bfseries} % HEADFONT
@@ -130,10 +131,25 @@
 \xpatchcmd{\proof}{\itshape}{\maybesffamily\accentcolor}{}{}
 \xpatchcmd{\proof}{.}{{\maybesffamily\accentcolor.}}{}{}
 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+	\pushQED{\qed}%
+	\normalfont
+	\topsep0pt \partopsep0pt % no space before
+	\trivlist
+	\item[\hskip\labelsep
+	\maybesffamily\accentcolor  % ‘Proof’ upright and in colour
+	#1\@addpunct{\maybesffamily\accentcolor.}]\ignorespaces  % ‘.’ upright and in colour
+}{%
+	\popQED\endtrivlist\@endpefalse
+	\addvspace{6pt plus 6pt} % some space after
+}
+\makeatother
+
 
 %%% Algorithms.
 \RestyleAlgo{plainruled}  % bar above and below algo + after caption
-\AtBeginDocument{\SetAlgoNoLine}  % vertical lines indicating blocks
+\AtBeginDocument{\SetAlgoLined}  % vertical lines indicating blocks
 \AtBeginDocument{\SetAlgoLongEnd}  % end if, end while, ...
 \DontPrintSemicolon  % semicolon at end of lines not printed
 \SetFillComment  % end mark of comment put directly at end

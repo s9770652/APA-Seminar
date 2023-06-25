@@ -106,11 +106,12 @@ We assume a well-defined order, so items of equal valuation shall be ordered fur
 \SMatch{} does in fact repeatedly match items.
 During the first matching, however, the edge weights are defined as \(\weight \log\paren[\big]{ \valuations[j] + \remvalue/n } \) for an edge between agent~\(i\) and item~\(j\).
 The addend \(\remvalue\) serves as estimation of the valuation of items assigned after the first matching (\cref{lem:lower_bound_later_items}) and is defined as
+\vspace{-1.0ex}
 \begin{equation}
 	\label{eq:def_remvalue}
 	\remvalue
 	\coloneq \smashoperator{\min_{\substack{\genericset \subset \goods \\ \abs{\genericset} \le 2n}}} \,\{ \valuations[\goods \setminus \genericset] \}
-	= \valuations[ \goodsordered{2n+1}, \dots, \goodsordered{m} ] \mperiod
+	= \valuations[ \goodsordered{2n+1}, \dots, \goodsordered{m} ] \mperiod \vspace{-1.0ex}
 \end{equation}
 Note that the set \(\genericset\) realizing the minimum of \(\valuations[\goods \setminus \genericset]\) may have less than \(2n\) elements if there are less than \(2n\) items in total or if some items have a valuation of zero.
 From the second matching onwards, the edge weights are defined as \(\weight \log\paren[\big]{ \valuations[j] + \valuations[\alloc] }\), where~\(\alloc\) is the continuously updated bundle of agent \(i\).
@@ -172,12 +173,13 @@ We can now establish \(\remvalue/n = \valuations[ \goodsordered{2n+1}, \dots, \g
 	By \cref{lem:lower_bound_single_item} and definition of \(\goodsordered{tn}\), every item \(\asgd{t}\) is worth at least as much as each item \(\goodsordered{tn+k}\) with \(k \in \{1, \dots, n\}\) and, consequently, its valuation \(\valuations[\asgd{t}]\) is at least as high as the mean valuation \(\frac{1}{n} \valuations[ \goodsordered{tn+1}, \dots, \goodsordered{tn + n} ]\).
 	Also, it holds \(\alloclen n + n \ge m \) since agent~\(i\) gets assigned \(\alloclen \ge \floor*{\frac{m}{n}} \ge \frac{m}{n} - 1\) many items.
 	This yields
+	\vspace{-2.5ex}
 	\begin{equation}
 		\valuations[\asgd{2}, \dots, \asgd{\alloclen}]
 		= \sum_{t=2}^{\alloclen \mathstrut} \valuations[\asgd{t}]
 		\ge \sum_{t=2}^{\alloclen \mathstrut} \frac{1}{n} \valuations[ \goodsordered{tn+1}, \dots, \goodsordered{tn + n} ]
 		\ge \frac{1}{n} \valuations[ \goodsordered{2n+1}, \dots, \goodsordered{m} ]
-		= \frac{\remvalue}{n} \label{eq:lower_bound_later_items} \mperiod
+		= \frac{\remvalue}{n} \label{eq:lower_bound_later_items} \mperiod \vspace{-2.5ex}
 	\end{equation}
 \end{proof}
 
@@ -194,6 +196,7 @@ This allows us to calculate an approximation factor for \SMatch{} by comparing i
 \end{theorem}
 \begin{proof}
 	\Cref{lem:lower_bound_later_items} can be plugged into the logarithmic Nash social welfare:
+	\vspace{-1.5ex}
 	\begin{align}
 		\log \NSW(\alloc[][])
 		&= \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \valuations[\asgd{1}, \dots, \asgd{\alloclen}] \\
@@ -202,6 +205,7 @@ This allows us to calculate an approximation factor for \SMatch{} by comparing i
 	\end{align}
 	Notice that the first matching of \SMatch{} maximises the sum in \cref{eq:smatch_maximising}.
 	Thus, assigning all agents~\(i\) their respective most highly valued item \(\asgd*{1}\) from an optimal bundle~\(\alloc* = \{ \asgd*{1}, \dots, \asgd*{\alloclen*} \}\) yields the even lower bound
+	\vspace{-0.5ex}
 	\begin{equation}
 		\label{eq:smatch_approx_factor_lower_bound}
 		\log \NSW(\alloc[][])
@@ -209,6 +213,7 @@ This allows us to calculate an approximation factor for \SMatch{} by comparing i
 	\end{equation}
 	Recall the definition of \(\remvalue\) from \cref{eq:def_remvalue}.
 	Consider a slightly modified variant:
+	\vspace{-0.5ex}
 	\begin{equation}
 		%\remvalue = \smashoperator{\min_{\substack{\genericset \subset \goods \\ \abs{\genericset} \le 2n}}} \{ \valuations[\goods \setminus \genericset] \}
 		%\textnormal{\quad or, alternatively,\quad}
@@ -217,6 +222,7 @@ This allows us to calculate an approximation factor for \SMatch{} by comparing i
 		\genericset[i] \coloneq \smashoperator{\argmin_{\substack{\genericset \subset \goods \\ \abs{\genericset} \le 2n}}} \{ \valuations[\goods \setminus \genericset] \}
 	\end{equation}
 	Now consider the set \(\genericset*[i]\) of the (at most) \(2n\) most highly valued items in the optimal bundle \(\alloc*\), \ie
+	\vspace{-1.5ex}
 	\begin{equation}
 		\genericset*[i]
 		\coloneq \smashoperator{\argmin_{\substack{\genericset \subset \alloc* \\ \abs{\genericset} \le 2n}}} \{ \valuations[\alloc* \setminus \genericset] \} \mperiod
@@ -224,17 +230,16 @@ This allows us to calculate an approximation factor for \SMatch{} by comparing i
 	It holds \(\valuations[\asgd*{1}] \ge \frac{1}{2 n} \valuations[\genericset*[i]]\) because of \(\valuations[\asgd*{1}] \ge \valuations[j]\) for all items \(j \in \genericset*[i]\).
 	Furthermore, it holds \(\remvalue = \valuations[\goods \setminus \genericset[i]] \ge \valuations[\alloc* \setminus \genericset[i]] \ge \valuations[\alloc* \setminus \genericset*[i]]\).
 	We can insert these two inequalities into \cref{eq:smatch_approx_factor_lower_bound} and prove the theorem thereby:
+	\vspace{-2.0ex}
 	\begin{align}
 		\log \NSW(\alloc[][])
 		&\ge \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \paren[\bigg]{ \frac{\valuations[\genericset*[i]]}{2 n} + \frac{\valuations[\alloc* \setminus \genericset*[i]]}{n} } \\
 		&\ge \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \paren[\bigg]{ \frac{\valuations[\alloc*]}{2n} } \\
 		&= \log \paren[\bigg]{\frac{\NSW(\alloc*[][])}{2 n}}
 	\end{align}
-	\qedhere
 \end{proof}
-
 The analysis is asymptotically tight.
-It is possible to design an instance for the asym\-metric additive \NSW{} such that \SMatch{} achieves an approximation ratio approaching \(n/2\).
+It is possible to design an instance for the asym\-metric additive \NSW{} such that \SMatch{} achieves an approximation factor approaching \(n/2\).
 It remains to be shown whether the symmetric additive \NSW{} leads to an asymptotically equally bad approximation factor.~\cite[Section 6.3]{APNSWuSVþUM}
 
 \begin{remark}

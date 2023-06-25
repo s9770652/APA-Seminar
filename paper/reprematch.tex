@@ -12,9 +12,8 @@ For this reason, the algorithm \RepReMatch{} (\cref{alg:reprematch}) relies on a
 In phase~\phasei, a sufficiently big set of high-value items is determined through repeated matchings.
 This phase serves merley to determine this set, so items are assigned temporarily only.
 The edge weights reflect this by taking the valuations of just single items into account.
-
 \vfil
-\begin{algorithm*}[H]
+\begin{algorithm*}[hb]
 	\KwIn{%
 		a set \(\goods\) of \(m\) items,
 		a set \(\agents\) of \(n\) agents,
@@ -31,7 +30,7 @@ The edge weights reflect this by taking the valuations of just single items into
 			\(\weights \gets \braces[\big]{\, \paren[\big]{ i, j, \weight \log{ \valuations[j] } } \given[\bigm] i \in \agents, j \in \goodsrem \,}\)   \tct*{weighted edges using val. of single item}
 			\(\bipartitegraph \gets (\agents, \goodsrem, \weights)\)  \tct*{bipartite graph}
 			\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
-			\(\alloc[\phasei] \gets \alloc[\phasei] \cup \{j\} \quad \forall(i, j) \in \matching\)  \tct*{assign temporarily according to matching}
+			\(\alloc[\phasei] \gets \alloc[\phasei] \cup \{j\} \quad \forall(i, j) \in \matching\)  \tct*{assign (temporarily) according to matching}
 			\(\goodsrem \gets \goodsrem \setminus \{\, j \given (i, j) \in \matching \,\}\)  \tct*{remove assigned items}
 		}
 	}
@@ -41,7 +40,7 @@ The edge weights reflect this by taking the valuations of just single items into
 		\(\weights \gets \braces[\big]{\, \paren[\big]{ i, j, \weight \log{ \valuations[ \alloc[\phaseii] \cup \{j\} ] } } \given[\bigm] i \in \agents, j \in \goodsrem \,}\)   \tct*{valuation of item \& current bundle}
 		\(\bipartitegraph \gets (\agents, \goodsrem, \weights)\)\;
 		\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
-		\(\alloc[\phaseii] \gets \alloc[\phaseii] \cup \{j\} \quad \forall(i, j) \in \matching\)  \tct*{assign definitely according to matching}
+		\(\alloc[\phaseii] \gets \alloc[\phaseii] \cup \{j\} \quad \forall(i, j) \in \matching\)  \tct*{assign (definitely) according to matching}
 		\(\goodsrem \gets \goodsrem \setminus \{\, j \given (i, j) \in \matching \,\}\)\;
 	}
 	\phaseiiisep
@@ -49,7 +48,7 @@ The edge weights reflect this by taking the valuations of just single items into
 	\(\weights \gets \braces[\big]{\, \paren[\big]{ i, j, \weight \log{ \valuations[ \alloc[\phaseii] \cup \{j\} ] } } \given[\bigm] i \in \agents, j \in \goodsrem \,}\)   \tct*{valuation of item \& current bundle}
 	\(\bipartitegraph \gets (\agents, \goodsrem, \weights)\)\;
 	\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
-	\(\alloc[\phaseiii] \gets \alloc[\phaseii] \cup \{j\} \quad\forall(i, j) \in \matching\)  \tct*{initialise final allocation \& assign def. according to matching}
+	\(\alloc[\phaseiii] \gets \alloc[\phaseii] \cup \{j\} \quad\forall(i, j) \in \matching\)  \tct*{initialise final allocation \& assign according to matching}
 	\(\goodsrem \gets \goodsrem \setminus \{\, j \given (i, j) \in \matching \,\}\)\;
 	\(\alloc[\phaseiii][] \gets \arballoc( \agents, \goodsrem, \alloc[\phaseiii][], (\valuations)_{i \in \agents} )\)  \tct*{assign remainder of items arbitrarily}
 	\Return{\(\alloc[\phaseiii][]\)}
@@ -80,21 +79,22 @@ To this end, we introduce two types of item sets.
 \end{definition}
 \begin{definition}
 	Let \(\alloc*\) be an optimal bundle of an agent \(i \in \agents\) and \(\alloc[\phaseii] = \{ \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} \}\) be her bundle at the end of phase \phaseii.
-	The set of \emph{optimal and attainable items} is defined as \(\attopt{0} \coloneq \alloc* \setminus \bigcup_{i' \in \agents} \alloc[\phasei][i']\) for round~\(0\) and as \(\attopt{r} \coloneq \attopt{r-1} \setminus ( \lostset{r} \cup \{\asgd{r-1}\} )\) for round \(r = 1, \dots, \alloclen[\phaseii]\).
+	The set of \emph{optimal and attainable items} is defined as \(\attopt{0} \coloneq \alloc* \setminus \bigcup_{i' \in \agents} \alloc[\phasei][i']\) for round~\(0\), as \(\attopt{1} \coloneq \attopt{0} \setminus \lostset{1}\) for round \(1\) and as \(\attopt{r} \coloneq \attopt{r-1} \setminus ( \lostset{r} \cup \{\asgd{r-1}\} )\) for round \(r = 2, \dots, \alloclen[\phaseii]\) of phase \phaseii.
 \end{definition}
 \noindent
 We denote their sizes by \(\lostsetlen{r}\ \coloneq \abs{\lostset{r}}\) and \(\attoptlen{r} \coloneq \abs{\attopt{r}}\), respectively.
 First, we give a lower bound on the valuations of optimal and attainable items.
 \begin{lemma}
 	\label{lem:induction}
-	For each agent \(i \in \agents\) and her bundle \(\alloc[\phaseii] = \{ \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} \}\), it holds in all rounds \(r = 2, \dots, \alloclen[\phaseii]\) of phase \phaseii{} that
+	For each agent \(i \in \agents\) and her bundle \(\alloc[\phaseii] = \{ \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} \}\) at the end of phase \phaseii, it holds in all rounds \(r = 2, \dots, \alloclen[\phaseii]\) that
+	\vspace{-2ex}
 	\begin{equation*}
-		\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] \ge \valuations[\attopt{1}] - \smashoperator{\sum_{r'=1}^{r-1}} \lostsetlen{r'+1} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] - \valuations[\asgd{1}, \dots, \asgd{r-1}] \mperiod
+		\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] \ge \valuations[\attopt{1}] - \smashoperator{\sum_{r'=1}^{r-1}} \lostsetlen{r'+1} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] - \valuations[\asgd{1}, \dots, \asgd{r-1}] \mperiod \vspace{-0.5ex}
 	\end{equation*}
 \end{lemma}
 \begin{proof}
 	The proof by \citeauthor{APNSWuSVþUM}~\cite[13\psq]{APNSWuSVþUM} consists of a lengthy induction rich in formulae and case differentiations.
-	This is why we give a different but intuitive approach.
+	We opt to give a different but more intuitive approach.
 
 	Writing the left-hand side of the lemma out in full gives
 	\begin{equation}
@@ -108,7 +108,7 @@ First, we give a lower bound on the valuations of optimal and attainable items.
 %	The set \(\attopt{r}\) of optimal and attainable items in round~\(r\) is equal to the set \(\attopt{r}\) of optimal and attainable items in round \(r-1\) minus the set \(\lostset{r}\) of lost items of round~\(r\) and, possibly, the item \(\asgd{r-1}\) assigned in round \(r-1\) if it was optimal back then, \ie, \(\asgd{r-1} \in \attopt{r-1}\).
 	The items which are optimal and attainable in round \(r\) were so in round~\(r-1\), too.
 	Additionally, the optimal but lost items of round \(r\) were attainable in round \(r-1\) as well.
-	The item \(\asgd{r}\) assigned to agent \(i\) in round \(r\) was also attainable in round \(r-1\) and may also be optimal.
+	The item \(\asgd{r}\) assigned to agent \(i\) in round \(r\) was still attainable in round \(r-1\) and may also be optimal.
 	Therefore, it holds \(\paren{ \attopt{r} \cup \braces{\asgd{r-1}} } \supset \paren{ \attopt{r-1} \setminus \lostset{r} }\) and
 	\begin{equation}
 		\valuations[\attopt{r} \cup \braces{ \asgd{1}, \dots, \asgd{r-1} }]
@@ -119,9 +119,10 @@ First, we give a lower bound on the valuations of optimal and attainable items.
 	The second inequality makes intuitively sense when one thinks of diminishing returns:
 	The gain from adding the set \(\lostset{r}\) to the items in \(\attopt{r-1} \cup \braces{ \asgd{1}, \dots, \asgd{r-1} }\) cannot be higher than its subtracted valuation over the empty set.
 	If we now recursively apply \cref{eq:attopt_union}, we eventually arrive at
+	\vspace{-0.5ex}
 	\begin{equation}
 		\valuations[\attopt{r} \cup \braces{ \asgd{1}, \dots, \asgd{r-1} }]
-		\ge \valuations[\attopt{1}] - \sum_{r'=1}^{r-1} \valuations[\lostset{r'+1}] \mperiod
+		\ge \valuations[\attopt{1}] - \smashoperator{\sum_{r'=1}^{r-1}} \valuations[\lostset{r'+1}] \mperiod
 		\label{eq:attop_lost}
 	\end{equation}
 
@@ -227,7 +228,7 @@ The lemma can be used to find a lower bound on the marginal valuation of the ite
 	Remember that valuation functions are monotonic if \(\valuations[\genericset[1]] \le \valuations[\genericset[2]]\) holds for all sets \(\genericset[1] \subset \genericset[2] \subset \goods\).
 	Induction shows that there must be an item \(j \in \genericset[2]\) with valuation \(\valuations[j] \ge \valuations[\genericset[2]] / \abs{\genericset[2]}\), otherwise it would hold \(\valuations[\emptyset] > 0\).
 	Applied to \cref{lem:induction}, this means that there must be an item \(j \in \attopt{r}\) with a marginal valuation of at least \(\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] / \attoptlen{r}\)\mperiod{}
-	As item \(\asgd{r}\) was the one to be assigned, its marginal valuation cannot be smaller.
+	As item \(\asgd{r}\) was the one to be assigned in round \(r\), its marginal valuation cannot be smaller.
 \end{proof}
 
 This, finally, enables us to give a lower bound on the valuation of the bundles \(\alloc[\phaseii]\).
@@ -241,8 +242,9 @@ This, finally, enables us to give a lower bound on the valuation of the bundles 
 \begin{proof}
 	In each round \(r = 1, \dots, \alloclen[\phaseii]\), \(\lostsetlen{r}\) optimal and attainable items of agent \(i\) are assigned to other agents.
 	As there are \(n\) agents in total, \(n-1\) is an upper bound on \(\lostsetlen{r}\).
-	Furthermore, after \(\alloclen[\phaseii]\) rounds, the number \(\attoptlen{\alloclen[\phaseii]}\) of optimal and attainable items is at most \(n-1 \le n\) elsewise agent \(i\) would have been assigned yet another item.
-	Together with \cref{cor:lower_bound_single_item}, this proves the lemma:
+	Furthermore, after \(\alloclen[\phaseii]\) rounds, the number of unassigned items is at most \(n-1\) elsewise agent \(i\) would have been assigned yet another item in a round \(\alloclen[\phaseii] + 1\).
+	This implies \(\attoptlen{\alloclen[\phaseii]} \le n\), as those \(n-1\) items could be optimal and item \(\asgd{\alloclen[\phaseii]}\) may be, too.
+	Together with \cref{cor:lower_bound_single_item}, the lemma is proven:
 	\begin{align}
 		\valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii]}]
 		&= \valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii] - 1}] + \valuations[ \asgd{\alloclen[\phaseii]} \given \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} ] \\
@@ -276,8 +278,8 @@ This, finally, enables us to give a lower bound on the valuation of the bundles 
 After having obtained a lower bound on the valuation of items assigned in phase~\phaseii, we need a lower bound for phase~\phaseiii{} as well.
 Therefor we introduce a third type of item set.
 \begin{definition}
-	Let \(\alloc* = \{ \asgd*{1}, \dots, \asgd{\alloclen*}\}\) be an optimal bundle of some agent \(i \in \agents\).
-	The set of \emph{overly good} items is defined as \(\overlygoodset \coloneq \{\, j \in \goods \given \valuations[j] \ge \valuations[\asgd*{1}] \,\}\).
+	Let \(\alloc* = \{ \asgd*{1}, \dots, \asgd*{\alloclen*}\}\) be an optimal bundle of some agent \(i \in \agents\).
+	The set of \emph{overly good items} is defined as \(\overlygoodset \coloneq \{\, j \in \goods \given \valuations[j] \ge \valuations[\asgd*{1}] \,\}\).
 \end{definition}
 
 \begin{lemma}
@@ -334,32 +336,31 @@ This allows us to calculate an approximation factor for \RepReMatch{} by compari
 	\end{equation}
 	is a lower bound on the logarithmic \NSW{} after the first matching in phase~\phaseiii, with \(\alloc[\phaseii] = \{ \asgd{1}, \dots, \allowbreak \asgd{\alloclen[\phaseii]} \}\) being the bundle of agent \(i\) at the end of phase~\phaseii.
 
-	Item \(\overlygooditem\) was released in phase~\phaseiii, which means it was assigned in phase~\phasei, implying \(\overlygooditem \in \alloc* \setminus \attopt{0}\) and, subsequently, \(\overlygooditem \in (\alloc* \setminus \attopt{0}) \cup \lostset{1}\).
-	Phase~\phasei{} runs for at most \(\ceil{\log_2 n}+1\) rounds, and at most~\(n\) items are assigned in each iteration.
-	Therefore, at most \(n (\log_2 n + 2)\) optimal items are assigned in that phase, \ie, \(\abs{ \alloc* \setminus \attopt{0} } \le n (\log_2 n + 2)\).
-	As in \cref{lem:lower_bound_all_items}, it also holds \(n \ge \lostsetlen{1} = \abs{\lostset{1}}\).
-	Together with the monotonicity of the valuation functions, this yields
-	\begin{equation}
-		\label{eq:overly_good_item_lower_bound}
-		\valuations[ \overlygooditem, \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} ]
-		\ge \valuations[\overlygooditem]
-		\ge \frac{\valuations[ (\alloc* \setminus \attopt{0}) \cup \lostset{1} ][\big]}{n(\log_2 n + 3)}
-	\end{equation}
-	as lower bound on the valuations of bundles.
-	Moreover, \cref{lem:lower_bound_later_items} and the monotonicity of the valuation functions functions yield
+	\Cref{lem:lower_bound_all_items} delivers a straightforward lower bound on the valuations of bundles, namely
 	\begin{equation}
 		\label{eq:assigned_items_lower_bound}
 		\valuations[ \overlygooditem, \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} ]
 		\ge \valuations[ \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} ]
 		\ge \frac{\valuations[\attopt{1}]}{n}
-		\ge \frac{\valuations[\attopt{1}]}{n(\log_2 n + 3)}
-		= \frac{\valuations[ \attopt{0} \setminus \lostset{1} ]}{n(\log_2 n + 3)}
+		= \frac{\valuations[ \attopt{0} \setminus \lostset{1} ]}{n} \mperiod
 	\end{equation}
-	as yet another lower bound.
-	The mean of \crefrange{eq:overly_good_item_lower_bound}{eq:assigned_items_lower_bound} and the monotonicity of the valuation functions give the concise lower bound
+	Next, consider the complement of \(\attopt{0} \setminus \lostset{1}\), \ie{} \((\alloc* \setminus \attopt{0}) \cup \lostset{1}\).
+	Phase~\phasei{} runs for at most \(\ceil{\log_2 n}+1\) rounds, and at most~\(n\) items are assigned in each iteration.
+	Therefore, at most \(n (\log_2 n + 2)\) optimal items are assigned in that phase, \ie, \(\abs{\bigcup_{i' \in \agents} \alloc[\phasei][i']} = \abs{ \alloc* \setminus \attopt{0} } \le n (\log_2 n + 2)\).
+	As in \cref{lem:lower_bound_all_items}, it also holds \(n \ge \lostsetlen{1} = \abs{\lostset{1}}\).
+	Since \({ (\alloc* \setminus \attopt{0}) \cup \lostset{1} } \subset \alloc*\) and \(\valuations[\asgd*{1}] \ge \valuations[\asgd*{r}]\) for all \(r \ge 1\), it holds
+	\begin{equation}
+		\label{eq:overly_good_item_lower_bound}
+		\valuations[ \overlygooditem, \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} ]
+		\ge \valuations[\overlygooditem]
+		\ge \valuations[\asgd*{1}]
+		\ge \frac{\valuations[ (\alloc* \setminus \attopt{0}) \cup \lostset{1} ][\big]}{n(\log_2 n + 3)} \mperiod
+	\end{equation}
+	\Cref{eq:overly_good_item_lower_bound,eq:assigned_items_lower_bound}, combined with the submodularity of the valuation functions, give the concise lower bound
+	\vspace{-1.5ex}
 	\begin{align}
 		\valuations[ \overlygooditem, \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} ]
-		&\ge \frac{1}{2} \paren*{ \frac{\valuations[ (\alloc* \setminus \attopt{0}) \cup \lostset{1} ][\big]}{n(\log_2 n + 3)} + \frac{\valuations[ \attopt{0} \setminus \lostset{1} ][\big]}{n(\log_2 n + 3)} } \\
+		&\ge \frac{1}{2} \paren*{ \frac{\valuations[ (\alloc* \setminus \attopt{0}) \cup \lostset{1} ][\big]}{n(\log_2 n + 3)} + \frac{\valuations[ \attopt{0} \setminus \lostset{1} ][\big]}{n} } \\
 		&\ge \frac{1}{2} \cdot \frac{ \valuations[ \paren{(\alloc* \setminus \attopt{0}) \cup \lostset{1}} \cup \paren{\attopt{0} \setminus \lostset{1}} ][\big] }{n(\log_2 n + 3)} \\
 		&= \frac{ \valuations[\alloc*] }{2n(\log_2 n + 3)} \mperiod
 	\end{align}

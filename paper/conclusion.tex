@@ -1,11 +1,12 @@
 \section{Conclusion}
 \label{sec:conclusion}
 
+\vspace{-0.5ex}
 \subsection{Summary}
 \label{subsec:conclusion:summary}
 
-The asymmetric Nash social welfare problem (\NSW) asks to find an allocation of unsharable and indivisible items amongst agents such that the weighted geometric mean of their valuations is maximised.
-In this seminar report, we presented two polynomial-time algorithms for the asymmetric \NSW, based on a paper by \citeauthor{APNSWuSVþUM}~\cite{APNSWuSVþUM}.
+The maximum Nash social welfare problem (\NSW) asks to find an allocation of unsharable and indivisible items amongst agents such that the weighted geometric mean of their valuations is maximised.
+Based on a paper by \citeauthor{APNSWuSVþUM}~\cite{APNSWuSVþUM}, we presented two polynomial-time algorithms for the asymmetric \NSW.
 The novelty lies in both algorithms having an approximation factor dependant on the number \(n\) of agents but not on the number \(m\) of items.
 
 The first algorithm, \SMatch, finds a \(2n\)-approximative allocation if the valuation functions are additive.
@@ -21,13 +22,13 @@ In phase \phaseiii, the high-value items are finally assigned to the agents.
 Lastly, it was shown that any polynomial-time algorithm for the submodular \NSW{} must have an approximation factor of at least \(\frac{\euler}{\euler - 1}\) unless \(\P = \NP\).
 This holds even when the problem is symmetric and the valuation functions equal.
 
-\subsection{Recent Work and Open Questions}
+\subsection{Open Questions and Recent Work}
 \label{subsec:conclusion:outlook}
 
 \Citeauthor{APNSWuSVþUM}~\cite{APNSWuSVþUM} conjecture that \SMatch{} has a better approximation factor for the symmetric additive \NSW{} though neither were they able to prove a better factor nor could they prove the tightness of their given analysis.
 Additionally, they forbore to prove the tightness of the analysis of \RepReMatch{}, and we suspect there to be quite some constants to be saved \Dash admittedly, the benefits of a more thorough analysis are questionable.
 
-To identify more general open questions, we need to take a look at new publications since 2020, the year of the publication of the paper by \citeauthor{APNSWuSVþUM}.
+The research on the \NSW{} gained pace in the last years, and some publications are of especial interest in the context of this report.
 \begin{itemize}
 	\item
 	\XOS{} functions encompass the submodular functions.
@@ -35,8 +36,8 @@ To identify more general open questions, we need to take a look at new publicati
 	\Citeauthor{sublin_approx_algo_for_nsw_with_xos_valuations}~\cite{sublin_approx_algo_for_nsw_with_xos_valuations} used both \RepReMatch{} and the discrete moving-knife method to get an \(\bigo(n^{53/54})\)-approximation algorithm.
 	However, the algorithm uses demand and \XOS{} queries, whereas \RepReMatch{} needs only the weaker value queries.
 
-	\item
-	\Citeauthor{tractable_fragments_of_the_max_nsw_problem}~\cite{tractable_fragments_of_the_max_nsw_problem} offer (fully) polynomial-time approximation schemes and even an optimal algorithm for some types of the symmetric and asymmetric additive \NSW.
+%	\item
+%	\Citeauthor{tractable_fragments_of_the_max_nsw_problem}~\cite{tractable_fragments_of_the_max_nsw_problem} offer (fully) polynomial-time approximation schemes and even an optimal algorithm for some types of the symmetric and asymmetric additive \NSW.
 
 	\item
 %	\citeauthor{a_constfactor_approx_algo_for_nsw_with_submod_valuations}~\cite{a_constfactor_approx_algo_for_nsw_with_submod_valuations} introduced a randomised, \(380\)-approximative algorithm for the symmetric submodular \NSW.
@@ -49,19 +50,18 @@ To identify more general open questions, we need to take a look at new publicati
 %	\SMatch{} can be modified to work for the \CASC{} \NSW{}, achieving an approximation factor of \(2n\)~\cite[Theorem 2.2]{APNSWuSVþUM}.
 %	\Citeauthor{fair_division_of_indiv_goods_for_a_class_of_concave_valuations}~\cite{fair_division_of_indiv_goods_for_a_class_of_concave_valuations} came up with an \(\euler^{1/\euler}\)-approximation algorithm for the symmetric case.
 
-		\item
-	Rado valuations are a special class of submodular functions and stem from a generalisation of \OXS{} valuations.
-	\Citeauthor{APNSWuSVþUM} emphatically mentioned the lack of research into the \OXS{} \NSW.
-	\Citeauthor{approximating_nsw_under_rado_valuations}~\cite{approximating_nsw_under_rado_valuations} developed an algorithm for the Rado \NSW, which is independent from both the number of items and the number of agents.
+	\item
+	Rado valuations are a special class of submodular functions and stem from a generalisation of \OXS{} valuations, in regard to which \citeauthor{APNSWuSVþUM} explicitly mentioned a lack of research.
+%	\Citeauthor{APNSWuSVþUM} emphatically mentioned the lack of research into the \OXS{} \NSW.
+	\Citeauthor{approximating_nsw_under_rado_valuations}~\cite{approximating_nsw_under_rado_valuations} developed an algorithm which is divided into five phases and shares ideas with \RepReMatch.
 	%
-	For the symmetric Rado \NSW, their algorithm achieves an approximation factor of \(256 \euler^{3/\euler} \approx 772\).
-	For the asymmetric Rado \NSW, the approximation factor is \(256 \gamma^3\) with \(\gamma \coloneq \max_{i \in \agents} \,\braces{\weight} / \min_{i \in \agents} \,\braces{\weight}\).
-	Interestingly, the algorithm is \(16 \gamma\)-approximative in case of the asymmetric additive \NSW, so it outperforms both \SMatch{} and \RepReMatch{} in many instances.
-	The algorithm is divided into five phases with purposes related to the ideas of \RepReMatch.
-	%	Other than that, heavy use of linear programming is made.
+	It achieves an approximation factor of \(256 \euler^{3/\euler} \approx 772\) in case of the symmetric Rado \NSW{} and of \(256 \gamma^3\) with \(\gamma \coloneq \max_{i \in \agents} \,\braces{\weight} / \min_{i \in \agents} \,\braces{\weight}\) in the asymmetric case.
+	Interestingly, the factor is \(16 \gamma\) in case of the asymmetric additive \NSW, so the algorithm outperforms \SMatch{} and \RepReMatch{} in many instances.
+%	The algorithm is divided into five phases with purposes related to the ideas of \RepReMatch.
+%	Other than that, heavy use of linear programming is made.
 \end{itemize}
-Besides efficiency, fairness is also a property towards which algorithm can be designed, although \SMatch{} and \RepReMatch{} advanced little in that regard.
-Especially \RepReMatch{} with no fairness guarantees is unsatisfactory.
+Besides efficiency, fairness is also a property towards which algorithms can be designed, although \SMatch{} and \RepReMatch{} advance little in that regard.
+%Particularly \RepReMatch{} with no fairness guarantee is unsatisfactory.
 %Research is made complex because of the myriad of notions of fairness.
 %A selection of new developments:
 %\begin{itemize}
@@ -77,11 +77,11 @@ Especially \RepReMatch{} with no fairness guarantees is unsatisfactory.
 %	\Citeauthor{on_optimal_tradeoffs_between_efx_and_nsw}~\cite{on_optimal_tradeoffs_between_efx_and_nsw} show a \((\alpha + 1)\)-approximation algorithm computing allocations which are \(\alpha\)-\EFX{} for the symmetric additive \NSW{} with \(\alpha \in [0, 1]\).
 %	They also show a \((\alpha+1)\)-approximation algorithm computing allocations which are \(\alpha\)-\EFX{} for the symmetric subadditive \NSW{} with \(\alpha \in [0, \sfrac{1}{2}]\).
 %\end{itemize}
-
-\smallskip\noindent
-As seen, the research on the \NSW{} gained pace in the last years, and some questions left unanswered by \citeauthor{APNSWuSVþUM} have been addressed.
-Apart from devising more algorithms for other valuation functions or with features close to reality, it could be rewarding to look at more basic cases.
-For example, as mentioned in \cref{subsec:intro:contribution}, the hardness of the symmetric additive \NSW{} could not be shown to be higher than \(\smash{\sqrt{8/7}} > 1.069\)~\cite{satiation_in_fisher_markets_and_approx_of_nsw}, but the best known algorithm, to the best of our knowledge to this day, has an approximation factor of about \(1.45\)~\cite{finding_fair_and_efficient_allocs}.
+%
+%\smallskip\noindent
+%As seen, the research on the \NSW{} gained pace in the last years, and some questions left unanswered by \citeauthor{APNSWuSVþUM} have been addressed.
+Apart from devising more algorithms for other valuation functions or with features close to reality, it could also be rewarding to look at more basic cases.
+For example, as mentioned in \cref{subsec:intro:contribution}, the hardness of the symmetric additive \NSW{} could not be shown to be higher than \(1.069\)~\cite{satiation_in_fisher_markets_and_approx_of_nsw}, but, to the best of our knowledge, the best known algorithm has an approximation factor of about \(1.45\)~\cite{finding_fair_and_efficient_allocs}.
 
 %\begin{itemize}
 %		\item

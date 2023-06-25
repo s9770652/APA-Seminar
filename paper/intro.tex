@@ -36,8 +36,8 @@ The distributions of items amongst agents are modelled through allocations.
 \end{definition}
 
 The satisfaction of an agent \(i\) with her bundle \(\alloc\) is measured by her \emph{valuation function}~\(\valuations\), which assigns each set of items a real value.
-We always assume that valuation functions are monotonically non-decreasing, \ie, \(\valuations[\genericset[1]] \le \valuations[\genericset[2]]\) \(\forall \genericset[1] \subset \genericset[2] \subset \goods\), and normalised, \ie, \(\valuations[\emptyset] = 0\).
-Note that this implies non-negativity, \ie, \(\valuations[\genericset] \ge 0\) \(\forall \genericset \subset \goods\).
+We always assume that valuation functions are monotonically non-decreasing, \ie, \(\valuations[\genericset[1]] \le \valuations[\genericset[2]]\), \(\forall \genericset[1] \subset \genericset[2] \subset \goods\), and normalised, \ie, \(\valuations[\emptyset] = 0\).
+Note that this implies non-negativity, \ie, \(\valuations[\genericset] \ge 0\), \(\forall \genericset \subset \goods\).
 Besides fulfilling these properties, the valuation functions can come from a plethora of function families.
 We discuss additive and submodular functions in greater detail.
 \begin{description}
@@ -48,7 +48,7 @@ We discuss additive and submodular functions in greater detail.
 
 	\item[Submodular]
 	Let \(\valuations[\genericset[1] \given \genericset[2]] \coloneq \valuations[\genericset[1] \cup \genericset[2]] - \valuations[\genericset[2]]\) denote the marginal valuation of agent~\(i\) for a set \(\genericset[1] \subset \goods\) of items over a disjoint set \(\genericset[2] \subset \goods\).
-	This valuation function satisfies the submodularity constraint \(\valuations[\{j\} \given \genericset[1] \cup \genericset[2]] \le \valuations[\{j\} \given \genericset[1]]\) for all agents \(i \in \agents\), items \(j \in \goods\) and sets \(\genericset[1], \genericset[2] \subset \goods\) of items.
+	This valuation function satisfies the submodularity constraint \(\valuations[\{j\} \given \genericset[1] \cup \genericset[2]] \le \valuations[\{j\} \given \genericset[1]]\), \(\forall \{j\}, \genericset[1], \genericset[2] \subset \goods\).
 
 	Submodular valuation functions, which encompass the additive ones, have the property that the gain from assigning new items decreases with increasing bundle size.
 	Diminishing returns are a common phenomenon in economics, making submodular functions worthwhile to study~\cite{inapprox_results_for_combi_auctions_with_submod_utility_funcs}.
@@ -61,7 +61,8 @@ Several options arise here;
 common choices are the utilitarian social welfare, that is the sum of all valuations~\cite{inapprox_results_for_combi_auctions_with_submod_utility_funcs, survey, APNSWuSVþUM, water_management, edge_computing_auction}, and the egalitarian social welfare, that is the minimum of all valuations~\cite{survey, APNSWuSVþUM}.
 We consider a third one, the Nash social welfare.
 \begin{problem}
-	Given a set \(\goods\) of items and a set \(\agents\) of agents with valuation functions \(\valuations \colon \powerset[\goods] \to \realposzero\) and weights \(\eta_i \in \realpos\) for all agents \(i \in \agents\), the \emph{Nash social welfare problem (\NSW)} is to find an allocation \(\alloc*[][]\) which maximises the weighted geometric mean of valuations, that is,
+	\label{prob:nsw}
+	Given a set \(\goods\) of items and a set \(\agents\) of agents with valuation functions \(\valuations \colon \powerset[\goods] \to \realposzero\) and weights \(\eta_i \in \realpos\) for all agents \(i \in \agents\), the \emph{maximum Nash social welfare problem (\NSW)} is to find an allocation \(\alloc*[][]\) which maximises the weighted geometric mean of valuations, that is,
 	\begin{equation*}
 		\alloc*[][] \overset{!}{=} \argmax_{\alloc[][] \in \allallocs{\agents}{\goods}} \braces{ \NSW(\alloc[][]) }
 		\quad\text{with~}
