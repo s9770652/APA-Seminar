@@ -279,12 +279,12 @@ After having obtained a lower bound on the valuation of items assigned in phase~
 Therefor we introduce a third type of item set.
 \begin{definition}
 	Let \(\alloc* = \{ \asgd*{1}, \dots, \asgd*{\alloclen*}\}\) be an optimal bundle of some agent \(i \in \agents\).
-	The set of \emph{overly good items} is defined as \(\overlygoodset \coloneq \{\, j \in \goods \given \valuations[j] \ge \valuations[\asgd*{1}] \,\}\).
+	The set of \emph{outstanding items} is defined as \(\overlygoodset \coloneq \{\, j \in \goods \given \valuations[j] \ge \valuations[\asgd*{1}] \,\}\).
 \end{definition}
 
 \begin{lemma}
 	\label{lem:overly_good_matching}
-	In phase~\phaseiii, there exists a matching such that each agent \(i \in \agents\) is matched to one of her overly good items in the set \(\bigcup_{i' \in \agents} \alloc[\phasei][i']\) of released items.
+	In phase~\phaseiii, there exists a matching such that each agent \(i \in \agents\) is matched to one of her outstanding items in the set \(\bigcup_{i' \in \agents} \alloc[\phasei][i']\) of released items.
 \end{lemma}
 \begin{proof}
 	If all items were matched in phase~\phasei, \ie, \(\bigcup_{i' \in \agents} \alloc[\phasei][i'] = \goods\), then all optimal items are released in phase~\phaseiii{} and each agent can be matched to one;
@@ -295,28 +295,28 @@ Therefor we introduce a third type of item set.
 	\begin{enumerate}
 		\item
 		\label[property]{enum:matching:agent}
-		If for an agent \(i\) all overly good items were amongst the released items,
+		If for an agent \(i\) all outstanding items were amongst the released items,
 %		\ie, \(\overlygoodset \subset \goodsreleased{t}\),
-		she gets matched with an overly good item \(j \in \overlygoodset\).
+		she gets matched with an outstanding item \(j \in \overlygoodset\).
 
 		\item
 		\label[property]{enum:matching:max}
-		The number of agents matched with one of their overly good items is maximal amongst all matchings fulfilling \cref{enum:matching:agent}.
+		The number of agents matched with one of their outstanding items is maximal amongst all matchings fulfilling \cref{enum:matching:agent}.
 	\end{enumerate}
 	\Cref{enum:matching:agent} is always satisfiable as the union of \(k\) many sets \(\overlygoodset\) contains \(k\) different items~\(\asgd*{1}\), which can be matched with agents \(i\).
-	\Cref{enum:matching:max} leads to all agents being matched with an overly good item when \(t = \ceil{\log_2 n}+1\), \ie{} the number of rounds in phase~\phasei, whence the lemma follows.
-	To prove this, we denote by \(\unluckyagents{t}\) the set of agents who are \emph{not} matched with one of their overly good items, and show by induction on \(t\) that it holds \(\abs{\unluckyagents{t}} \le n/2^t\).
+	\Cref{enum:matching:max} leads to all agents being matched with an outstanding item when \(t = \ceil{\log_2 n}+1\), \ie{} the number of rounds in phase~\phasei, whence the lemma follows.
+	To prove this, we denote by \(\unluckyagents{t}\) the set of agents who are \emph{not} matched with one of their outstanding items, and show by induction on \(t\) that it holds \(\abs{\unluckyagents{t}} \le n/2^t\).
 
 	In the base case \(t=1\), none of the items are assigned initially.
-	Denote by \(\unluckyagentsalgo{1}\) the number of agents who were not assigned an overly good item in the first round of phase~\phasei.
+	Denote by \(\unluckyagentsalgo{1}\) the number of agents who were not assigned an outstanding item in the first round of phase~\phasei.
 	If \(\unluckyagentsalgo{1} \le n/2\), then a matching \(\matching[1]\) obviously exists and the base case is immediately proven.
 	Otherwise, all items from at least \(\unluckyagentsalgo{1}\) many sets \(\overlygoodset\) got assigned to someone.
 	Again:
 	Each set \(\overlygoodset\) contains the item \(\asgd*{1}\), so the union of these sets contains at least~\(\unluckyagentsalgo{1}\) items which can be matched with at least \(\unluckyagentsalgo{1}\) agents upon release.
-	This then leaves at most~\(n-\alpha < n/2\) agents not matched with an overly good item.
+	This then leaves at most~\(n-\alpha < n/2\) agents not matched with an outstanding item.
 
 	For the induction hypothesis, we assume that the statement holds true for all rounds up to some \(t\).
-	In the induction step \(t \to t+1\), by \cref{enum:matching:agent}, there is at least one unassigned, overly good item in each set \(\overlygoodset[i']\) of all agents \(i' \in \unluckyagents{t}\) at the start of round \(t+1\).
+	In the induction step \(t \to t+1\), by \cref{enum:matching:agent}, there is at least one unassigned, outstanding item in each set \(\overlygoodset[i']\) of all agents \(i' \in \unluckyagents{t}\) at the start of round \(t+1\).
 	Analogously to the base case, for at least half of those agents \(i'\), these unassigned items will be assigned to either them or someone else, and it can be argued accordingly.
 	By the induction hypothesis, it holds \(\abs{\unluckyagents{t+1}} \le \abs{\unluckyagents{t}}/2 \le (n/2^t)/2 = n/2^{t+1}\).
 \end{proof}
@@ -327,7 +327,7 @@ This allows us to calculate an approximation factor for \RepReMatch{} by compari
 	\RepReMatch{} has an approximation factor of \(2n (\log_2 n + 3)\).
 \end{theorem}
 \begin{proof}
-	By \cref{lem:overly_good_matching}, we can assign each agent \(i\) an overly good item \(\overlygooditem \in \overlygoodset\) in the beginning of phase~\phaseiii.
+	By \cref{lem:overly_good_matching}, we can assign each agent \(i\) an outstanding item \(\overlygooditem \in \overlygoodset\) in the beginning of phase~\phaseiii.
 	\RepReMatch{} maximises the logarithmic Nash social welfare, so
 	\begin{equation}
 		\label{eq:reprematch_approx_factor_lower_bound}
@@ -371,5 +371,3 @@ This allows us to calculate an approximation factor for \RepReMatch{} by compari
 		= \log \paren[\bigg]{ \frac{\NSW(\alloc*[][])}{2n(\log_2 n + 3)} }
 	\end{equation}
 \end{proof}
-
-\todo[inline]{overly good → outstanding?}
