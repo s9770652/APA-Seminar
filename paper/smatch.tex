@@ -19,7 +19,7 @@ As the following examples demonstrates, this leads to an algorithm with an appro
 	Even if all remaining items were going to be assigned to agent \(\agents_{1}\), the Nash social welfare would never surpass \(\smash{\sqrt{(2m + \epsilon - 1) \cdot 1}} < \sqrt{2m}\) (\cref{fig:bad_idea:alg}).
 	The approximation factor of the output \(\alloc[][]\) therefore is at least \(\sqrt{m/2}\) and, thus, depends on the number of items.
 \end{example}
-The geometric mean is high when bundles are valued similarly, wherefore it may be beneficial to give an item to agents who cannot expect many more valuable items in the future instead of to agents who value the item a bit more but do so for other items as well.
+The geometric mean is high when bundles are valued similarly, wherefore it may be beneficial to give an item to agents who cannot expect many more valuable ones in the future instead of to agents who value the item a bit more but do so for others as well.
 This is known as the Pigou-Dalton transfer principle~\cite{sublin_approx_algo_for_nsw_with_xos_valuations}.
 
 \begin{figure*}
@@ -94,7 +94,7 @@ This is known as the Pigou-Dalton transfer principle~\cite{sublin_approx_algo_fo
 		\label{fig:bad_idea:alg}
 	\end{subfigure}
 	\caption{%
-		Illustration of \cref{ex:bad_idea} with \(m+1\) items and two equally weighted agents, their valuations shown as edge weights.
+		Illustration of \cref{ex:bad_idea} with \(m+1\) items and two equally weighted agents, their valuations shown as edge labels.
 		It demonstrates that naïvely repeated matching without consideration of the future leads to an allocation \(\alloc[][]\) which is at best a \(\smash{\sqrt{m/2}}\)-approximation of the optimum \(\alloc*[][]\), meaning the approximation factor depends on the number of items.
 	}
 	\label{fig:bad_idea}
@@ -105,7 +105,7 @@ For a fixed agent \(i\), order the items in descending order of valuations and d
 We assume a well-defined order, so items of equal valuation shall be ordered further by ID or something similar.
 \SMatch{} does in fact repeatedly match items.
 During the first matching, however, the edge weights are defined as \(\weight \log\paren[\big]{ \valuations[j] + \remvalue/n } \) for an edge between agent~\(i\) and item~\(j\).
-The addend \(\remvalue\) serves as estimation of the valuation of items assigned after the first matching (\cref{lem:lower_bound_later_items}) and is defined as
+The value \(\remvalue\) serves as estimation of the valuation of items assigned after the first matching (\cref{lem:lower_bound_later_items}) and is defined as
 \vspace{-1.0ex}
 \begin{equation}
 	\label{eq:def_remvalue}
@@ -113,7 +113,7 @@ The addend \(\remvalue\) serves as estimation of the valuation of items assigned
 	\coloneq \smashoperator{\min_{\substack{\genericset \subset \goods \\ \abs{\genericset} \le 2n}}} \,\{ \valuations[\goods \setminus \genericset] \}
 	= \valuations[ \goodsordered{2n+1}, \dots, \goodsordered{m} ] \mperiod \vspace{-1.0ex}
 \end{equation}
-Note that the set \(\genericset\) realizing the minimum of \(\valuations[\goods \setminus \genericset]\) may have less than \(2n\) elements if there are less than \(2n\) items in total or if some items have a valuation of zero.
+Note that the set \(\genericset\) realizing the minimum of \(\valuations[\goods \setminus \genericset]\) may have less than \(2n\) elements if there are less than \(2n\) items in total or if some items are valuated at \(0\).
 From the second matching onwards, the edge weights are defined as \(\weight \log\paren[\big]{ \valuations[j] + \valuations[\alloc] }\), where~\(\alloc\) is the continuously updated bundle of agent \(i\).
 The addend \(\valuations[\alloc]\) could lead to better allocations in applications but does not improve the approximation factor asymptotically and so is of no further interest in the analysis.
 
@@ -124,7 +124,7 @@ The addend \(\valuations[\alloc]\) could lead to better allocations in applicati
 		additive valuation functions \(\valuations \colon \powerset[\goods] \to \realposzero\) and weights \(\weight \in \realpos\) for all agents \(i \in \agents\)
 	}
 	\KwOut{%
-		\(2n\)-approximation \(\alloc[][] = (\alloc)_{i \in \agents}\) of an optimal allocation
+		a \(2n\)-approximation \(\alloc[][] = (\alloc)_{i \in \agents}\) of an optimal allocation
 	}
 
 	\(\remvalue \gets \valuations[ \goodsordered{2n+1}, \dots, \goodsordered{m} ] \quad\forall i \in \agents\)  \tct*{estimation of future valuations}
@@ -132,7 +132,7 @@ The addend \(\valuations[\alloc]\) could lead to better allocations in applicati
 	\(\bipartitegraph \gets (\agents, \goods, \weights)\)  \tct*{bipartite graph}
 	\(\matching \gets \maxweightmatching(\bipartitegraph)\)\;
 	\(\alloc \gets \{\, j \given (i, j) \in \matching \,\} \quad\forall i \in \agents\)  \tct*{assign according to matching}
-	\(\goodsrem \gets \goods \setminus \{\, j \given (i, j) \in \matching \,\}\)  \tct*{remove assigned items}
+	\(\goodsrem \gets \goods \setminus \{\, j \given (i, j) \in \matching \,\}\)  \tct*{set of unassigned items}
 	\While{\(\goodsrem \neq \emptyset\)}{
 		\(\weights \gets \braces[\big]{\, \paren[\big]{ i, j, \weight \log\paren{ \valuations[j] + \valuations[\alloc] } } \given[\bigm] i \in \agents, j \in \goodsrem \,}\)  \tct*{weighted edges using only valuations}
 		\(\bipartitegraph \gets (\agents, \goodsrem, \weights)\)\;
@@ -148,6 +148,7 @@ The addend \(\valuations[\alloc]\) could lead to better allocations in applicati
 	\label{alg:smatch}
 \end{algorithm*}
 
+
 \subsection{Analysis of the Algorithm}
 \label{subsec:smatch:analysis}
 
@@ -160,11 +161,11 @@ Note that if set \(\genericset\) happens to be a bundle, then item \(\genericite
 \end{lemma}
 \begin{proof}
 	Before the \(t\)th matching, no more than \((t-1) n\) items out of the \(tn\) most highly valued items \(\goodsordered{1}, \dots, \goodsordered{tn}\) have been assigned in previous matchings since at most~\(n\) many out of those items are assigned each time.
-	Because of the \(t\)th matching, at most \(n-1\) more could be assigned to other agents, leaving at least one item of \(\goodsordered{1}, \dots, \goodsordered{tn}\) unassigned.
+	Because of the \(t\)th matching, at most \(n-1\) more items could be assigned to other agents, leaving at least one item of \(\goodsordered{1}, \dots, \goodsordered{tn}\) attainable for agent \(i\).
 	Since \(\valuations[\goodsordered{k}] \ge \valuations[\goodsordered{tn}]\) for all \(k \le tn\) by definition of \(\goodsordered{k}\), the lemma follows.
 \end{proof}
 
-We can now establish \(\remvalue/n = \valuations[ \goodsordered{2n+1}, \dots, \goodsordered{m} ]/n\) as lower bound on  the valuations of items assigned after the first matching.
+We can now use \(\remvalue/n = \valuations[ \goodsordered{2n+1}, \dots, \goodsordered{m} ]/n\) to establish a lower bound on  the valuations of items assigned after the first matching.
 \begin{lemma}
 	\label{lem:lower_bound_later_items}
 	For each agent \(i \in \agents\) and her final bundle \(\alloc = \{\asgd{1}, \dots, \asgd{\alloclen}\}\), it holds \(\valuations[ \asgd{2}, \dots, \asgd{\alloclen} ] \ge \remvalue/n\).
@@ -186,7 +187,7 @@ We can now establish \(\remvalue/n = \valuations[ \goodsordered{2n+1}, \dots, \g
 \begin{remark}
 	In \cref{lem:lower_bound_later_items}, we assumed non-zero valuations for all items, hence the bundle lengths of \(\alloclen \ge \floor*{\frac{m}{n}}\).
 	Of course, one would not assign items to agents who value them at zero in an actual program.
-	Nevertheless, \cref{lem:lower_bound_later_items} still holds inasmuch as additional zeroes do not change the sum in \cref{eq:lower_bound_later_items}.
+	Inasmuch as additional zeroes do not change the sum in \cref{eq:lower_bound_later_items}, \cref{lem:lower_bound_later_items} still holds.
 \end{remark}
 
 This allows us to calculate an approximation factor for \SMatch{} by comparing its output with an optimal allocation \(\alloc*[][]\).
@@ -215,13 +216,11 @@ This allows us to calculate an approximation factor for \SMatch{} by comparing i
 	Consider a slightly modified variant:
 	\vspace{-0.5ex}
 	\begin{equation}
-		%\remvalue = \smashoperator{\min_{\substack{\genericset \subset \goods \\ \abs{\genericset} \le 2n}}} \{ \valuations[\goods \setminus \genericset] \}
-		%\textnormal{\quad or, alternatively,\quad}
 		\remvalue = \valuations[\goods \setminus \genericset[i]]
 		\textnormal{ with }
 		\genericset[i] \coloneq \smashoperator{\argmin_{\substack{\genericset \subset \goods \\ \abs{\genericset} \le 2n}}} \{ \valuations[\goods \setminus \genericset] \}
 	\end{equation}
-	Now consider the set \(\genericset*[i]\) of the (at most) \(2n\) most highly valued items in the optimal bundle \(\alloc*\), \ie
+	Now consider the set \(\genericset*[i]\) of the (at most) \(2n\) most highly valued items in the optimal bundle \(\alloc*\), that is,
 	\vspace{-1.5ex}
 	\begin{equation}
 		\genericset*[i]
@@ -238,16 +237,16 @@ This allows us to calculate an approximation factor for \SMatch{} by comparing i
 		&= \log \paren[\bigg]{\frac{\NSW(\alloc*[][])}{2 n}}
 	\end{align}
 \end{proof}
-The analysis is asymptotically tight.
+The analysis is asymptotically tight~\cite[Section~6.3]{APNSWuSVþUM}.
 It is possible to design an instance for the asym\-metric additive \NSW{} such that \SMatch{} achieves an approximation factor approaching \(n/2\).
-It remains to be shown whether the symmetric additive \NSW{} leads to an asymptotically equally bad approximation factor.~\cite[Section 6.3]{APNSWuSVþUM}
+It remains to be shown whether the symmetric additive \NSW{} leads to an asymptotically equally bad approximation factor.
 
 \begin{remark}
 	\label{rem:ef1}
-	\SMatch{} produces \emph{fair} allocations which are \emph{envy-free up to one item (\EFone)}.
-	An allocation~\(\alloc[][]\) is \EFone{} if, for every pair \((i, i') \in \agents^2\) of agents, one needs to remove at most one item from the bundle \(\alloc[][i']\) of agent \(i'\) so that agent \(i\) does not want to swap bundles.
-	In other words, either it holds \(\valuations[\alloc[][i]][][i] \ge \valuations[\alloc[][i']][][i']\) or there is an item \(j \in \alloc[][i']\) such that \(\valuations[\alloc[][i]][][i] \ge \valuations[\alloc[][i'] \setminus \{j\}][][i']\).~\cite[Section 5.2]{APNSWuSVþUM}
+	\SMatch{} produces \emph{fair} allocations which are \emph{envy-free up to one item (\EFone)}~\cite[Section~5.2]{APNSWuSVþUM}.
+	An allocation~\(\alloc[][]\) is \EFone{} if, for every pair \((i, i') \in \agents^2\) of agents, one needs to remove at most one item from the bundle \(\alloc[][i']\) of agent \(i'\) such that agent \(i\) does not want to swap bundles.
+	In other words, it holds \(\valuations[\alloc[][i]][][i] \ge \valuations[\alloc[][i']]\) or, if not, there is an item \(j \in \alloc[][i']\) such that \(\valuations[\alloc[][i]][][i] \ge \valuations[\alloc[][i'] \setminus \{j\}]\).
 
-	However, \SMatch{} does not produce allocations which are \emph{Pareto-optimal (\PO)}, another popular fairness property.
-	An allocation~\(\alloc[][]\) is \PO{} if there is no other allocation \(\alloc[\prime][]\) where every agent is at least as well off and one agent is strictly better off, \ie, it does not hold \(\valuations[\alloc[\prime]] \ge \valuations[\alloc] \) for all agents \(i \in \agents\) and \(\valuations[\alloc[\prime][i']][][i'] > \valuations[\alloc[][i']][][i']\) for some agent \(i' \in \agents\).~\cite[Remark 5.2]{APNSWuSVþUM}
+	However, \SMatch{} does not produce allocations which are \emph{Pareto-optimal (\PO)}, another popular fairness property~\cite[Remark~5.2]{APNSWuSVþUM}.
+	An allocation~\(\alloc[][]\) is \PO{} if there is no other allocation \(\alloc[\prime][]\) where every agent is at least as well off and one agent is strictly better off, \ie, it does not hold \(\valuations[\alloc[\prime]] \ge \valuations[\alloc] \) for all agents \(i \in \agents\) and \(\valuations[\alloc[\prime][i']][][i'] > \valuations[\alloc[][i']][][i']\) for some agent \(i' \in \agents\).
 \end{remark}

@@ -1,5 +1,6 @@
 %%% Font.
 \RequirePackage[osf]{libertinus}
+%\setmathfont[range={\mathcal,\mathbfcal}]{Cambria Math}  % destroys positioning of super-/subscript, fractions, etc.‽
 %\RequirePackage[regular]{newcomputermodern}  % newest version of Computer Modern (regular: display weight)
 
 \RenewDocumentCommand{\abb}{m}{\text{#1}}  % abbreviations
@@ -17,9 +18,9 @@
 %}
 
 % Colours in titles.
-%\NewDocumentCommand{\accentcolor}{}{\color[RGB]{118, 13, 28}}  % Mordred's red
-\NewDocumentCommand{\accentcolor}{}{\color[RGB]{51, 0, 102}}  % algo's violet
-%\NewDocumentCommand{\accentcolor}{}{\color{black}}
+%\DefineNamedColor{named}{accentcolor}{RGB}{118, 13, 28}  % Mordred's red
+\DefineNamedColor{named}{accentcolor}{RGB}{51, 0, 102}  % algo's violet
+\NewDocumentCommand{\accentcolor}{}{\color[named]{accentcolor}}
 \addtokomafont{captionlabel}{\accentcolor}
 \addtokomafont{disposition}{\accentcolor}
 \addtokomafont{labelinglabel}{\accentcolor}
@@ -32,8 +33,14 @@
 \setlist[enumerate,4]{font=\usekomafont{labelitemiv}}
 
 % Title page.
+%\addtokomafont{author}{\LibertinusSerifSB\bfseries\color{white}}
+%\addtokomafont{date}{\LibertinusSerifSB\bfseries\color{white}}
+%\addtokomafont{dedication}{\LibertinusSerifSB\bfseries\color{white}}
+%\addtokomafont{subject}{\color{white}}
+%\addtokomafont{subtitle}{\color{white}}
 \addtokomafont{title}{\color{black}}
-\setkomafont{publishers}{}  % \publishers in normal font
+\setkomafont{publishers}{\color{black}}  % \publishers in normalsized font
+%\addtokomafont{titlehead}{\LibertinusSerifSB\bfseries\color{white}}
 
 % Links.
 \hypersetup{
@@ -44,7 +51,7 @@
 	plainpages=false,
 	hypertexnames=false,
 	citecolor=blue!80!black,
-	urlcolor=red,
+	urlcolor=blue!80!black,
 }
 
 %% Set style of operators.
@@ -72,6 +79,9 @@
 	abstract,  % heading for abstract
 	titlepage,  % dedicated titlepage without abstract
 }
+
+% Foot notes.
+\deffootnote[1em]{1em}{1em}{\thefootnotemark.~}
 
 
 %%% Theory environments.

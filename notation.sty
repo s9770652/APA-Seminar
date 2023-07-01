@@ -136,16 +136,9 @@
 
 
 %%% Power set.
-\NewDocumentCommand{\powerset}{so}{
-	\IfNoValueTF{#2}{
-		\symcal{P}
-	}{
-		\IfBooleanTF{#1}{
-			\symcal{P}\left(#2\right)
-		}{
-			\symcal{P}(#2)
-		}
-	}
+\NewDocumentCommand{\powerset}{O{} m}{
+%	\symcal{P}\paren[#1]{#2}
+	2^{#2}
 }
 
 
@@ -227,8 +220,17 @@
 
 %%% APA seminar.
 % Maths & algo.
+\NewDocumentCommand{\af}{}{
+	\frac{\euler}{\raisebox{0.30ex}{\(\scriptstyle\euler - 1\)}}
+}
+\NewDocumentCommand{\afconst}{}{
+	\frac{\euler}{\raisebox{0.30ex}{\(\scriptstyle\euler - 1 + \USWsmallconstant\)}}
+}
+\NewDocumentCommand{\afinv}{}{
+	\frac{\euler - 1 + \USWsmallconstant}{\raisebox{0.4ex}{\(\scriptstyle\euler\)}}
+}
 \NewDocumentCommand{\agents}{}{
-	\symcal{A}
+	\symscr{A}
 }
 \NewDocumentCommand{\allallocs}{m m}{
 	\symbf{X}_{#1}(#2)
@@ -237,10 +239,10 @@
 	\symbf{x}\IfEmptyF{#3}{_{#3}}\IfEmptyTF{#2}{\IfBooleanT{#1}{^*}}{^{\IfBooleanT{#1}{*}#2}}
 }
 \NewDocumentCommand{\alloclen}{s O{} O{i}}{
-	\smash{\tau\IfEmptyF{#3}{_{#3}}\IfEmptyTF{#2}{\IfBooleanT{#1}{^*}}{^{\IfBooleanT{#1}{*}#2}}}
+	\smash[b]{\tau\IfEmptyF{#3}{_{#3}}\IfEmptyTF{#2}{\IfBooleanT{#1}{^*}}{^{\IfBooleanT{#1}{*}#2}}}
 }
 \NewDocumentCommand{\asgd}{s m O{i}}{
-	\IfBooleanTF{#1}{g}{h}\IfEmptyF{#3}{_{#3}}^{#2}
+	\IfBooleanTF{#1}{o}{\textsl{a}}\IfEmptyF{#3}{_{#3}}^{#2}
 }
 \NewDocumentCommand{\attopt}{m O{i}}{
 	\mybar{0.95}{0.07em}{\symbf{x}}^*_{\smash{#2, #1}}
@@ -258,25 +260,25 @@
 	j\IfEmptyF{#1}{^{#1}}
 }
 \NewDocumentCommand{\genericset}{s O{}}{
-	\symcal{S}\IfBooleanT{#1}{^*}\IfEmptyF{#2}{_{#2}}
+	\symscr{S}\IfBooleanT{#1}{^*}\IfEmptyF{#2}{_{#2}}
 }
 \NewDocumentCommand{\goods}{}{
-	\symcal{G}
+	\symscr{G}
 }
 \NewDocumentCommand{\goodsordered}{m O{i}}{
-	\goods\IfEmptyF{#2}{_{#2}}^{\smash{#1}}
+	\goods\IfEmptyF{#2}{_{#2}}^{\smash[t]{#1}}
 }
 \NewDocumentCommand{\goodsrem}{}{
-	\symcal{G}^{\mathup{rem}}
+	\symscr{G}^{\mathup{rem}}
 }
 \NewDocumentCommand{\lostset}{m O{i}}{
-	\symcal{L}_{\smash{\IfEmptyF{#2}{#2, } #1}}
+	\symscr{L}_{\smash{\IfEmptyF{#2}{#2, } #1}}
 }
 \NewDocumentCommand{\lostsetlen}{m O{i}}{
 	\ell_{\smash{\IfEmptyF{#2}{#2, } #1}}
 }
 \NewDocumentCommand{\matching}{O{}}{
-	\symcal{M}\IfEmptyF{#1}{_{\hspace{-.1em}#1}}
+	\symscr{M}\IfEmptyF{#1}{_{\hspace{-.1em}#1}}
 }
 \NewDocumentCommand{\overlygooditem}{O{i}}{
 	j^{+}\IfEmptyF{#1}{_{#1}}
@@ -298,6 +300,9 @@
 }
 \NewDocumentCommand{\USWconstant}{}{
 	C
+}
+\NewDocumentCommand{\USWsmallconstant}{}{
+	\varepsilon
 }
 \NewDocumentCommand{\unluckyagents}{m}{
 	\agents^-_{#1}
@@ -333,11 +338,11 @@
 \NewDocumentCommand{\EFone}{}{\abb{EF\liningnums{1}}}
 \NewDocumentCommand{\EFX}{}{\abb{EFX}}
 \NewDocumentCommand{\ESW}{}{%
-	\relax\ifmmode{\operatorname{ESW}}\else{\abb{ESW}}\fi%
+	\relax\ifmmode{\operatorname{ESW}}\else{\abb{MEP}}\fi%
 }
 \NewDocumentCommand{\No}{}{\abb{No}~instance}
 \NewDocumentCommand{\NSW}{}{%
-	\relax\ifmmode{\operatorname{NSW}}\else{\abb{NSW}}\fi%
+	\relax\ifmmode{\operatorname{NSW}}\else{\abb{MNP}}\fi%
 }
 \NewDocumentCommand{\OXS}{}{\abb{OXS}}
 \NewDocumentCommand{\PO}{}{\abb{PO}}
@@ -345,7 +350,7 @@
 \NewDocumentCommand{\SMatch}{}{SMɑtc\Lsalt{h}}
 \NewDocumentCommand{\SPLC}{}{\abb{SPLC}}
 \NewDocumentCommand{\USW}{}{%
-	\relax\ifmmode{\operatorname{USW}}\else{\abb{USW}}\fi%
+	\relax\ifmmode{\operatorname{USW}}\else{\abb{MUP}}\fi%
 }
 \NewDocumentCommand{\XOS}{}{\abb{XOS}}
 \NewDocumentCommand{\Yes}{}{\abb{Yes}~instance}

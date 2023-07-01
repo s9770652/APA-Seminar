@@ -5,6 +5,7 @@
 
 \RequirePackage{amsmath, amssymb, amsthm}  % mathematische Grundlagen
 \RequirePackage[intlimits]{mathtools}  % stellt u. a. \DeclarePairedDelimiter zur Verfügung + weitere Verbesserungen für amsmath
+
 \RequirePackage[
 	math-style=ISO,
 	bold-style=ISO,
@@ -32,7 +33,8 @@
 
 \RequirePackage{algorithm2e}  % Algorithmen setzen
 
-\RequirePackage[final]{hyperref}  % klickbare Verweise
+\RequirePackage{hyperref}  % klickbare Verweise
+\hypersetup{final}  % nicht direkt geladen, da 'beamer' vorher schon 'hyperref' lädt
 \RequirePackage[nameinlink, capitalize]{cleveref}  % Namen in Verweisen
 
 \RequirePackage{fixdif}  % bessere Ableitungsoperatoren; benötigt 'unicode-math'; nach 'hyperref' zu laden
@@ -40,8 +42,12 @@
 \RequirePackage[backend=biber, style=numeric-comp, sortcites]{biblatex}  % Quellenverzeichnis
 \addbibresource{../sources.bib}
 
+\makeatletter
+\@ifclassloaded{beamer}{}{
 \RequirePackage{lipsum}  % lorem ipsum dolor sit amet
 \RequirePackage[obeyDraft, colorinlistoftodos, tickmarkheight=.25em, textwidth=2.1cm]{todonotes}  % Notizen
 \todostyle{info}{color=CornflowerBlue, textcolor=white}
 \RequirePackage{marginnote}  % benötigt, um \todo in Gleitobjekten benutzen zu können
 \renewcommand{\marginpar}{\marginnote}
+}
+\makeatother
