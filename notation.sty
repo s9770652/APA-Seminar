@@ -117,7 +117,7 @@
 %%% Constants and specifiers.
 \def\APX{\ensuremath{\mathcal{APX}}}
 \def\euler{\ensuremath{\symup{e}}}
-\def\NP{\ensuremath{\mathcal{N\kern-0.025em P}}}
+\def\NP{\ensuremath{\mathcal{N\kern-0.02em P}}}
 \def\P{\ensuremath{\mathcal{P}}}
 
 % Sets of numbers.
@@ -176,6 +176,8 @@
 
 \NewDocumentCommand{\caseintextfont}{}{}  % actually defined in theme.sty
 \NewDocumentEnvironment{caseintext}{m m}{\par\smallskip\noindent{\caseintextfont Case #1 \Dash #2:}}{\par\smallskip}
+
+\NewDocumentCommand{\itordinal}{}{\kern 0.1em}
 
 % Thin spaces around en dash (\dash) and em dash(\Dash). Use only for English texts!
 % taken from: https://tex.stackexchange.com/questions/268111/automated-spacing

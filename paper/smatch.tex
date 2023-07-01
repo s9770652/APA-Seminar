@@ -7,7 +7,7 @@
 In the case of an equal number of agents and items, \ie, \(n = m\), the \emph{additive} \NSW{} can be solved exactly by finding a maximum matching on a bipartite graph with the sets of agents and of items as its parts;
 the weight of an edge between agent \(i\) and item \(j\) would be the weighted logarithmic valuation of item \(j\) by agent \(i\), \ie{} \(\weight \log \valuations[j]\).
 Should there be more items than agents, then it would seem natural to just repeat this process until all items are assigned.
-The flaw of this idea is that such a greedy algorithm considers only the valuations of items in the current graph and perhaps the valuations of items already assigned.
+The flaw of this idea is that such a greedy approach considers only the valuations of items in the current graph and perhaps the valuations of items already assigned.
 As the following examples demonstrates, this leads to an algorithm with an approximation factor dependent on the number \(m\) of items.
 \begin{example}
 	\label{ex:bad_idea}
@@ -19,7 +19,7 @@ As the following examples demonstrates, this leads to an algorithm with an appro
 	Even if all remaining items were going to be assigned to agent \(\agents_{1}\), the Nash social welfare would never surpass \(\smash{\sqrt{(2m + \epsilon - 1) \cdot 1}} < \sqrt{2m}\) (\cref{fig:bad_idea:alg}).
 	The approximation factor of the output \(\alloc[][]\) therefore is at least \(\sqrt{m/2}\) and, thus, depends on the number of items.
 \end{example}
-The geometric mean is high when bundles are valued similarly, wherefore it may be beneficial to give an item to agents who cannot expect many more valuable ones in the future instead of to agents who value the item a bit more but do so for others as well.
+The geometric mean is high when bundles are valuated similarly, wherefore it may be beneficial to give an item to agents who cannot expect many more valuable ones in the future instead of to agents who value the item a bit more but do so for others as well.
 This is known as the Pigou-Dalton transfer principle~\cite{sublin_approx_algo_for_nsw_with_xos_valuations}.
 
 \begin{figure*}
@@ -101,7 +101,7 @@ This is known as the Pigou-Dalton transfer principle~\cite{sublin_approx_algo_fo
 \end{figure*}
 
 The algorithm \SMatch{} (\cref{alg:smatch}) eliminates the flaw by first gaining foresight of the valuations of items assigned after the first matching, thereby achieving an approximation factor of \(2 n\) (\cref{th:smatch}).
-For a fixed agent \(i\), order the items in descending order of valuations and denote the \(j\)th most liked item by~\(\goodsordered{j}\).
+For a fixed agent \(i\), order the items in descending order of valuations and denote the \(j\)\itordinal th most liked item by~\(\goodsordered{j}\).
 We assume a well-defined order, so items of equal valuation shall be ordered further by ID or something similar.
 \SMatch{} does in fact repeatedly match items.
 During the first matching, however, the edge weights are defined as \(\weight \log\paren[\big]{ \valuations[j] + \remvalue/n } \) for an edge between agent~\(i\) and item~\(j\).
@@ -121,7 +121,7 @@ The addend \(\valuations[\alloc]\) could lead to better allocations in applicati
 	\KwIn{%
 		a set \(\goods\) of \(m\) items,
 		a set \(\agents\) of \(n\) agents,
-		additive valuation functions \(\valuations \colon \powerset[\goods] \to \realposzero\) and weights \(\weight \in \realpos\) for all agents \(i \in \agents\)
+		additive valuation functions \(\valuations \colon \powerset{\goods} \to \realposzero\) and weights \(\weight \in \realpos\) for all agents \(i \in \agents\)
 	}
 	\KwOut{%
 		a \(2n\)-approximation \(\alloc[][] = (\alloc)_{i \in \agents}\) of an optimal allocation
@@ -153,15 +153,15 @@ The addend \(\valuations[\alloc]\) could lead to better allocations in applicati
 \label{subsec:smatch:analysis}
 
 To calculate the approximation factor of \SMatch, we first need to establish a lower bound on the valuation of single items.
-For convenience, we order the items of any set \(\genericset = \{ \genericitem[1], \genericitem[2], \dots \}\) in descreasing order of valuation, so that it holds \(\valuations[\genericitem[k]] \ge \valuations[\genericitem[k']]\) for all \(k < k'\).
-Note that if set \(\genericset\) happens to be a bundle, then item \(\genericitem[k]\) was assigned according to the \(k\)th matching.
+For convenience, we order the items of any set \(\genericset = \{\itordinal \genericitem[1], \genericitem[2], \dots \}\) in descreasing order of valuation, so that it holds \(\valuations[\itordinal\genericitem[k]] \ge \valuations[\itordinal\genericitem[k']]\) for all \(k < k'\).
+Note that if set \(\genericset\) happens to be a bundle, then item \(\genericitem[k]\) was assigned according to the \(k\)\itordinal th matching.
 \begin{lemma}
 	\label{lem:lower_bound_single_item}
 	For each agent \(i \in \agents\) and her final bundle \(\alloc = \{\asgd{1}, \dots, \asgd{\alloclen}\}\), it holds \(\valuations[\asgd{t}] \ge \valuations[\goodsordered{tn}]\) for all \(t = 1, \dots, \alloclen\).
 \end{lemma}
 \begin{proof}
-	Before the \(t\)th matching, no more than \((t-1) n\) items out of the \(tn\) most highly valued items \(\goodsordered{1}, \dots, \goodsordered{tn}\) have been assigned in previous matchings since at most~\(n\) many out of those items are assigned each time.
-	Because of the \(t\)th matching, at most \(n-1\) more items could be assigned to other agents, leaving at least one item of \(\goodsordered{1}, \dots, \goodsordered{tn}\) attainable for agent \(i\).
+	Before the \(t\)\itordinal th matching, no more than \((t-1) n\) items out of the \(tn\) most highly valued items \(\goodsordered{1}, \dots, \goodsordered{tn}\) have been assigned in previous matchings since at most~\(n\) many out of those items are assigned each time.
+	Because of the \(t\)\itordinal th matching, at most \(n-1\) more items could be assigned to other agents, leaving at least one item of \(\goodsordered{1}, \dots, \goodsordered{tn}\) attainable for agent \(i\).
 	Since \(\valuations[\goodsordered{k}] \ge \valuations[\goodsordered{tn}]\) for all \(k \le tn\) by definition of \(\goodsordered{k}\), the lemma follows.
 \end{proof}
 

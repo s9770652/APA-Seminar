@@ -4,9 +4,9 @@
 \subsection{Presentation of the Algorithm}
 \label{subsec:reprematch:presentation}
 
-The algorithm \SMatch{} estimates the valuation of the lowest-value items by determining the set of highest-value items and then valuing the remaining items.
-Unfortunately, this approach does not work for general \emph{submodular} valuation functions because taking the set of highest-value items away does not necessarily leave a set of lowest-value items.
-In fact, it can be shown \cite{submodular_low_value} that determining the set of lowest-value items is approximable only within a factor of \(\bigomega(\sqrt{m / \ln m})\).
+The algorithm \SMatch{} estimates the worst-case valuation of future items by determining the set of highest-value items and then valuing the remaining items.
+Unfortunately, this approach does not work for general \emph{submodular} valuation functions because taking a set of highest valuation away does not necessarily leave a set of lowest valuation.
+In fact, it can be shown \cite{submodular_low_value} that determining the set of lowest valuation is approximable only within a factor of \(\smash[t]{\bigomega\paren[\big]{ \sqrt{m / \ln m} }}\).
 
 For this reason, the algorithm \RepReMatch{} (\cref{alg:reprematch}) relies on an approach with three phases, thereby achieving an approximation factor of \(2n(\log_2 n + 3)\) (\cref{th:reprematch}).
 In phase~\phasei, a sufficiently big set of high-value items is determined through repeated matchings.
@@ -17,7 +17,7 @@ The edge weights reflect this by taking the valuations of just single items into
 	\KwIn{%
 		a set \(\goods\) of \(m\) items,
 		a set \(\agents\) of \(n\) agents,
-		submodular valuation functions \(\valuations \colon \powerset[\goods] \to \realposzero\) and weights \(\weight \in \realpos\) for all agents \(i \in \agents\)
+		submodular valuation functions \(\valuations \colon \powerset{\goods} \to \realposzero\) and weights \(\weight \in \realpos\) for all agents \(i \in \agents\)
 	}
 	\KwOut{%
 		a \(2n(\log_2 n + 3)\)-approximation \(\alloc[\phaseiii][] = (\alloc[\phaseiii])_{i \in \agents}\) of an optimal allocation
@@ -127,7 +127,7 @@ Firstly, we give a lower bound on the valuations of optimal and attainable items
 	\end{equation}
 
 	In the last step, we give an upper bound on \(\valuations[\lostset{r'+1}]\).
-	The valuation \(\valuations[j \given \asgd{1}, \dots, \asgd{r'-1}]\) of any item \(j \in \lostset{r'+1}\) in round \(r'\) could not have been higher than \(\valuations[\asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1}]\) as otherwise item \(\asgd{r'}\) would not have been assigned before item \(j\).
+	The valuation \(\valuations[\itordinal j \given \asgd{1}, \dots, \asgd{r'-1}]\) of any item \(j \in \lostset{r'+1}\) in round \(r'\) could not have been higher than \(\valuations[\asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1}]\) as otherwise item \(\asgd{r'}\) would not have been assigned before item \(j\).
 	From this follows
 	\begin{equation}
 		\valuations[\lostset{r'+1}] \le \lostsetlen{r'+1} \cdot \valuations[\asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1}] \mperiod
@@ -147,8 +147,7 @@ The lemma can be used to find a lower bound on the marginal valuation of the ite
 \end{corollary}
 \begin{proof}
 	Valuation functions are monotonic, so \(\valuations[\genericset[1]] \le \valuations[\genericset[2]]\) holds for all sets \(\genericset[1] \subset \genericset[2] \subset \goods\).
-	Induction shows that there must be an item \(j \in \genericset[2]\) with valuation \(\valuations[j] \ge \valuations[\genericset[2]] / \abs{\genericset[2]}\);
-	otherwise it would hold \(\valuations[\emptyset] > 0\).
+	Induction shows that there must be an item \(j \in \genericset[2]\) with valuation \(\valuations[\itordinal j] \ge \valuations[\genericset[2]] / \abs{\genericset[2]}\), otherwise it would hold \(\valuations[\emptyset] > 0\).
 	Applied to \cref{lem:induction}, this means that there must be an item \(j \in \attopt{r}\) with a marginal valuation of at least \(\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] / \attoptlen{r}\)\mperiod{}
 	As item \(\asgd{r}\) was the one to be assigned in round \(r\), its marginal valuation cannot be smaller.
 \end{proof}
@@ -162,9 +161,9 @@ This, finally, enables us to give a lower bound on the valuation of the bundles 
 	\end{equation*}
 \end{lemma}
 \begin{proof}
-	In each round \(r = 1, \dots, \alloclen[\phaseii]\), \(\lostsetlen{r}\) optimal and attainable items of agent \(i\) are assigned to other agents.
-	As there are \(n\) agents in total, \(n-1\) is an upper bound on \(\lostsetlen{r}\).
-	Furthermore, after \(\alloclen[\phaseii]\) rounds, the number of unassigned items is at most \(n-1\) elsewise agent \(i\) would have been assigned yet another item in a round \(\alloclen[\phaseii] + 1\).
+	In each round \(r = 1, \dots, \alloclen[\phaseii]\), there are \(\lostsetlen{r}\) optimal and attainable items of agent \(i\) gettin assigned to other agents.
+	As \(n\) is the number of agents, \(n-1\) is an upper bound on \(\lostsetlen{r}\).
+	Furthermore, after \(\alloclen[\phaseii]\) rounds, the number of unassigned items is at most \(n-1\) elsewise agent~\(i\) would have been assigned yet another item in a round \(\alloclen[\phaseii] + 1\).
 	This implies \(\attoptlen{\alloclen[\phaseii]} \le n\), as those \(n-1\) items could be optimal and item \(\asgd{\alloclen[\phaseii]}\) may be, too.
 	Together with \cref{cor:lower_bound_single_item}, the lemma is proven:
 	\begin{align}
@@ -187,7 +186,7 @@ After having obtained a lower bound on the valuation of items assigned in phase~
 Therefor we introduce a third type of item set.
 \begin{definition}
 	Let \(\alloc* = \{ \asgd*{1}, \dots, \asgd*{\alloclen*}\}\) be an optimal bundle of an agent \(i \in \agents\).
-	The set of \emph{outstanding items} is defined as \(\overlygoodset \coloneq \{\, j \in \goods \given \valuations[j] \ge \valuations[\asgd*{1}] \,\}\).
+	The set of \emph{outstanding items} is defined as \(\overlygoodset \coloneq \{\, j \in \goods \given \valuations[\itordinal j] \ge \valuations[\asgd*{1}] \,\}\).
 \end{definition}
 
 \begin{lemma}
@@ -203,15 +202,13 @@ Therefor we introduce a third type of item set.
 	\begin{enumerate}
 		\item
 		\label[property]{enum:matching:agent}
-		If all outstanding items of an agent \(i\) were amongst the released items,
-		\ie, \(\overlygoodset \subset \bigcup_{i' \in \agents} \alloc[\phasei][i']\),
-		she gets matched with an outstanding item \(j \in \overlygoodset\).
+		If all outstanding items of an agent \(i\) were amongst the released items, she gets matched with an outstanding item \(j \in \overlygoodset\).
 
 		\item
 		\label[property]{enum:matching:max}
 		The number of agents matched with one of their outstanding items is maximal amongst all matchings fulfilling \cref{enum:matching:agent}.
 	\end{enumerate}
-	\Cref{enum:matching:agent} is always satisfiable as the union of \(k\) many sets \(\overlygoodset\) contains \(k\) different items~\(\asgd*{1}\), which can be matched with agents \(i\).
+	\Cref{enum:matching:agent} is always satisfiable as the union of \(k\) many sets \(\overlygoodset\) contains \(k\) different outstanding items~\(\asgd*{1}\), which can be matched with agents \(i\).
 	\Cref{enum:matching:max} leads to all agents being matched with an outstanding item when \(t = \ceil{\log_2 n}+1\), \ie{} the number of rounds in phase~\phasei, whence the lemma follows.
 	To prove this, we denote by \(\unluckyagents{t}\) the set of agents who are \emph{not} matched with one of their outstanding items, and show by induction on \(t\) that it holds \(\abs{\unluckyagents{t}} \le n/2^t\).
 
@@ -220,8 +217,8 @@ Therefor we introduce a third type of item set.
 	If \(\unluckyagentsalgo{1} \le n/2\), then a matching \(\matching[1]\) as described above obviously exists and the base case is immediately proven.
 	Otherwise, all items from at least \(\unluckyagentsalgo{1}\) many sets \(\overlygoodset\) got assigned to someone.
 	Again:
-	Each set \(\overlygoodset\) contains the item \(\asgd*{1}\), so the union of these sets contains at least~\(\unluckyagentsalgo{1}\) items which can be matched with at least \(\unluckyagentsalgo{1}\) agents upon release.
-	This then leaves at most~\(n-\alpha < n/2\) agents not matched with an outstanding item.
+	Each set \(\overlygoodset\) contains the outstanding item \(\asgd*{1}\), so the union of these sets contains at least~\(\unluckyagentsalgo{1}\) items which can be matched with at least \(\unluckyagentsalgo{1}\) agents upon release.
+	This, then, leaves at most~\(n-\alpha < n/2\) agents not matched with an outstanding item.
 
 	For the induction hypothesis, we assume that the statement holds true for all rounds up to some \(t\).
 	In the induction step \(t \to t+1\), by \cref{enum:matching:agent}, there is at least one unassigned, outstanding item in each set \(\overlygoodset[i']\) of all agents \(i' \in \unluckyagents{t}\) at the start of round \(t+1\).
@@ -240,14 +237,14 @@ This allows us to calculate an approximation factor for \RepReMatch{} by compari
 	\begin{equation}
 		\label{eq:reprematch_approx_factor_lower_bound}
 		\log \NSW(\alloc[\phaseiii][])
-		\ge \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \valuations[\overlygooditem, \asgd{1}, \dots, \asgd{\alloclen[\phaseii]}]
+		\ge \frac{1}{\sum_{i \in \agents} \weight} \cdot \sum_{i \in \agents} \weight \log \valuations[\itordinal \overlygooditem, \asgd{1}, \dots, \asgd{\alloclen[\phaseii]}]
 	\end{equation}
 	is a lower bound on the logarithmic Nash social welfare after the first matching in phase~\phaseiii, with \(\alloc[\phaseii] = \{ \asgd{1}, \dots, \allowbreak \asgd{\alloclen[\phaseii]} \}\) being the bundle of agent \(i\) at the end of phase~\phaseii.
 
 	\Cref{lem:lower_bound_all_items} delivers a straightforward lower bound on the valuations of bundles, namely
 	\begin{equation}
 		\label{eq:assigned_items_lower_bound}
-		\valuations[ \overlygooditem, \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} ]
+		\valuations[ \itordinal \overlygooditem, \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} ]
 		\ge \valuations[ \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} ]
 		\ge \frac{\valuations[\attopt{1}]}{n}
 		= \frac{\valuations[ \attopt{0} \setminus \lostset{1} ]}{n} \mperiod
@@ -259,8 +256,8 @@ This allows us to calculate an approximation factor for \RepReMatch{} by compari
 	Since \({ (\alloc* \setminus \attopt{0}) \cup \lostset{1} } \subset \alloc*\) and \(\valuations[\asgd*{1}] \ge \valuations[\asgd*{r}]\) for all \(\asgd*{r} \in \alloc*\), it holds
 	\begin{equation}
 		\label{eq:overly_good_item_lower_bound}
-		\valuations[ \overlygooditem, \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} ]
-		\ge \valuations[\overlygooditem]
+		\valuations[ \itordinal \overlygooditem, \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} ]
+		\ge \valuations[\itordinal \overlygooditem]
 		\ge \valuations[\asgd*{1}]
 		\ge \frac{\valuations[ (\alloc* \setminus \attopt{0}) \cup \lostset{1} ][\big]}{n(\log_2 n + 3)} \mperiod
 	\end{equation}

@@ -9,7 +9,7 @@
 	Consider the related maximum utilitarian social welfare problem\footnotemark.
 	\begin{problem}
 		\label{prob:usw}
-		Given a set \(\goods\) of items and a set \(\agents\) of agents with valuation functions \(\valuations \colon \powerset[\goods] \to \realposzero\) for all agents \(i \in \agents\), the symmetric submodular \emph{maximum utilitarian social welfare problem (\USW)} is to find an allocation \(\alloc*[][]\) which maximises the sum of valuations, that is,
+		Given a set \(\goods\) of items and a set \(\agents\) of agents with submodular valuation functions \(\valuations \colon \powerset{\goods} \to \realposzero\) for all agents \(i \in \agents\), the symmetric submodular \emph{maximum utilitarian social welfare problem (\USW)} is to find an allocation \(\alloc*[][]\) which maximises the sum of valuations, that is,
 		\begin{equation*}
 			\alloc*[][] \overset{!}{=} \smashoperator{\argmax_{\alloc[][] \in \allallocs{\scriptstyle\agents\kern1pt}{\goods}}} \braces{ \USW(\alloc[][]) }
 			\quad\text{with~}
@@ -22,7 +22,7 @@
 	We are going to exploit this fact to calculate the Nash social welfare of instances for \USW.
 	\citeauthor{inapprox_results_for_combi_auctions_with_submod_utility_funcs}~\cite{inapprox_results_for_combi_auctions_with_submod_utility_funcs} supply a polynomial-time reduction of \USW{} from the following problem:
 	\begin{problem}
-		Given a graph \(G = (V, E)\) and a constant \(\colouringconstant < 1\), the \emph{\(\colouringconstant\)-\Gap{} problem} is to decide whether, for any \(3\)-colouring of graph \(G\) which maximises the number of edges with different coloured endpoints, the number of such edges is~\(\abs{E}\) (\emph{\Yes}) or \(\colouringconstant \abs{E}\) and below (\emph{\No}).
+		Given a graph \(G = (V, E)\) and a constant \(\colouringconstant < 1\), the \emph{\(\colouringconstant\)-\Gap{} problem} is to decide whether, for any \(3\)-colouring of graph \(G\) which maximises the number of edges with differently coloured endpoints, the number of such edges is~\(\abs{E}\) (\emph{\Yes}) or \(\colouringconstant \abs{E}\) and below (\emph{\No}).
 	\end{problem}
 
 	\begin{proposition}
@@ -35,7 +35,7 @@
 	\begin{description}
 		\item[\Yes]
 		The utilitarian social welfare is \(n \USWconstant\) because every agent values her bundle at \(n\), whereby \(\USWconstant\) is a constant depending on the input graph.
-		The Nash social welfare of the instance is be \(\USWconstant\).
+		The Nash social welfare of the instance is \(\USWconstant\).
 
 		\item[\No]
 		The utilitarian social welfare is no more than \(\afinv \cdot n \USWconstant\) with some \(\USWsmallconstant > 0\).
