@@ -215,6 +215,28 @@
 \makeatother
 
 
+%%% Beamer specific.
+\makeatletter
+\@ifclassloaded{beamer}{
+	% to position images more easily
+	% ex.: \beamerimage at (12cm, 0.25cm) {\includegraphics[height=3cm, page=62]{example-image-duck}};
+	\NewDocumentCommand{\beamerimage}{}{\tikz[baseline,overlay]\node}
+
+	% \subject additionally creates a suiting string variable, which is used on the title page.
+	\let\oldsubject\subject
+	\RenewDocumentCommand{\subject}{m}{%
+		\oldsubject{#1}%
+		\NewDocumentCommand{\insertsubject}{}{#1}%
+	}
+
+	% \supervisor creates a suiting string variable, which is used on the title page.
+	\NewDocumentCommand{\supervisor}{m}{%
+		\NewDocumentCommand{\insertsupervisor}{}{#1}%
+	}
+}{}
+\makeatother
+
+
 %%% Junk for playing around.
 \def\ABC{ABCDEFGHIJKLMNOPQRSTUVWXYZ}
 \def\abc{abcdefghijklmnopqrstuvwxyz}
