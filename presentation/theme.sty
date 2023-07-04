@@ -101,13 +101,20 @@
 	\advance\@tempdima by\beamer@leftmargin%
 	\advance\@tempdima by\beamer@rightmargin%
 	\begin{beamercolorbox}[sep=0.3cm,#1,wd=\the\@tempdima]{frametitle}
-		\usebeamerfont{frametitle}%
+		\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}%
 		\vbox{}\vskip-1ex%
 		{%
+			\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}
 			\ifx\insertframesubtitle\@empty%
+			{%
+				\ifx\insertsection\@empty%
+				\else%
+				{\strut\insertsection\strut\par}%
+				\fi%
+			}%
 			\else%
-			{\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\strut\insertframesubtitle\strut\par}%
-			\fi
+			{\strut\insertframesubtitle\strut\par}%
+			\fi%
 		}%
 		\if@tempswa\else\csname beamer@fte#1\endcsname\fi%
 		\strut\insertframetitle\strut\par%
@@ -156,24 +163,9 @@
 }{}
 
 
-%%% Document info functions.
-% \subject additionally creates a suiting string variable, which is used on the title page.
-\let\oldsubject\subject
-\RenewDocumentCommand{\subject}{m}{%
-	\oldsubject{#1}%
-	\NewDocumentCommand{\insertsubject}{}{#1}%
-}
-
-% \supervisor creates a suiting string variable, which is used on the title page.
-\NewDocumentCommand{\supervisor}{m}{%
-	\NewDocumentCommand{\insertsupervisor}{}{#1}%
-}
-
-
 %%% PDF options.
 \hypersetup{
 	pdfdisplaydoctitle=true,
 }
-
 
 % TODO: Opaqueness? (Beamer manual p. 186)
