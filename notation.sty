@@ -233,6 +233,11 @@
 	\NewDocumentCommand{\supervisor}{m}{%
 		\NewDocumentCommand{\insertsupervisor}{}{#1}%
 	}
+
+	% For resuming enumerations like with the package `enumitem`. Use `\seti` after the last `item` and `\conti` before the first.
+	\newcounter{saveenumi}
+	\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+	\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
 }{}
 \makeatother
 
