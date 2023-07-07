@@ -40,21 +40,32 @@
 
 
 %%% Background graphics.
+\newlength{\goethelogotopmargin}
+\setlength{\goethelogotopmargin}{0.3cm}
+\newlength{\goethelogoheight}
+\AtBeginDocument{  % Since \vbox only works after \begin{document}, the height cannot be set in the preamble.
+	\settoheight{\goethelogoheight}{\vbox{
+		\usebeamerfont{framesubtitle}\strut \\
+		\usebeamerfont{frametitle}\strut
+	}}
+}
+\makeatletter
 \usebackgroundtemplate{
 	% Logo in top right corner
 	\begin{tikzpicture}[overlay,remember picture]
-		\node[at=(current page.north east), anchor=north east, inner sep=0, xshift=-0.0275\paperheight, yshift=-0.0275\paperheight] (fglogo){
-			\includegraphics[width=0.115\paperwidth]{include/gu_logo_blau.pdf}
+		\node[at=(current page.north east), anchor=north east, inner sep=0, xshift=-\beamer@rightmargin, yshift=-\goethelogotopmargin] (fglogo){  % 1ex comes from beamertemplate 'frametitle'
+			\includegraphics[height=\goethelogoheight]{include/gu_logo_blau.pdf}
 		};
-		\path[draw, goetheblau, thick] ($(fglogo.south west) - (0.028\paperheight, 0)$) -- ($(fglogo.north west) - (0.028\paperheight, -100)$);
+		\path[draw, goetheblau, thick] ($(fglogo.south west) - (\beamer@rightmargin, 0)$) -- ($(fglogo.north west) - (\beamer@rightmargin, -100)$);
 	\end{tikzpicture}
 	% Head in bottom left corner
 	\begin{tikzpicture}[overlay,remember picture]
-		\node[at=(current page.south west), anchor=south west, inner sep=0, xshift=-0.105\paperwidth,opacity=.25] {
+		\node[at=(current page.south west), anchor=south west, inner sep=0, xshift=-0.19\paperheight, opacity=.25] {
 			\includegraphics[width=0.66\paperheight]{include/gu_logo_sandgrau.pdf}
 		};
 	\end{tikzpicture}
 }
+\makeatother
 
 
 %%% Headline and Footline.
@@ -108,6 +119,7 @@
 			\ifx\insertframesubtitle\@empty%
 			{%
 				\ifx\insertsection\@empty%
+				{\strut\par}%  to prevent the frame title from jumping up
 				\else%
 				{\strut\insertsection\strut\par}%
 				\fi%
