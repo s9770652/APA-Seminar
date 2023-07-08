@@ -25,11 +25,11 @@
 		Item \(j\) is \emph{assigned} to agent \(i\) if \(j \in \alloc\).
 	\end{definition}
 
-	But how to measure the efficiency and fairness of the allocation?
+	But how to measure its efficiency and fairness?
 \end{frame}
 
 \subsection{Valuation Functions}
-\begin{frame}{Valuation Functions}
+\begin{frame}{Valuation Functions}{}
 	Requirements:
 	\begin{itemize}
 		\item
@@ -45,13 +45,13 @@
 	Types:
 	\begin{itemize}
 		\item
-		additive: \(\valuations[\genericset] \coloneq \sum_{j \in \genericset} \valuations[ j ]\) \quad \(\forall \genericset \subset \goods\)
+		additive: \(\valuations[\genericset] \coloneq \sum_{j \in \genericset} \valuations[ \{ j \} ]\) \quad \(\forall \genericset \subset \goods\)
 
 		\item
 		submodular: \(\valuations[\genericset[1] \given \genericset[2]] \coloneq \valuations[\genericset[1] \cup \genericset[2]] - \valuations[\genericset[2]]\) \quad \(\forall \genericset[1], \genericset[2] \subset \goods\) with \(\genericset[1], \genericset[2]\) disjoint
 		\begin{itemize}
 			\item
-			encompasses additivity
+			more general (encompasses additivity)
 
 			\item
 			diminishing returns
