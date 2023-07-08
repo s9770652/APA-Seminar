@@ -22,12 +22,10 @@
 \useinnertheme[showtitle=false]{tcolorbox}  % turning off background of boxes without title
 \beamertemplatenavigationsymbolsempty
 
-\AtBeginSection{\begin{frame}
-		\tableofcontents[currentsection]
-\end{frame}}
 
 %%% Font.
 \RequirePackage[osf]{libertinus}
+\NewDocumentCommand{\tlffont}{}{\LibertinusSansTLF}  % font with lining numbers
 
 \usefonttheme[stillsansserifsmall, stillsansseriflarge]{serif}  % serif text, sans-serif structures (title, footer, etc.)
 \usefonttheme[onlylarge]{structurebold}  % structures in bold
@@ -35,8 +33,8 @@
 \setbeamercolor{structure}{fg=goetheblau}  % structure in goetheblau
 \setbeamercolor{block title}{fg=white, bg=goetheblau}  % normal block header background in goetheblau (body colour automatically altered)
 
-\setbeamerfont{section number projected}{family=\LibertinusSansTLF}  % section numbers in toc in lining figures
-\setbeamerfont{item projected}{family=\LibertinusSansTLF}  % number of enumerate labels in lining figures
+\setbeamerfont{section number projected}{family=\tlffont}  % section numbers in toc in lining figures
+\setbeamerfont{item projected}{family=\tlffont}  % number of enumerate labels in lining figures
 
 
 %%% Background graphics.
@@ -49,6 +47,7 @@
 		\usebeamerfont{frametitle}\strut
 	}}
 }
+\def\goetheheadopacity{0.25}
 \makeatletter
 \usebackgroundtemplate{
 	% Logo in top right corner
@@ -60,7 +59,7 @@
 	\end{tikzpicture}
 	% Head in bottom left corner
 	\begin{tikzpicture}[overlay,remember picture]
-		\node[at=(current page.south west), anchor=south west, inner sep=0, xshift=-0.19\paperheight, opacity=.25] {
+		\node[at=(current page.south west), anchor=south west, inner sep=0, xshift=-0.19\paperheight, opacity=\goetheheadopacity] {
 			\includegraphics[width=0.66\paperheight]{include/gu_logo_sandgrau.pdf}
 		};
 	\end{tikzpicture}
@@ -167,9 +166,19 @@
 }
 
 
+%%% Frame at section beginning.
+\AtBeginSection{\begin{frame}
+%		\tableofcontents[currentsection]
+		\begin{tikzpicture}[overlay, remember picture]
+			\node[sandgrau, opacity=\goetheheadopacity] at (current page.center) {\scalebox{5}{\Huge\liningnums{\thesection}}};
+			\node[align=center] at (current page.center) {\usebeamerfont{title}\usebeamercolor[fg]{title} \insertsection};
+		\end{tikzpicture}
+\end{frame}}
+
+
 %%% Blocks.
 % Like 'block' but without additional space on top. Useful for starting blocks.
-\NewDocumentCommand{\adjustfortopblock}{}{\vspace{-\medskipamount}}
+
 \addtobeamertemplate{block begin}{%
 	\setlength{\textwidth}{0.5\textwidth}
 }{}

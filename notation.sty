@@ -238,6 +238,9 @@
 	\newcounter{saveenumi}
 	\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
 	\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+
+%	 to remove space above blocks on top of frame
+	\NewDocumentCommand{\adjustfortopblock}{}{\vspace{-\medskipamount}}
 }{}
 \makeatother
 
@@ -284,6 +287,9 @@
 }
 \NewDocumentCommand{\colouringconstant}{}{
 	c
+}
+\NewDocumentCommand{\edgeweight}{m}{
+	w(#1)
 }
 \NewDocumentCommand{\genericitem}{O{}}{
 	j\IfEmptyF{#1}{^{#1}}
