@@ -17,7 +17,7 @@
 		\item
 		recipients: set \(\agents\) of \(n\) agents
 	\end{itemize}
-	\begin{definition}
+	\begin{definition}[1]
 		An \emph{allocation} is a tuple
 		\(\alloc[][] = (\alloc)_{i \in \agents}\)
 		of bundles \(\alloc \subset \goods\) such that each item is element of precisely one bundle.
@@ -27,6 +27,10 @@
 
 	But how to measure its efficiency and fairness?
 \end{frame}
+
+
+
+
 
 \subsection{Valuation Functions}
 \begin{frame}{Valuation Functions}{}
@@ -45,7 +49,7 @@
 	Types:
 	\begin{itemize}
 		\item
-		additive: \(\valuations[\genericset] \coloneq \sum_{j \in \genericset} \valuations[ \{ j \} ]\) \quad \(\forall \genericset \subset \goods\)
+		additive: \(\valuations[\genericset] \coloneq \sum_{\genericitem \in \genericset} \valuations[ \hairspace \genericitem ]\) \quad \(\forall \genericset \subset \goods\)
 
 		\item
 		submodular: \(\valuations[\genericset[1] \given \genericset[2]] \coloneq \valuations[\genericset[1] \cup \genericset[2]] - \valuations[\genericset[2]]\) \quad \(\forall \genericset[1], \genericset[2] \subset \goods\) with \(\genericset[1], \genericset[2]\) disjoint
@@ -63,10 +67,14 @@
 	\end{center}
 \end{frame}
 
+
+
+
+
 \subsection{Maximum Nash Social Welfare Problem}
 \begin{frame}{Asymmetric Maximum Nash Social Welfare Problem}
 	\adjustfortopblock
-	\begin{definition}
+	\begin{problem}[2]
 		\begin{equation*}
 			\alloc*[][] \overset{!}{=} \smashoperator{\argmax_{\alloc[][] \in \allallocs{\scriptstyle\agents\kern1pt}{\goods}}} \braces{ \NSW(\alloc[][]) }
 			\quad\text{with~}
@@ -79,7 +87,7 @@
 			\item
 			\(\weight\): agent weight
 		\end{itemize}
-	\end{definition}
+	\end{problem}
 	\begin{itemize}
 		\item
 		middle ground between efficiency and fairness
