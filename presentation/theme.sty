@@ -167,21 +167,40 @@
 
 
 %%% Frame at section beginning.
-\AtBeginSection{\begin{frame}
+\setbeamercolor{section name}{fg=sandgrau, bg=red}
+
+\setbeamerfont{section name}{family=\Libertinusinitials, size=\Huge}
+
+\defbeamertemplate*{section page}{customized}[1][]{
+	\begin{tikzpicture}[overlay, remember picture]
+		\node[opacity=\goetheheadopacity] at (current page.center) {\scalebox{5}{\usebeamerfont{section name}\usebeamercolor[fg]{section name}\liningnums{\insertsectionnumber}}};
+		\node[align=center] at (current page.center) {\usebeamerfont{section title}\usebeamercolor[fg]{section title} \insertsection};
+	\end{tikzpicture}
+}
+
+\AtBeginSection{\begin{frame}[plain, noframenumbering]
 %		\tableofcontents[currentsection]
-		\begin{tikzpicture}[overlay, remember picture]
-			\node[sandgrau, opacity=\goetheheadopacity] at (current page.center) {\scalebox{5}{\Huge\liningnums{\thesection}}};
-			\node[align=center] at (current page.center) {\usebeamerfont{title}\usebeamercolor[fg]{title} \insertsection};
-		\end{tikzpicture}
+		\sectionpage
 \end{frame}}
 
 
-%%% Blocks.
-% Like 'block' but without additional space on top. Useful for starting blocks.
+%%% Boxes.
+% overwrite the style of `problem` environment
+\makeatletter
+\def\cleartheorem#1{%
+	\expandafter\let\csname#1\endcsname\relax
+	\expandafter\let\csname c@#1\endcsname\relax
+}
+\makeatother
 
-\addtobeamertemplate{block begin}{%
-	\setlength{\textwidth}{0.5\textwidth}
-}{}
+\cleartheorem{problem}
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+
+% removes the dot after 'Proof'
+\makeatletter
+\AtBeginEnvironment{proof}{\let\@addpunct\@gobble}
+\makeatother
 
 
 %%% PDF options.
