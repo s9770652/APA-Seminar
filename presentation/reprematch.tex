@@ -44,39 +44,39 @@
 		\allocationexample
 	\end{center}
 	\begin{block}{}
-		What are the low-value items?\phantom{g}  % 'g' has an ascender.
+		What are the items of lowest valuation?\phantom{g}  % 'g' has an ascender and ensures equal margin on top and bottom.
 	\end{block}
 \end{frame}
 
-\begin{frame}{Looking into the Future}
-	\begin{itemize}
-		\item
-		sort items by valuation in descending order
-		\begin{itemize}
-			\item
-			low-value items on the left
-		\end{itemize}
-	\end{itemize}
-	\begin{center}
-		\includegraphics[width=10cm, height=2cm, page=21]{example-image-duck}
-	\end{center}
-	\begin{itemize}
-		\item
-		use their valuations for edge weights in early matchings
-	\end{itemize}
-	\begin{exampleblock}{}
-		A \(2n\)-approximation is possible \dots{} using \SMatch.
-	\end{exampleblock}
-	\begin{alertblock}{}
-		This only works for additive valuation functions.
-	\end{alertblock}
-\end{frame}
+%\begin{frame}{Looking into the Future}
+%	\begin{itemize}
+%		\item
+%		sort items by valuation in descending order
+%		\begin{itemize}
+%			\item
+%			low-value items on the left
+%		\end{itemize}
+%	\end{itemize}
+%	\begin{center}
+%		\includegraphics[width=10cm, height=2cm, page=21]{example-image-duck}
+%	\end{center}
+%	\begin{itemize}
+%		\item
+%		use their valuations for edge weights in early matchings
+%	\end{itemize}
+%	\begin{exampleblock}{}
+%		A \(2n\)-approximation is possible \dots{} using \SMatch.
+%	\end{exampleblock}
+%	\begin{alertblock}{}
+%		This only works for additive valuation functions.
+%	\end{alertblock}
+%\end{frame}
 
-\begin{frame}{Changing the Past}
-	Under submodular valuation, the set of lowest valuation is approximable only by \(\bigomega\paren[\big]{ \sqrt{m/\ln m} }\).
+\begin{frame}{Looking into the Future? Changing the Past!}
+	Under submodular valuations, the set of lowest valuation is approximable only by \(\bigomega\paren[\big]{ \sqrt{m/\ln m} }\). \smash{\raisebox{-.25ex}{\Large\Lightning}}
 	\includegraphics[height=3ex, page=66]{example-image-duck}
 
-	We can change the past in three phases:
+	We need change the past in three phases:
 	\begin{description}
 		\item[Phase \phasei]
 		Assign enough high-value items temporarily.
@@ -107,7 +107,7 @@
 		repeat \(\ceil{\log_2 n} + 1\) times or until \(\goods = \emptyset\)
 		\begin{enumerate}
 			\item
-			create bipartite graph \(\bipartitegraph = (\agents, \goods, E)\) with edge weights \(\edgeweight{i, j} = \weight \log \valuations[ j ]\)
+			create bipartite graph \(\bipartitegraph = (\agents, \goods, E)\) with edge weights \(\edgeweight{i, j} = \weight \log \valuations[ \hairspace j ]\)
 
 			\item
 			compute maximum weight matching \(\matching\)
@@ -124,7 +124,7 @@
 		repeat until \(\goods = \emptyset\)
 		\begin{enumerate}
 			\item
-			create bipartite graph \(\bipartitegraph = (\agents, \goods, E)\) with edge weights \(\edgeweight{i, j} = \weight \log \paren[\big]{ \valuations[\alloc[\phaseii] \cup \{ j \} ] }\)
+			create bipartite graph \(\bipartitegraph = (\agents, \goods, E)\) with edge weights \(\edgeweight{i, j} = \weight \log \paren[\big]{ \valuations[\alloc[\phaseii] \cup \{ \hairspace j \} ] }\)
 
 			\item
 			compute maximum weight matching \(\matching\)
@@ -138,7 +138,7 @@
 	\begin{enumerate}
 		\conti
 		\item
-		create bipartite graph \(\bipartitegraph = (\agents, \bigcup_{i \in \agents} \alloc[\phasei], E)\) with edge weights \(\edgeweight{i, j} = \weight \log \paren[\big]{ \valuations[\alloc[\phaseii] \cup \{ j \} ] }\)
+		create bipartite graph \(\bipartitegraph = (\agents, \bigcup_{i \in \agents} \alloc[\phasei], E)\) with edge weights \(\edgeweight{i, j} = \weight \log \paren[\big]{ \valuations[\alloc[\phaseii] \cup \{ \hairspace j \} ] }\)
 
 		\item
 		compute maximum weight matching \(\matching\)
@@ -153,40 +153,35 @@
 
 
 \subsection{Analysing Phase \texorpdfstring{\phaseii}{II}}
-\begin{frame}{Analysing Phase \phaseii}
+\begin{frame}{Analysing Phase \phaseii{} (1/5)}
 	\adjustforminipage
 	\begin{minipage}{0.55\textwidth}
 		\begin{definition}[9]
 			The set \(\lostset{r}\) of \emph{lost items} is the set of all optimal items \(j \in \alloc*\) assigned to other agents \(i' \neq i\) in round \(r\).
 		\end{definition}
 		\begin{definition}[10]
+			Let \(\alloc[\phaseii] = \{ \asgd{1}, \asgd{2}, \dots \}\) be the bundle of agent \(i\).
 			The set of \emph{optimal and attainable items} is defined as
 			\begin{equation*}
 				\attopt{r} \coloneq \begin{cases*}
 					\alloc* \setminus \bigcup_{i' \in \agents} \alloc[\phasei][i'] & in round \(r = 0\), \\
 					\attopt{0} \setminus \lostset{1} & in round \(r = 1\), \\
-					\attopt{r-1} \setminus ( \lostset{r} \cup \{\asgd{r-1}\} ) & in round \(r = 2, \dots, \alloclen[\phaseii]\).
+					\attopt{r-1} \setminus ( \lostset{r} \cup \{\asgd{r-1}\} ) & in round \(r \ge 2\).
 				\end{cases*}
 			\end{equation*}
 		\end{definition}
-
-		\medskip
 
 		\(\Rightarrow\) What is the valuation of the remaining items?
 	\end{minipage}
 	\beamerimage at (3.7cm, 0cm) {\includegraphics[height=3.75cm, page=25]{example-image-duck}};
 \end{frame}
 
-\begin{frame}{Analysing Phase \phaseii \Dash Valuation of Unassigned Items (1/4)}
+\begin{frame}{Analysing Phase \phaseii{} (2/5)}
 	\adjustfortopblock
 	\begin{lemma}[11]
 		\begin{equation*}
 			\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] \ge \valuations[\attopt{1}] - \smashoperator{\sum_{r'=1}^{r-1}} \abs{\lostset{r'+1}} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] - \valuations[\asgd{1}, \dots, \asgd{r-1}]  \tag*{\(\forall r \ge 2\)}
 		\end{equation*}
-		\begin{itemize}
-			\item
-			\(\alloc[\phaseii] = \{ \asgd{1}, \dots, \asgd{\alloclen[\phaseii]} \}\)
-		\end{itemize}
 	\end{lemma}
 	\begin{proof}
 		\begin{itemize}
@@ -202,7 +197,7 @@
 	\end{proof}
 \end{frame}
 
-\begin{frame}{Analysing Phase \phaseii \Dash Valuation of Unassigned Items (2/4)}
+\begin{frame}{Analysing Phase \phaseii{} (3/5)}
 	\adjustfortopblock
 	\begin{lemma}[11]
 		\begin{equation*}
@@ -233,7 +228,7 @@
 	\end{proof}
 \end{frame}
 
-\begin{frame}{Analysing Phase \phaseii \Dash Valuation of Unassigned Items (3/4)}
+\begin{frame}{Analysing Phase \phaseii{} (4/5)}
 	\adjustfortopblock
 	\begin{lemma}[11]
 		\begin{equation*}
@@ -255,7 +250,7 @@
 	\end{proof}
 \end{frame}
 
-\begin{frame}{Analysing Phase \phaseii \Dash Valuation of Unassigned Items (4/4)}
+\begin{frame}{Analysing Phase \phaseii{} (5/5)}
 	\adjustfortopblock
 	\begin{lemma}[11]
 		\begin{equation*}
@@ -280,28 +275,28 @@
 	\end{proof}
 \end{frame}
 
-\begin{frame}{Analysing Phase \phaseii \Dash Valuation of Assigned Items}
-	\adjustfortopblock
-	\begin{lemma}[13]
-		\begin{equation*}
-			\valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii]}] \ge \valuations[\attopt{1}] / n \vphantom{\sum_{r'=1}^{r-1}}
-		\end{equation*}
-	\end{lemma}
-	\begin{proof}
-		Left as exercise to the listeners.
-
-		\smallskip
-
-		Hint: \(\abs{\lostset{r}} \le n - 1\)
-	\end{proof}
-\end{frame}
+%\begin{frame}{Analysing Phase \phaseii \Dash Valuation of Assigned Items}
+%	\adjustfortopblock
+%	\begin{lemma}[13]
+%		\begin{equation*}
+%			\valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii]}] \ge \valuations[\attopt{1}] / n \vphantom{\sum_{r'=1}^{r-1}}
+%		\end{equation*}
+%	\end{lemma}
+%	\begin{proof}
+%		Left as exercise to the listeners.
+%
+%		\smallskip
+%
+%		Hint: \(\abs{\lostset{r}} \le n - 1\)
+%	\end{proof}
+%\end{frame}
 
 
 
 
 
 \subsection{Analysing Phases \texorpdfstring{\phasei{} \& \phaseiii}{I \& III}}
-\begin{frame}{Analysing Phases \phasei{} \& \phaseiii}
+\begin{frame}{Analysing Phases \phasei{} \& \phaseiii{} (1/2)}
 	\adjustfortopblock
 	\begin{block}{Reminder\vphantom{(15)}}
 		\begin{description}
@@ -323,7 +318,6 @@
 		An item \(\genericitem \in \goods\) is \emph{outstanding} if \(\valuations[ \hairspace \genericitem] \ge \valuations[\asgd*{1}]\).
 	\end{definition}
 
-	\medskip
 	\(\Rightarrow\) Are enough outstanding items reserved?
 \end{frame}
 
@@ -331,7 +325,7 @@
 
 
 
-\begin{frame}{Analysing Phases \phasei{} \& \phaseiii \Dash todo}
+\begin{frame}{Analysing Phases \phasei{} \& \phaseiii{} (2/2)}
 	\adjustfortopblock
 	\begin{lemma}[15]
 		Each agent can be matched with an outstanding item in phase \phaseiii.
@@ -341,16 +335,16 @@
 			\begin{column}{0.6\textwidth}
 				\begin{itemize}
 					\item
-					number of agents not matched with an outstanding item in phase \phaseiii{} halved with each round of phase \phasei
+					number of unmatched agents halved with each round of phase \phasei
 					\begin{itemize}
 						\item
-						induction on number of rounds in phase \phasei
+						\(\ceil{\log_2 n} + 1\) rounds in phase \phasei{} are enough
 					\end{itemize}
 
 					\item
-					\(\ceil{\log_2 n} + 1\) rounds in phase \phasei{} are enough
+					induction on number of rounds in phase \phasei
 				\end{itemize}
-				Base Case: In round 1 of phase \phasei, either
+				Base Case: In round \(1\) of phase \phasei, either
 				\begin{itemize}
 					\item
 					\(\ge n/2\) many agents matched with an outstanding item
@@ -372,14 +366,4 @@
 		\end{columns}
 		\vspace{-2ex}
 	\end{proof}
-\end{frame}
-
-
-
-
-
-\begin{frame}{The Approximation Factor}
-	\begin{theorem}[16]
-		The approximation factor is \(2n ( \log_2 n + 3 ) \).
-	\end{theorem}
 \end{frame}

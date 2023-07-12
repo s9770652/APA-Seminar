@@ -1,0 +1,99 @@
+\section{Conclusion}
+
+\subsection{Summary}
+\begin{frame}{Summary}
+	\begin{itemize}
+		\item
+		allocation:
+		partition of items amongst agents
+
+		\item
+		bundles valued using submodular valuation functions
+		\begin{itemize}
+			\item
+			diminishing returns
+		\end{itemize}
+
+		\item
+		Nash social welfare:
+		weighted geometric mean of valuations
+
+		\item
+		wanted: approximation factor independent from \(m\)
+
+		\item
+		naïve, repeated matching fails because of missing foresight
+
+		\item
+		\RepReMatch:
+		\(2n (\log n + 3)\)-approximative
+		\begin{description}
+			\item[Phase \phasei]
+			finding enough outstanding items
+
+			\item[Phase \phaseii]
+			assigning remaining item (lost vs. optimal and attainable)
+
+			\item[Phase \phaseiii]
+			assigning outstanding items
+		\end{description}
+	\end{itemize}
+	\begin{center}
+		\includegraphics[height=2cm, page=62]{example-image-duck}
+		\hfill
+		\includegraphics[height=2cm, page=6]{example-image-duck}
+		\hfill
+		\includegraphics[height=2cm, page=25]{example-image-duck}
+		\hfill
+		\includegraphics[height=2cm, page=19]{example-image-duck}
+	\end{center}
+\end{frame}
+
+
+
+
+
+\subsection{Evaluation and Outlook}
+\begin{frame}{Evaluation and Outlook}
+	An improvement over previous results?
+
+	Yes!
+	\((m-n+1)\) best known approximation factor before.
+
+	\medskip
+
+	Any room for improvement left?
+
+	Possibly!
+	Lower bound of \(1.72\).
+
+	\bigskip
+
+	Outlook:
+	\begin{itemize}
+		\item
+		less general valuation functions \(\leadsto\) better factors
+
+		\item
+		limits on agent weights \(\leadsto\) linear and even constant factors
+
+		\item
+		focus on fairness
+	\end{itemize}
+\end{frame}
+
+
+
+
+
+\begin{frame}[c, plain, noframenumbering]
+%	\begin{center}
+%		\begin{tikzpicture}[overlay, remember picture]
+%			\node[opacity=\goetheheadopacity] at (current page.center) {\scalebox{5}{\Huge\usebeamercolor[fg]{section name}?}};
+%			\node[align=center] at (current page.center) {\usebeamerfont{section title}\usebeamercolor[fg]{section title} Any Questions Left?};
+%		\end{tikzpicture}
+%	\end{center}
+	\renewcommand{\insertsectionnumber}{!}
+	\renewcommand{\insertsection}{End of Talk}
+	\sectionpage
+\end{frame}
