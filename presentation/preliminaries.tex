@@ -5,6 +5,9 @@
 	Setting:
 	\begin{itemize}
 		\item
+		recipients: set \(\agents\) of \(n\) agents
+
+		\item
 		goods: set \(\goods\) of \(m\) items
 		\begin{itemize}
 			\item
@@ -13,9 +16,6 @@
 			\item
 			indivisible
 		\end{itemize}
-
-		\item
-		recipients: set \(\agents\) of \(n\) agents
 	\end{itemize}
 	\begin{definition}[1]
 		An \emph{allocation} is a tuple
@@ -35,6 +35,7 @@
 \subsection{Valuation Functions}
 \begin{frame}{Valuation Functions}{}
 	Requirements:
+	\vspace{-0.5ex}
 	\begin{itemize}
 		\item
 		monotonically non-decreasing: \(\valuations[\genericset[1]] \le \valuations[\genericset[2]]\) \quad \(\forall \genericset[1] \subset \genericset[2] \subset \goods\)
@@ -47,6 +48,7 @@
 	\end{itemize}
 
 	Types:
+	\vspace{-0.5ex}
 	\begin{itemize}
 		\item
 		additive: \(\valuations[\genericset] \coloneq \sum_{\genericitem \in \genericset} \valuations[ \hairspace \genericitem ]\) \quad \(\forall \genericset \subset \goods\)
@@ -63,7 +65,11 @@
 	\end{itemize}
 
 	\begin{center}
-		\includegraphics[height=2cm, page=24]{example-image-duck}
+		\includegraphics[height=2cm]{img/additive}
+		\hfil
+		\includegraphics[height=2cm]{img/submodular}
+		\hfil
+		\includegraphics[height=2cm]{img/diminishingreturns}
 	\end{center}
 \end{frame}
 
@@ -88,10 +94,9 @@
 			\(\weight\): agent weight
 		\end{itemize}
 	\end{problem}
-	\begin{itemize}
-		\item
-		middle ground between efficiency and fairness
-	\end{itemize}
+	The NSW strikes a middle ground between efficiency and fairness!
+
+	\medskip
 
 	\begin{minipage}{0.6\textwidth}
 		\begin{alertblock}{Challenge}
@@ -99,5 +104,5 @@
 		\end{alertblock}
 	\end{minipage}
 
-	\beamerimage at (12cm, 0.25cm) {\includegraphics[height=3cm, page=62]{example-image-duck}};
+	\beamerimage at (13cm, 0.25cm) {\includegraphics[height=3cm]{img/nvsm}};
 \end{frame}

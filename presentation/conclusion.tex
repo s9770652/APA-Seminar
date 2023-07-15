@@ -19,10 +19,10 @@
 		weighted geometric mean of valuations
 
 		\item
-		wanted: approximation factor independent from \(m\)
+		approximation factor independent from \(m\)?
 
 		\item
-		naïve, repeated matching fails because of missing foresight
+		simple, repeated matching fails because of missing foresight
 
 		\item
 		\RepReMatch:
@@ -32,29 +32,55 @@
 			finding enough outstanding items
 
 			\item[Phase \phaseii]
-			assigning remaining item (lost vs. optimal and attainable)
+			assigning remaining item
 
 			\item[Phase \phaseiii]
 			assigning outstanding items
 		\end{description}
 	\end{itemize}
-	\begin{center}
-		\includegraphics[height=2cm, page=62]{example-image-duck}
-		\hfill
-		\includegraphics[height=2cm, page=6]{example-image-duck}
-		\hfill
-		\includegraphics[height=2cm, page=25]{example-image-duck}
-		\hfill
-		\includegraphics[height=2cm, page=19]{example-image-duck}
-	\end{center}
+	\beamerimage at (13cm,  5.00cm) {\includegraphics[height=1.45cm]{img/nvsm}};
+	\beamerimage at (13cm,  3.25cm) {\includegraphics[height=1.45cm]{img/allocation}};
+	\beamerimage at (13cm,  1.50cm) {\includegraphics[height=1.45cm]{img/outstanding_1}};
+	\beamerimage at (13cm, -0.25cm) {\includegraphics[height=1.45cm]{img/anal2_1}};
+%	\begin{center}
+%		\includegraphics[height=2cm]{img/n_vs_m}
+%		\hfil
+%		\begin{tikzpicture}[scale=0.3, transform shape, every node/.style={minimum size=5mm}, node distance=10mm and 32mm]
+%				% items
+%				\node[draw, rectangle] (i1)                {};
+%				\node[draw, rectangle] (i2)  [below=of i1] {};
+%				\node[draw, rectangle] (i3)  [below=of i2] {};
+%				\node[draw, rectangle] (im)  [below=of i3] {};
+%				\node[draw, rectangle] (im1) [below=of im] {};
+%				% agents
+%				\node[draw, circle] (a1) [left=of i1]  {};
+%				\node[draw, circle] (a2) [left=of im1] {};
+%				% valuations
+%				\draw (a1) to (i1);
+%				\draw (a1) to (i2);
+%				\draw (a1) to (i3);
+%				\draw (a1) to (im);
+%				\draw (a1) to (im1);
+%
+%				\draw (a2) to (i1);
+%				\draw (a2) to (i2);
+%				\draw (a2) to (i3);
+%				\draw (a2) to (im);
+%				\draw (a2) to (im1);
+%		\end{tikzpicture}
+%		\hfil
+%		\includegraphics[height=2cm, page=19]{example-image-duck}
+%		\hfil
+%		\includegraphics[height=2cm]{img/anal2_1}
+%	\end{center}
 \end{frame}
 
 
 
 
 
-\subsection{Evaluation and Outlook}
-\begin{frame}{Evaluation and Outlook}
+\subsection{Outlook}
+\begin{frame}{Outlook}
 	An improvement over previous results?
 
 	Yes!
@@ -69,16 +95,13 @@
 
 	\bigskip
 
-	Outlook:
+	Other approaches:
 	\begin{itemize}
 		\item
 		less general valuation functions \(\leadsto\) better factors
 
 		\item
 		limits on agent weights \(\leadsto\) linear and even constant factors
-
-		\item
-		focus on fairness
 	\end{itemize}
 \end{frame}
 
@@ -87,12 +110,6 @@
 
 
 \begin{frame}[c, plain, noframenumbering]
-%	\begin{center}
-%		\begin{tikzpicture}[overlay, remember picture]
-%			\node[opacity=\goetheheadopacity] at (current page.center) {\scalebox{5}{\Huge\usebeamercolor[fg]{section name}?}};
-%			\node[align=center] at (current page.center) {\usebeamerfont{section title}\usebeamercolor[fg]{section title} Any Questions Left?};
-%		\end{tikzpicture}
-%	\end{center}
 	\renewcommand{\insertsectionnumber}{!}
 	\renewcommand{\insertsection}{End of Talk}
 	\sectionpage

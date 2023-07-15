@@ -7,6 +7,7 @@
 		item/.style = {draw, rectangle, font=\small},
 		dots/.style = {font=\small},
 		weight/.style = {font=\footnotesize},
+		edgealw/.style = {},
 		edgeopt/.style = {},
 		edgealg/.style = {},
 		edgegry/.style = {},
@@ -14,7 +15,6 @@
 		on grid
 	}
 	\def\allocationexample{
-		\centering
 		\begin{tikzpicture}
 			% items
 			\node[item] (i1)                       {\(\goods_{1}\)};
@@ -28,9 +28,9 @@
 			\node[agent] (a2) [left=of im1] {\(\agents_2\)};
 			% valuations
 			\draw[edgealg] (a1) to node[weight, pos=.42,  above]      {\(m + \epsilon\)} (i1);
-			\draw          (a1) to node[weight, pos=.42,  above]      {\(1\)}            (i2);
-			\draw          (a1) to node[weight, pos=.39,  above]      {\(1\)}            (i3);
-			\draw          (a1) to node[weight, pos=.32,  above]      {\(1\)}            (im);
+			\draw[edgealw] (a1) to node[weight, pos=.42,  above]      {\(1\)}            (i2);
+			\draw[edgealw] (a1) to node[weight, pos=.39,  above]      {\(1\)}            (i3);
+			\draw[edgealw] (a1) to node[weight, pos=.32,  above]      {\(1\)}            (im);
 			\draw[edgeopt] (a1) to node[weight, pos=.255, above]      {\(1\)}            (im1);
 
 			\draw[edgeopt] (a2) to node[weight, pos=.26,  above left] {\(m\)}            (i1);
@@ -40,41 +40,57 @@
 			\draw[edgealg] (a2) to node[weight, pos=.48,  above]      {\(1\)}            (im1);
 		\end{tikzpicture}
 	}
-	\begin{center}
-		\allocationexample
-	\end{center}
+	\begin{columns}[c]
+		\begin{column}{.3\textwidth}
+			\(\abs{\agents} = 2\)
+
+			\(\abs{\goods} = m+1\)
+
+			\(\weight[1] = \weight[2] = 1\)
+
+			\medskip
+
+			\(\NSW(\alloc*) = \sqrt{m \cdot m}\) \\
+			\(\hphantom{\NSW(\alloc*)} = m\)
+
+			\smallskip
+
+			\(\NSW(\alloc) = \sqrt{ (2m + \epsilon - 1) \cdot 1 }\)
+			\(\hphantom{\NSW(\alloc)} \le \sqrt{2m}\)
+
+			\medskip
+
+			\(\Rightarrow \alpha \ge \sqrt{m/2} \)
+		\end{column}
+		\begin{column}{.7\textwidth}
+			\centering
+			\tikzset{
+				edgealw/.style = {thick},
+				edgeopt/.style = {thick},
+				edgealg/.style = {opacity=0.3},
+				edgegry/.style = {opacity=0.3},
+			}
+			\allocationexample
+			\hfil
+			\tikzset{
+				edgeopt/.style = {opacity=0.3},
+				edgealg/.style = {opacity=1.0, thick},
+			}
+			\allocationexample
+		\end{column}
+	\end{columns}
 	\begin{block}{}
 		What are the items of lowest valuation?\phantom{g}  % 'g' has an ascender and ensures equal margin on top and bottom.
 	\end{block}
 \end{frame}
 
-%\begin{frame}{Looking into the Future}
-%	\begin{itemize}
-%		\item
-%		sort items by valuation in descending order
-%		\begin{itemize}
-%			\item
-%			low-value items on the left
-%		\end{itemize}
-%	\end{itemize}
-%	\begin{center}
-%		\includegraphics[width=10cm, height=2cm, page=21]{example-image-duck}
-%	\end{center}
-%	\begin{itemize}
-%		\item
-%		use their valuations for edge weights in early matchings
-%	\end{itemize}
-%	\begin{exampleblock}{}
-%		A \(2n\)-approximation is possible \dots{} using \SMatch.
-%	\end{exampleblock}
-%	\begin{alertblock}{}
-%		This only works for additive valuation functions.
-%	\end{alertblock}
-%\end{frame}
 
-\begin{frame}{Looking into the Future? Changing the Past!}
+
+
+
+\subsection{The Algorithm}
+\begin{frame}{Key Ideas of the Algorithm}
 	Under submodular valuations, the set of lowest valuation is approximable only by \(\bigomega\paren[\big]{ \sqrt{m/\ln m} }\). \smash{\raisebox{-.25ex}{\Large\Lightning}}
-	\includegraphics[height=3ex, page=66]{example-image-duck}
 
 	We need change the past in three phases:
 	\begin{description}
@@ -95,11 +111,6 @@
 	\end{exampleblock}
 \end{frame}
 
-
-
-
-
-\subsection{The Algorithm}
 \begin{frame}{The Algorithm}
 	Phase \phasei
 	\begin{enumerate}
@@ -152,164 +163,8 @@
 
 
 
-\subsection{Analysing Phase \texorpdfstring{\phaseii}{II}}
-\begin{frame}{Analysing Phase \phaseii{} (1/5)}
-	\adjustforminipage
-	\begin{minipage}{0.55\textwidth}
-		\begin{definition}[9]
-			The set \(\lostset{r}\) of \emph{lost items} is the set of all optimal items \(j \in \alloc*\) assigned to other agents \(i' \neq i\) in round \(r\).
-		\end{definition}
-		\begin{definition}[10]
-			Let \(\alloc[\phaseii] = \{ \asgd{1}, \asgd{2}, \dots \}\) be the bundle of agent \(i\).
-			The set of \emph{optimal and attainable items} is defined as
-			\begin{equation*}
-				\attopt{r} \coloneq \begin{cases*}
-					\alloc* \setminus \bigcup_{i' \in \agents} \alloc[\phasei][i'] & in round \(r = 0\), \\
-					\attopt{0} \setminus \lostset{1} & in round \(r = 1\), \\
-					\attopt{r-1} \setminus ( \lostset{r} \cup \{\asgd{r-1}\} ) & in round \(r \ge 2\).
-				\end{cases*}
-			\end{equation*}
-		\end{definition}
-
-		\(\Rightarrow\) What is the valuation of the remaining items?
-	\end{minipage}
-	\beamerimage at (3.7cm, 0cm) {\includegraphics[height=3.75cm, page=25]{example-image-duck}};
-\end{frame}
-
-\begin{frame}{Analysing Phase \phaseii{} (2/5)}
-	\adjustfortopblock
-	\begin{lemma}[11]
-		\begin{equation*}
-			\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] \ge \valuations[\attopt{1}] - \smashoperator{\sum_{r'=1}^{r-1}} \abs{\lostset{r'+1}} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] - \valuations[\asgd{1}, \dots, \asgd{r-1}]  \tag*{\(\forall r \ge 2\)}
-		\end{equation*}
-	\end{lemma}
-	\begin{proof}
-		\begin{itemize}
-			\item
-			definition of marginal valuation
-		\end{itemize}
-		\begin{align*}
-			\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ]
-			= \valuations[ \attopt{r} \cup \braces{ \asgd{1}, \dots, \asgd{r-1} } ] - \valuations[ \asgd{1}, \dots, \asgd{r-1} ]
-		\end{align*}
-		\(\Rightarrow\) We need a lower bound on \(\valuations[ \attopt{r} \cup \braces{ \asgd{1}, \dots, \asgd{r-1} } ]\)\mperiod[!]
-		\renewcommand{\qedsymbol}{}
-	\end{proof}
-\end{frame}
-
-\begin{frame}{Analysing Phase \phaseii{} (3/5)}
-	\adjustfortopblock
-	\begin{lemma}[11]
-		\begin{equation*}
-			\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] \ge \valuations[\attopt{1}] - \smashoperator{\sum_{r'=1}^{r-1}} \abs{\lostset{r'+1}} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] - \valuations[\asgd{1}, \dots, \asgd{r-1}]  \tag*{\(\forall r \ge 2\)}
-		\end{equation*}
-	\end{lemma}
-	\begin{proof}
-		\begin{itemize}
-			\item
-			\(\attopt{r} = \attopt{r-1} \setminus ( \lostset{r} \cup \{\asgd{r-1}\} )\) \(\implies\) \(\paren{ \attopt{r} \cup \braces{\asgd{r-1}} } \supset \paren{ \attopt{r-1} \setminus \lostset{r} }\)
-			\begin{itemize}
-				\item
-				item \(\asgd{r-1}\) perhaps not element of \(\attopt{r-1}\)
-			\end{itemize}
-
-			\item
-			diminishing returns \(\implies\) \(\valuations[ \genericset[1] \given \genericset[2] \cup \genericset[3] ] \le \valuations[ \genericset[1] \given \genericset[2] ] \)
-		\end{itemize}
-		\vspace{-1.25ex}
-		\begin{align*}
-			\valuations[\attopt{r} \cup \braces{ \asgd{1}, \dots, \asgd{r-1} }]
-			&\ge \valuations[\attopt{r-1} \setminus \lostset{r} \cup \braces{ \asgd{1}, \dots, \asgd{r-2} }] \\
-			&= \valuations[\attopt{r-1} \cup \braces{ \asgd{1}, \dots, \asgd{r-2} }] - \valuations[ \lostset{r} \given \attopt{r-1} \setminus \lostset{r} \cup \braces{ \asgd{1}, \dots, \asgd{r-2} } ] \\
-			&\ge \valuations[\attopt{r-1} \cup \braces{ \asgd{1}, \dots, \asgd{r-2} }] - \valuations[ \lostset{r} \given \asgd{1}, \dots, \asgd{r-2} ]
-		\end{align*}
-		\renewcommand{\qedsymbol}{}
-		\vspace*{-4.5ex}
-	\end{proof}
-\end{frame}
-
-\begin{frame}{Analysing Phase \phaseii{} (4/5)}
-	\adjustfortopblock
-	\begin{lemma}[11]
-		\begin{equation*}
-			\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] \ge \valuations[\attopt{1}] - \smashoperator{\sum_{r'=1}^{r-1}} \abs{\lostset{r'+1}} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] - \valuations[\asgd{1}, \dots, \asgd{r-1}]  \tag*{\(\forall r \ge 2\)}
-		\end{equation*}
-	\end{lemma}
-	\begin{proof}
-		\begin{itemize}
-			\item
-			apply inequality recursively
-		\end{itemize}
-		\begin{align*}
-			\valuations[\attopt{r} \cup \braces{ \asgd{1}, \dots, \asgd{r-1} }]
-			&\ge \valuations[\attopt{r-1} \cup \braces{ \asgd{1}, \dots, \asgd{r-2} }] - \valuations[ \lostset{r} \given \asgd{1}, \dots, \asgd{r-2} ] \\
-			&\ge \valuations[\attopt{1}] - \smashoperator{\sum_{r'=1}^{r-1}} \valuations[\lostset{r'+1} \given \asgd{1}, \dots, \asgd{r'-2} ]
-		\end{align*}
-		\(\Rightarrow\) We need an upper bound on \(\valuations[ \lostset{r'+1} \given \asgd{1}, \dots, \asgd{r'-2} ]\)\mperiod[!]
-		\renewcommand{\qedsymbol}{}
-	\end{proof}
-\end{frame}
-
-\begin{frame}{Analysing Phase \phaseii{} (5/5)}
-	\adjustfortopblock
-	\begin{lemma}[11]
-		\begin{equation*}
-			\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ] \ge \valuations[\attopt{1}] - \smashoperator{\sum_{r'=1}^{r-1}} \abs{\lostset{r'+1}} \cdot \valuations[ \asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1} ] - \valuations[\asgd{1}, \dots, \asgd{r-1}]  \tag*{\(\forall r \ge 2\)}
-		\end{equation*}
-	\end{lemma}
-	\begin{proof}
-		\begin{itemize}
-			\item
-			diminishing returns \(\implies\) \(\valuations[\genericset] \le \sum_{\genericitem \in \genericset} \valuations[ \hairspace \genericitem ]\) for all \(\genericset\)
-
-			\item
-			item \(\asgd{r'}\) assigned before any item \(\genericitem \in \lostset{r'+1}\) \(\implies\) \(\valuations[\asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1}] \ge \valuations[\hairspace \genericitem \given \asgd{1}, \dots, \asgd{r'-1}]\)
-		\end{itemize}
-		\begin{align*}
-			\valuations[ \lostset{r'+1} \given \asgd{1}, \dots, \asgd{r'-2} ]
-			&\le \smashoperator{ \sum_{\genericitem \in \lostset{r'+1}} } \valuations[ \hairspace \genericitem \given \asgd{1}, \dots, \asgd{r'-2} ] \\
-			&\le \abs{\lostset{r'+1}} \cdot \valuations[\asgd{r'} \given \asgd{1}, \dots, \asgd{r'-1}] \tag*{\qedsymbol}
-		\end{align*}
-		\vspace*{-4.5ex}
-		\renewcommand{\qedsymbol}{}
-	\end{proof}
-\end{frame}
-
-%\begin{frame}{Analysing Phase \phaseii \Dash Valuation of Assigned Items}
-%	\adjustfortopblock
-%	\begin{lemma}[13]
-%		\begin{equation*}
-%			\valuations[\asgd{1}, \dots, \asgd{\alloclen[\phaseii]}] \ge \valuations[\attopt{1}] / n \vphantom{\sum_{r'=1}^{r-1}}
-%		\end{equation*}
-%	\end{lemma}
-%	\begin{proof}
-%		Left as exercise to the listeners.
-%
-%		\smallskip
-%
-%		Hint: \(\abs{\lostset{r}} \le n - 1\)
-%	\end{proof}
-%\end{frame}
-
-
-
-
-
 \subsection{Analysing Phases \texorpdfstring{\phasei{} \& \phaseiii}{I \& III}}
 \begin{frame}{Analysing Phases \phasei{} \& \phaseiii{} (1/2)}
-	\adjustfortopblock
-	\begin{block}{Reminder\vphantom{(15)}}
-		\begin{description}
-			\item[Phase \phasei]
-			Temporary assignments.
-			Valuations of single items as edge weights.
-
-			\item[Phase \phaseiii]
-			Items of phase \phasei{} released.
-			Valuations of items and bundles from phase \phaseii{} as edge weights.
-		\end{description}
-	\end{block}
-
 	Phase \phasei{} reserves \enquote{high-value} items.
 	But what qualifies as \enquote{high-value}?
 
@@ -320,10 +175,6 @@
 
 	\(\Rightarrow\) Are enough outstanding items reserved?
 \end{frame}
-
-
-
-
 
 \begin{frame}{Analysing Phases \phasei{} \& \phaseiii{} (2/2)}
 	\adjustfortopblock
@@ -345,6 +196,7 @@
 					induction on number of rounds in phase \phasei
 				\end{itemize}
 				Base Case: In round \(1\) of phase \phasei, either
+				\vspace{-0.5ex}
 				\begin{itemize}
 					\item
 					\(\ge n/2\) many agents matched with an outstanding item
@@ -361,9 +213,53 @@
 				\end{itemize}
 			\end{column}
 			\begin{column}{0.375\textwidth}
-				\includegraphics[width=5cm, page=19]{example-image-duck}
+				\centering
+				\includegraphics<1>[height=4.25cm]{img/outstanding_1}
+				\includegraphics<2>[height=4.25cm]{img/outstanding_2}
+				\includegraphics<3>[height=4.25cm]{img/outstanding_3}
+				\includegraphics<4>[height=4.25cm]{img/outstanding_4}
 			\end{column}
 		\end{columns}
 		\vspace{-2ex}
 	\end{proof}
+\end{frame}
+
+
+
+
+
+\subsection{Analysing Phase \texorpdfstring{\phaseii}{II}}
+\begin{frame}{Analysing Phase \phaseii{} (1/2)}
+	\adjustforminipage
+	\begin{minipage}{0.55\textwidth}
+		\begin{definition}[9]
+			The set \(\lostset{r}\) of \emph{lost items} is the set of all optimal items \(j \in \alloc*\) assigned to other agents \(i' \neq i\) in round \(r\).
+		\end{definition}
+		\begin{definition}[10]
+			Let \(\alloc[\phaseii] = \{ \asgd{1}, \asgd{2}, \dots \}\) be the bundle of agent \(i\).
+			The set of \emph{optimal and attainable items} is defined as
+			\begin{equation*}
+				\attopt{r} \coloneq \begin{cases*}
+					\alloc* \setminus \bigcup_{i' \in \agents} \alloc[\phasei][i'] & in round \(r = 0\), \\
+					\attopt{0} \setminus \lostset{1} & in round \(r = 1\), \\
+					\attopt{r-1} \setminus ( \{\asgd{r-1} \cup \lostset{r} ) \} ) & in round \(r \ge 2\).
+				\end{cases*}
+			\end{equation*}
+		\end{definition}
+
+		\(\Rightarrow\) What is the valuation of the remaining items?
+	\end{minipage}
+	\beamerimage at (3.7cm, 0cm) {\includegraphics[width=6.5cm]{img/optainable}};
+\end{frame}
+
+\begin{frame}{Analysing Phase \phaseii{} (2/2)}
+	\begin{center}
+		\includegraphics[height=4cm]{img/anal2_1}
+		\begin{equation*}
+			\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ]
+			\ge \valuations[ \attopt{r} ] - \valuations[ \asgd{1}, \dots, \asgd{r-1} ] - \sum_{l=2}^{r} \abs{\lostset{l}} \cdot \valuations[\asgd{l-1} \given \asgd{1}, \dots, \asgd{l-2} ]
+		\end{equation*}
+		\scriptsize \textbf{Plan:} first show black set, then alternately enlarge green set and uncover blue sets \(\Rightarrow\) valuation of grey area = val. of black -- val. of dark green -- val. of blue \(\Rightarrow\) lower bound is enough, therefore subtract val. of whole green area \(\Rightarrow\) show that sum of marg. val. of \(\asgd{l}\) equals val. of \(\asgd{1}, \dots, \asgd{r-1}\) \(\Rightarrow\) then subtract marg. val. of blue area by summing over marg. val. of each lost set \(\Rightarrow\) marg. val. of lost set \(\le\) sum of marg. val. of items of lost set \(\Rightarrow\) marg. val. of item of lost set \(\le\) marg. val. of \(\asgd{l-1}\) because \(\asgd{l-1}\) assigned before items in lost set
+	\end{center}
+	\beamerimage[align=center, font=\scriptsize] at (13.5cm, 5cm) {may-be auxiliary calculation for \\ \(\valuations[ \lostset{l} \given \asgd{1}, \dots, \asgd{l-2} ]\) \\ \(= \abs{\lostset{l}} \cdot \valuations[\asgd{l-1} \given \asgd{1}, \dots, \asgd{l-2} ]\) \\ here};
 \end{frame}
