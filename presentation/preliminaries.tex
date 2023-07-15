@@ -3,6 +3,7 @@
 \subsection{Allocations}
 \begin{frame}{Allocations}
 	Setting:
+	\adjustfortopitem
 	\begin{itemize}
 		\item
 		recipients: set \(\agents\) of \(n\) agents
@@ -17,6 +18,9 @@
 			indivisible
 		\end{itemize}
 	\end{itemize}
+	\beamerimage at ( 8cm, 1.25cm) {\includegraphics[height=2cm]{img/nosatellites}};
+	\beamerimage at (10cm, 1.25cm) {\includegraphics[height=2cm]{img/nowater}};
+	\vspace{-3ex}
 	\begin{definition}[1]
 		An \emph{allocation} is a tuple
 		\(\alloc[][] = (\alloc)_{i \in \agents}\)
@@ -35,7 +39,7 @@
 \subsection{Valuation Functions}
 \begin{frame}{Valuation Functions}{}
 	Requirements:
-	\vspace{-0.5ex}
+	\adjustfortopitem
 	\begin{itemize}
 		\item
 		monotonically non-decreasing: \(\valuations[\genericset[1]] \le \valuations[\genericset[2]]\) \quad \(\forall \genericset[1] \subset \genericset[2] \subset \goods\)
@@ -48,7 +52,7 @@
 	\end{itemize}
 
 	Types:
-	\vspace{-0.5ex}
+	\adjustfortopitem
 	\begin{itemize}
 		\item
 		additive: \(\valuations[\genericset] \coloneq \sum_{\genericitem \in \genericset} \valuations[ \hairspace \genericitem ]\) \quad \(\forall \genericset \subset \goods\)
@@ -57,7 +61,7 @@
 		submodular: \(\valuations[\genericset[1] \given \genericset[2]] \coloneq \valuations[\genericset[1] \cup \genericset[2]] - \valuations[\genericset[2]]\) \quad \(\forall \genericset[1], \genericset[2] \subset \goods\) with \(\genericset[1], \genericset[2]\) disjoint
 		\begin{itemize}
 			\item
-			more general (encompasses additivity)
+			more general
 
 			\item
 			diminishing returns
@@ -86,6 +90,7 @@
 			\quad\text{with~}
 			\NSW(\alloc[][]) \coloneq \paren[\Big]{ \smashoperator{\prod_{i \in \agents}} \valuations[\alloc]^{\,\textstyle\weight} }{}^{\textstyle 1 / \sum_{i \in \agents} \weight}
 		\end{equation*}
+		\adjustfortopitem
 		\begin{itemize}
 			\item
 			\(\allallocs{\agents\kern1pt}{\goods}\): all possible allocations
@@ -95,14 +100,16 @@
 		\end{itemize}
 	\end{problem}
 	The NSW strikes a middle ground between efficiency and fairness!
+	\begin{alertblock}{}
+		Is there a polynomial-time algorithm with an approximation factor \dots
+		\begin{itemize}
+			\item
+			\dots{} dependent on \(n\)?
 
-	\medskip
-
-	\begin{minipage}{0.6\textwidth}
-		\begin{alertblock}{Challenge}
-			Algorithm with approximation factor \emph{independent from \(m\)}!
-		\end{alertblock}
-	\end{minipage}
-
-	\beamerimage at (13cm, 0.25cm) {\includegraphics[height=3cm]{img/nvsm}};
+			\item
+			\dots{} independent from \(m\)?
+		\end{itemize}
+		\beamerimage at (13cm, 1.15cm) {\includegraphics[height=2cm]{img/nvsm}};
+		\vspace{-0.75ex}
+	\end{alertblock}
 \end{frame}

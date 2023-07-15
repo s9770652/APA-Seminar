@@ -240,11 +240,14 @@
 	\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
 	\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
 
-%	 to remove space above blocks on top of frame
+	% to remove space above blocks on top of frame
 	\NewDocumentCommand{\adjustfortopblock}{}{\vspace{-\medskipamount}}
 
-%	 to correct space above minipages
+	% to correct space above minipages
 	\NewDocumentCommand{\adjustforminipage}{}{\vspace{4pt}}  % Dirty! Whence does this number come? Sould there not be a better solution?
+
+	% to remove space above `itemize` and `enumerate` environments
+	\NewDocumentCommand{\adjustfortopitem}{}{\vspace{-0.5ex}}
 }{}
 \makeatother
 
