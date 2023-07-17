@@ -1,11 +1,138 @@
-%%% Checks whether a string is not given/empty/blank or not.
-% Ex.: \NewDocumentCommand{\test}{O{}}{\IfEmptyTF{#1}{true}{false}}
-% \text -> true
-% \test[] -> true
-% \test[   ] -> true
-% \test[a] -> false
-\ExplSyntaxOn
-\cs_set_eq:NN\IfEmptyT\tl_if_blank:nT
-\cs_set_eq:NN\IfEmptyF\tl_if_blank:nF
-\cs_set_eq:NN\IfEmptyTF\tl_if_blank:nTF
-\ExplSyntaxOff
+% Maths & Algorithms.
+\NewDocumentCommand{\af}{}{
+	\frac{\euler}{\raisebox{0.3ex}{\(\scriptstyle\euler - 1\)}}
+}
+\NewDocumentCommand{\afconst}{}{
+	\frac{\euler}{\raisebox{0.3ex}{\(\scriptstyle\euler - 1 + \USWsmallconstant\)}}
+}
+\NewDocumentCommand{\afinv}{}{
+	\frac{\euler - 1 + \USWsmallconstant}{\raisebox{0.4ex}{\(\scriptstyle\euler\)}}
+}
+\NewDocumentCommand{\agents}{}{
+	\symscr{A}
+}
+\NewDocumentCommand{\allallocs}{m m}{
+	\symbf{X}_{#1}(#2)
+}
+\NewDocumentCommand{\alloc}{s O{} O{i}}{
+	\symbf{x}\IfEmptyF{#3}{_{#3}}\IfEmptyTF{#2}{\IfBooleanT{#1}{^*}}{^{\IfBooleanT{#1}{*}#2}}
+}
+\NewDocumentCommand{\alloclen}{s O{} O{i}}{
+	\smash[b]{\tau\IfEmptyF{#3}{_{#3}}\IfEmptyTF{#2}{\IfBooleanT{#1}{^*}}{^{\IfBooleanT{#1}{*}#2}}}
+}
+\NewDocumentCommand{\asgd}{s m O{i}}{
+	\IfBooleanTF{#1}{o}{\textsl{a}}\IfEmptyF{#3}{_{#3}}^{#2}
+}
+\NewDocumentCommand{\attopt}{m O{i}}{
+	\mybar{0.95}{0.07em}{\symbf{x}}^*_{\smash{#2, #1}}
+}
+\NewDocumentCommand{\attoptlen}{m O{i}}{
+	\smash{\mybar{1.2}{0.02em}{\tau}^{*}_{#2, #1}}
+}
+\NewDocumentCommand{\bipartitegraph}{}{
+	G
+}
+\NewDocumentCommand{\colouringconstant}{}{
+	c
+}
+\NewDocumentCommand{\genericitem}{O{}}{
+	j\IfEmptyF{#1}{^{#1}}
+}
+\NewDocumentCommand{\genericset}{s O{}}{
+	\symscr{S}\IfBooleanT{#1}{^*}\IfEmptyF{#2}{_{#2}}
+}
+\NewDocumentCommand{\goods}{}{
+	\symscr{G}
+}
+\NewDocumentCommand{\goodsordered}{m O{i}}{
+	\goods\IfEmptyF{#2}{_{#2}}^{\smash[t]{#1}}
+}
+\NewDocumentCommand{\goodsrem}{}{
+	\symscr{G}^{\mathup{rem}}
+}
+\NewDocumentCommand{\lostset}{m O{i}}{
+	\symscr{L}_{\smash{\IfEmptyF{#2}{#2, } #1}}
+}
+\NewDocumentCommand{\lostsetlen}{m O{i}}{
+	\ell_{\smash{\IfEmptyF{#2}{#2, } #1}}
+}
+\NewDocumentCommand{\matching}{O{}}{
+	\symscr{M}\IfEmptyF{#1}{_{\hspace{-.1em}#1}}
+}
+\NewDocumentCommand{\overlygooditem}{O{i}}{
+	j^{+}\IfEmptyF{#1}{_{#1}}
+}
+\NewDocumentCommand{\overlygoodset}{O{i}}{
+	\goods^{+}\IfEmptyF{#1}{_{#1}}
+}
+\NewDocumentCommand{\phasei}{}{%
+	Ⅰ%
+}
+\NewDocumentCommand{\phaseii}{}{%
+	Ⅱ%
+}
+\NewDocumentCommand{\phaseiii}{}{%
+	Ⅲ%
+}
+\NewDocumentCommand{\remvalue}{O{i}}{
+	u\IfEmptyF{#1}{_{#1}}
+}
+\NewDocumentCommand{\USWconstant}{}{
+	C
+}
+\NewDocumentCommand{\USWsmallconstant}{}{
+	\varepsilon
+}
+\NewDocumentCommand{\unluckyagents}{m}{
+	\agents^-_{#1}
+}
+\NewDocumentCommand{\unluckyagentsalgo}{m}{
+	\alpha
+}
+\NewDocumentCommand{\unluckyagentslen}{m}{
+	a^-_{#1}
+}
+\NewDocumentCommand{\valuations}{O{} o O{i}}{
+	v\IfEmptyF{#3}{_{#3}}\IfEmptyF{#1}{\paren[#2]{#1}}
+}
+\NewDocumentCommand{\weight}{O{i}}{
+	\eta\IfEmptyF{#1}{_{#1}}
+}
+\NewDocumentCommand{\weights}{}{
+	E
+}
+
+\SetKwFunction{maxweightmatching}{max\_weight\_matching}
+\SetKwFunction{arballoc}{arbitrary\_allocation}
+
+\NewDocumentCommand{\phaseisep}{}{\nonl\CommentSty{Phase \phasei:}\;}
+\NewDocumentCommand{\phaseiisep}{}{\vspace{0.25em}\nonl\CommentSty{Phase \phaseii:}\;}
+\NewDocumentCommand{\phaseiiisep}{}{\vspace{0.25em}\nonl\CommentSty{Phase \phaseiii:}\;}
+
+% Texts.
+\NewDocumentCommand{\CASC}{}{\abb{CASC}}
+\NewDocumentCommand{\Gap}{}{\abb{Gap-Max-\liningnums{3}-Colouring}}
+\NewDocumentCommand{\EFone}{}{\abb{EF\liningnums{1}}}
+\NewDocumentCommand{\EFX}{}{\abb{EFX}}
+\NewDocumentCommand{\ESW}{}{%
+	\relax\ifmmode{\operatorname{ESW}}\else{\abb{MEP}}\fi%
+}
+\NewDocumentCommand{\No}{}{\abb{No}~instance}
+\NewDocumentCommand{\NSW}{}{%
+	\relax\ifmmode{\operatorname{NSW}}\else{\abb{MNP}}\fi%
+}
+\NewDocumentCommand{\OXS}{}{\abb{OXS}}
+\NewDocumentCommand{\PO}{}{\abb{PO}}
+\makeatletter
+\NewDocumentCommand{\RepReMatch}{}{\@ifclassloaded{libertinus}{\Lss02{RepReMɑtc\Lsalt{h}}}{RepReMatch}}
+\NewDocumentCommand{\SMatch}{}{\@ifclassloaded{libertinus}{SMɑtc\Lsalt{h}}{SMatch}}
+\makeatother
+\NewDocumentCommand{\SPLC}{}{\abb{SPLC}}
+\NewDocumentCommand{\USW}{}{%
+	\relax\ifmmode{\operatorname{USW}}\else{\abb{MUP}}\fi%
+}
+\NewDocumentCommand{\XOS}{}{\abb{XOS}}
+\NewDocumentCommand{\Yes}{}{\abb{Yes}~instance}
+
+\crefname{property}{property}{properties}
+\Crefname{property}{Property}{Properties}

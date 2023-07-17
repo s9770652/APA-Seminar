@@ -6,7 +6,7 @@
 
 The algorithm \SMatch{} estimates the worst-case valuation of future items by determining the set of highest-value items and then valuing the remaining items.
 Unfortunately, this approach does not work for general \emph{submodular} valuation functions because taking a set of highest valuation away does not necessarily leave a set of lowest valuation.
-In fact, it can be shown \cite{submodular_low_value} that determining the set of lowest valuation is approximable only within a factor of \(\smash[t]{\bigomega\paren[\big]{ \sqrt{m / \ln m} }}\).
+In fact, it can be shown \cite{submodular_low_value} that determining the set of lowest valuation is approximable only within a factor of \(\smash[t]{\bigomega*{ \sqrt{m / \ln m} }}\).
 
 For this reason, the algorithm \RepReMatch{} (\cref{alg:reprematch}) relies on an approach with three phases, thereby achieving an approximation factor of \(2n(\log_2 n + 3)\) (\cref{th:reprematch}).
 In phase~\phasei, a sufficiently big set of high-value items is determined through repeated matchings.

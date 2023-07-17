@@ -1,23 +1,3 @@
-# Textual notation.
-\begin{caseintext}{%|number%text}{condition%text}%\\end{caseintext}#n
-
-\caseintextfont{arg}#S
-
-# Mathematical notation.
-# general
-\abs{formula}#m
-\braces[size]{formula}#m
-\ceil{formula}#m
-\floor{formula}#m
-\given#m
-\given[size]#m
-\norm{formula}#m
-\paren[size]{formula}#m
-
-\mperiod
-\mperiod[symbol]
-
-# specific
 \agents#m
 
 \alloc#m
@@ -29,6 +9,8 @@
 \alloclen*#m
 \alloclen[phase]#m
 \alloclen[phase][agent]#m
+
+\arballoc#m
 
 \asgd{rank}#m
 \asgd*{rank}#m
@@ -67,6 +49,8 @@
 \matching#m
 \matching[round]#m
 
+\maxweightmatching#m
+
 \overlygooditem#m
 \overlygooditem[agent]#m
 \overlygoodset#m
@@ -75,7 +59,6 @@
 \phasei
 \phaseii
 \phaseiii
-
 
 \remvalue#m
 \remvalue[agent]#m
@@ -93,18 +76,3 @@
 \weight[agent]#m
 
 \weights#m
-
-
-# Algorithms.
-\maxweightmatching#m
-
-\arballoc#m
-
-\tct{Text%text}#n
-\tct*{Text%text}#n
-
-
-# Macros
-\IfEmptyT{arg}{emptyCode}
-\IfEmptyF{Arg}{fullCode}
-\IfEmptyTF{arg}{emptyCode}{fullCode}

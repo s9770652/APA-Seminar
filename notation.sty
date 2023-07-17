@@ -8,7 +8,7 @@
 		\node[inner sep=0pt] (tmp) {\vphantom{}};
 		\begin{scope}[overlay]
 			\path (current page text area.west|-tmp.base)
-			node[anchor=base west, inner sep=0pt, outer sep=0pt]{\(#1\)}
+				node[anchor=base west, inner sep=0pt, outer sep=0pt]{\(#1\)}
 			;
 		\end{scope}
 	\end{tikzpicture}
@@ -20,7 +20,7 @@
 		\node[inner sep=0pt] (tmp) {\vphantom{}};
 		\begin{scope}[overlay]
 			\path (current page text area.west|-tmp.base)
-			node[anchor=base west, inner sep=0pt, outer sep=0pt, xshift=#1]{\(#2\)}
+				node[anchor=base west, inner sep=0pt, outer sep=0pt, xshift=#1]{\(#2\)}
 			;
 		\end{scope}
 	\end{tikzpicture}
@@ -34,7 +34,7 @@
 		\node[inner sep=0pt](tmp){\vphantom{1}};
 		\begin{scope}[overlay]
 			\path (current page text area.east|-tmp.base)
-			node[anchor=base east,inner sep=0pt,outer sep=0pt]{(#1)}
+				node[anchor=base east,inner sep=0pt,outer sep=0pt]{(#1)}
 			;
 		\end{scope}
 	\end{tikzpicture}
@@ -93,11 +93,6 @@
 }
 \makeatother
 
-% Cup with higher lower limit (to be used for textmode).
-\providecommand*{\highbigcup}{%
-	\mathop{\bigcup{}}
-}
-
 % Differential operators
 \letdif*{\dif}{d}  % \d is redefined by fixdif. This line is just for renaming.
 \letdif*{\diff}{updelta}  % * = spacing correction; perhaps remove the asterisks if changing the math font
@@ -110,27 +105,27 @@
 }
 
 % Minima and maxima.
-\DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
 
 
 %%% Constants and specifiers.
-\def\APX{\ensuremath{\mathcal{APX}}}
-\def\euler{\ensuremath{\symup{e}}}
-\def\NP{\ensuremath{\mathcal{N\kern-0.02em P}}}
-\def\P{\ensuremath{\mathcal{P}}}
+\NewDocumentCommand{\compAPX}{}{\ensuremath{\mathcal{APX}}}
+\NewDocumentCommand{\euler}{}{\ensuremath{\symup{e}}}
+\NewDocumentCommand{\compNP}{}{\ensuremath{\mathcal{N\kern-0.02em P}}}
+\NewDocumentCommand{\compP}{}{\ensuremath{\mathcal{P}}}
 
 % Sets of numbers.
-\def\nat{\symbb{N}}
-\def\natzero{\symbb{N}_{0}}
-\def\natnozero{\symbb{N}_{>0}}
-\def\real{\symbb{R}}
-\def\realpos{\symbb{R}^+}
-\def\realposzero{\symbb{R}_0^+}
+\NewDocumentCommand{\nat}{}{\symbb{N}}
+\NewDocumentCommand{\natzero}{}{\symbb{N}_{0}}
+\NewDocumentCommand{\natnozero}{}{\symbb{N}_{>0}}
+\NewDocumentCommand{\real}{}{\symbb{R}}
+\NewDocumentCommand{\realpos}{}{\symbb{R}^+}
+\NewDocumentCommand{\realposzero}{}{\symbb{R}_0^+}
 
 % Custom \bar.
 % taken from: https://tex.stackexchange.com/a/583573
-\newcommand{\mybar}[3]{%
+\NewDocumentCommand{\mybar}{m m m}{%
 	\mathrlap{\hspace{#2}\overline{\scalebox{#1}[1]{\phantom{\ensuremath{#3}}}}}\ensuremath{#3}
 }
 
@@ -143,18 +138,47 @@
 
 
 %%% Bachmann-Landau notation.
-\def\bigo{\symcal{O}} % TODO: Schreibweisen angleichen
-\def\bigomega{\upOmega}
+\makeatletter
+\NewDocumentCommand{\l@nd@usymbol}{s O{} m m}{%
+	#4\IfBooleanTF{#1}{%
+		\paren*{#3}%
+	}{%
+		\IfEmptyTF{#2}{%
+			\paren{#3}%
+		}{%
+			\paren[#2]{#3}%
+		}%
+	}%
+}
+\NewDocumentCommand{\bigomega}{s o m}{\IfBooleanTF{#1}{\l@nd@usymbol*}{\l@nd@usymbol}[#2]{#3}{\upOmega}}
+\NewDocumentCommand{\bigomicron}{s o m}{\IfBooleanTF{#1}{\l@nd@usymbol*}{\l@nd@usymbol}[#2]{#3}{\symup{O}}}
+\NewDocumentCommand{\bigtheta}{s o m}{\IfBooleanTF{#1}{\l@nd@usymbol*}{\l@nd@usymbol}[#2]{#3}{\upTheta}}
+\NewDocumentCommand{\smallomega}{s o m}{\IfBooleanTF{#1}{\l@nd@usymbol*}{\l@nd@usymbol}[#2]{#3}{\upomega}}
+\NewDocumentCommand{\smallomicron}{s o m}{\IfBooleanTF{#1}{\l@nd@usymbol*}{\l@nd@usymbol}[#2]{#3}{\symup{o}}}
+\makeatother
 
 
 %%% Stochastic notation.
-\NewDocumentCommand\Prob{sm}{\IfBooleanTF{#1}{\symbb{P}\left[#2\right]}{\symbb{P}[#2]}}
-\NewDocumentCommand\Erw{sm}{\IfBooleanTF{#1}{\symbb{E}\left[#2\right]}{\symbb{E}[#2]}}
-\NewDocumentCommand\Var{sm}{\IfBooleanTF{#1}{\operatorname{Var}\left[#2\right]}{\operatorname{Var}[#2]}}
-\NewDocumentCommand\Cov{sm}{\IfBooleanTF{#1}{\operatorname{Cov}\left[#2\right]}{\operatorname{Cov}[#2]}}
+\makeatletter
+\NewDocumentCommand{\prob@bility}{s O{} m m}{%
+	#4\IfBooleanTF{#1}{%
+		\brackets*{#3}%
+	}{%
+		\IfEmptyTF{#2}{%
+			\brackets{#3}%
+		}{%
+			\brackets[#2]{#3}%
+		}%
+	}%
+}
+\NewDocumentCommand{\Cov}{s o m}{\IfBooleanTF{#1}{\prob@bility*}{\prob@bility}[#2]{#3}{\operatorname{Cov}}}
+\NewDocumentCommand{\Prob}{s o m}{\IfBooleanTF{#1}{\prob@bility*}{\prob@bility}[#2]{#3}{\symbb{P}}}
+\NewDocumentCommand{\Erw}{s o m}{\IfBooleanTF{#1}{\prob@bility*}{\prob@bility}[#2]{#3}{\symbb{E}}}
+\NewDocumentCommand{\Var}{s o m}{\IfBooleanTF{#1}{\prob@bility*}{\prob@bility}[#2]{#3}{\operatorname{Var}}}
+\makeatother
 
-\def\Unif{\symfrak{U}}
-\def\Norm{\symfrak{N}}
+\NewDocumentCommand{\Norm}{}{\symfrak{N}}
+\NewDocumentCommand{\Unif}{}{\symfrak{U}}
 
 
 %%% Period in math environments.
@@ -164,16 +188,12 @@
 
 
 %%% Abbreviation in texts.
-\def\eg{\mbox{e.\thinskip g.}\@}  % mbox to prevent breaks
-\def\ie{\mbox{i.\thinskip e.}\@}
+\NewDocumentCommand{\eg}{}{\mbox{e.\thinskip g.}\@}  % mbox to prevent breaks
+\NewDocumentCommand{\ie}{}{\mbox{i.\thinskip e.}\@}
 
+\NewDocumentCommand{\pp}{}{\nobreak pp}  % percentage points
 
 %%% Notation in texts.
-\def\pp{\nobreak pp}  % percentage points
-
-\NewDocumentCommand{\OPT}{}{\abb{OPT}}
-\NewDocumentCommand{\ALG}{}{\abb{ALG}}
-
 \NewDocumentCommand{\caseintextfont}{}{}  % actually defined in theme.sty
 \NewDocumentEnvironment{caseintext}{m m}{\par\smallskip\noindent{\caseintextfont Case #1 \Dash #2:}}{\par\smallskip}
 
@@ -243,161 +263,15 @@
 	% to remove space above blocks on top of frame
 	\NewDocumentCommand{\adjustfortopblock}{}{\vspace{-\medskipamount}}
 
+	% to remove space above blocks on top of frame
+	\NewDocumentCommand{\adjustfortopblockincolumn}{}{\vspace{-4.175ex}}
+
 	% to correct space above minipages
 	\NewDocumentCommand{\adjustforminipage}{}{\vspace{4pt}}  % Dirty! Whence does this number come? Sould there not be a better solution?
-
-	% to remove space above `itemize` and `enumerate` environments
-	\NewDocumentCommand{\adjustfortopitem}{}{\vspace{-0.5ex}}
 }{}
 \makeatother
 
 
 %%% Junk for playing around.
-\def\ABC{ABCDEFGHIJKLMNOPQRSTUVWXYZ}
-\def\abc{abcdefghijklmnopqrstuvwxyz}
-
-
-%%% APA seminar.
-% Maths & algo.
-\NewDocumentCommand{\af}{}{
-	\frac{\euler}{\raisebox{0.30ex}{\(\scriptstyle\euler - 1\)}}
-}
-\NewDocumentCommand{\afconst}{}{
-	\frac{\euler}{\raisebox{0.30ex}{\(\scriptstyle\euler - 1 + \USWsmallconstant\)}}
-}
-\NewDocumentCommand{\afinv}{}{
-	\frac{\euler - 1 + \USWsmallconstant}{\raisebox{0.4ex}{\(\scriptstyle\euler\)}}
-}
-\NewDocumentCommand{\agents}{}{
-	\symscr{A}
-}
-\NewDocumentCommand{\allallocs}{m m}{
-	\symbf{X}_{#1}(#2)
-}
-\NewDocumentCommand{\alloc}{s O{} O{i}}{
-	\symbf{x}\IfEmptyF{#3}{_{#3}}\IfEmptyTF{#2}{\IfBooleanT{#1}{^*}}{^{\IfBooleanT{#1}{*}#2}}
-}
-\NewDocumentCommand{\alloclen}{s O{} O{i}}{
-	\smash[b]{\tau\IfEmptyF{#3}{_{#3}}\IfEmptyTF{#2}{\IfBooleanT{#1}{^*}}{^{\IfBooleanT{#1}{*}#2}}}
-}
-\NewDocumentCommand{\asgd}{s m O{i}}{
-	\IfBooleanTF{#1}{o}{\textsl{a}}\IfEmptyF{#3}{_{#3}}^{#2}
-}
-\NewDocumentCommand{\attopt}{m O{i}}{
-	\mybar{0.95}{0.07em}{\symbf{x}}^*_{\smash{#2, #1}}
-}
-\NewDocumentCommand{\attoptlen}{m O{i}}{
-	\smash{\mybar{1.2}{0.02em}{\tau}^{*}_{#2, #1}}
-}
-\NewDocumentCommand{\bipartitegraph}{}{
-	G
-}
-\NewDocumentCommand{\colouringconstant}{}{
-	c
-}
-\NewDocumentCommand{\edgeweight}{m}{
-	w(#1)
-}
-\NewDocumentCommand{\genericitem}{O{}}{
-	j\IfEmptyF{#1}{^{#1}}
-}
-\NewDocumentCommand{\genericset}{s O{}}{
-	\symscr{S}\IfBooleanT{#1}{^*}\IfEmptyF{#2}{_{#2}}
-}
-\NewDocumentCommand{\goods}{}{
-	\symscr{G}
-}
-\NewDocumentCommand{\goodsordered}{m O{i}}{
-	\goods\IfEmptyF{#2}{_{#2}}^{\smash[t]{#1}}
-}
-\NewDocumentCommand{\goodsrem}{}{
-	\symscr{G}^{\mathup{rem}}
-}
-\NewDocumentCommand{\lostset}{m O{i}}{
-	\symscr{L}_{\smash{\IfEmptyF{#2}{#2, } #1}}
-}
-\NewDocumentCommand{\lostsetlen}{m O{i}}{
-	\ell_{\smash{\IfEmptyF{#2}{#2, } #1}}
-}
-\NewDocumentCommand{\matching}{O{}}{
-	\symscr{M}\IfEmptyF{#1}{_{\hspace{-.1em}#1}}
-}
-\NewDocumentCommand{\overlygooditem}{O{i}}{
-	j^{+}\IfEmptyF{#1}{_{#1}}
-}
-\NewDocumentCommand{\overlygoodset}{O{i}}{
-	\goods^{+}\IfEmptyF{#1}{_{#1}}
-}
-\NewDocumentCommand{\phasei}{}{%
-	Ⅰ%
-}
-\NewDocumentCommand{\phaseii}{}{%
-	Ⅱ%
-}
-\NewDocumentCommand{\phaseiii}{}{%
-	Ⅲ%
-}
-\NewDocumentCommand{\remvalue}{O{i}}{
-	u\IfEmptyF{#1}{_{#1}}
-}
-\NewDocumentCommand{\USWconstant}{}{
-	C
-}
-\NewDocumentCommand{\USWsmallconstant}{}{
-	\varepsilon
-}
-\NewDocumentCommand{\unluckyagents}{m}{
-	\agents^-_{#1}
-}
-\NewDocumentCommand{\unluckyagentsalgo}{m}{
-	\alpha
-}
-\NewDocumentCommand{\unluckyagentslen}{m}{
-	a^-_{#1}
-}
-\NewDocumentCommand{\valuations}{O{} o O{i}}{
-	v\IfEmptyF{#3}{_{#3}}\IfEmptyF{#1}{\paren[#2]{#1}}
-}
-\NewDocumentCommand{\weight}{O{i}}{
-	\eta\IfEmptyF{#1}{_{#1}}
-}
-\NewDocumentCommand{\weights}{}{
-	E
-}
-
-\SetKwFunction{maxweightmatching}{max\_weight\_matching}
-\SetKwFunction{arballoc}{arbitrary\_allocation}
-
-\NewDocumentCommand{\phaseisep}{}{\nonl\CommentSty{Phase \phasei:}\;}
-\NewDocumentCommand{\phaseiisep}{}{\vspace{0.25em}\nonl\CommentSty{Phase \phaseii:}\;}
-\NewDocumentCommand{\phaseiiisep}{}{\vspace{0.25em}\nonl\CommentSty{Phase \phaseiii:}\;}
-
-% Texts.
-\NewDocumentCommand{\abb}{m}{#1}  % actually defined in theme.sty
-
-\NewDocumentCommand{\CASC}{}{\abb{CASC}}
-\NewDocumentCommand{\Gap}{}{\abb{Gap-Max-\liningnums{3}-Colouring}}
-\NewDocumentCommand{\EFone}{}{\abb{EF\liningnums{1}}}
-\NewDocumentCommand{\EFX}{}{\abb{EFX}}
-\NewDocumentCommand{\ESW}{}{%
-	\relax\ifmmode{\operatorname{ESW}}\else{\abb{MEP}}\fi%
-}
-\NewDocumentCommand{\No}{}{\abb{No}~instance}
-\NewDocumentCommand{\NSW}{}{%
-	\relax\ifmmode{\operatorname{NSW}}\else{\abb{MNP}}\fi%
-}
-\NewDocumentCommand{\OXS}{}{\abb{OXS}}
-\NewDocumentCommand{\PO}{}{\abb{PO}}
-\makeatletter
-\NewDocumentCommand{\RepReMatch}{}{\@ifclassloaded{libertinus}{\Lss02{RepReMɑtc\Lsalt{h}}}{RepReMatch}}
-\NewDocumentCommand{\SMatch}{}{\@ifclassloaded{libertinus}{SMɑtc\Lsalt{h}}{SMatch}}
-\makeatother
-\NewDocumentCommand{\SPLC}{}{\abb{SPLC}}
-\NewDocumentCommand{\USW}{}{%
-	\relax\ifmmode{\operatorname{USW}}\else{\abb{MUP}}\fi%
-}
-\NewDocumentCommand{\XOS}{}{\abb{XOS}}
-\NewDocumentCommand{\Yes}{}{\abb{Yes}~instance}
-
-\crefname{property}{property}{properties}
-\Crefname{property}{Property}{Properties}
+\NewDocumentCommand{\ABC}{}{ABCDEFGHIJKLMNOPQRSTUVWXYZ}
+\NewDocumentCommand{\abc}{}{abcdefghijklmnopqrstuvwxyz}

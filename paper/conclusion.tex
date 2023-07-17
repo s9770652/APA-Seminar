@@ -18,7 +18,7 @@ In phase \phasei, a set of high-value items is determined through repeated match
 In phase \phaseii, agents are repeatedly matched with the remaining items.
 In phase \phaseiii, the high-value items are finally assigned to the agents.
 
-Additionally, it was shown that any polynomial-time algorithm for the submodular \NSW{} must have an approximation factor of at least \(\frac{\euler}{\euler - 1}\) unless \(\P = \NP\).
+Additionally, it was shown that any polynomial-time algorithm for the submodular \NSW{} must have an approximation factor of at least \(\frac{\euler}{\euler - 1}\) unless \(\compP = \compNP\).
 This holds even when the problem is symmetric and the valuation functions equal.
 
 \subsection{Open Questions and Recent Work}
@@ -32,7 +32,7 @@ The research on the \NSW{} gained pace in the last years, and some publications 
 	\item
 	\XOS{} functions encompass the submodular functions.
 	Unfortunately, \RepReMatch{} does not guarantee an approximation factor independent of the number of items even for the symmetric \XOS{} \NSW~\cite[Section 6.2]{APNSWuSVþUM}.
-	\Citeauthor{sublin_approx_algo_for_nsw_with_xos_valuations}~\cite{sublin_approx_algo_for_nsw_with_xos_valuations} used both a modified \RepReMatch{} and the discrete moving-knife method to get an \(\bigo(n^{53/54})\)-approximation algorithm.
+	\Citeauthor{sublin_approx_algo_for_nsw_with_xos_valuations}~\cite{sublin_approx_algo_for_nsw_with_xos_valuations} used both a modified \RepReMatch{} and the discrete moving-knife method to get an \(\bigomicron{n^{53/54}}\)-approximation algorithm.
 	However, the algorithm uses demand and \XOS{} queries, whereas \RepReMatch{} needs only the weaker value queries.
 
 	\item

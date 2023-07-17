@@ -3,7 +3,7 @@
 %\setmathfont[range={\mathcal,\mathbfcal}]{Cambria Math}  % destroys positioning of super-/subscript, fractions, etc.‽
 %\RequirePackage[regular]{newcomputermodern}  % newest version of Computer Modern (regular: display weight)
 
-\RenewDocumentCommand{\abb}{m}{\text{#1}}  % abbreviations
+\NewDocumentCommand{\abb}{m}{\text{#1}}  % abbreviations
 \setkomafont{captionlabel}{\usekomafont{descriptionlabel}}
 
 \RenewDocumentCommand{\caseintextfont}{}{\maybesffamily\itshape}  % font used for case labels (e. g., Case 1 -- x > 1; Case 1 -- x <= 1)

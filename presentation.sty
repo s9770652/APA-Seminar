@@ -37,6 +37,8 @@
 \setbeamerfont{section number projected}{family=\tlffont}  % section numbers in toc in lining figures
 \setbeamerfont{item projected}{family=\tlffont}  % number of enumerate labels in lining figures
 
+\NewDocumentCommand{\abb}{m}{\text{#1}}  % abbreviations
+
 
 %%% Background graphics.
 \newlength{\goethelogotopmargin}
@@ -54,14 +56,14 @@
 	% Logo in top right corner
 	\begin{tikzpicture}[overlay,remember picture]
 		\node[at=(current page.north east), anchor=north east, inner sep=0, xshift=-\beamer@rightmargin, yshift=-\goethelogotopmargin] (fglogo){  % 1ex comes from beamertemplate 'frametitle'
-			\includegraphics[height=\goethelogoheight]{include/gu_logo_blau.pdf}
+			\includegraphics[height=\goethelogoheight]{../gu_logo_blau.pdf}
 		};
 		\path[draw, goetheblau, thick] ($(fglogo.south west) - (\beamer@rightmargin, 0)$) -- ($(fglogo.north west) - (\beamer@rightmargin, -100)$);
 	\end{tikzpicture}
 	% Head in bottom left corner
 	\begin{tikzpicture}[overlay,remember picture]
 		\node[at=(current page.south west), anchor=south west, inner sep=0, xshift=-0.19\paperheight, opacity=\goetheheadopacity] {
-			\includegraphics[width=0.66\paperheight]{include/gu_logo_sandgrau.pdf}
+			\includegraphics[width=0.66\paperheight]{../gu_logo_sandgrau.pdf}
 		};
 	\end{tikzpicture}
 }
