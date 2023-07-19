@@ -3,7 +3,6 @@
 \subsection{Allocations}
 \begin{frame}{Allocations}
 	Setting:
-	\adjustfortopitem
 	\begin{itemize}
 		\item
 		recipients: set \(\agents\) of \(n\) agents
@@ -18,10 +17,10 @@
 			indivisible
 		\end{itemize}
 	\end{itemize}
-	\beamerimage at ( 8cm, 1.25cm) {\includegraphics[height=2cm]{img/nosatellites}};
-	\beamerimage at (10cm, 1.25cm) {\includegraphics[height=2cm]{img/nowater}};
+	\beamerimage at ( 8cm, 1.4cm) {\resizebox{!}{2cm}{\input{img/nosatellite.pdf_tex}}};
+	\beamerimage at (11cm, 1.4cm) {\resizebox{!}{2cm}{\input{img/nowater.pdf_tex}}};
 	\vspace{-3ex}
-	\begin{definition}[1]
+	\begin{definition}
 		An \emph{allocation} is a tuple
 		\(\alloc[][] = (\alloc)_{i \in \agents}\)
 		of bundles \(\alloc \subset \goods\) such that each item is element of precisely one bundle.
@@ -39,41 +38,35 @@
 \subsection{Valuation Functions}
 \begin{frame}{Valuation Functions}{}
 	Requirements:
-	\adjustfortopitem
 	\begin{itemize}
 		\item
-		monotonically non-decreasing: \(\valuations[\genericset[1]] \le \valuations[\genericset[2]]\) \quad \(\forall \genericset[1] \subset \genericset[2] \subset \goods\)
+		monotonically non-decreasing: \(\valuations[\genericset[1]] \le \valuations[\genericset[2]]\)
 
 		\item
 		normalised: \(\valuations[\emptyset] = 0\)
-
-		\item
-		non-negative: \(\valuations[\genericset] \ge 0\) \quad \(\forall \genericset \subset \goods\)
 	\end{itemize}
 
+	\medskip
+
 	Types:
-	\adjustfortopitem
 	\begin{itemize}
 		\item
-		additive: \(\valuations[\genericset] \coloneq \sum_{\genericitem \in \genericset} \valuations[ \hairspace \genericitem ]\) \quad \(\forall \genericset \subset \goods\)
+		additive: \(\valuations[\genericset] \coloneq \sum_{\genericitem \in \genericset} \valuations[ \hairspace \genericitem ]\)
 
 		\item
-		submodular: \(\valuations[\genericset[1] \given \genericset[2]] \coloneq \valuations[\genericset[1] \cup \genericset[2]] - \valuations[\genericset[2]]\) \quad \(\forall \genericset[1], \genericset[2] \subset \goods\) with \(\genericset[1], \genericset[2]\) disjoint
+		submodular: \(\valuations[\genericset[1] \given \genericset[2]] \coloneq \valuations[\genericset[1] \cup \genericset[2]] - \valuations[\genericset[2]]\)
 		\begin{itemize}
-			\item
-			more general
-
 			\item
 			diminishing returns
 		\end{itemize}
 	\end{itemize}
 
 	\begin{center}
-		\includegraphics[height=2cm]{img/additive}
+		\resizebox{!}{2.5cm}{\input{img/additive.pdf_tex}}
 		\hfil
-		\includegraphics[height=2cm]{img/submodular}
+		\resizebox{!}{2.5cm}{\input{img/submodular.pdf_tex}}
 		\hfil
-		\includegraphics[height=2cm]{img/diminishingreturns}
+		\resizebox{!}{2.5cm}{\input{img/diminishingreturns.pdf_tex}}
 	\end{center}
 \end{frame}
 
@@ -84,13 +77,12 @@
 \subsection{Maximum Nash Social Welfare Problem}
 \begin{frame}{Asymmetric Maximum Nash Social Welfare Problem}
 	\adjustfortopblock
-	\begin{problem}[2]
+	\begin{problem}
 		\begin{equation*}
 			\alloc*[][] \overset{!}{=} \smashoperator{\argmax_{\alloc[][] \in \allallocs{\scriptstyle\agents\kern1pt}{\goods}}} \braces{ \NSW(\alloc[][]) }
 			\quad\text{with~}
 			\NSW(\alloc[][]) \coloneq \paren[\Big]{ \smashoperator{\prod_{i \in \agents}} \valuations[\alloc]^{\,\textstyle\weight} }{}^{\textstyle 1 / \sum_{i \in \agents} \weight}
 		\end{equation*}
-		\adjustfortopitem
 		\begin{itemize}
 			\item
 			\(\allallocs{\agents\kern1pt}{\goods}\): all possible allocations
@@ -109,7 +101,8 @@
 			\item
 			\dots{} independent from \(m\)?
 		\end{itemize}
-		\beamerimage at (13cm, 1.15cm) {\includegraphics[height=2cm]{img/nvsm}};
+		\def\svgwidth{3cm}
+		\beamerimage at (13.5cm, 1.1cm) {\input{img/nvsm.pdf_tex}};
 		\vspace{-0.75ex}
 	\end{alertblock}
 \end{frame}
