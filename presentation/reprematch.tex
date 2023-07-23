@@ -19,7 +19,7 @@
 
 					\item
 					submodular valuations:
-					set of lowest valuation \\
+					lowest valuation \\
 					approximable only by \(\bigomega[\big]{ \sqrt{m/\ln m} }\) \smash{\raisebox{-.25ex}{\Large\Lightning}}
 				\end{itemize}
 			\end{itemize}
@@ -74,7 +74,7 @@
 		repeat \(\ceil{\log_2 n} + 1\) times
 		\begin{enumerate}
 			\item
-			create bipartite graph \((\agents, \goods, E)\) with edge weights \(\weight \cdot \log \valuations[ \hairspace j ]\)
+			create bipartite graph \((\agents, \goods, E)\) with edge weights \(\log \valuations[ \hairspace j ]^{\weight}\)
 
 			\item
 			compute maximum weight matching
@@ -91,7 +91,7 @@
 		repeat until \(\goods = \emptyset\)
 		\begin{enumerate}
 			\item
-			create bipartite graph \((\agents, \goods, E)\) with edge weights \(\weight \cdot \log \valuations[\alloc[\phaseii] \cup \{ \hairspace j \} ] \)
+			create bipartite graph \((\agents, \goods, E)\) with edge weights \(\log \valuations[\alloc[\phaseii] \cup \{ \hairspace j \} ]^{\weight} \)
 
 			\item
 			compute maximum weight matching
@@ -105,7 +105,7 @@
 	\begin{enumerate}
 		\conti
 		\item
-		create bipartite graph \(\paren[\big]{ \agents, \bigcup_{i \in \agents} \alloc[\phasei], E }\) with edge weights \(\weight \cdot \log \valuations[\alloc[\phaseii] \cup \{ \hairspace j \} ] \)
+		create bipartite graph \(\paren[\big]{ \agents, \bigcup_{i \in \agents} \alloc[\phasei], E }\) with edge weights \(\log \valuations[\alloc[\phaseii] \cup \{ \hairspace j \} ]^{\weight} \)
 
 		\item
 		compute maximum weight matching
@@ -169,10 +169,10 @@
 		\end{column}
 		\begin{column}{0.375\textwidth}
 			\centering
-			\includegraphics<1>[height=4.25cm]{img/outstanding_1}
-			\includegraphics<2>[height=4.25cm]{img/outstanding_2}
-			\includegraphics<3>[height=4.25cm]{img/outstanding_3}
-			\includegraphics<4>[height=4.25cm]{img/outstanding_4}
+			\includegraphics<1>[height=4.25cm]{img/outstanding_1}%
+%			\includegraphics<2>[height=4.25cm]{img/outstanding_2}%
+%			\includegraphics<3>[height=4.25cm]{img/outstanding_3}%
+%			\includegraphics<4>[height=4.25cm]{img/outstanding_4}%
 		\end{column}
 	\end{columns}
 \end{frame}
@@ -182,42 +182,82 @@
 
 
 \subsection{Analysing Phase \texorpdfstring{\phaseii}{II}}
-\begin{frame}{Analysing Phase \phaseii{} (1/2)}
+\begin{frame}[fragile]{Analysing Phase \phaseii{} (1/2)}
 	\adjustfortopblockincolumn
 	\begin{columns}[t, onlytextwidth]
 		\begin{column}{0.55\textwidth}
-			\begin{definition}
-				The set \(\lostset{r}\) of \emph{lost items} is the set of all optimal items \(j \in \alloc*\) assigned to other agents \(i' \neq i\) in round \(r\).
+			\begin{definition}<2->
+				The set \(\lostset{r}\) of \emph{lost items} is the set of all optimal items \(j \in \alloc*\)
+				\onslide<3->{assigned to other agents \(i' \neq i\) in round \(r\).}
 			\end{definition}
-			\begin{definition}
+			\begin{definition}<4->
 				Let \(\alloc[\phaseii] = \{ \asgd{1}, \asgd{2}, \dots \}\) be the bundle of agent \(i\).
-				The set of \emph{optimal and attainable items} is defined as
+				\onslide<5->{The set of \emph{optimal and attainable items} is defined as}
 				\begin{equation*}
-					\attopt{r} \coloneq \begin{cases*}
-						\alloc* \setminus \paren[\big]{ \bigcup_{i' \in \agents} \alloc[\phasei][i'] \cup \lostset{1} } & in round \(r = 1\), \\
-						\attopt{r-1} \setminus ( \lostset{r} \cup \{\asgd{r-1}\} ) & in round \(r \ge 2\).
+					\onslide<5->{\attopt{r} \coloneq} \begin{cases*}
+						\only<11->{\alloc* \setminus \paren[\big]{ \bigcup_{i' \in \agents} \alloc[\phasei][i'] \cup \lostset{1} }}\only<-10>{\phantom{ \alloc* \setminus \paren[\big]{ \bigcup_{i' \in \agents} \alloc[\phasei][i'] \cup \lostset{1} } }}
+						& \only<6->{in round \(r = 1\), }\only<-5>{\phantom{ in round \(r = 1\),}} \\
+						\only<19->{\attopt{r-1} \setminus ( \lostset{r} \cup \{\asgd{r-1}\} )}\only<-18>{\phantom{ \attopt{r-1} \setminus ( \lostset{r} \cup \{\asgd{r-1}\} ) }}
+						& \only<12->{in round \(r \ge 2\).}\only<-11>{\phantom{in round \(r \ge 2\).}}
 					\end{cases*}
 				\end{equation*}
 			\end{definition}
 
-			\(\Rightarrow\) What is the valuation of the remaining items?
+			\onslide<20->{\(\Rightarrow\) What is the valuation of the remaining items?}
 		\end{column}
 		\begin{column}{0.45\textwidth}
-			\vphantom{a}\vspace{1.0\baselineskip}\par
-			\centering
-			\includegraphics[width=6cm]{img/optainable}
+			\RenewDocumentCommand{\asgd}{s m O{i}}{\textbf{\textsl{a}}_{#3}^{#2}}
+			\begin{figure}
+				\def\figwidth{\def\svgwidth{5.5cm}}  % Why on earth must it be repeated each time?
+				\begin{overprint}
+					\onslide< 7 |handout:0>\centering\figwidth\input{img/optainable_r1_1.pdf_tex}
+					\onslide< 8 |handout:0>\centering\figwidth\input{img/optainable_r1_2.pdf_tex}
+					\onslide< 9 |handout:0>\centering\figwidth\input{img/optainable_r1_3.pdf_tex}
+					\onslide<10-|handout:1>\centering\figwidth\input{img/optainable_r1_4.pdf_tex}
+				\end{overprint}
+
+				\vspace{2ex}
+
+				\begin{overprint}
+					\onslide<13 |handout:0>\centering\figwidth\input{img/optainable_r2_1.pdf_tex}
+					\onslide<14 |handout:0>\centering\figwidth\input{img/optainable_r2_2.pdf_tex}
+					\onslide<15 |handout:0>\centering\figwidth\input{img/optainable_r2_3.pdf_tex}
+					\onslide<16 |handout:0>\centering\figwidth\input{img/optainable_r2_4.pdf_tex}
+					\onslide<17 |handout:0>\centering\figwidth\input{img/optainable_r2_5.pdf_tex}
+					\onslide<18-|handout:1>\centering\figwidth\input{img/optainable_r2_6.pdf_tex}
+				\end{overprint}
+			\end{figure}
 		\end{column}
 	\end{columns}
 \end{frame}
 
 \begin{frame}{Analysing Phase \phaseii{} (2/2)}
-	\begin{center}
-		\includegraphics[height=4cm]{img/anal2_1}
+	\begin{figure}
+		\def\figwidth{\def\svgwidth{8cm}}  % Why on earth must it be repeated each time?
+		\begin{overprint}
+			\onslide< 1|handout:0>\centering\figwidth\input{img/optainable_anal_1.pdf_tex}
+			\onslide< 2|handout:0>\centering\figwidth\input{img/optainable_anal_2.pdf_tex}
+			\onslide< 3|handout:0>\centering\figwidth\input{img/optainable_anal_3.pdf_tex}
+			\onslide< 4|handout:0>\centering\figwidth\input{img/optainable_anal_4.pdf_tex}
+			\onslide< 5|handout:0>\centering\figwidth\input{img/optainable_anal_5.pdf_tex}
+			\onslide< 6|handout:0>\centering\figwidth\input{img/optainable_anal_6.pdf_tex}
+			\onslide< 7|handout:0>\centering\figwidth\input{img/optainable_anal_7.pdf_tex}
+			\onslide< 8|handout:0>\centering\figwidth\input{img/optainable_anal_8.pdf_tex}
+			\onslide< 9|handout:0>\centering\figwidth\input{img/optainable_anal_9.pdf_tex}
+			\onslide<10|handout:0>\centering\figwidth\input{img/optainable_anal_10.pdf_tex}
+			\onslide<11|handout:0>\centering\figwidth\input{img/optainable_anal_11.pdf_tex}
+			\onslide<12|handout:0>\centering\figwidth\input{img/optainable_anal_12.pdf_tex}
+			\onslide<13|handout:0>\centering\figwidth\input{img/optainable_anal_13.pdf_tex}
+			\onslide<14|handout:0>\centering\figwidth\input{img/optainable_anal_14.pdf_tex}
+			\onslide<15|handout:0>\centering\figwidth\input{img/optainable_anal_15.pdf_tex}
+			\onslide<16|handout:0>\centering\figwidth\input{img/optainable_anal_16.pdf_tex}
+		\end{overprint}
+	\end{figure}
+	{\vspace{-3ex}
+	\begin{lemma}
 		\begin{equation*}
 			\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ]
 			\ge \valuations[ \attopt{r} ] - \valuations[ \asgd{1}, \dots, \asgd{r-1} ] - \sum_{l=2}^{r} \abs{\lostset{l}} \cdot \valuations[\asgd{l-1} \given \asgd{1}, \dots, \asgd{l-2} ]
 		\end{equation*}
-		\scriptsize \textbf{Plan:} first show black set, then alternately enlarge green set and uncover blue sets \(\Rightarrow\) valuation of grey area = val. of black -- val. of dark green -- val. of blue \(\Rightarrow\) lower bound is enough, therefore subtract val. of whole green area \(\Rightarrow\) show that sum of marg. val. of \(\asgd{l}\) equals val. of \(\asgd{1}, \dots, \asgd{r-1}\) \(\Rightarrow\) then subtract marg. val. of blue area by summing over marg. val. of each lost set \(\Rightarrow\) marg. val. of lost set \(\le\) sum of marg. val. of items of lost set \(\Rightarrow\) marg. val. of item of lost set \(\le\) marg. val. of \(\asgd{l-1}\) because \(\asgd{l-1}\) assigned before items in lost set
-	\end{center}
-	\beamerimage[align=center, font=\scriptsize] at (13.5cm, 5cm) {maybe auxiliary calculation for \\ \(\valuations[ \lostset{l} \given \asgd{1}, \dots, \asgd{l-2} ]\) \\ \(= \abs{\lostset{l}} \cdot \valuations[\asgd{l-1} \given \asgd{1}, \dots, \asgd{l-2} ]\) \\ here};
+	\end{lemma}}
 \end{frame}
