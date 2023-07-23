@@ -50,11 +50,11 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.59090909)%
+  \begin{picture}(1,0.45454545)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{optainable_r1_2.pdf}}%
-    \put(0.86042442,0.46427593){\color[rgb]{0.70196078,0.02352941,0.17254902}\makebox(0,0)[t]{\lineheight{0.80000001}\smash{\begin{tabular}[t]{c}\boldmath\(\bigcup_{i' \in \agents} \alloc[\phasei][i']\)\end{tabular}}}}%
-    \put(0.06573715,0.38321307){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{0.80000001}\smash{\begin{tabular}[t]{c}\boldmath\(\alloc*\)\end{tabular}}}}%
+    \put(0.86042442,0.33198305){\color[rgb]{0.70196078,0.02352941,0.17254902}\makebox(0,0)[t]{\lineheight{0.80000001}\smash{\begin{tabular}[t]{c}\boldmath\(\bigcup_{i' \in \agents} \alloc[\phasei][i']\)\end{tabular}}}}%
+    \put(0.06573715,0.25092019){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{0.80000001}\smash{\begin{tabular}[t]{c}\boldmath\(\alloc*\)\end{tabular}}}}%
   \end{picture}%
 \endgroup%

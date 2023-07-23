@@ -1,6 +1,6 @@
 %% Creator: Inkscape 1.1.1 (3bf5ae0d25, 2021-09-20), www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'optainable_r2_6.pdf' (pdf, eps, ps)
+%% Accompanies image file 'optainable_anal_18.pdf' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -38,7 +38,7 @@
   \newcommand*\fsize{\dimexpr\f@size pt\relax}%
   \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{1559.05511811bp}%
+    \setlength{\unitlength}{2267.71653543bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -50,15 +50,13 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.45454545)%
+  \begin{picture}(1,0.5625)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{optainable_r2_6.pdf}}%
-    \put(0.12960143,0.34297259){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{0.80000001}\smash{\begin{tabular}[t]{c}\boldmath\(\attopt{r-1}\)\end{tabular}}}}%
-    \put(0.80254805,0.09153453){\color[rgb]{0,0.37647059,0.56078431}\makebox(0,0)[t]{\lineheight{0.80000001}\smash{\begin{tabular}[t]{c}\boldmath\(\lostset{r}\)\end{tabular}}}}%
-    \put(0.79599593,0.40488192){\color[rgb]{0.25098039,0.58431373,0.17254902}\makebox(0,0)[t]{\lineheight{0.80000001}\smash{\begin{tabular}[t]{c}\boldmath\(\asgd{r-1}\)\end{tabular}}}}%
-    \put(0.56500786,0.26609614){\color[rgb]{0.25098039,0.58431373,0.17254902}\makebox(0,0)[t]{\lineheight{0.80000001}\smash{\begin{tabular}[t]{c}\textbf{?}\end{tabular}}}}%
-    \put(0.36737413,0.15452326){\color[rgb]{0.50196078,0.50196078,0.50196078}\makebox(0,0)[t]{\lineheight{0.80000001}\smash{\begin{tabular}[t]{c}\boldmath\(\attopt{r}\)\end{tabular}}}}%
-    \put(0.92523859,0.27068832){\color[rgb]{0.25098039,0.58431373,0.17254902}\makebox(0,0)[t]{\lineheight{0.80000001}\smash{\begin{tabular}[t]{c}\textbf{?}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{optainable_anal_18.pdf}}%
+    \put(0.03339089,0.42189705){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{0.80000001}\smash{\begin{tabular}[t]{c}\boldmath\(\attopt{1}\)\end{tabular}}}}%
+    \put(0.02672376,0.33921476){\color[rgb]{0.25098039,0.58431373,0.17254902}\makebox(0,0)[t]{\lineheight{0.80000001}\smash{\begin{tabular}[t]{c}\boldmath\(\alloc[\phaseii]\)\end{tabular}}}}%
+    \put(0.02597597,0.25653247){\color[rgb]{0,0.37647059,0.56078431}\makebox(0,0)[t]{\lineheight{0.80000001}\smash{\begin{tabular}[t]{c}\boldmath\(\lostset{l}\)\end{tabular}}}}%
+    \put(0.02892583,0.17385018){\color[rgb]{0.50196078,0.50196078,0.50196078}\makebox(0,0)[t]{\lineheight{0.80000001}\smash{\begin{tabular}[t]{c}\boldmath\(\attopt{r}\)\end{tabular}}}}%
   \end{picture}%
 \endgroup%

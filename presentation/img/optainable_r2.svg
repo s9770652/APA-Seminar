@@ -24,9 +24,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="1"
-     inkscape:cx="1260"
-     inkscape:cy="394.5"
+     inkscape:zoom="0.5"
+     inkscape:cx="1646"
+     inkscape:cy="-319"
      inkscape:window-width="2560"
      inkscape:window-height="1387"
      inkscape:window-x="1912"
@@ -42,9 +42,9 @@
      id="defs2">
     <pattern
        inkscape:collect="always"
-       xlink:href="#pattern5141"
-       id="pattern5285"
-       patternTransform="matrix(-0.3403398,0.19649527,0.05326402,0.09225604,766.00008,-196.99999)" />
+       xlink:href="#pattern2070"
+       id="pattern2134"
+       patternTransform="matrix(0.23678086,0.23678086,-0.23678086,0.23678086,766.00002,-467.00001)" />
     <linearGradient
        id="linearGradient4698"
        inkscape:swatch="solid">
@@ -186,11 +186,45 @@
            y="-52.122917" />
       </g>
     </pattern>
+    <pattern
+       patternUnits="userSpaceOnUse"
+       width="18.000023"
+       height="459"
+       patternTransform="translate(766.00002,-467.00001)"
+       id="pattern2070">
+      <g
+         id="g1988"
+         style="stroke-width:2.42528"
+         transform="matrix(3.7795276,0,0,9.1788529,-766.00002,478.42859)">
+        <rect
+           style="fill:#999999;stroke:none;stroke-width:13.8241;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:13.8241, 13.8241;stroke-dashoffset:138.241"
+           id="rect1984"
+           width="2.3812499"
+           height="50.006248"
+           x="202.67084"
+           y="-52.122917" />
+        <rect
+           style="fill:none;stroke:none;stroke-width:13.8241;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:13.8241, 13.8241;stroke-dashoffset:138.241"
+           id="rect1986"
+           width="2.3812499"
+           height="50.006248"
+           x="205.05209"
+           y="-52.122917" />
+      </g>
+    </pattern>
   </defs>
   <g
      inkscape:label="Ebene 1"
      inkscape:groupmode="layer"
      id="layer1">
+    <rect
+       style="stroke:none;fill:url(#pattern2070)"
+       transform="scale(0.26458333)"
+       width="18.000023"
+       height="459"
+       x="766.00002"
+       y="-467.00001"
+       id="rect2075" />
     <path
        style="fill:#333333;fill-rule:evenodd;stroke:none;stroke-width:5.7;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1"
        d="m 249.2021,39.087017 c -31.37909,-1.335281 -64.57736,-0.118864 -94.66686,9.728613 -37.54472,12.287361 -50.45729,40.262272 -77.828887,63.98432 -13.648359,11.82857 -55.712631,36.00698 -39.662798,60.61672 48.139776,73.81432 128.606935,27.85372 199.062345,37.04356 101.03219,13.17811 152.17532,69.31786 254.81476,10.10279 17.94963,-10.35555 13.60258,-36.04285 5.23849,-52.01065 -17.19673,-32.83012 -54.56465,-48.0955 -84.18991,-67.35192 -27.89389,-18.131032 -54.17347,-45.201746 -87.18331,-54.255708 -5.6546,-1.550948 -11.73341,0.724955 -17.58635,0.374177 -19.49128,-1.168147 -46.94069,-7.764763 -57.99748,-8.231902 z"
@@ -220,7 +254,7 @@
        id="path25367"
        sodipodi:nodetypes="csszzsc" />
     <path
-       style="mix-blend-mode:normal;fill:url(#pattern5285);fill-opacity:1;fill-rule:evenodd;stroke:#999999;stroke-width:5.7;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:5.7, 5.7;stroke-dashoffset:57;stroke-opacity:1"
+       style="mix-blend-mode:normal;fill:url(#pattern2134);fill-opacity:1;fill-rule:evenodd;stroke:#999999;stroke-width:5.7;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:5.7, 5.7;stroke-dashoffset:57;stroke-opacity:1"
        d="m 292.41959,85.873697 c -1.61782,7.280228 -5.84991,14.052556 -1.49672,21.515193 6.19095,10.61306 32.30128,11.60356 39.28864,1.12254 3.99039,-5.98559 -0.57762,-16.03315 -1.49673,-23.386085 -0.91911,-7.352935 3.30033,-5.560653 -2.05798,-12.347854 -5.35832,-6.787201 -11.95853,-6.756032 -17.77341,-5.612659 -12.80742,2.518307 -14.10395,8.048682 -16.4638,18.708865 z"
        id="path893"
        sodipodi:nodetypes="csszzsc" />
@@ -288,13 +322,13 @@
     </g>
     <text
        xml:space="preserve"
-       style="font-size:3.52777px;line-height:80%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-size:3.52777px;line-height:80%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#808080;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
        x="202.05577"
        y="165.01221"
        id="text31611"><tspan
          sodipodi:role="line"
          id="tspan31609"
-         style="fill:#000000;stroke:none;stroke-width:0.264583px"
+         style="fill:#808080;stroke:none;stroke-width:0.264583px;fill-opacity:1"
          x="202.05577"
          y="165.01221">\boldmath\(\attopt{r}\)</tspan></text>
     <g
@@ -312,13 +346,5 @@
            x="314.49609"
            y="96.350662">\textbf{?}</tspan></text>
     </g>
-    <rect
-       style="stroke:none;fill:url(#pattern5141)"
-       transform="scale(0.26458333)"
-       width="18.000023"
-       height="188.99999"
-       x="766.00002"
-       y="-197"
-       id="rect5146" />
   </g>
 </svg>

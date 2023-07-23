@@ -125,8 +125,8 @@
 	But what qualifies as \enquote{high-value}?
 
 	\begin{definition}
-		Let \(\alloc* = \{ \asgd*{1}, \asgd*{2}, \dots\}\) be an optimal bundle.
-		An item \(\genericitem \in \goods\) is \emph{outstanding} if \(\valuations[ \hairspace \genericitem] \ge \valuations[\asgd*{1}]\).
+		Let \(\alloc* = \braces[\big]{ \asgd*{1}, \asgd*{2}, \dots }\) be an optimal bundle.
+		An item \(\genericitem \in \goods\) is \emph{outstanding} if \(\valuations[ \hairspace \genericitem] \ge \valuations[\asgd*{1}][\big]\).
 	\end{definition}
 
 	\(\Rightarrow\) Are enough outstanding items reserved?
@@ -169,7 +169,14 @@
 		\end{column}
 		\begin{column}{0.375\textwidth}
 			\centering
-			\includegraphics<1>[height=4.25cm]{img/outstanding_1}%
+			\begin{tikzpicture}
+				\node at (0, 0) {\includegraphics[height=7mm]{img/outstanding_agent}};
+				\node at (0, 1) {\includegraphics[height=7mm]{img/outstanding_agent}};
+				\node at (0, 2) {\includegraphics[height=7mm]{img/outstanding_agent}};
+				\node at (0, 3) {\includegraphics[height=7mm]{img/outstanding_agent}};
+				\node at (0, 4) {\includegraphics[height=7mm]{img/outstanding_agent}};
+			\end{tikzpicture}
+%			\includegraphics<1>[height=4.25cm]{img/outstanding_1}%
 %			\includegraphics<2>[height=4.25cm]{img/outstanding_2}%
 %			\includegraphics<3>[height=4.25cm]{img/outstanding_3}%
 %			\includegraphics<4>[height=4.25cm]{img/outstanding_4}%
@@ -191,16 +198,16 @@
 				\onslide<3->{assigned to other agents \(i' \neq i\) in round \(r\).}
 			\end{definition}
 			\begin{definition}<4->
-				Let \(\alloc[\phaseii] = \{ \asgd{1}, \asgd{2}, \dots \}\) be the bundle of agent \(i\).
-				\onslide<5->{The set of \emph{optimal and attainable items} is defined as}
+				Let \(\alloc[\phaseii] = \braces[\big]{ \asgd{1}, \asgd{2}, \dots }\) be the bundle of agent \(i\).
+				\onslide<5->{The set of \emph{optimal and attainable items} is defined as
 				\begin{equation*}
-					\onslide<5->{\attopt{r} \coloneq} \begin{cases*}
-						\only<11->{\alloc* \setminus \paren[\big]{ \bigcup_{i' \in \agents} \alloc[\phasei][i'] \cup \lostset{1} }}\only<-10>{\phantom{ \alloc* \setminus \paren[\big]{ \bigcup_{i' \in \agents} \alloc[\phasei][i'] \cup \lostset{1} } }}
-						& \only<6->{in round \(r = 1\), }\only<-5>{\phantom{ in round \(r = 1\),}} \\
-						\only<19->{\attopt{r-1} \setminus ( \lostset{r} \cup \{\asgd{r-1}\} )}\only<-18>{\phantom{ \attopt{r-1} \setminus ( \lostset{r} \cup \{\asgd{r-1}\} ) }}
-						& \only<12->{in round \(r \ge 2\).}\only<-11>{\phantom{in round \(r \ge 2\).}}
+					\attopt{r} \coloneq \begin{cases*}
+						\onslide*<-10>{\phantom}{\alloc* \setminus \paren[\big]{ \bigcup_{i' \in \agents} \alloc[\phasei][i'] \cup \lostset{1} }}
+						& \onslide*<-5>{\phantom}{in round \(r = 1\), } \\
+						\onslide*<-18>{\phantom}{ \attopt{r-1} \setminus \paren[\big]{ \lostset{r} \cup \braces[\big]{ \asgd{r-1} } } }
+						& \onslide*<-11>{\phantom}{in round \(r \ge 2\).}
 					\end{cases*}
-				\end{equation*}
+				\end{equation*}}
 			\end{definition}
 
 			\onslide<20->{\(\Rightarrow\) What is the valuation of the remaining items?}
@@ -208,23 +215,23 @@
 		\begin{column}{0.45\textwidth}
 			\RenewDocumentCommand{\asgd}{s m O{i}}{\textbf{\textsl{a}}_{#3}^{#2}}
 			\begin{figure}
-				\def\figwidth{\def\svgwidth{5.5cm}}  % Why on earth must it be repeated each time?
+				\def\initfig{\centering\def\svgwidth{5.5cm}}  % Why on earth must it be repeated each time?
 				\begin{overprint}
-					\onslide< 7 |handout:0>\centering\figwidth\input{img/optainable_r1_1.pdf_tex}
-					\onslide< 8 |handout:0>\centering\figwidth\input{img/optainable_r1_2.pdf_tex}
-					\onslide< 9 |handout:0>\centering\figwidth\input{img/optainable_r1_3.pdf_tex}
-					\onslide<10-|handout:1>\centering\figwidth\input{img/optainable_r1_4.pdf_tex}
+					\onslide< 7 |handout:0>\initfig\input{img/optainable_r1_1.pdf_tex}
+					\onslide< 8 |handout:0>\initfig\input{img/optainable_r1_2.pdf_tex}
+					\onslide< 9 |handout:0>\initfig\input{img/optainable_r1_3.pdf_tex}
+					\onslide<10-|handout:1>\initfig\input{img/optainable_r1_4.pdf_tex}
 				\end{overprint}
 
 				\vspace{2ex}
 
 				\begin{overprint}
-					\onslide<13 |handout:0>\centering\figwidth\input{img/optainable_r2_1.pdf_tex}
-					\onslide<14 |handout:0>\centering\figwidth\input{img/optainable_r2_2.pdf_tex}
-					\onslide<15 |handout:0>\centering\figwidth\input{img/optainable_r2_3.pdf_tex}
-					\onslide<16 |handout:0>\centering\figwidth\input{img/optainable_r2_4.pdf_tex}
-					\onslide<17 |handout:0>\centering\figwidth\input{img/optainable_r2_5.pdf_tex}
-					\onslide<18-|handout:1>\centering\figwidth\input{img/optainable_r2_6.pdf_tex}
+					\onslide<13 |handout:0>\initfig\input{img/optainable_r2_1.pdf_tex}
+					\onslide<14 |handout:0>\initfig\input{img/optainable_r2_2.pdf_tex}
+					\onslide<15 |handout:0>\initfig\input{img/optainable_r2_3.pdf_tex}
+					\onslide<16 |handout:0>\initfig\input{img/optainable_r2_4.pdf_tex}
+					\onslide<17 |handout:0>\initfig\input{img/optainable_r2_5.pdf_tex}
+					\onslide<18-|handout:1>\initfig\input{img/optainable_r2_6.pdf_tex}
 				\end{overprint}
 			\end{figure}
 		\end{column}
@@ -232,32 +239,61 @@
 \end{frame}
 
 \begin{frame}{Analysing Phase \phaseii{} (2/2)}
+	\adjustfortopblock
+	\begin{lemma}<2->
+		\vspace{-3ex}
+		\begin{flalign*}
+			\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ][\big]
+			\temporal<19-24>{}{=}{\ge}
+			\onslide*<19-20>{\valuations[ \attopt{r} \cup \braces{\asgd{1}, \dots, \asgd{r-1}} ][\big] \alert<20>{- \valuations[\asgd{1}, \dots, \asgd{r-1}][\big]}}
+			\onslide*<21-  >{- \valuations[\asgd{1}, \dots, \asgd{r-1}][\big] +}
+			\onslide*<21-24>{\valuations[ \attopt{r} \cup \braces{\asgd{1}, \dots, \asgd{r-1}} ][\big]}
+			\onslide*<25-  >{\valuations[ \attopt{1} ][\big]}
+			\onslide*<26-28>{- \valuations[ \lostset{2} \given \asgd{1} ][\big]}
+			\onslide*<27-28>{- \valuations[ \lostset{3} \given \asgd{1}, \asgd{2} ][\big]}
+			\onslide*<28   >{- \dots}
+			\onslide*<29-37>{- \!\!\sum_{l=2}^{r} \valuations[ \lostset{l} \given \asgd{1}, \dots, \asgd{l-1} ][\big] }
+			\onslide*<38-40>{- \!\!\sum_{l=2}^{r} \smashoperator[r]{\sum_{\genericitem \in \lostset{l}}} \valuations[ \hairspace\genericitem \given \asgd{1}, \dots, \alert<40>{\asgd{l-1}} ][\big] }
+			\onslide*<41-42>{- \!\!\sum_{l=2}^{r} \smashoperator[r]{\sum_{\genericitem \in \lostset{l}}} \valuations[ \hairspace\genericitem \given \asgd{1}, \dots, \alert<41>{\asgd{l-2}} ][\big] }
+			\onslide*<43   >{- \!\!\sum_{l=2}^{r} \smashoperator[r]{\sum_{\genericitem \in \lostset{l}}} \valuations[ \asgd{l-1} \given \asgd{1}, \dots, \asgd{l-2} ][\big] }
+			\onslide*<44   >{- \!\!\sum_{l=2}^{r} \abs{\lostset{l}} \cdot \valuations[ \asgd{l-1} \given \asgd{1}, \dots, \asgd{l-2} ][\big] }
+			\onslide*<45   >{- \!\!\sum_{l=2}^{r} (n-1) \cdot \valuations[ \asgd{l-1} \given \asgd{1}, \dots, \asgd{l-2} ][\big] }
+			\vphantom{\sum_{\genericitem \in \lostset{l}}^{r}}&&
+		\end{flalign*}
+	\end{lemma}
 	\begin{figure}
-		\def\figwidth{\def\svgwidth{8cm}}  % Why on earth must it be repeated each time?
+		\def\initfig{\centering\hspace{-1cm}\def\svgwidth{8cm}}  % Why on earth must it be repeated each time?
 		\begin{overprint}
-			\onslide< 1|handout:0>\centering\figwidth\input{img/optainable_anal_1.pdf_tex}
-			\onslide< 2|handout:0>\centering\figwidth\input{img/optainable_anal_2.pdf_tex}
-			\onslide< 3|handout:0>\centering\figwidth\input{img/optainable_anal_3.pdf_tex}
-			\onslide< 4|handout:0>\centering\figwidth\input{img/optainable_anal_4.pdf_tex}
-			\onslide< 5|handout:0>\centering\figwidth\input{img/optainable_anal_5.pdf_tex}
-			\onslide< 6|handout:0>\centering\figwidth\input{img/optainable_anal_6.pdf_tex}
-			\onslide< 7|handout:0>\centering\figwidth\input{img/optainable_anal_7.pdf_tex}
-			\onslide< 8|handout:0>\centering\figwidth\input{img/optainable_anal_8.pdf_tex}
-			\onslide< 9|handout:0>\centering\figwidth\input{img/optainable_anal_9.pdf_tex}
-			\onslide<10|handout:0>\centering\figwidth\input{img/optainable_anal_10.pdf_tex}
-			\onslide<11|handout:0>\centering\figwidth\input{img/optainable_anal_11.pdf_tex}
-			\onslide<12|handout:0>\centering\figwidth\input{img/optainable_anal_12.pdf_tex}
-			\onslide<13|handout:0>\centering\figwidth\input{img/optainable_anal_13.pdf_tex}
-			\onslide<14|handout:0>\centering\figwidth\input{img/optainable_anal_14.pdf_tex}
-			\onslide<15|handout:0>\centering\figwidth\input{img/optainable_anal_15.pdf_tex}
-			\onslide<16|handout:0>\centering\figwidth\input{img/optainable_anal_16.pdf_tex}
+			\onslide< 3       |handout:0>\initfig\input{img/optainable_anal_1.pdf_tex}
+			\onslide< 4       |handout:0>\initfig\input{img/optainable_anal_2.pdf_tex}
+			\onslide< 5       |handout:0>\initfig\input{img/optainable_anal_3.pdf_tex}
+			\onslide< 6       |handout:0>\initfig\input{img/optainable_anal_4.pdf_tex}
+			\onslide< 7       |handout:0>\initfig\input{img/optainable_anal_5.pdf_tex}
+			\onslide< 8       |handout:0>\initfig\input{img/optainable_anal_6.pdf_tex}
+			\onslide< 9       |handout:0>\initfig\input{img/optainable_anal_7.pdf_tex}
+			\onslide<10       |handout:0>\initfig\input{img/optainable_anal_8.pdf_tex}
+			\onslide<11       |handout:0>\initfig\input{img/optainable_anal_9.pdf_tex}
+			\onslide<12       |handout:0>\initfig\input{img/optainable_anal_10.pdf_tex}
+			\onslide<13       |handout:0>\initfig\input{img/optainable_anal_11.pdf_tex}
+			\onslide<14       |handout:0>\initfig\input{img/optainable_anal_12.pdf_tex}
+			\onslide<15       |handout:0>\initfig\input{img/optainable_anal_13.pdf_tex}
+			\onslide<16       |handout:0>\initfig\input{img/optainable_anal_14.pdf_tex}
+			\onslide<17       |handout:0>\initfig\input{img/optainable_anal_15.pdf_tex}
+			\onslide<18-21,24-|handout:1>\initfig\input{img/optainable_anal_16.pdf_tex}
+			\onslide<22       |handout:0>\initfig\input{img/optainable_anal_17.pdf_tex}
+			\onslide<23       |handout:0>\initfig\input{img/optainable_anal_18.pdf_tex}
 		\end{overprint}
 	\end{figure}
-	{\vspace{-3ex}
-	\begin{lemma}
-		\begin{equation*}
-			\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ]
-			\ge \valuations[ \attopt{r} ] - \valuations[ \asgd{1}, \dots, \asgd{r-1} ] - \sum_{l=2}^{r} \abs{\lostset{l}} \cdot \valuations[\asgd{l-1} \given \asgd{1}, \dots, \asgd{l-2} ]
-		\end{equation*}
-	\end{lemma}}
+	\onslide*<30-38>{\beamerimage at (13cm, 3.25cm) {%
+		\begin{minipage}[t][5cm]{0.4\textwidth}\begin{flalign*}
+			\valuations[ \genericset[1] \given \genericset[2] ] = {}
+			\onslide*<31-35>{&\valuations[\hairspace\genericitem[1] \given \genericset[2] ][\big]}
+			\onslide*<32-35>{{} + {} \\ &\valuations[\hairspace\genericitem[2] \given \genericset[2] \cup \alert<35>{\braces[\big]{ \genericitem[1] }} ][\big]}
+			\onslide*<33-35>{{} + {} \\ &\valuations[\hairspace\genericitem[3] \given \genericset[2] \cup \alert<35>{\braces[\big]{ \genericitem[1], \genericitem[2] }} ][\big]}
+			\onslide*<34-35>{{} + {} \\ &\vdots}
+			\onslide*<36   >{&\valuations[ \hairspace\genericitem[1] \given \genericset[2] ][\big] + {} \\ &\valuations[ \hairspace\genericitem[2] \given \genericset[2] ][\big] + {} \\ &\valuations[ \hairspace\genericitem[3] \given \genericset[2] ][\big] + {} \\ &\vdots}
+			\onslide*<37-  >{\!\!\smashoperator{\sum_{\genericitem \in \genericset[1]}} \valuations[ \hairspace\genericitem  \given \genericset[2] ] }
+			&&
+		\end{flalign*}\end{minipage}
+	};}
 \end{frame}
