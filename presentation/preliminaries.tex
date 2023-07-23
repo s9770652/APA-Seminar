@@ -9,17 +9,17 @@
 
 		\item
 		goods: set \(\goods\) of \(m\) items
-		\begin{itemize}
-			\item
-			unsharable
-
-			\item
-			indivisible
-		\end{itemize}
+%		\begin{itemize}
+%			\item
+%			unsharable
+%
+%			\item
+%			indivisible
+%		\end{itemize}
 	\end{itemize}
-	\beamerimage at ( 8cm, 1.4cm) {\resizebox{!}{2cm}{\input{img/nosatellite.pdf_tex}}};
-	\beamerimage at (11cm, 1.4cm) {\resizebox{!}{2cm}{\input{img/nowater.pdf_tex}}};
-	\vspace{-3ex}
+%	\beamerimage at ( 8cm, 1.4cm) {\resizebox{!}{2cm}{\input{img/nosatellite.pdf_tex}}};
+%	\beamerimage at (11cm, 1.4cm) {\resizebox{!}{2cm}{\input{img/nowater.pdf_tex}}};
+%	\vspace{-3ex}
 	\begin{definition}
 		An \emph{allocation} is a tuple
 		\(\alloc[][] = (\alloc)_{i \in \agents}\)
@@ -40,7 +40,7 @@
 	Requirements:
 	\begin{itemize}
 		\item
-		monotonically non-decreasing: \(\valuations[\genericset[1]] \le \valuations[\genericset[2]]\)
+		monotonically non-decreasing: \(\valuations[\genericset[1]] \le \valuations[\genericset[2]]\) if \(\genericset[1] \subset \genericset[2]\)
 
 		\item
 		normalised: \(\valuations[\emptyset] = 0\)
