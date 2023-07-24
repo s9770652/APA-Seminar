@@ -245,9 +245,9 @@
 		\begin{flalign*}
 			\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ][\big]
 			\temporal<19-24>{}{=}{\ge}
-			\onslide*<19-20>{\valuations[ \attopt{r} \cup \braces{\asgd{1}, \dots, \asgd{r-1}} ][\big] \alert<20>{- \valuations[\asgd{1}, \dots, \asgd{r-1}][\big]}}
+			\onslide*<19-20>{\valuations[ \attopt{r} \cup \braces[\big]{\asgd{1}, \dots, \asgd{r-1}} ][\big] \alert<20>{- \valuations[\asgd{1}, \dots, \asgd{r-1}][\big]}}
 			\onslide*<21-  >{- \valuations[\asgd{1}, \dots, \asgd{r-1}][\big] +}
-			\onslide*<21-24>{\valuations[ \attopt{r} \cup \braces{\asgd{1}, \dots, \asgd{r-1}} ][\big]}
+			\onslide*<21-24>{\valuations[ \attopt{r} \cup \braces[\big]{\asgd{1}, \dots, \asgd{r-1}} ][\big]}
 			\onslide*<25-  >{\valuations[ \attopt{1} ][\big]}
 			\onslide*<26-28>{- \valuations[ \lostset{2} \given \asgd{1} ][\big]}
 			\onslide*<27-28>{- \valuations[ \lostset{3} \given \asgd{1}, \asgd{2} ][\big]}
@@ -261,28 +261,43 @@
 			\vphantom{\sum_{\genericitem \in \lostset{l}}^{r}}&&
 		\end{flalign*}
 	\end{lemma}
+	\vspace{-1ex}
 	\begin{figure}
-		\def\initfig{\centering\hspace{-1cm}\def\svgwidth{8cm}}  % Why on earth must it be repeated each time?
-		\begin{overprint}
-			\onslide< 3       |handout:0>\initfig\input{img/optainable_anal_1.pdf_tex}
-			\onslide< 4       |handout:0>\initfig\input{img/optainable_anal_2.pdf_tex}
-			\onslide< 5       |handout:0>\initfig\input{img/optainable_anal_3.pdf_tex}
-			\onslide< 6       |handout:0>\initfig\input{img/optainable_anal_4.pdf_tex}
-			\onslide< 7       |handout:0>\initfig\input{img/optainable_anal_5.pdf_tex}
-			\onslide< 8       |handout:0>\initfig\input{img/optainable_anal_6.pdf_tex}
-			\onslide< 9       |handout:0>\initfig\input{img/optainable_anal_7.pdf_tex}
-			\onslide<10       |handout:0>\initfig\input{img/optainable_anal_8.pdf_tex}
-			\onslide<11       |handout:0>\initfig\input{img/optainable_anal_9.pdf_tex}
-			\onslide<12       |handout:0>\initfig\input{img/optainable_anal_10.pdf_tex}
-			\onslide<13       |handout:0>\initfig\input{img/optainable_anal_11.pdf_tex}
-			\onslide<14       |handout:0>\initfig\input{img/optainable_anal_12.pdf_tex}
-			\onslide<15       |handout:0>\initfig\input{img/optainable_anal_13.pdf_tex}
-			\onslide<16       |handout:0>\initfig\input{img/optainable_anal_14.pdf_tex}
-			\onslide<17       |handout:0>\initfig\input{img/optainable_anal_15.pdf_tex}
-			\onslide<18-21,24-|handout:1>\initfig\input{img/optainable_anal_16.pdf_tex}
-			\onslide<22       |handout:0>\initfig\input{img/optainable_anal_17.pdf_tex}
-			\onslide<23       |handout:0>\initfig\input{img/optainable_anal_18.pdf_tex}
-		\end{overprint}
+		\hspace{-3em}
+		\begin{tikzpicture}
+			\node<  - 2>[minimum height=45mm] {};  % prevents wobbling of lemma block in otherwise empty page
+			\node< 3-  > {\includegraphics[height=45mm]{optainable_anal_optblack}};
+			\node<18-  > {\includegraphics[height=45mm]{optainable_anal_optgrey}};
+			\node< 4- 5> {\includegraphics[height=45mm]{optainable_anal_asgdf_1}};
+			\node< 6- 7> {\includegraphics[height=45mm]{optainable_anal_asgdf_2}};
+			\node< 8- 9> {\includegraphics[height=45mm]{optainable_anal_asgdf_3}};
+			\node<10-11> {\includegraphics[height=45mm]{optainable_anal_asgdf_4}};
+			\node<12-13> {\includegraphics[height=45mm]{optainable_anal_asgdf_5}};
+			\node<14-15> {\includegraphics[height=45mm]{optainable_anal_asgdf_6}};
+			\node<16-  > {\includegraphics[height=45mm]{optainable_anal_asgdf_7}};
+			\node< 3-  > {\includegraphics[height=45mm]{optainable_anal_optoutline}};
+			\node< 4- 5> {\includegraphics[height=45mm]{optainable_anal_asgdl_1}};
+			\node< 6- 7> {\includegraphics[height=45mm]{optainable_anal_asgdl_2}};
+			\node< 8- 9> {\includegraphics[height=45mm]{optainable_anal_asgdl_3}};
+			\node<10-11> {\includegraphics[height=45mm]{optainable_anal_asgdl_4}};
+			\node<12-13> {\includegraphics[height=45mm]{optainable_anal_asgdl_5}};
+			\node<14-15> {\includegraphics[height=45mm]{optainable_anal_asgdl_6}};
+			\node<16-  > {\includegraphics[height=45mm]{optainable_anal_asgdl_7}};
+			\node< 5-  > {\includegraphics[height=45mm]{optainable_anal_lost_1}};
+			\node< 7-  > {\includegraphics[height=45mm]{optainable_anal_lost_2}};
+			\node< 9-  > {\includegraphics[height=45mm]{optainable_anal_lost_3}};
+			\node<11-  > {\includegraphics[height=45mm]{optainable_anal_lost_4}};
+			\node<13-  > {\includegraphics[height=45mm]{optainable_anal_lost_5}};
+			\node<15-  > {\includegraphics[height=45mm]{optainable_anal_lost_6}};
+			\node<17-  > {\includegraphics[height=45mm]{optainable_anal_lost_7}};
+			\node<22   > {\includegraphics[height=45mm]{optainable_anal_emph_big}};
+			\node<23   > {\includegraphics[height=45mm]{optainable_anal_emph_small}};
+
+			\node< 3->[legend             ] at (-3.5,  1.50) {\(\attopt{1}\)};
+			\node< 4->[legend, dunkelgruen] at (-3.5,  0.75) {\(\alloc[\phaseii]\)};
+			\node< 5->[legend, goetheblau ] at (-3.5, -0.00) {\(\lostset{l}\)};
+			\node<18->[legend, dunkelgrau ] at (-3.5, -0.75) {\(\attopt{r}\)};
+		\end{tikzpicture}
 	\end{figure}
 	\onslide*<30-38>{\beamerimage at (13cm, 3.25cm) {%
 		\begin{minipage}[t][5cm]{0.4\textwidth}\begin{flalign*}
