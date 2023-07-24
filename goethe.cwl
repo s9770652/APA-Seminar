@@ -149,6 +149,8 @@
 \abc#n
 \ABC#n
 
+\alertmath<overlay specification>{highlighted text}#m
+
 \beamerimage at (cm, cm) {\includegraphics[]{}};
 \insertsubject#S
 \insertsupervisor#S
