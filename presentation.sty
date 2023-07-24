@@ -38,8 +38,12 @@
 
 \setbeamerfont{section number projected}{family=\tlffont}  % section numbers in toc in lining figures
 \setbeamerfont{item projected}{family=\tlffont}  % number of enumerate labels in lining figures
+\setbeamerfont{alerted text}{series=\bfseries}
 
 \NewDocumentCommand{\abb}{m}{\text{#1}}  % abbreviations
+
+% To be used instead of \alert{} in math mode, since \bfseries is not allowed then.
+\NewDocumentCommand{\alertmath}{D<>{1-} m}{\alt<#1>{\usebeamercolor[fg]{alerted text}\boldsymbol{#2}}{#2}}
 
 
 %%% Background graphics.

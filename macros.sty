@@ -23,6 +23,21 @@
 \NewDocumentCommand{\asgd}{s m O{i}}{
 	\IfBooleanTF{#1}{o}{\textsl{a}}\IfEmptyF{#3}{_{#3}}^{#2}
 }
+\NewDocumentCommand{\asgdbf}{s m O{i}}{
+	\IfBooleanTF{#1}{o}{\textbf{\textsl{a}}}\IfEmptyF{#3}{_{#3}}^{#2}
+}
+\let\asgdnbf\asgd
+\RenewDocumentCommand{\alertmath}{D<>{1-} m}{
+	\alt<#1>{
+		\usebeamercolor[fg]{alerted text}
+		\let\asgd\asgdbf
+		\boldsymbol{#2}
+		\let\asgd\asgdnbf
+		\usebeamercolor[fg]{normal text}
+	}{
+		#2
+	}
+}
 \NewDocumentCommand{\attopt}{m O{i}}{
 	\mybar{0.95}{0.07em}{\symbf{x}}^*_{\smash{#2, #1}}
 }
