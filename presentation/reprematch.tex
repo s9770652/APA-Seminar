@@ -213,26 +213,39 @@
 			\onslide<20->{\(\Rightarrow\) What is the valuation of the remaining items?}
 		\end{column}
 		\begin{column}{0.45\textwidth}
-			\RenewDocumentCommand{\asgd}{s m O{i}}{\textbf{\textsl{a}}_{#3}^{#2}}
 			\begin{figure}
-				\def\initfig{\centering\def\svgwidth{5.5cm}}  % Why on earth must it be repeated each time?
-				\begin{overprint}
-					\onslide< 7 |handout:0>\initfig\input{img/optainable_r1_1.pdf_tex}
-					\onslide< 8 |handout:0>\initfig\input{img/optainable_r1_2.pdf_tex}
-					\onslide< 9 |handout:0>\initfig\input{img/optainable_r1_3.pdf_tex}
-					\onslide<10-|handout:1>\initfig\input{img/optainable_r1_4.pdf_tex}
-				\end{overprint}
+				\begin{tikzpicture}
+					\node< 7- 9> {\includegraphics[height=25mm]{optainable_r1_optblack}};
+					\node<10-  > {\includegraphics[height=25mm]{optainable_r1_optgrey}};
+					\node< 8-  > {\includegraphics[height=25mm]{optainable_r1_phIfill}};
+					\node< 7-  > {\includegraphics[height=25mm]{optainable_r1_optoutline}};
+					\node< 8-  > {\includegraphics[height=25mm]{optainable_r1_phIoutline}};
+					\node< 9-  > {\includegraphics[height=25mm]{optainable_r1_lost}};
+
+					\node< 7->[legend            ] at (-2.00,  0.50) {\(\alloc*\)};
+					\node< 8->[legend, emorot    ] at ( 2.00,  0.65) {\(\bigcup_{i' \in \agents} \alloc[\phasei][i']\)};
+					\node< 9->[legend, goetheblau] at (-0.65,  0.25) {\(\lostset{1}\)};
+					\node<10->[legend, dunkelgrau] at (-0.30, -0.75) {\(\attopt{1}\)};
+				\end{tikzpicture}
 
 				\vspace{2ex}
 
-				\begin{overprint}
-					\onslide<13 |handout:0>\initfig\input{img/optainable_r2_1.pdf_tex}
-					\onslide<14 |handout:0>\initfig\input{img/optainable_r2_2.pdf_tex}
-					\onslide<15 |handout:0>\initfig\input{img/optainable_r2_3.pdf_tex}
-					\onslide<16 |handout:0>\initfig\input{img/optainable_r2_4.pdf_tex}
-					\onslide<17 |handout:0>\initfig\input{img/optainable_r2_5.pdf_tex}
-					\onslide<18-|handout:1>\initfig\input{img/optainable_r2_6.pdf_tex}
-				\end{overprint}
+				\let\asgd\asgdbf
+				\begin{tikzpicture}
+					\node<13-17> {\includegraphics[height=25mm]{optainable_r2_optblack}};
+					\node<18-  > {\includegraphics[height=25mm]{optainable_r2_optgrey}};
+					\node<14-  > {\includegraphics[height=25mm]{optainable_r2_lost}};
+					\node<16-  > {\includegraphics[height=25mm]{optainable_r2_asgdleft}};
+					\node<17-  > {\includegraphics[height=25mm]{optainable_r2_asgdright}};
+					\node<18-  > {\includegraphics[height=25mm]{optainable_r2_optoverlay}};
+
+					\node<13->[legend             ] at (-2.15,  0.75) {\(\attopt{r-1}\)};
+					\node<14->[legend, goetheblau ] at ( 1.75, -0.65) {\(\lostset{1}\)};
+					\node<15->[legend, dunkelgruen] at ( 1.67,  1.00) {\(\asgd{r-1}\)};
+					\node<16->[legend, dunkelgruen] at ( 0.36,  0.35) {\(?\)};
+					\node<17->[legend, dunkelgruen] at ( 2.35,  0.35) {\(?\)};
+					\node<18->[legend, dunkelgrau ] at (-0.75, -0.25) {\(\attopt{r}\)};
+				\end{tikzpicture}
 			\end{figure}
 		\end{column}
 	\end{columns}

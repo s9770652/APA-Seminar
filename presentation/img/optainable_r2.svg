@@ -24,15 +24,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="0.5"
-     inkscape:cx="1646"
-     inkscape:cy="-319"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="868.32713"
+     inkscape:cy="344.361"
      inkscape:window-width="2560"
      inkscape:window-height="1387"
      inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer2"
      showguides="true">
     <inkscape:grid
        type="xygrid"
@@ -272,6 +272,11 @@
        d="m 486.97461,83.017271 c -3.1631,6.7538 0.73536,15.466019 5.64704,22.573529 6.07727,8.79421 28.67053,9.93398 35.71676,0.39494 4.27421,-5.78633 5.5078,-15.900865 4.58869,-23.2538 -0.91911,-7.352935 -2.78509,-5.692945 -8.1434,-12.480146 -5.35832,-6.787201 -16.46479,-6.436786 -21.60987,-3.495992 -9.73948,5.566834 -12.21314,7.750489 -16.19922,16.261469 z"
        id="path35618"
        sodipodi:nodetypes="sssszss" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Schrift">
     <text
        xml:space="preserve"
        style="font-size:3.52777px;line-height:80%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -307,7 +312,7 @@
          y="27.314945">\boldmath\(\asgd{r-1}\)</tspan></text>
     <g
        id="g24237"
-       transform="translate(-3.7417734,7.2964581)">
+       transform="translate(-3.7417735,7.296458)">
       <text
          xml:space="preserve"
          style="font-size:3.52777px;line-height:80%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#40952c;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
