@@ -300,24 +300,24 @@
 
 \begin{frame}{Analysing Phase \phaseii{} (2/2)}
 	\adjustfortopblock
-	\begin{lemma}<2->
+	\begin{lemma}
 		\vspace{-3ex}
 		\begin{flalign*}
 			\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ][\big]
-			\temporal<19-24>{}{=}{\ge}
-			\onslide*<19-20>{\valuations[ \attopt{r} \cup \braces[\big]{\asgd{1}, \dots, \asgd{r-1}} ][\big] \alertmath<20>{{} - \valuations[\asgd{1}, \dots, \asgd{r-1}][\big]}}
-			\onslide*<21-  >{\alertmath<21>{- \valuations[\asgd{1}, \dots, \asgd{r-1}][\big]} +}
-			\onslide*<21-24>{\alertmath<22-24>{\valuations[ \attopt{r} \cup \braces[\big]{\asgd{1}, \dots, \asgd{r-1}} ][\big]}}
-			\onslide*<25-  >{\valuations[ \attopt{1} ][\big]}
-			\onslide*<26-28>{- \valuations[ \lostset{2} \given \asgd{1} ][\big]}
-			\onslide*<27-28>{- \valuations[ \lostset{3} \given \asgd{1}, \asgd{2} ][\big]}
-			\onslide*<28   >{- \dots}
-			\onslide*<29-37>{- \!\!\sum_{l=2}^{r} \valuations[ \lostset{l} \given \asgd{1}, \dots, \asgd{l-1} ][\big] }
-			\onslide*<38-40>{- \!\!\sum_{l=2}^{r} \smashoperator[r]{\sum_{\genericitem \in \lostset{l}}} \valuations[ \hairspace\genericitem \given \asgd{1}, \dots, \alertmath<40>{\asgd{l-1}} ][\big] }
-			\onslide*<41-42>{- \!\!\sum_{l=2}^{r} \smashoperator[r]{\sum_{\genericitem \in \lostset{l}}} \valuations[ \hairspace\genericitem \given \asgd{1}, \dots, \alertmath<41>{\asgd{l-2}} ][\big] }
-			\onslide*<43   >{- \!\!\sum_{l=2}^{r} \smashoperator[r]{\sum_{\genericitem \in \lostset{l}}} \valuations[ \asgd{l-1} \given \asgd{1}, \dots, \asgd{l-2} ][\big] }
-			\onslide*<44   >{- \!\!\sum_{l=2}^{r} \abs{\lostset{l}} \cdot \valuations[ \asgd{l-1} \given \asgd{1}, \dots, \asgd{l-2} ][\big] }
-			\onslide*<45   >{- \!\!\sum_{l=2}^{r} (n-1) \cdot \valuations[ \asgd{l-1} \given \asgd{1}, \dots, \asgd{l-2} ][\big] }
+			\temporal<18-23>{}{=}{\ge}
+			\onslide*<18-19>{\valuations[ \attopt{r} \cup \braces[\big]{\asgd{1}, \dots, \asgd{r-1}} ][\big] \alertmath<19>{{} - \valuations[\asgd{1}, \dots, \asgd{r-1}][\big]}}
+			\onslide*<20-  >{\alertmath<20>{- \valuations[\asgd{1}, \dots, \asgd{r-1}][\big]} +}
+			\onslide*<20-23>{\alertmath<21-23>{\valuations[ \attopt{r} \cup \braces[\big]{\asgd{1}, \dots, \asgd{r-1}} ][\big]}}
+			\onslide*<24-  >{\valuations[ \attopt{1} ][\big]}
+			\onslide*<25-27>{- \valuations[ \lostset{2} \given \asgd{1} ][\big]}
+			\onslide*<26-27>{- \valuations[ \lostset{3} \given \asgd{1}, \asgd{2} ][\big]}
+			\onslide*<27   >{- \dots}
+			\onslide*<28-36>{- \!\!\sum_{l=2}^{r} \valuations[ \lostset{l} \given \asgd{1}, \dots, \asgd{l-1} ][\big] }
+			\onslide*<37-39>{- \!\!\sum_{l=2}^{r} \smashoperator[r]{\sum_{\genericitem \in \lostset{l}}} \valuations[ \hairspace\genericitem \given \asgd{1}, \dots, \alertmath<39>{\asgd{l-1}} ][\big] }
+			\onslide*<40-41>{- \!\!\sum_{l=2}^{r} \smashoperator[r]{\sum_{\genericitem \in \lostset{l}}} \valuations[ \hairspace\genericitem \given \asgd{1}, \dots, \alertmath<40>{\asgd{l-2}} ][\big] }
+			\onslide*<42   >{- \!\!\sum_{l=2}^{r} \smashoperator[r]{\sum_{\genericitem \in \lostset{l}}} \valuations[ \asgd{l-1} \given \asgd{1}, \dots, \asgd{l-2} ][\big] }
+			\onslide*<43   >{- \!\!\sum_{l=2}^{r} \abs{\lostset{l}} \cdot \valuations[ \asgd{l-1} \given \asgd{1}, \dots, \asgd{l-2} ][\big] }
+			\onslide*<44   >{- \!\!\sum_{l=2}^{r} (n-1) \cdot \valuations[ \asgd{l-1} \given \asgd{1}, \dots, \asgd{l-2} ][\big] }
 			\vphantom{\sum_{\genericitem \in \lostset{l}}^{r}}&&
 		\end{flalign*}
 	\end{lemma}
@@ -325,49 +325,49 @@
 	\begin{figure}
 		\hspace{-3em}
 		\begin{tikzpicture}
-			\node<  - 2>[opacity=0] {\includegraphics[height=45mm]{optainable_anal_asgdf_1}};  % prevents wobbling of lemma block in otherwise empty page
-			\node< 3-  > {\includegraphics[height=45mm]{optainable_anal_optblack}};
-			\node<18-  > {\includegraphics[height=45mm]{optainable_anal_optgrey}};
-			\node< 4- 5> {\includegraphics[height=45mm]{optainable_anal_asgdf_1}};
-			\node< 6- 7> {\includegraphics[height=45mm]{optainable_anal_asgdf_2}};
-			\node< 8- 9> {\includegraphics[height=45mm]{optainable_anal_asgdf_3}};
-			\node<10-11> {\includegraphics[height=45mm]{optainable_anal_asgdf_4}};
-			\node<12-13> {\includegraphics[height=45mm]{optainable_anal_asgdf_5}};
-			\node<14-15> {\includegraphics[height=45mm]{optainable_anal_asgdf_6}};
-			\node<16-  > {\includegraphics[height=45mm]{optainable_anal_asgdf_7}};
-			\node< 3-  > {\includegraphics[height=45mm]{optainable_anal_optoutline}};
-			\node< 4- 5> {\includegraphics[height=45mm]{optainable_anal_asgdl_1}};
-			\node< 6- 7> {\includegraphics[height=45mm]{optainable_anal_asgdl_2}};
-			\node< 8- 9> {\includegraphics[height=45mm]{optainable_anal_asgdl_3}};
-			\node<10-11> {\includegraphics[height=45mm]{optainable_anal_asgdl_4}};
-			\node<12-13> {\includegraphics[height=45mm]{optainable_anal_asgdl_5}};
-			\node<14-15> {\includegraphics[height=45mm]{optainable_anal_asgdl_6}};
-			\node<16-  > {\includegraphics[height=45mm]{optainable_anal_asgdl_7}};
-			\node< 5-  > {\includegraphics[height=45mm]{optainable_anal_lost_1}};
-			\node< 7-  > {\includegraphics[height=45mm]{optainable_anal_lost_2}};
-			\node< 9-  > {\includegraphics[height=45mm]{optainable_anal_lost_3}};
-			\node<11-  > {\includegraphics[height=45mm]{optainable_anal_lost_4}};
-			\node<13-  > {\includegraphics[height=45mm]{optainable_anal_lost_5}};
-			\node<15-  > {\includegraphics[height=45mm]{optainable_anal_lost_6}};
-			\node<17-  > {\includegraphics[height=45mm]{optainable_anal_lost_7}};
-			\node<23   > {\includegraphics[height=45mm]{optainable_anal_emph_big}};
-			\node<24   > {\includegraphics[height=45mm]{optainable_anal_emph_small}};
+			\node< 1   >[opacity=0] {\includegraphics[height=45mm]{optainable_anal_asgdf_1}};  % prevents wobbling of lemma block in otherwise empty page
+			\node< 2-  > {\includegraphics[height=45mm]{optainable_anal_optblack}};
+			\node<17-  > {\includegraphics[height=45mm]{optainable_anal_optgrey}};
+			\node< 3- 4> {\includegraphics[height=45mm]{optainable_anal_asgdf_1}};
+			\node< 5- 6> {\includegraphics[height=45mm]{optainable_anal_asgdf_2}};
+			\node< 7- 8> {\includegraphics[height=45mm]{optainable_anal_asgdf_3}};
+			\node< 9-10> {\includegraphics[height=45mm]{optainable_anal_asgdf_4}};
+			\node<11-12> {\includegraphics[height=45mm]{optainable_anal_asgdf_5}};
+			\node<13-14> {\includegraphics[height=45mm]{optainable_anal_asgdf_6}};
+			\node<15-  > {\includegraphics[height=45mm]{optainable_anal_asgdf_7}};
+			\node< 2-  > {\includegraphics[height=45mm]{optainable_anal_optoutline}};
+			\node< 3- 4> {\includegraphics[height=45mm]{optainable_anal_asgdl_1}};
+			\node< 5- 6> {\includegraphics[height=45mm]{optainable_anal_asgdl_2}};
+			\node< 7- 8> {\includegraphics[height=45mm]{optainable_anal_asgdl_3}};
+			\node< 9-10> {\includegraphics[height=45mm]{optainable_anal_asgdl_4}};
+			\node<11-12> {\includegraphics[height=45mm]{optainable_anal_asgdl_5}};
+			\node<13-14> {\includegraphics[height=45mm]{optainable_anal_asgdl_6}};
+			\node<15-  > {\includegraphics[height=45mm]{optainable_anal_asgdl_7}};
+			\node< 4-  > {\includegraphics[height=45mm]{optainable_anal_lost_1}};
+			\node< 6-  > {\includegraphics[height=45mm]{optainable_anal_lost_2}};
+			\node< 8-  > {\includegraphics[height=45mm]{optainable_anal_lost_3}};
+			\node<10-  > {\includegraphics[height=45mm]{optainable_anal_lost_4}};
+			\node<12-  > {\includegraphics[height=45mm]{optainable_anal_lost_5}};
+			\node<14-  > {\includegraphics[height=45mm]{optainable_anal_lost_6}};
+			\node<16-  > {\includegraphics[height=45mm]{optainable_anal_lost_7}};
+			\node<22   > {\includegraphics[height=45mm]{optainable_anal_emph_big}};
+			\node<23   > {\includegraphics[height=45mm]{optainable_anal_emph_small}};
 
-			\node< 3->[legend             ] at (-3.25,  0.50) {\(\attopt{1}\)};
-			\node< 4->[legend, dunkelgruen] at ( 2.50, -1.75) {\(\alloc[\phaseii]\)};
-			\node< 5->[legend, goetheblau ] at ( 3.57,  0.20) {\(\lostset{\cdot}\)};
-			\node<18->[legend, dunkelgrau ] at (-1.00,  0.10) {\(\attopt{r}\)};
+			\node< 2->[legend             ] at (-3.25,  0.50) {\(\attopt{1}\)};
+			\node< 3->[legend, dunkelgruen] at ( 2.50, -1.75) {\(\alloc[\phaseii]\)};
+			\node< 4->[legend, goetheblau ] at ( 3.57,  0.20) {\(\lostset{\cdot}\)};
+			\node<17->[legend, dunkelgrau ] at (-1.00,  0.10) {\(\attopt{r}\)};
 		\end{tikzpicture}
 	\end{figure}
-	\onslide*<30-38>{\beamerimage at (13cm, 3.25cm) {%
+	\onslide*<29-37>{\beamerimage at (13cm, 3.25cm) {%
 		\begin{minipage}[t][5cm]{0.4\textwidth}\begin{flalign*}
-			\valuations[ \genericset[1] \given \genericset[2] ] \alt<36->{\le {}}{= {}}
-			\onslide*<31-35>{&\valuations[\hairspace\genericitem[1] \given \genericset[2] ][\big]}
-			\onslide*<32-35>{{} + {} \\ &\valuations[\hairspace\genericitem[2] \given \genericset[2] \cup \alertmath<35>{\braces[\big]{ \genericitem[1] }} ][\big]}
-			\onslide*<33-35>{{} + {} \\ &\valuations[\hairspace\genericitem[3] \given \genericset[2] \cup \alertmath<35>{\braces[\big]{ \genericitem[1], \genericitem[2] }} ][\big]}
-			\onslide*<34-35>{{} + {} \\ &\vdots}
-			\onslide*<36   >{&\valuations[ \hairspace\genericitem[1] \given \genericset[2] ][\big] + {} \\ &\valuations[ \hairspace\genericitem[2] \given \genericset[2] ][\big] + {} \\ &\valuations[ \hairspace\genericitem[3] \given \genericset[2] ][\big] + {} \\ &\vdots}
-			\onslide*<37-  >{\!\!\smashoperator{\sum_{\genericitem \in \genericset[1]}} \valuations[ \hairspace\genericitem  \given \genericset[2] ] }
+			\valuations[ \genericset[1] \given \genericset[2] ] \alt<35->{\le {}}{= {}}
+			\onslide*<30-34>{&\valuations[\hairspace\genericitem[1] \given \genericset[2] ][\big]}
+			\onslide*<31-34>{{} + {} \\ &\valuations[\hairspace\genericitem[2] \given \genericset[2] \cup \alertmath<34>{\braces[\big]{ \genericitem[1] }} ][\big]}
+			\onslide*<32-34>{{} + {} \\ &\valuations[\hairspace\genericitem[3] \given \genericset[2] \cup \alertmath<34>{\braces[\big]{ \genericitem[1], \genericitem[2] }} ][\big]}
+			\onslide*<33-34>{{} + {} \\ &\vdots}
+			\onslide*<35   >{&\valuations[ \hairspace\genericitem[1] \given \genericset[2] ][\big] + {} \\ &\valuations[ \hairspace\genericitem[2] \given \genericset[2] ][\big] + {} \\ &\valuations[ \hairspace\genericitem[3] \given \genericset[2] ][\big] + {} \\ &\vdots}
+			\onslide*<36-  >{\!\!\smashoperator{\sum_{\genericitem \in \genericset[1]}} \valuations[ \hairspace\genericitem  \given \genericset[2] ] }
 			&&
 		\end{flalign*}\end{minipage}
 	};}
