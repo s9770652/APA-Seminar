@@ -28,9 +28,9 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:zoom="1.877186"
-     inkscape:cx="64.990897"
-     inkscape:cy="80.173197"
+     inkscape:zoom="2.6547419"
+     inkscape:cx="88.144162"
+     inkscape:cy="110.93357"
      inkscape:window-width="2560"
      inkscape:window-height="1387"
      inkscape:window-x="1912"
@@ -47,17 +47,17 @@
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:#00608f;stroke-width:5.70003;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:244.716, 11.3999, 0.000569998, 11.3999;stroke-dashoffset:127.673;stroke-opacity:1"
        id="KisteGro__"
-       width="64.305191"
+       width="64.305"
        height="64.294739"
        x="94.202225"
        y="72.355743" />
     <g
        id="g2302"
        style="stroke-width:1.65267"
-       transform="matrix(0.60513423,0,0,0.60503373,-272.819,-176.661)">
+       transform="matrix(0.60513423,0,0,0.60503373,-272.819,-176.73572)">
       <path
          style="fill:none;fill-rule:evenodd;stroke:#00608f;stroke-width:9.42023;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:301.446, 18.8402, 0.000942023, 18.8402;stroke-dashoffset:50.1026;stroke-opacity:1"
-         d="m 624.83842,429.90138 69.61333,69.61358"
+         d="m 619.0734,424.13634 81.39035,81.39064"
          id="path861"
          sodipodi:nodetypes="cc" />
       <use
