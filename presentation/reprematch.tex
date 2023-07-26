@@ -121,15 +121,16 @@
 
 \subsection{Analysing Phases \texorpdfstring{\phasei{} \& \phaseiii}{I \& III}}
 \begin{frame}{Analysing Phases \phasei{} \& \phaseiii{} (1/2)}
-	Phase \phasei{} reserves \enquote{high-value} items.
-	But what qualifies as \enquote{high-value}?
+	\pause
+	\onslide<+->{Phase \phasei{} reserves \enquote{high-value} items.}
+	\onslide<+->{But what qualifies as \enquote{high-value}?}
 
-	\begin{definition}
+	\begin{definition}<+->
 		Let \(\alloc* = \braces[\big]{ \asgd*{1}, \asgd*{2}, \dots }\) be an optimal bundle.
-		An item \(\genericitem \in \goods\) is \emph{outstanding} if \(\valuations[ \hairspace \genericitem] \ge \valuations[\asgd*{1}][\big]\).
+		\onslide<+->{An item \(\genericitem \in \goods\) is \emph{outstanding} if \(\valuations[ \hairspace \genericitem] \ge \valuations[\asgd*{1}][\big]\).}
 	\end{definition}
 
-	\(\Rightarrow\) Are enough outstanding items reserved?
+	\onslide<+->{\(\Rightarrow\) Are enough outstanding items reserved?}
 \end{frame}
 
 \begin{frame}{Analysing Phases \phasei{} \& \phaseiii{} (2/2)}
@@ -139,11 +140,11 @@
 	\end{lemma}
 	\begin{columns}[T]
 		\begin{column}{0.6\textwidth}
-			\begin{itemize}
+			\begin{itemize}[<+(1)->]
 				\item
 				maximum number of unmatched agents halved \\
 				with each round of phase \phasei
-				\begin{itemize}
+				\begin{itemize}[<+(1)->]
 					\item
 					\(\ceil{\log_2 n} + 1\) rounds in phase \phasei{} are enough
 				\end{itemize}
@@ -151,35 +152,81 @@
 				\item
 				induction on number of rounds in phase \phasei
 			\end{itemize}
-			Base Case: In round \(1\) of phase \phasei, either
-			\begin{itemize}
+			\onslide<+(1)->{Base Case: In round \(1\) of phase \phasei, either}
+			\begin{itemize}[<+(1)->]
 				\item
 				\(\ge n/2\) many agents matched with an outstanding item
 
 				\item
 				\(< n/2\) many agents matched with an outstanding item
 				\begin{itemize}
-					\item
+					\item<+(1)->
 					\(> n/2\) many items \(\asgd*{1}\) assigned to someone else
 
-					\item
+					\item<+(5)->
 					\(> n/2\) many agents matched upon release in phase \phaseiii
 				\end{itemize}
 			\end{itemize}
 		\end{column}
 		\begin{column}{0.375\textwidth}
 			\centering
-			\begin{tikzpicture}
-				\node at (0, 0) {\includegraphics[height=7mm]{img/outstanding_agent}};
-				\node at (0, 1) {\includegraphics[height=7mm]{img/outstanding_agent}};
-				\node at (0, 2) {\includegraphics[height=7mm]{img/outstanding_agent}};
-				\node at (0, 3) {\includegraphics[height=7mm]{img/outstanding_agent}};
-				\node at (0, 4) {\includegraphics[height=7mm]{img/outstanding_agent}};
+			\begin{tikzpicture}[lbl/.style = {font={\Large\boldmath}}, asgd/.style = {line width=.57mm, line cap=round}]
+				% Agents.
+				\node<5->[lbl] at (0, 4) (a1) {\includegraphics[height=8mm]{img/outstanding_agent}\hspace{-4.05mm}\(1\)};
+				\node<5->[lbl] at (0, 3) (a2) {\includegraphics[height=8mm]{img/outstanding_agent}\hspace{-4.05mm}\(2\)};
+				\node<5->[lbl] at (0, 2) (a3) {\includegraphics[height=8mm]{img/outstanding_agent}\hspace{-4.05mm}\(3\)};
+				\node<5->[lbl] at (0, 1) (a4) {\includegraphics[height=8mm]{img/outstanding_agent}\hspace{-4.05mm}\(4\)};
+				\node<5->[lbl] at (0, 0) (a5) {\includegraphics[height=8mm]{img/outstanding_agent}\hspace{-4.05mm}\(5\)};
+
+				% Items (outlines).
+				\node<5-> at (3, 4) (i1) {\includegraphics[height=8mm]{img/outstanding_item}};
+				\node<5-> at (3, 3) (i2) {\includegraphics[height=8mm]{img/outstanding_item}};
+				\node<5-> at (3, 2) (i3) {\includegraphics[height=8mm]{img/outstanding_item}};
+				\node<5-> at (3, 1) (i4) {\includegraphics[height=8mm]{img/outstanding_item}};
+				\node<5-> at (3, 0) (i5) {\includegraphics[height=8mm]{img/outstanding_item}};
+
+				% Edges.
+				\def\xoffset{++(5.5mm,0)}
+				\draw< 5-12>[asgd] (a1)\xoffset -- (i1) (a2)\xoffset -- (i2) (a3)\xoffset -- (i3) (a4)\xoffset -- (i4) (a5)\xoffset -- (i5);  % phase I
+				\draw<13-  >[asgd] (a1)\xoffset -- (i4) (a2)\xoffset -- (i5) (a3)\xoffset -- (i1) (a4)\xoffset -- (i3) (a5)\xoffset -- (i2);  % phase III
+
+				% Items (planks).
+				\node<5- 9> at (3, 4) {\includegraphics[height=8mm]{img/outstanding_itemplanks}};
+				\node<5-11> at (3, 3) {\includegraphics[height=8mm]{img/outstanding_itemplanks}};
+				\node<5-10> at (3, 2) {\includegraphics[height=8mm]{img/outstanding_itemplanks}};
+				\node<5- 8> at (3, 1) {\includegraphics[height=8mm]{img/outstanding_itemplanks}};
+				\node<5-  > at (3, 0) {\includegraphics[height=8mm]{img/outstanding_itemplanks}};
+
+				% Ticks and crosses (dilator).
+				\node<-5> at (-.25, 4) {\includegraphics[height=8mm]{img/outstanding_empty}};
+
+				% Ticks and crosses (case 1).
+				\node<6> at (-.25, 4) {\includegraphics[height=8mm]{img/outstanding_tick}};
+				\node<6> at (-.25, 3) {\includegraphics[height=8mm]{img/outstanding_tick}};
+				\node<6> at (-.25, 2) {\includegraphics[height=8mm]{img/outstanding_cross}};
+				\node<6> at (-.25, 1) {\includegraphics[height=8mm]{img/outstanding_tick}};
+				\node<6> at (-.25, 0) {\includegraphics[height=8mm]{img/outstanding_tick}};
+
+				% Ticks and crosses (case 2 (bad)).
+				\node<7-12> at (-.25, 4) {\includegraphics[height=8mm]{img/outstanding_cross}};
+				\node<7-12> at (-.25, 3) {\includegraphics[height=8mm]{img/outstanding_tick}};
+				\node<7-12> at (-.25, 2) {\includegraphics[height=8mm]{img/outstanding_cross}};
+				\node<7-12> at (-.25, 1) {\includegraphics[height=8mm]{img/outstanding_cross}};
+				\node<7-12> at (-.25, 0) {\includegraphics[height=8mm]{img/outstanding_cross}};
+
+				% Items (labels).
+				\node<10->[lbl] at (3, 4) {\(\asgd*{1}[3]\)};
+				\node<12->[lbl] at (3, 3) {\(\asgd*{1}[5]\)};
+				\node<11->[lbl] at (3, 2) {\(\asgd*{1}[4]\)};
+				\node< 9->[lbl] at (3, 1) {\(\asgd*{1}[1]\)};
+
+				% Ticks and crosses (case 2 (good)).
+				\node<13-> at (-.25, 4) {\includegraphics[height=8mm]{img/outstanding_tick}};
+				\node<13-> at (-.25, 3) {\includegraphics[height=8mm]{img/outstanding_cross}};
+				\node<13-> at (-.25, 2) {\includegraphics[height=8mm]{img/outstanding_tick}};
+				\node<13-> at (-.25, 1) {\includegraphics[height=8mm]{img/outstanding_tick}};
+				\node<13-> at (-.25, 0) {\includegraphics[height=8mm]{img/outstanding_tick}};
 			\end{tikzpicture}
-%			\includegraphics<1>[height=4.25cm]{img/outstanding_1}%
-%			\includegraphics<2>[height=4.25cm]{img/outstanding_2}%
-%			\includegraphics<3>[height=4.25cm]{img/outstanding_3}%
-%			\includegraphics<4>[height=4.25cm]{img/outstanding_4}%
 		\end{column}
 	\end{columns}
 \end{frame}
