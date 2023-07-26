@@ -187,8 +187,20 @@
 
 				% Edges.
 				\def\xoffset{++(5.5mm,0)}
-				\draw< 5-12>[asgd] (a1)\xoffset -- (i1) (a2)\xoffset -- (i2) (a3)\xoffset -- (i3) (a4)\xoffset -- (i4) (a5)\xoffset -- (i5);  % phase I
-				\draw<13-  >[asgd] (a1)\xoffset -- (i4) (a2)\xoffset -- (i5) (a3)\xoffset -- (i1) (a4)\xoffset -- (i3) (a5)\xoffset -- (i2);  % phase III
+				\draw< 5-12>[asgd]  % phase I
+					(a1)\xoffset -- (i1)
+					(a2)\xoffset -- (i2)
+					(a3)\xoffset -- (i3)
+					(a4)\xoffset -- (i4)
+					(a5)\xoffset -- (i5)
+				;
+				\draw<13-  >[asgd]  % phase III
+					(a1)\xoffset -- (i4.west)
+					(a2)\xoffset -- (i5.west)
+					(a3)\xoffset -- (i1.west)
+					(a4)\xoffset -- (i3.west)
+					(a5)\xoffset -- (i2.west)
+				;
 
 				% Items (planks).
 				\node<5- 9> at (3, 4) {\includegraphics[height=8mm]{img/outstanding_itemplanks}};
