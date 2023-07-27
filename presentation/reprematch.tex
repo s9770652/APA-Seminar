@@ -243,14 +243,14 @@
 
 				% Edges.
 				\def\xoffset{++(5.5mm,0)}
-				\draw< 5-12>  % phase I
+				\draw< 5-12|handout:0>  % phase I
 					(a1)\xoffset -- (i1)
 					(a2)\xoffset -- (i2)
 					(a3)\xoffset -- (i3)
 					(a4)\xoffset -- (i4)
 					(a5)\xoffset -- (i5)
 				;
-				\draw<13-  >  % phase III
+				\draw<13->  % phase III
 					(a1)\xoffset -- (i4.west)
 					(a2)\xoffset -- (i5.west)
 					(a3)\xoffset -- (i1.west)
@@ -259,28 +259,28 @@
 				;
 
 				% Items (planks).
-				\node<5- 9> at (3, 4) {\includegraphics[height=8mm]{img/outstanding_itemplanks}};
-				\node<5-11> at (3, 3) {\includegraphics[height=8mm]{img/outstanding_itemplanks}};
-				\node<5-10> at (3, 2) {\includegraphics[height=8mm]{img/outstanding_itemplanks}};
-				\node<5- 8> at (3, 1) {\includegraphics[height=8mm]{img/outstanding_itemplanks}};
-				\node<5-  > at (3, 0) {\includegraphics[height=8mm]{img/outstanding_itemplanks}};
+				\node<5- 9|handout:0> at (3, 4) {\includegraphics[height=8mm]{img/outstanding_itemplanks}};
+				\node<5-11|handout:0> at (3, 3) {\includegraphics[height=8mm]{img/outstanding_itemplanks}};
+				\node<5-10|handout:0> at (3, 2) {\includegraphics[height=8mm]{img/outstanding_itemplanks}};
+				\node<5- 8|handout:0> at (3, 1) {\includegraphics[height=8mm]{img/outstanding_itemplanks}};
+				\node<5-  |handout:1> at (3, 0) {\includegraphics[height=8mm]{img/outstanding_itemplanks}};
 
 				% Ticks and crosses (dilator).
 				\node<-5>[opacity=0] at (-.25, 4) {\includegraphics[height=8mm]{img/outstanding_tick}};
 
 				% Ticks and crosses (case 1).
-				\node<6> at (-.25, 4) {\includegraphics[height=8mm]{img/outstanding_tick}};
-				\node<6> at (-.25, 3) {\includegraphics[height=8mm]{img/outstanding_tick}};
-				\node<6> at (-.25, 2) {\includegraphics[height=8mm]{img/outstanding_cross}};
-				\node<6> at (-.25, 1) {\includegraphics[height=8mm]{img/outstanding_tick}};
-				\node<6> at (-.25, 0) {\includegraphics[height=8mm]{img/outstanding_tick}};
+				\node<6|handout:0> at (-.25, 4) {\includegraphics[height=8mm]{img/outstanding_tick}};
+				\node<6|handout:0> at (-.25, 3) {\includegraphics[height=8mm]{img/outstanding_tick}};
+				\node<6|handout:0> at (-.25, 2) {\includegraphics[height=8mm]{img/outstanding_cross}};
+				\node<6|handout:0> at (-.25, 1) {\includegraphics[height=8mm]{img/outstanding_tick}};
+				\node<6|handout:0> at (-.25, 0) {\includegraphics[height=8mm]{img/outstanding_tick}};
 
 				% Ticks and crosses (case 2 (bad)).
-				\node<7-12> at (-.25, 4) {\includegraphics[height=8mm]{img/outstanding_cross}};
-				\node<7-12> at (-.25, 3) {\includegraphics[height=8mm]{img/outstanding_tick}};
-				\node<7-12> at (-.25, 2) {\includegraphics[height=8mm]{img/outstanding_cross}};
-				\node<7-12> at (-.25, 1) {\includegraphics[height=8mm]{img/outstanding_cross}};
-				\node<7-12> at (-.25, 0) {\includegraphics[height=8mm]{img/outstanding_cross}};
+				\node<7-12|handout:0> at (-.25, 4) {\includegraphics[height=8mm]{img/outstanding_cross}};
+				\node<7-12|handout:0> at (-.25, 3) {\includegraphics[height=8mm]{img/outstanding_tick}};
+				\node<7-12|handout:0> at (-.25, 2) {\includegraphics[height=8mm]{img/outstanding_cross}};
+				\node<7-12|handout:0> at (-.25, 1) {\includegraphics[height=8mm]{img/outstanding_cross}};
+				\node<7-12|handout:0> at (-.25, 0) {\includegraphics[height=8mm]{img/outstanding_cross}};
 
 				% Items (labels).
 				\node<10->[lbl] at (3, 4) {\(\asgd*{1}[3]\)};
@@ -317,10 +317,10 @@
 				\onslide<5->{The set of \emph{optimal and attainable items} is defined as
 				\begin{equation*}
 					\attopt{r} \coloneq \begin{cases*}
-						\onslide*<-10>{\phantom}{\alloc* \setminus \paren[\big]{ \bigcup_{i' \in \agents} \alloc[\phasei][i'] \cup \lostset{1} }}
-						& \onslide*<-5>{\phantom}{in round \(r = 1\), } \\
-						\onslide*<-18>{\phantom}{ \attopt{r-1} \setminus \paren[\big]{ \lostset{r} \cup \braces[\big]{ \asgd{r-1} } } }
-						& \onslide*<-11>{\phantom}{in round \(r \ge 2\).}
+						\onslide*<-10|handout:0>{\phantom}{\alloc* \setminus \paren[\big]{ \bigcup_{i' \in \agents} \alloc[\phasei][i'] \cup \lostset{1} }}
+						& \onslide*<-5|handout:0>{\phantom}{in round \(r = 1\), } \\
+						\onslide*<-18|handout:0>{\phantom}{ \attopt{r-1} \setminus \paren[\big]{ \lostset{r} \cup \braces[\big]{ \asgd{r-1} } } }
+						& \onslide*<-11|handout:0>{\phantom}{in round \(r \ge 2\).}
 					\end{cases*}
 				\end{equation*}}
 			\end{definition}
@@ -372,20 +372,20 @@
 		\vspace{-3ex}
 		\begin{flalign*}
 			\valuations[ \attopt{r} \given \asgd{1}, \dots, \asgd{r-1} ][\big]
-			\temporal<18-23>{}{=}{\ge}
-			\onslide*<18-19>{\valuations[ \attopt{r} \cup \braces[\big]{\asgd{1}, \dots, \asgd{r-1}} ][\big] \alertmath<19>{{} - \valuations[\asgd{1}, \dots, \asgd{r-1}][\big]}}
-			\onslide*<20-  >{\alertmath<20>{- \valuations[\asgd{1}, \dots, \asgd{r-1}][\big]} +}
-			\onslide*<20-23>{\alertmath<21-23>{\valuations[ \attopt{r} \cup \braces[\big]{\asgd{1}, \dots, \asgd{r-1}} ][\big]}}
-			\onslide*<24-  >{\valuations[ \attopt{1} ][\big]}
-			\onslide*<25-27>{- \valuations[ \lostset{2} \given \asgd{1} ][\big]}
-			\onslide*<26-27>{- \valuations[ \lostset{3} \given \asgd{1}, \asgd{2} ][\big]}
-			\onslide*<27   >{- \dots}
-			\onslide*<28-36>{- \!\!\sum_{l=2}^{r} \valuations[ \lostset{l} \given \asgd{1}, \dots, \asgd{l-1} ][\big] }
-			\onslide*<37-39>{- \!\!\sum_{l=2}^{r} \smashoperator[r]{\sum_{\genericitem \in \lostset{l}}} \valuations[ \hairspace\genericitem \given \asgd{1}, \dots, \alertmath<39>{\asgd{l-1}} ][\big] }
-			\onslide*<40-41>{- \!\!\sum_{l=2}^{r} \smashoperator[r]{\sum_{\genericitem \in \lostset{l}}} \valuations[ \hairspace\genericitem \given \asgd{1}, \dots, \alertmath<40>{\asgd{l-2}} ][\big] }
-			\onslide*<42   >{- \!\!\sum_{l=2}^{r} \smashoperator[r]{\sum_{\genericitem \in \lostset{l}}} \valuations[ \asgd{l-1} \given \asgd{1}, \dots, \asgd{l-2} ][\big] }
-			\onslide*<43   >{- \!\!\sum_{l=2}^{r} \abs{\lostset{l}} \cdot \valuations[ \asgd{l-1} \given \asgd{1}, \dots, \asgd{l-2} ][\big] }
-			\onslide*<44   >{- \!\!\sum_{l=2}^{r} (n-1) \cdot \valuations[ \asgd{l-1} \given \asgd{1}, \dots, \asgd{l-2} ][\big] }
+			\temporal<18-23|handout:0>{}{=}{\ge}
+			\onslide*<18-19|handout:0>{\valuations[ \attopt{r} \cup \braces[\big]{\asgd{1}, \dots, \asgd{r-1}} ][\big] \alertmath<19>{{} - \valuations[\asgd{1}, \dots, \asgd{r-1}][\big]}}
+			\onslide*<20-  |handout:1>{\alertmath<20|handout:0>{- \valuations[\asgd{1}, \dots, \asgd{r-1}][\big]} +}
+			\onslide*<20-23|handout:0>{\alertmath<21-23>{\valuations[ \attopt{r} \cup \braces[\big]{\asgd{1}, \dots, \asgd{r-1}} ][\big]}}
+			\onslide*<24-  |handout:1>{\valuations[ \attopt{1} ][\big]}
+			\onslide*<25-27|handout:0>{- \valuations[ \lostset{2} \given \asgd{1} ][\big]}
+			\onslide*<26-27|handout:0>{- \valuations[ \lostset{3} \given \asgd{1}, \asgd{2} ][\big]}
+			\onslide*<27   |handout:0>{- \dots}
+			\onslide*<28-36|handout:0>{- \!\!\sum_{l=2}^{r} \valuations[ \lostset{l} \given \asgd{1}, \dots, \asgd{l-1} ][\big] }
+			\onslide*<37-39|handout:0>{- \!\!\sum_{l=2}^{r} \smashoperator[r]{\sum_{\genericitem \in \lostset{l}}} \valuations[ \hairspace\genericitem \given \asgd{1}, \dots, \alertmath<39>{\asgd{l-1}} ][\big] }
+			\onslide*<40-41|handout:0>{- \!\!\sum_{l=2}^{r} \smashoperator[r]{\sum_{\genericitem \in \lostset{l}}} \valuations[ \hairspace\genericitem \given \asgd{1}, \dots, \alertmath<40>{\asgd{l-2}} ][\big] }
+			\onslide*<42   |handout:0>{- \!\!\sum_{l=2}^{r} \smashoperator[r]{\sum_{\genericitem \in \lostset{l}}} \valuations[ \asgd{l-1} \given \asgd{1}, \dots, \asgd{l-2} ][\big] }
+			\onslide*<43   |handout:1>{- \!\!\sum_{l=2}^{r} \abs{\lostset{l}} \cdot \valuations[ \asgd{l-1} \given \asgd{1}, \dots, \asgd{l-2} ][\big] }
+			\onslide*<44   |handout:0>{- \!\!\sum_{l=2}^{r} (n-1) \cdot \valuations[ \asgd{l-1} \given \asgd{1}, \dots, \asgd{l-2} ][\big] }
 			\vphantom{\sum_{\genericitem \in \lostset{l}}^{r}}&&
 		\end{flalign*}
 	\end{lemma}
@@ -393,33 +393,34 @@
 	\begin{figure}
 		\hspace{-3em}
 		\begin{tikzpicture}
-			\node< 1   >[opacity=0] {\includegraphics[height=45mm]{optainable_anal_asgdf_1}};  % prevents wobbling of lemma block in otherwise empty page
-			\node< 2-  > {\includegraphics[height=45mm]{optainable_anal_optblack}};
-			\node<17-  > {\includegraphics[height=45mm]{optainable_anal_optgrey}};
-			\node< 3- 4> {\includegraphics[height=45mm]{optainable_anal_asgdf_1}};
-			\node< 5- 6> {\includegraphics[height=45mm]{optainable_anal_asgdf_2}};
-			\node< 7- 8> {\includegraphics[height=45mm]{optainable_anal_asgdf_3}};
-			\node< 9-10> {\includegraphics[height=45mm]{optainable_anal_asgdf_4}};
-			\node<11-12> {\includegraphics[height=45mm]{optainable_anal_asgdf_5}};
-			\node<13-14> {\includegraphics[height=45mm]{optainable_anal_asgdf_6}};
-			\node<15-  > {\includegraphics[height=45mm]{optainable_anal_asgdf_7}};
-			\node< 2-  > {\includegraphics[height=45mm]{optainable_anal_optoutline}};
-			\node< 3- 4> {\includegraphics[height=45mm]{optainable_anal_asgdl_1}};
-			\node< 5- 6> {\includegraphics[height=45mm]{optainable_anal_asgdl_2}};
-			\node< 7- 8> {\includegraphics[height=45mm]{optainable_anal_asgdl_3}};
-			\node< 9-10> {\includegraphics[height=45mm]{optainable_anal_asgdl_4}};
-			\node<11-12> {\includegraphics[height=45mm]{optainable_anal_asgdl_5}};
-			\node<13-14> {\includegraphics[height=45mm]{optainable_anal_asgdl_6}};
-			\node<15-  > {\includegraphics[height=45mm]{optainable_anal_asgdl_7}};
-			\node< 4-  > {\includegraphics[height=45mm]{optainable_anal_lost_1}};
-			\node< 6-  > {\includegraphics[height=45mm]{optainable_anal_lost_2}};
-			\node< 8-  > {\includegraphics[height=45mm]{optainable_anal_lost_3}};
-			\node<10-  > {\includegraphics[height=45mm]{optainable_anal_lost_4}};
-			\node<12-  > {\includegraphics[height=45mm]{optainable_anal_lost_5}};
-			\node<14-  > {\includegraphics[height=45mm]{optainable_anal_lost_6}};
-			\node<16-  > {\includegraphics[height=45mm]{optainable_anal_lost_7}};
-			\node<22   > {\includegraphics[height=45mm]{optainable_anal_emph_big}};
-			\node<23   > {\includegraphics[height=45mm]{optainable_anal_emph_small}};
+			\node< 1|handout:0>[opacity=0] {\includegraphics[height=45mm]{optainable_anal_asgdf_1}};  % prevents wobbling of lemma block in otherwise empty page
+
+			\node< 2-  |handout:0> {\includegraphics[height=45mm]{optainable_anal_optblack}};
+			\node<17-  |handout:1> {\includegraphics[height=45mm]{optainable_anal_optgrey}};
+			\node< 3- 4|handout:0> {\includegraphics[height=45mm]{optainable_anal_asgdf_1}};
+			\node< 5- 6|handout:0> {\includegraphics[height=45mm]{optainable_anal_asgdf_2}};
+			\node< 7- 8|handout:0> {\includegraphics[height=45mm]{optainable_anal_asgdf_3}};
+			\node< 9-10|handout:0> {\includegraphics[height=45mm]{optainable_anal_asgdf_4}};
+			\node<11-12|handout:0> {\includegraphics[height=45mm]{optainable_anal_asgdf_5}};
+			\node<13-14|handout:0> {\includegraphics[height=45mm]{optainable_anal_asgdf_6}};
+			\node<15-  |handout:1> {\includegraphics[height=45mm]{optainable_anal_asgdf_7}};
+			\node< 2-  |handout:1> {\includegraphics[height=45mm]{optainable_anal_optoutline}};
+			\node< 3- 4|handout:0> {\includegraphics[height=45mm]{optainable_anal_asgdl_1}};
+			\node< 5- 6|handout:0> {\includegraphics[height=45mm]{optainable_anal_asgdl_2}};
+			\node< 7- 8|handout:0> {\includegraphics[height=45mm]{optainable_anal_asgdl_3}};
+			\node< 9-10|handout:0> {\includegraphics[height=45mm]{optainable_anal_asgdl_4}};
+			\node<11-12|handout:0> {\includegraphics[height=45mm]{optainable_anal_asgdl_5}};
+			\node<13-14|handout:0> {\includegraphics[height=45mm]{optainable_anal_asgdl_6}};
+			\node<15-  |handout:1> {\includegraphics[height=45mm]{optainable_anal_asgdl_7}};
+			\node< 4-  |handout:1> {\includegraphics[height=45mm]{optainable_anal_lost_1}};
+			\node< 6-  |handout:1> {\includegraphics[height=45mm]{optainable_anal_lost_2}};
+			\node< 8-  |handout:1> {\includegraphics[height=45mm]{optainable_anal_lost_3}};
+			\node<10-  |handout:1> {\includegraphics[height=45mm]{optainable_anal_lost_4}};
+			\node<12-  |handout:1> {\includegraphics[height=45mm]{optainable_anal_lost_5}};
+			\node<14-  |handout:1> {\includegraphics[height=45mm]{optainable_anal_lost_6}};
+			\node<16-  |handout:1> {\includegraphics[height=45mm]{optainable_anal_lost_7}};
+			\node<22   |handout:0> {\includegraphics[height=45mm]{optainable_anal_emph_big}};
+			\node<23   |handout:1> {\includegraphics[height=45mm]{optainable_anal_emph_small}};
 
 			\node< 2->[legend             ] at (-3.25,  0.50) {\(\attopt{1}\)};
 			\node< 3->[legend, dunkelgruen] at ( 2.50, -1.75) {\(\alloc[\phaseii]\)};
@@ -427,7 +428,7 @@
 			\node<17->[legend, dunkelgrau ] at (-1.00,  0.10) {\(\attopt{r}\)};
 		\end{tikzpicture}
 	\end{figure}
-	\onslide*<29-37>{\beamerimage at (13cm, 3.25cm) {%
+	\onslide*<29-37|handout:0>{\beamerimage at (13cm, 3.25cm) {%
 		\begin{minipage}[t][5cm]{0.4\textwidth}\begin{flalign*}
 			\valuations[ \genericset[1] \given \genericset[2] ] \alt<35->{\le {}}{= {}}
 			\onslide*<30-34>{&\valuations[\hairspace\genericitem[1] \given \genericset[2] ][\big]}
