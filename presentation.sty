@@ -24,7 +24,6 @@
 
 
 %%% Font.
-\RequirePackage{marvosym}
 \RequirePackage[osf, defaultfeatures={Ligatures=Rare}]{libertinus}
 \NewDocumentCommand{\tlffont}{}{\LibertinusSansTLF}  % font with lining numbers
 
@@ -34,6 +33,7 @@
 \setbeamercolor{structure}{fg=goetheblau}  % structure in goetheblau
 \setbeamercolor{block title}{fg=white, bg=goetheblau}  % normal block header background in goetheblau (body colour automatically altered)
 \setbeamercolor{alerted text}{fg=emorot}  % also affects alert block
+\colorlet{alert}{emorot}  % needed for example for TikZ images
 \setbeamercolor{block title example}{bg=dunkelgruen}  % `block body example` automatically recoloured
 
 \setbeamerfont{section number projected}{family=\tlffont}  % section numbers in toc in lining figures
