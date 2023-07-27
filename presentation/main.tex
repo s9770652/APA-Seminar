@@ -2,12 +2,18 @@
 \documentclass[aspectratio=169]{../gpresentation}
 
 \input{../macros.sty}
+\RequirePackage{marvosym}
+
 \graphicspath{{img/}}
 
 % This is a highly special setting, so it is set here.
 \setbeamersize{description width of={Phase \phaseiii}}
 
-%\titlehead{Algorithms and Complexity Group\hfill Summer Semester 2023 \\ Institute for Computer Science \\ Goethe University Frankfurt}
+\tikzset{
+	legend/.style = {font=\boldmath, align=left},
+	every path/.style = {line width=.57mm, line cap=round},
+}
+
 \subject{Seminar Approximation Algorithms}
 \title[Approximating Nash Social Welfare under Submodular Valuations through (Un)Matchings]{Approximating Nash Social Welfare under Submodular Valuations \\ through (Un)Matchings}
 \subtitle{Based on a paper of the same title by J. Garg, P\!. Kulkarni, and R. Kulkarni}
@@ -15,10 +21,6 @@
 \supervisor{Supervised by Dr Giovanna Varricchio}
 \date[]{\today}
 \institute[]{Algorithms and Complexity (Prof. Dr Martin Hoefer)}
-
-\tikzset{
-	legend/.style = {font=\boldmath, align=left},
-}
 
 \begin{document}
 	\begin{frame}[plain, noframenumbering]
