@@ -6,10 +6,12 @@
 	\onslide<+->{Setting:}
 	\begin{itemize}[<+->]
 		\item
-		recipients: set \(\agents\) of \(n\) agents
+		\textsbf{recipients:}
+		set \(\agents\) of \(n\) agents
 
 		\item
-		goods: set \(\goods\) of \(m\) items
+		\textsbf{goods:}
+		set \(\goods\) of \(m\) items
 %		\begin{itemize}
 %			\item
 %			unsharable
@@ -41,10 +43,12 @@
 	\onslide<+->{Requirements:}
 	\begin{itemize}[<+->]
 		\item
-		monotonically non-decreasing: \(\valuations[\genericset[1]] \le \valuations[\genericset[2]]\) if \(\genericset[1] \subset \genericset[2]\)
+		\textsbf{monotonically non-decreasing:}
+		\(\valuations[\genericset[1]] \le \valuations[\genericset[2]]\) if \(\genericset[1] \subset \genericset[2]\)
 
 		\item
-		normalised: \(\valuations[\emptyset] = 0\)
+		\textsbf{normalised:}
+		\(\valuations[\emptyset] = 0\)
 	\end{itemize}
 
 %	\medskip
@@ -52,10 +56,12 @@
 	\onslide<+->{Types:}
 	\begin{itemize}[<+->]
 		\item
-		additive: \(\valuations[\genericset] \coloneq \sum_{\genericitem \in \genericset} \valuations[ \hairspace \genericitem ]\)
+		\textsbf{additive:}
+		\(\valuations[\genericset\hairspace] \coloneq \sum_{\genericitem \in \genericset} \valuations[ \hairspace \genericitem ]\)
 
 		\item
-		submodular: \(\valuations[\genericset[1] \given \genericset[2]] \onslide<+->{\coloneq \valuations[\genericset[1] \cup \genericset[2]] - \valuations[\genericset[2]]}\)
+		\textsbf{submodular:}
+		\(\valuations[\genericset[1] \given \genericset[2]] \onslide<+->{\coloneq \valuations[\genericset[1] \cup \genericset[2]] - \valuations[\genericset[2]]}\)
 		\begin{itemize}[<+->]
 			\item
 			diminishing returns
