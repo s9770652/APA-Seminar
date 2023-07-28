@@ -139,8 +139,8 @@
 \NewDocumentCommand{\OXS}{}{\abb{OXS}}
 \NewDocumentCommand{\PO}{}{\abb{PO}}
 \makeatletter
-\NewDocumentCommand{\RepReMatch}{}{\@ifclassloaded{libertinus}{\Lss02{RepReMɑtc\Lsalt{h}}}{RepReMatch}}
-\NewDocumentCommand{\SMatch}{}{\@ifclassloaded{libertinus}{SMɑtc\Lsalt{h}}{SMatch}}
+\NewDocumentCommand{\RepReMatch}{}{\@ifpackageloaded{libertinus}{\Lss02{RepReMɑtc\Lsalt{h}}}{RepReMatch}}
+\NewDocumentCommand{\SMatch}{}{\@ifpackageloaded{libertinus}{SMɑtc\Lsalt{h}}{SMatch}}
 \makeatother
 \NewDocumentCommand{\SPLC}{}{\abb{SPLC}}
 \NewDocumentCommand{\USW}{}{%
