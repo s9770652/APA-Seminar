@@ -156,8 +156,13 @@
 \setbeamerfont{subject}{series=\bfseries}
 \setbeamerfont{author}{}
 \setbeamerfont{supervisor}{size=\footnotesize}
-\setbeamerfont{date}{size=\normalsize}  % explicitely set size of date
-\setbeamerfont{institute}{size=\normalsize}
+%\setbeamerfont{date}{size=\normalsize}  % explicitely set size of date
+\makeatletter
+\@ifpackageloaded{libertinus}{
+	\setbeamerfont{date}{family=\LibertinusSerifSB, series=\bfseries}
+}{}
+\makeatother
+\setbeamerfont{institute}{parent={date}}
 
 \defbeamertemplate*{title page}{customized}[1][]
 {%
@@ -170,8 +175,8 @@
 	\bigskip%
 	\usebeamerfont*{author}\usebeamercolor[fg]{author}\insertauthor\par%
 	\usebeamerfont*{supervisor}\usebeamercolor[fg]{supervisor}\insertsupervisor\par%
-	\smallskip
-	\usebeamerfont*{date}\usebeamercolor[fg]{date}\insertdate\IfEmptyF{\insertinstitute}{\usebeamercolor[fg]{normal text}~\(\cdot\)~\usebeamerfont*{institute}\usebeamercolor[fg]{institute}\insertinstitute} \par%
+	\medskip
+	\usebeamerfont*{date}\usebeamercolor[fg]{date}\insertdate\IfEmptyF{\insertinstitute}{\usebeamercolor[fg]{normal text}~·~\usebeamerfont*{institute}\usebeamercolor[fg]{institute}\insertinstitute} \par%
 }
 
 
