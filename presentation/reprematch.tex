@@ -4,24 +4,24 @@
 \begin{frame}{Naïve Approach}
 	\begin{columns}[T, onlytextwidth]
 		\begin{column}{0.55\textwidth}
-			Greedy algorithm:
+			\onslide<2->{Greedy algorithm:}
 			\begin{itemize}
 				\item<5->
 				repeatedly use maximum weight matchings
 
-				\item<6->
+				\item<10->
 				fails because of missing foresight
 				\begin{itemize}
-					\item<7->
+					\item<11->
 					\textsbf{additive valuations:}
 					sort items by valuation \\
 					\(\Rightarrow\) \(2n\)-approximation (\emph{SMatch})
 
-					\item<8->
+					\item<12->
 					\textsbf{submodular valuations:}
 					lowest valuation \\
 					approximable only by \(\bigomega[\big]{ \sqrt{m/\ln m} }\)
-					\onslide<9->{\smash{\raisebox{-.25ex}{\textcolor{senfgelb}{\Large\Lightning}}}}
+					\onslide<13->{\smash{\raisebox{-.25ex}{\textcolor{senfgelb}{\Large\Lightning}}}}
 				\end{itemize}
 			\end{itemize}
 		\end{column}
@@ -34,10 +34,10 @@
 				\node<2-> at (0, 0) (a2) {\includegraphics[height=8mm]{img/outstanding_agent}};
 
 				% Items (first batch).
-				\node<2-3|handout:0> at (       4, 5) (i1) {\includegraphics[height=6mm]{img/naive_item}};
-				\node<2-3|handout:0> at (       4, 0) (i6) {\includegraphics[height=6mm]{img/naive_item}};
+				\node<2-3|handout:0> at (    4, 5) (i1) {\includegraphics[height=6mm]{img/naive_item}};
+				\node<2-3|handout:0> at (    4, 0) (i6) {\includegraphics[height=4mm]{img/naive_itemsmall}};
 				\node<4- |handout:1> at (-0.65, 5)      {\includegraphics[height=6mm]{img/naive_item}};
-				\node<4- |handout:1> at (-0.65, 0)      {\includegraphics[height=6mm]{img/naive_item}};
+				\node<4- |handout:1> at (-0.65, 0)      {\includegraphics[height=4mm]{img/naive_itemsmall}};
 
 				% Edges (first batch).
 				\only<3|handout:0>{\tikzset{match/.style={alert}}}
@@ -48,10 +48,10 @@
 				\draw<2-3|handout:0>[match] (a2.east) -- node[val]           {\(\weight[2] \cdot \symup{log}~ \valuations[\genericitem[2]][\big][2]\)} (i6.west);
 
 				% Items (third batch)
-				\node<5-8|handout:1> at ( 4.00, 1) (i5) {\includegraphics[height=6mm]{img/naive_item}};
+				\node<5-8|handout:1> at ( 4.00, 1) (i5) {\includegraphics[height=4mm]{img/naive_itemsmall}};
 				\node<5-8|handout:1> at ( 4.00, 3) (i3) {\includegraphics[height=6mm]{img/naive_item}};
-				\node<9- |handout:0> at (-1.95, 5) (i5) {\includegraphics[height=6mm]{img/naive_item}};
-				\node<9- |handout:0> at (-1.95, 0) (i3) {\includegraphics[height=6mm]{img/naive_item}};
+				\node<9- |handout:0> at (-1.95, 5)      {\includegraphics[height=6mm]{img/naive_item}};
+				\node<9- |handout:0> at (-1.95, 0)      {\includegraphics[height=4mm]{img/naive_itemsmall}};
 
 				% Edges (third batch)
 				\only<8|handout:0>{\tikzset{match3/.style={alert}}}
@@ -76,7 +76,7 @@
 				\draw<5-6|handout:1>[match] (a1.east) -- (i4.west);
 
 				% Dilators.
-				\node<2->[opacity=0] at (-1.950, 5)       {\includegraphics[height=6mm]{img/naive_item}};
+				\node<2->[opacity=0] at (-1.95, 5)       {\includegraphics[height=6mm]{img/naive_item}};
 				\node<2->[opacity=0] at (-1.30, 5)       {\includegraphics[height=6mm]{img/naive_item}};
 				\node<2->[opacity=0] at (-0.65, 5)       {\includegraphics[height=6mm]{img/naive_item}};
 				\node<2->[opacity=0] at ( 4.00, 5) (inv) {\includegraphics[height=6mm]{img/naive_item}};
