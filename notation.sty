@@ -260,6 +260,9 @@
 	\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
 	\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
 
+	% Emphasising defined words.
+	\NewDocumentCommand{\emphdef}{m}{\@ifpackageloaded{libertinus}{\textsbf}{\textbf}{\emph{#1}}}
+
 	% to remove space above blocks on top of frame
 	\NewDocumentCommand{\adjustfortopblock}{}{\vspace{-\medskipamount}}
 

@@ -2,7 +2,7 @@
 
 \subsection{Naïve Approach}
 \begin{frame}{Naïve Approach}
-	\begin{columns}[T, onlytextwidth]
+	\begin{columns}[t, onlytextwidth]
 		\begin{column}{0.55\textwidth}
 			\onslide<2->{Greedy algorithm:}
 			\begin{itemize}
@@ -26,7 +26,7 @@
 			\end{itemize}
 		\end{column}
 		\begin{column}{0.45\textwidth}
-			\vphantom{a}\vspace{-0.5\baselineskip}\par
+			\vphantom{a}\vspace{-1\baselineskip}\par
 			\centering
 			\begin{tikzpicture}[val/.style = {font={\small\boldmath}, sloped, above}, match/.style = {}, match3/.style = {}]
 				% Agents.
@@ -183,7 +183,7 @@
 
 	\begin{definition}<+->
 		Let \(\alloc* = \braces[\big]{ \asgd*{1}, \asgd*{2}, \dots }\) be an optimal bundle.
-		\onslide<+->{An item \(\genericitem \in \goods\) is \emph{outstanding} if \(\valuations[ \hairspace \genericitem] \ge \valuations[\asgd*{1}][\big]\).}
+		\onslide<+->{An item \(\genericitem \in \goods\) is \emphdef{outstanding} if \(\valuations[ \hairspace \genericitem] \ge \valuations[\asgd*{1}][\big]\).}
 	\end{definition}
 
 	\onslide<+->{\(\Rightarrow\) Are enough outstanding items reserved?}
@@ -309,12 +309,12 @@
 	\begin{columns}[t, onlytextwidth]
 		\begin{column}{0.55\textwidth}
 			\begin{definition}<2->
-				The set \(\lostset{r}\) of \emph{lost items} is the set of all optimal items \(j \in \alloc*\)
+				The set \(\lostset{r}\) of \emphdef{lost items} is the set of all optimal items \(j \in \alloc*\)
 				\onslide<3->{matched with other agents \(i' \neq i\) in round \(r\).}
 			\end{definition}
 			\begin{definition}<4->
 				Let \(\alloc[\phaseii] = \braces[\big]{ \asgd{1}, \asgd{2}, \dots }\) be the bundle of agent \(i\).
-				\onslide<5->{The set of \emph{optimal and attainable items} is defined as
+				\onslide<5->{The set of \emphdef{optimal and attainable items} is defined as
 				\begin{equation*}
 					\attopt{r} \coloneq \begin{cases*}
 						\onslide*<-10|handout:0>{\phantom}{\alloc* \setminus \paren[\big]{ \bigcup_{i' \in \agents} \alloc[\phasei][i'] \cup \lostset{1} }}
@@ -368,6 +368,7 @@
 
 \begin{frame}{Analysing Phase \phaseii{} (2/2)}
 	\adjustfortopblock
+	\vspace{-0.425ex}
 	\begin{lemma}
 		\vspace{-3ex}
 		\begin{flalign*}

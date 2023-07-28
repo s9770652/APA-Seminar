@@ -37,6 +37,8 @@
 #include:todonotes
 #include:marginnote
 
+#include:libertinus-otf
+
 # General page styles.
 \mybibliography
 
@@ -152,6 +154,7 @@
 \alertmath<overlay specification>{highlighted text}#m
 
 \beamerimage at (cm, cm) {\includegraphics[]{}};
+\emphdef
 \insertsubject#S
 \insertsupervisor#S
 
