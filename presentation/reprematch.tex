@@ -4,7 +4,7 @@
 \begin{frame}{Naïve Approach}
 	\begin{columns}[t, onlytextwidth]
 		\begin{column}{0.55\textwidth}
-			\onslide<2->{Greedy algorithm:}
+			\onslide<5->{Greedy algorithm:}
 			\begin{itemize}
 				\item<5->
 				repeatedly use maximum weight matchings
@@ -33,47 +33,50 @@
 				\node<2-> at (0, 5) (a1) {\includegraphics[height=8mm]{img/outstanding_agent}};
 				\node<2-> at (0, 0) (a2) {\includegraphics[height=8mm]{img/outstanding_agent}};
 
-				% Items (first batch).
-				\node<2-3|handout:0> at (    4, 5) (i1) {\includegraphics[height=6mm]{img/naive_item}};
-				\node<2-3|handout:0> at (    4, 0) (i6) {\includegraphics[height=4mm]{img/naive_itemsmall}};
-				\node<4- |handout:1> at (-0.65, 5)      {\includegraphics[height=6mm]{img/naive_item}};
-				\node<4- |handout:1> at (-0.65, 0)      {\includegraphics[height=4mm]{img/naive_itemsmall}};
-
-				% Edges (first batch).
-				\only<3|handout:0>{\tikzset{match/.style={alert}}}
-
-				\draw<2-3|handout:0>        (a2.east) -- node[val, pos=0.25] {\(\weight[2] \cdot \symup{log}~ \valuations[\genericitem[1]][\big][2]\)} (i1.west);
-				\draw<2-3|handout:0>        (a1.east) -- node[val, pos=0.25] {\(\weight[1] \cdot \symup{log}~ \valuations[\genericitem[2]][\big][1]\)} (i6.west);
-				\draw<2-3|handout:0>[match] (a1.east) -- node[val]           {\(\weight[1] \cdot \symup{log}~ \valuations[\genericitem[1]][\big][1]\)} (i1.west);
-				\draw<2-3|handout:0>[match] (a2.east) -- node[val]           {\(\weight[2] \cdot \symup{log}~ \valuations[\genericitem[2]][\big][2]\)} (i6.west);
-
-				% Items (third batch)
+				% Items (third round)
 				\node<5-8|handout:1> at ( 4.00, 1) (i5) {\includegraphics[height=4mm]{img/naive_itemsmall}};
 				\node<5-8|handout:1> at ( 4.00, 3) (i3) {\includegraphics[height=6mm]{img/naive_item}};
+
 				\node<9- |handout:0> at (-1.95, 5)      {\includegraphics[height=6mm]{img/naive_item}};
 				\node<9- |handout:0> at (-1.95, 0)      {\includegraphics[height=4mm]{img/naive_itemsmall}};
 
-				% Edges (third batch)
+				% Edges (third round)
 				\only<8|handout:0>{\tikzset{match3/.style={alert}}}
 
-				\draw<5-8|handout:1>         (a2.east) -- (i3.west);
 				\draw<5-8|handout:1>         (a1.east) -- (i5.west);
+				\draw<5-8|handout:1>         (a2.east) -- (i3.west);
 				\draw<5-8|handout:1>[match3] (a1.east) -- (i3.west);
 				\draw<5-8|handout:1>[match3] (a2.east) -- (i5.west);
 
-				% Items (second batch)
+				% Items (second round)
 				\node<5-6|handout:1> at (   4, 4) (i2) {\includegraphics[height=6mm]{img/naive_item}};
 				\node<5-6|handout:1> at (   4, 2) (i4) {\includegraphics[height=6mm]{img/naive_item}};
+
 				\node<7- |handout:0> at (-1.3, 5)      {\includegraphics[height=6mm]{img/naive_item}};
 				\node<7- |handout:0> at (-1.3, 0)      {\includegraphics[height=6mm]{img/naive_item}};
 
-				% Edges (second batch)
+				% Edges (second round)
 				\only<6|handout:1>{\tikzset{match/.style={alert}}}
 
 				\draw<5-6|handout:1>        (a1.east) -- (i2.west);
 				\draw<5-6|handout:1>        (a2.east) -- (i4.west);
-				\draw<5-6|handout:1>[match] (a2.east) -- (i2.west);
 				\draw<5-6|handout:1>[match] (a1.east) -- (i4.west);
+				\draw<5-6|handout:1>[match] (a2.east) -- (i2.west);
+
+				% Items (first round).
+				\node<2-3|handout:0> at (    4, 5) (i1) {\includegraphics[height=6mm]{img/naive_item}};
+				\node<2-3|handout:0> at (    4, 0) (i6) {\includegraphics[height=4mm]{img/naive_itemsmall}};
+
+				\node<4- |handout:1> at (-0.65, 5)      {\includegraphics[height=6mm]{img/naive_item}};
+				\node<4- |handout:1> at (-0.65, 0)      {\includegraphics[height=4mm]{img/naive_itemsmall}};
+
+				% Edges (first round).
+				\only<3|handout:0>{\tikzset{match/.style={alert}}}
+
+				\draw<2-3|handout:0>        (a1.east) -- node[val, pos=0.25] {\(\weight[1] \cdot \symup{log}~ \valuations[\genericitem[2]][\big][1]\)} (i6.west);
+				\draw<2-3|handout:0>        (a2.east) -- node[val, pos=0.25] {\(\weight[2] \cdot \symup{log}~ \valuations[\genericitem[1]][\big][2]\)} (i1.west);
+				\draw<2-3|handout:0>[match] (a1.east) -- node[val]           {\(\weight[1] \cdot \symup{log}~ \valuations[\genericitem[1]][\big][1]\)} (i1.west);
+				\draw<2-3|handout:0>[match] (a2.east) -- node[val]           {\(\weight[2] \cdot \symup{log}~ \valuations[\genericitem[2]][\big][2]\)} (i6.west);
 
 				% Dilators.
 				\node<2->[opacity=0] at (-1.95, 5)       {\includegraphics[height=6mm]{img/naive_item}};
@@ -97,27 +100,115 @@
 		\begin{column}{0.6\textwidth}
 			We need change the past in three phases:
 			\begin{description}
-				\item[Phase \phasei]
-				Assign enough high-value items temporarily.
+				\item<2->[Phase \phasei]
+				Assign enough high-value items \alert<2>{temporarily}.
 
-				\item[Phase \phaseii]
-				Assign the remaining items definitely.
+				\item<7->[Phase \phaseii]
+				Assign the remaining items \alert<7>{definitely}.
 
-				\item[Phase \phaseiii]
-				Re-assign the items of phase \phasei{} definitely.
+				\item<12->[Phase \phaseiii]
+				Re-assign the items of phase \phasei{} \alert<12>{definitely}.
 			\end{description}
 
 			\smallskip
 
-			\begin{exampleblock}{Theorem}
+			\begin{exampleblock}<15->{Theorem}
 				RepReMatch guarantees a \(2n(\log_2 n + 3)\)-approximation \\
 				under submodular valuations.
 			\end{exampleblock}
 		\end{column}
 		\begin{column}{0.4\textwidth}
-			\vphantom{a}\vspace{-0.5\baselineskip}\par
+			\vphantom{a}\vspace{-1\baselineskip}\par
 			\centering
-			\includegraphics[height=5cm]{img/phases}
+			\begin{tikzpicture}[
+				fix/.style = {dunkelgruen, bend left=17, ->},
+				question mark/.style = {font={\Large\bfseries}, dunkelgruen},
+				match1/.style = {}, match2/.style = {}, match3/.style = {}, match4/.style = {}
+			]
+				% Agents.
+				\node at (0, 4.5) (a1) {\includegraphics[height=8mm]{img/outstanding_agent}};
+				\node at (0, 0.0) (a2) {\includegraphics[height=8mm]{img/outstanding_agent}};
+
+				% Items (P2R2).
+				\node<  -10> at (3, 4.5) (i8) {\includegraphics[height=4mm]{img/naive_itemsmall}};
+				\node<  -10> at (3, 4.0) (i7) {\includegraphics[height=4mm]{img/naive_itemsmall}};
+
+				\node<11- > at (-1.6, 4.5)   {\includegraphics[height=4mm]{img/naive_itemsmall}};
+				\node<11- > at (-1.6, 0.0)   {\includegraphics[height=4mm]{img/naive_itemsmall}};
+
+				% Edges (P2R2).
+				\only<10|handout:0>{\tikzset{match4/.style={alert}}}
+
+				\draw<-10>         (a1.east) -- (i8.west);
+				\draw<-10>         (a2.east) -- (i7.west);
+				\draw<-10>[match4] (a1.east) -- (i7.west);
+				\draw<-10>[match4] (a2.east) -- (i8.west);
+
+				% Items (P2R1).
+				\node<-8> at (3, 2.7) (i5) {\includegraphics[height=6mm]{img/naive_item}};
+				\node<-8> at (3, 0.0) (i1) {\includegraphics[height=4mm]{img/naive_itemsmall}};
+
+				\node<9- > at (-0.8, 4.5)   {\includegraphics[height=6mm]{img/naive_item}};
+				\node<9- > at (-0.8, 0.0)   {\includegraphics[height=4mm]{img/naive_itemsmall}};
+
+				% Edges (P2R1).
+				\only<8|handout:0>{\tikzset{match3/.style={alert}}}
+
+				\draw<-8>         (a1.east) -- (i1.west);
+				\draw<-8>         (a2.east) -- (i5.west);
+				\draw<-8>[match3] (a1.east) -- (i5.west);
+				\draw<-8>[match3] (a2.east) -- (i1.west);
+
+				% Items (P1R2).
+				\node<- 5> at (  3.0, 3.4) (i6) {\includegraphics[height=6mm]{img/naive_item}};
+				\node<- 5> at (  3.0, 0.6) (i2) {\includegraphics[height=6mm]{img/naive_item}};
+
+				\node<6-13> at (-1.6, 0.7) (s3) {\includegraphics[height=6mm]{img/naive_itemtemp}};
+				\node<6-13> at (-1.6, 3.8) (s4) {\includegraphics[height=6mm]{img/naive_itemtemp}};
+
+				% Edges (P1R2).
+				\only<5|handout:0>{\tikzset{match2/.style={alert}}}
+
+				\draw<-5>         (a1.east) -- (i2.west);
+				\draw<-5>         (a2.east) -- (i6.west);
+				\draw<-5>[match2] (a1.east) -- (i6.west);
+				\draw<-5>[match2] (a2.east) -- (i2.west);
+
+				% Items (P1R1).
+				\node< - 3> at ( 3.0, 2.0) (i4) {\includegraphics[height=6mm]{img/naive_item}};
+				\node< - 3> at ( 3.0, 1.3) (i3) {\includegraphics[height=6mm]{img/naive_item}};
+
+				\node<4-13> at (-0.8, 0.7) (s1) {\includegraphics[height=6mm]{img/naive_itemtemp}};
+				\node<4-13> at (-0.8, 3.8) (s2) {\includegraphics[height=6mm]{img/naive_itemtemp}};
+
+				% Edges (P1R1).
+				\only<3|handout:0>{\tikzset{match1/.style={alert}}}
+
+				\draw<-3>         (a1.east) -- (i4.west);
+				\draw<-3>         (a2.east) -- (i3.west);
+				\draw<-3>[match1] (a1.east) -- (i3.west);
+				\draw<-3>[match1] (a2.east) -- (i4.west);
+
+				% Items (P3).
+				\node<14-|handout:0> at (-0.8, 0.7)   {\includegraphics[height=6mm]{img/naive_item}};
+				\node<14-|handout:0> at (-0.8, 3.8)   {\includegraphics[height=6mm]{img/naive_item}};
+				\node<14-|handout:0> at (-1.6, 0.7)   {\includegraphics[height=6mm]{img/naive_item}};
+				\node<14-|handout:0> at (-1.6, 3.8)   {\includegraphics[height=6mm]{img/naive_item}};
+
+				% Swaps (P3).
+				\path<13>[fix] (s1.north west) edge (s2.south west);
+				\path<13>[fix] (s4.south east) edge (s3.north east);
+
+				\node<13>[question mark] at (-1.2, 2.25) {?};
+
+				% Dilators.
+				\node[opacity=0] at (-1.6, 4.5)        {\includegraphics[height=6mm]{img/naive_itemtemp}};
+				\node[opacity=0] at ( 3.0, 4.5)        {\includegraphics[height=6mm]{img/naive_itemtemp}};
+				\node[opacity=0] at (-1.6, 3.8) (inv1) {\includegraphics[height=6mm]{img/naive_itemtemp}};
+				\node[opacity=0] at (-1.6, 0.7) (inv2) {\includegraphics[height=6mm]{img/naive_itemtemp}};
+
+				\path[fix, opacity=0] (inv2) edge (inv1);
+			\end{tikzpicture}
 		\end{column}
 	\end{columns}
 \end{frame}
@@ -130,7 +221,7 @@
 		repeat \(\ceil{\log_2 n} + 1\) times
 		\begin{enumerate}[<+->]
 			\item
-			create bipartite graph \((\agents, \goods, E)\) with edge weights \(\log \valuations[ \hairspace j ]^{\weight}\)
+			create bipartite graph \((\agents, \goods, E)\) with edge weights \(\weight \cdot \log \valuations[ \hairspace j ]\)
 
 			\item
 			compute maximum weight matching
@@ -147,7 +238,7 @@
 		repeat until \(\goods = \emptyset\)
 		\begin{enumerate}[<+->]
 			\item
-			create bipartite graph \((\agents, \goods, E)\) with edge weights \(\log \valuations[\alloc[\phaseii] \cup \{ \hairspace j \} ]^{\weight} \)
+			create bipartite graph \((\agents, \goods, E)\) with edge weights \(\weight \cdot \log \valuations[\alloc[\phaseii] \cup \{ \hairspace j \} ]\)
 
 			\item
 			compute maximum weight matching
@@ -161,7 +252,7 @@
 	\begin{enumerate}[<+->]
 		\conti
 		\item
-		create bipartite graph \(\paren[\big]{ \agents, \bigcup_{i \in \agents} \alloc[\phasei], E }\) with edge weights \(\log \valuations[\alloc[\phaseii] \cup \{ \hairspace j \} ]^{\weight} \)
+		create bipartite graph \(\paren[\big]{ \agents, \bigcup_{i \in \agents} \alloc[\phasei], E }\) with edge weights \(\weight \cdot \log \valuations[\alloc[\phaseii] \cup \{ \hairspace j \} ]\)
 
 		\item
 		compute maximum weight matching
@@ -388,6 +479,7 @@
 			\onslide*<43   |handout:1>{- \!\!\sum_{l=2}^{r} \abs{\lostset{l}} \cdot \valuations[ \asgd{l-1} \given \asgd{1}, \dots, \asgd{l-2} ][\big] }
 			\onslide*<44   |handout:0>{- \!\!\sum_{l=2}^{r} (n-1) \cdot \valuations[ \asgd{l-1} \given \asgd{1}, \dots, \asgd{l-2} ][\big] }
 			\vphantom{\sum_{\genericitem \in \lostset{l}}^{r}}&&
+			\tag*{if \(r \ge 2\)}
 		\end{flalign*}
 	\end{lemma}
 	\vspace{-1ex}
