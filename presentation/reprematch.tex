@@ -202,12 +202,8 @@
 				\node<13>[question mark] at (-1.2, 2.25) {?};
 
 				% Dilators.
-				\node[opacity=0] at (-1.6, 4.5)        {\includegraphics[height=6mm]{img/naive_itemtemp}};
-				\node[opacity=0] at ( 3.0, 4.5)        {\includegraphics[height=6mm]{img/naive_itemtemp}};
-				\node[opacity=0] at (-1.6, 3.8) (inv1) {\includegraphics[height=6mm]{img/naive_itemtemp}};
-				\node[opacity=0] at (-1.6, 0.7) (inv2) {\includegraphics[height=6mm]{img/naive_itemtemp}};
-
-				\path[fix, opacity=0] (inv2) edge (inv1);
+				\node[opacity=0] at (-1.6, 4.5) {\includegraphics[height=6mm]{img/naive_itemtemp}};
+				\node[opacity=0] at ( 3.0, 4.5) {\includegraphics[height=6mm]{img/naive_itemtemp}};
 			\end{tikzpicture}
 		\end{column}
 	\end{columns}
@@ -287,11 +283,12 @@
 	\end{lemma}
 	\begin{columns}[T]
 		\begin{column}{0.6\textwidth}
-			\begin{itemize}[<+(1)->]
+			\pause
+			\begin{itemize}[<+->]
 				\item
-				maximum number of unmatched agents halved \\
+				maximum number of agents \emph{without} outstanding item halved
 				with each round of phase \phasei
-				\begin{itemize}[<+(1)->]
+				\begin{itemize}[<+->]
 					\item
 					\(\ceil{\log_2 n} + 1\) rounds in phase \phasei{} are enough
 				\end{itemize}
@@ -299,25 +296,25 @@
 				\item
 				induction on number of rounds in phase \phasei
 			\end{itemize}
-			\onslide<+(1)->{Base Case: In round \(1\) of phase \phasei, either}
-			\begin{itemize}[<+(1)->]
+			\onslide<+->{Base Case: In round \(1\) of phase \phasei, either}
+			\begin{itemize}[<+->]
 				\item
-				\(\ge n/2\) many agents matched with an outstanding item
+				\(\le n/2\) many agents without an outstanding item
 
 				\item
-				\(< n/2\) many agents matched with an outstanding item
+				\(> n/2\) many agents without an outstanding item
 				\begin{itemize}
-					\item<+(1)->
+					\item<+(4)->
 					\(> n/2\) many items \(\asgd*{1}\) assigned to someone else
 
-					\item<+(5)->
-					\(> n/2\) many agents matched upon release in phase \phaseiii
+					\item<+(4)->
+					\(> n/2\) many agents matched with outstanding item \\ upon release in phase \phaseiii
 				\end{itemize}
 			\end{itemize}
 		\end{column}
 		\begin{column}{0.375\textwidth}
 			\centering
-			\begin{tikzpicture}[lbl/.style = {font={\Large\boldmath}}]
+			\begin{tikzpicture}[lbl/.style = {font={\Large\boldmath}}, info/.style = {font={\boldmath}, alert}]
 				% Agents.
 				\node<5->[lbl] at (0, 4) (a1) {\includegraphics[height=8mm]{img/outstanding_agent}\hspace{-4.05mm}\(1\)};
 				\node<5->[lbl] at (0, 3) (a2) {\includegraphics[height=8mm]{img/outstanding_agent}\hspace{-4.05mm}\(2\)};
@@ -350,10 +347,10 @@
 				;
 
 				% Items (planks).
-				\node<5- 9|handout:0> at (3, 4) {\includegraphics[height=8mm]{img/outstanding_itemplanks}};
-				\node<5-11|handout:0> at (3, 3) {\includegraphics[height=8mm]{img/outstanding_itemplanks}};
-				\node<5-10|handout:0> at (3, 2) {\includegraphics[height=8mm]{img/outstanding_itemplanks}};
-				\node<5- 8|handout:0> at (3, 1) {\includegraphics[height=8mm]{img/outstanding_itemplanks}};
+				\node<5- 8|handout:0> at (3, 4) {\includegraphics[height=8mm]{img/outstanding_itemplanks}};
+				\node<5-10|handout:0> at (3, 3) {\includegraphics[height=8mm]{img/outstanding_itemplanks}};
+				\node<5- 9|handout:0> at (3, 2) {\includegraphics[height=8mm]{img/outstanding_itemplanks}};
+				\node<5- 7|handout:0> at (3, 1) {\includegraphics[height=8mm]{img/outstanding_itemplanks}};
 				\node<5-  |handout:1> at (3, 0) {\includegraphics[height=8mm]{img/outstanding_itemplanks}};
 
 				% Ticks and crosses (dilator).
@@ -374,10 +371,10 @@
 				\node<7-12|handout:0> at (-.25, 0) {\includegraphics[height=8mm]{img/outstanding_cross}};
 
 				% Items (labels).
-				\node<10->[lbl] at (3, 4) {\(\asgd*{1}[3]\)};
-				\node<12->[lbl] at (3, 3) {\(\asgd*{1}[5]\)};
-				\node<11->[lbl] at (3, 2) {\(\asgd*{1}[4]\)};
-				\node< 9->[lbl] at (3, 1) {\(\asgd*{1}[1]\)};
+				\node< 9->[lbl] at (3, 4) {\(\asgd*{1}[3]\)};
+				\node<11->[lbl] at (3, 3) {\(\asgd*{1}[5]\)};
+				\node<10->[lbl] at (3, 2) {\(\asgd*{1}[4]\)};
+				\node< 8->[lbl] at (3, 1) {\(\asgd*{1}[1]\)};
 
 				% Ticks and crosses (case 2 (good)).
 				\node<13-> at (-.25, 4) {\includegraphics[height=8mm]{img/outstanding_tick}};
@@ -385,6 +382,11 @@
 				\node<13-> at (-.25, 2) {\includegraphics[height=8mm]{img/outstanding_tick}};
 				\node<13-> at (-.25, 1) {\includegraphics[height=8mm]{img/outstanding_tick}};
 				\node<13-> at (-.25, 0) {\includegraphics[height=8mm]{img/outstanding_tick}};
+
+				% Number of agents matched with an outstanding item.
+				\node< 6   >[info] at (1.5, -0.5) {\(\le n/2\)};
+				\node< 7-12>[info] at (1.5, -0.5) {\(> n/2\)};
+				\node<13-  >[info] at (1.5, -0.5) {\(< n/2\)};
 			\end{tikzpicture}
 		\end{column}
 	\end{columns}
