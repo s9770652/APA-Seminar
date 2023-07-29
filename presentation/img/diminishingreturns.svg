@@ -24,9 +24,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="1.4142136"
-     inkscape:cx="619.42554"
-     inkscape:cy="296.63129"
+     inkscape:zoom="0.7071068"
+     inkscape:cx="691.55041"
+     inkscape:cy="446.18437"
      inkscape:window-width="2560"
      inkscape:window-height="1387"
      inkscape:window-x="1912"
@@ -209,8 +209,8 @@
        width="100%"
        height="100%" />
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#40952c;stroke-width:3.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 66.376508,105.15067 H 76.618"
+       style="fill:none;fill-rule:evenodd;stroke:#40952c;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 67.000002,105.15067 h 7.872"
        id="path1769"
        sodipodi:nodetypes="cc" />
     <use
