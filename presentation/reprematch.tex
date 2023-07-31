@@ -98,7 +98,7 @@
 \begin{frame}{Key Ideas of the Algorithm}
 	\begin{columns}[t, onlytextwidth]
 		\begin{column}{0.6\textwidth}
-			We need change the past in three phases:
+			We change the past in three phases:
 			\begin{description}
 				\item<2->[Phase \phasei]
 				Assign enough high-value items \alert<2>{temporarily}.
@@ -217,13 +217,13 @@
 		repeat \(\ceil{\log_2 n} + 1\) times
 		\begin{enumerate}[<+->]
 			\item
-			create bipartite graph \((\agents, \goods, E)\) with edge weights \(\weight \cdot \log \valuations[ \hairspace j ]\)
+			create bipartite graph with edge weights \(\weight \cdot \log \valuations[ \hairspace j ]\)
 
 			\item
 			compute maximum weight matching
 
 			\item
-			update bundles \(\alloc[\phasei]\) \& remove assigned items
+			update bundles \(\alloc[\phasei]\)
 		\end{enumerate}
 		\seti
 	\end{enumerate}
@@ -231,16 +231,16 @@
 	\begin{enumerate}[<+->]
 		\conti
 		\item
-		repeat until \(\goods = \emptyset\)
+		repeat until all items assigned
 		\begin{enumerate}[<+->]
 			\item
-			create bipartite graph \((\agents, \goods, E)\) with edge weights \(\weight \cdot \log \valuations[\alloc[\phaseii] \cup \{ \hairspace j \} ]\)
+			create bipartite graph with edge weights \(\weight \cdot \log \valuations[\alloc[\phaseii] \cup \{ \hairspace j \} ]\)
 
 			\item
 			compute maximum weight matching
 
 			\item
-			update bundles \(\alloc[\phaseii]\) \& remove assigned items
+			update bundles \(\alloc[\phaseii]\)
 		\end{enumerate}
 		\seti
 	\end{enumerate}
@@ -248,7 +248,7 @@
 	\begin{enumerate}[<+->]
 		\conti
 		\item
-		create bipartite graph \(\paren[\big]{ \agents, \bigcup_{i \in \agents} \alloc[\phasei], E }\) with edge weights \(\weight \cdot \log \valuations[\alloc[\phaseii] \cup \{ \hairspace j \} ]\)
+		release items \&{} create bipartite graph with edge weights \(\weight \cdot \log \valuations[\alloc[\phaseii] \cup \{ \hairspace j \} ]\)
 
 		\item
 		compute maximum weight matching
@@ -269,7 +269,7 @@
 	\onslide<+->{But what qualifies as \enquote{high-value}?}
 
 	\begin{definition}<+->
-		Let \(\alloc* = \braces[\big]{ \asgd*{1}, \asgd*{2}, \dots }\) be an optimal bundle.
+		Let \(\asgd*{1} \coloneq \argmax_{\asgd*{}[] \in \alloc*} \valuations[\asgd*{}[]]\).
 		\onslide<+->{An item \(\genericitem \in \goods\) is \emphdef{outstanding} if \(\valuations[ \hairspace \genericitem] \ge \valuations[\asgd*{1}][\big]\).}
 	\end{definition}
 
@@ -282,15 +282,14 @@
 		Each agent can be matched with an outstanding item in phase \phaseiii.
 	\end{lemma}
 	\begin{columns}[T]
-		\begin{column}{0.6\textwidth}
+		\begin{column}{0.65\textwidth}
 			\pause
 			\begin{itemize}[<+->]
 				\item
-				maximum number of agents \emph{without} outstanding item halved
-				with each round of phase \phasei
+				maximum number of agents \emph{not matchable} \\ with outstanding item \emph{halved} with each round of phase \phasei
 				\begin{itemize}[<+->]
 					\item
-					\(\ceil{\log_2 n} + 1\) rounds in phase \phasei{} are enough
+					\(\ceil{\log_2 n} + 1\) rounds in phase \phasei{} enough
 				\end{itemize}
 
 				\item
@@ -299,20 +298,20 @@
 			\onslide<+->{Base Case: In round \(1\) of phase \phasei, either}
 			\begin{itemize}[<+->]
 				\item
-				\(\le n/2\) many agents without an outstanding item
+				\(\le n/2\) many agents not matched with outstanding item
 
 				\item
-				\(> n/2\) many agents without an outstanding item
+				\(> n/2\) many agents not matched outstanding item
 				\begin{itemize}
 					\item<+(4)->
 					\(> n/2\) many items \(\asgd*{1}\) assigned to someone else
 
 					\item<+(4)->
-					\(> n/2\) many agents matched with outstanding item \\ upon release in phase \phaseiii
+					\(> n/2\) many agents matchable with outstanding item \\ upon release in phase \phaseiii
 				\end{itemize}
 			\end{itemize}
 		\end{column}
-		\begin{column}{0.375\textwidth}
+		\begin{column}{0.325\textwidth}
 			\centering
 			\begin{tikzpicture}[lbl/.style = {font={\Large\boldmath}}, info/.style = {font={\boldmath}, alert}]
 				% Agents.
@@ -406,8 +405,8 @@
 				\onslide<3->{matched with other agents \(i' \neq i\) in round \(r\).}
 			\end{definition}
 			\begin{definition}<4->
-				Let \(\alloc[\phaseii] = \braces[\big]{ \asgd{1}, \asgd{2}, \dots }\) be the bundle of agent \(i\).
-				\onslide<5->{The set of \emphdef{optimal and attainable items} is defined as
+				Let \(\alloc[\phaseii] = \braces[\big]{ \asgd{1}, \asgd{2}, \dots }\).
+				\onslide<5->{The set of \emphdef{optimal and \\ attainable items} is defined as
 				\begin{equation*}
 					\attopt{r} \coloneq \begin{cases*}
 						\onslide*<-10|handout:0>{\phantom}{\alloc* \setminus \paren[\big]{ \bigcup_{i' \in \agents} \alloc[\phasei][i'] \cup \lostset{1} }}
@@ -438,7 +437,7 @@
 
 				\vspace{2ex}
 
-				\let\asgd\asgdbf
+				\let\asgd\asgdbf  % custom bold version because \textsl is not affected by \boldmath
 				\begin{tikzpicture}
 					\node<13-17> {\includegraphics[height=25mm]{optainable_r2_optblack}};
 					\node<18-  > {\includegraphics[height=25mm]{optainable_r2_optgrey}};
@@ -479,7 +478,6 @@
 			\onslide*<40-41|handout:0>{- \!\!\sum_{l=2}^{r} \smashoperator[r]{\sum_{\genericitem \in \lostset{l}}} \valuations[ \hairspace\genericitem \given \asgd{1}, \dots, \alertmath<40>{\asgd{l-2}} ][\big] }
 			\onslide*<42   |handout:0>{- \!\!\sum_{l=2}^{r} \smashoperator[r]{\sum_{\genericitem \in \lostset{l}}} \valuations[ \asgd{l-1} \given \asgd{1}, \dots, \asgd{l-2} ][\big] }
 			\onslide*<43   |handout:1>{- \!\!\sum_{l=2}^{r} \abs{\lostset{l}} \cdot \valuations[ \asgd{l-1} \given \asgd{1}, \dots, \asgd{l-2} ][\big] }
-			\onslide*<44   |handout:0>{- \!\!\sum_{l=2}^{r} (n-1) \cdot \valuations[ \asgd{l-1} \given \asgd{1}, \dots, \asgd{l-2} ][\big] }
 			\vphantom{\sum_{\genericitem \in \lostset{l}}^{r}}&&
 			\tag*{if \(r \ge 2\)}
 		\end{flalign*}
@@ -524,15 +522,17 @@
 		\end{tikzpicture}
 	\end{figure}
 	\onslide*<29-37|handout:0>{\beamerimage at (13cm, 3.25cm) {%
-		\begin{minipage}[t][5cm]{0.4\textwidth}\begin{flalign*}
-			\valuations[ \genericset[1] \given \genericset[2] ] \alt<35->{\le {}}{= {}}
-			\onslide*<30-34>{&\valuations[\hairspace\genericitem[1] \given \genericset[2] ][\big]}
-			\onslide*<31-34>{{} + {} \\ &\valuations[\hairspace\genericitem[2] \given \genericset[2] \cup \alertmath<34>{\braces[\big]{ \genericitem[1] }} ][\big]}
-			\onslide*<32-34>{{} + {} \\ &\valuations[\hairspace\genericitem[3] \given \genericset[2] \cup \alertmath<34>{\braces[\big]{ \genericitem[1], \genericitem[2] }} ][\big]}
-			\onslide*<33-34>{{} + {} \\ &\vdots}
-			\onslide*<35   >{&\valuations[ \hairspace\genericitem[1] \given \genericset[2] ][\big] + {} \\ &\valuations[ \hairspace\genericitem[2] \given \genericset[2] ][\big] + {} \\ &\valuations[ \hairspace\genericitem[3] \given \genericset[2] ][\big] + {} \\ &\vdots}
-			\onslide*<36-  >{\!\!\smashoperator{\sum_{\genericitem \in \genericset[1]}} \valuations[ \hairspace\genericitem  \given \genericset[2] ] }
-			&&
-		\end{flalign*}\end{minipage}
+		\begin{minipage}[t][5cm]{0.4\textwidth}
+			\begin{flalign*}
+				\valuations[ \genericset[1] \given \genericset[2] ] \alt<35->{\le {}}{= {}}
+				\onslide*<30-34>{&\valuations[\hairspace\genericitem[1] \given \genericset[2] ][\big]}
+				\onslide*<31-34>{{} + {} \\ &\valuations[\hairspace\genericitem[2] \given \genericset[2] \cup \alertmath<34>{\braces[\big]{ \genericitem[1] }} ][\big]}
+				\onslide*<32-34>{{} + {} \\ &\valuations[\hairspace\genericitem[3] \given \genericset[2] \cup \alertmath<34>{\braces[\big]{ \genericitem[1], \genericitem[2] }} ][\big]}
+				\onslide*<33-34>{{} + {} \\ &\vdots}
+				\onslide*<35   >{&\valuations[ \hairspace\genericitem[1] \given \genericset[2] ][\big] + {} \\ &\valuations[ \hairspace\genericitem[2] \given \genericset[2] ][\big] + {} \\ &\valuations[ \hairspace\genericitem[3] \given \genericset[2] ][\big] + {} \\ &\vdots}
+				\onslide*<36-  >{\!\!\smashoperator{\sum_{\genericitem \in \genericset[1]}} \valuations[ \hairspace\genericitem  \given \genericset[2] ] }
+				&&
+			\end{flalign*}
+	\end{minipage}
 	};}
 \end{frame}

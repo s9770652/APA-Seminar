@@ -44,7 +44,7 @@
 	\begin{itemize}[<+->]
 		\item
 		\textsbf{monotonically non-decreasing:}
-		\(\valuations[\genericset[1]] \le \valuations[\genericset[2]]\) if \(\genericset[1] \subset \genericset[2]\)
+		\(\valuations[\genericset[1]] \le \valuations[\genericset[1] \cup \genericset[2]]\)
 
 		\item
 		\textsbf{normalised:}
@@ -64,7 +64,8 @@
 		\(\valuations[\genericset[1] \given \genericset[2]] \onslide<+->{\coloneq \valuations[\genericset[1] \cup \genericset[2]] - \valuations[\genericset[2]]}\)
 		\begin{itemize}[<+->]
 			\item
-			diminishing returns
+			\textsbf{diminishing returns:}
+			\(\valuations[ \genericset[1] \given \genericset[2] ] \ge \valuations[ \genericset[1] \given \genericset[2] \cup \genericset[3] ]\)
 		\end{itemize}
 	\end{itemize}
 
@@ -112,7 +113,7 @@
 	\end{problem}
 	\onslide<5->{The NSW strikes a middle ground between efficiency and fairness!}
 	\begin{alertblock}<6->{}
-		Is there a polynomial-time algorithm with an approximation factor \dots
+		Is there an algorithm with an approximation factor \dots
 		\begin{itemize}
 			\item<8->
 			\dots{} dependent on \(n\)?
