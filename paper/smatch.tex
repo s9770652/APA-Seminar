@@ -104,7 +104,7 @@ The algorithm \SMatch{} (\cref{alg:smatch}) eliminates the flaw by first gaining
 For a fixed agent \(i\), order the items in descending order of valuations and denote the \(j\)\itordinal th most liked item by~\(\goodsordered{j}\).
 We assume a well-defined order, so items of equal valuation shall be ordered further by ID or something similar.
 \SMatch{} does in fact repeatedly match items.
-During the first matching, however, the edge weights are defined as \(\weight \log\paren[\big]{ \valuations[j] + \remvalue/n } \) for an edge between agent~\(i\) and item~\(j\).
+During the first matching, however, the edge weights are defined as \(\weight \log\paren[\big]{ \valuations[ \hairspace j ] + \remvalue/n } \) for an edge between agent~\(i\) and item~\(j\).
 The value \(\remvalue\) serves as estimation of the valuation of items assigned after the first matching (\cref{lem:lower_bound_later_items}) and is defined as
 \vspace{-1.0ex}
 \begin{equation}
@@ -114,7 +114,7 @@ The value \(\remvalue\) serves as estimation of the valuation of items assigned 
 	= \valuations[ \goodsordered{2n+1}, \dots, \goodsordered{m} ] \mperiod \vspace{-1.0ex}
 \end{equation}
 Note that the set \(\genericset\) realizing the minimum of \(\valuations[\goods \setminus \genericset]\) may have less than \(2n\) elements if there are less than \(2n\) items in total or if some items are valuated at \(0\).
-From the second matching onwards, the edge weights are defined as \(\weight \log\paren[\big]{ \valuations[j] + \valuations[\alloc] }\), where~\(\alloc\) is the continuously updated bundle of agent \(i\).
+From the second matching onwards, the edge weights are defined as \(\weight \log\paren[\big]{ \valuations[ \hairspace j ] + \valuations[\alloc] }\), where~\(\alloc\) is the continuously updated bundle of agent \(i\).
 The addend \(\valuations[\alloc]\) could lead to better allocations in applications but does not improve the approximation factor asymptotically and so is of no further interest in the analysis.
 
 \begin{algorithm*}[t]
@@ -153,7 +153,7 @@ The addend \(\valuations[\alloc]\) could lead to better allocations in applicati
 \label{subsec:smatch:analysis}
 
 To calculate the approximation factor of \SMatch, we first need to establish a lower bound on the valuation of single items.
-For convenience, we order the items of any set \(\genericset = \{\itordinal \genericitem[1], \genericitem[2], \dots \}\) in descreasing order of valuation, so that it holds \(\valuations[\itordinal\genericitem[k]] \ge \valuations[\itordinal\genericitem[k']]\) for all \(k < k'\).
+For convenience, we order the items of any set \(\genericset = \{\hairspace \genericitem[1], \genericitem[2], \dots \}\) in descreasing order of valuation, so that it holds \(\valuations[\hairspace\genericitem[k]] \ge \valuations[\hairspace\genericitem[k']]\) for all \(k < k'\).
 Note that if set \(\genericset\) happens to be a bundle, then item \(\genericitem[k]\) was assigned according to the \(k\)\itordinal th matching.
 \begin{lemma}
 	\label{lem:lower_bound_single_item}
